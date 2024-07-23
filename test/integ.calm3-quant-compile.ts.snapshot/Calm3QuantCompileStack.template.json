@@ -938,7 +938,7 @@
              "Arn"
             ]
            },
-           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/*"
+           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/*"
           ]
          ]
         }
@@ -1133,11 +1133,11 @@
          {
           "Ref": "Bucket83908E77"
          },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/model && aws s3 sync --no-progress ./compiled s3://",
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/model && aws s3 sync --no-progress ./compiled s3://",
          {
           "Ref": "Bucket83908E77"
          },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/compiled"
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/compiled && echo 'compile completed'"
         ]
        ]
       }
@@ -1157,7 +1157,7 @@
       },
       {
        "Name": "OPT_LEVEL",
-       "Value": "3"
+       "Value": "1"
       },
       {
        "Name": "QUANT_DTYPE",
@@ -1173,7 +1173,7 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8"
+          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
          ]
         ]
        }
@@ -1826,8 +1826,8 @@
     "NeuronxCompileCompileJobProviderwaiterstatemachineRoleC71AF084"
    ]
   },
-  "NeuronxCompileCompileJobFF089164": {
-   "Type": "Custom::CompileJob",
+  "NeuronxCompile2DF99EDF": {
+   "Type": "Custom::NeuronxCompile",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
@@ -1852,7 +1852,7 @@
        {
         "Ref": "Bucket83908E77"
        },
-       "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8"
+       "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
       ]
      ]
     }
@@ -2213,7 +2213,7 @@
   "CompiledArtifact": {
    "Value": {
     "Fn::GetAtt": [
-     "NeuronxCompileCompileJobFF089164",
+     "NeuronxCompile2DF99EDF",
      "ArtifactS3Url"
     ]
    }

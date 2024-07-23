@@ -297,6 +297,7 @@ export class NeuronxCompile extends Construct {
               "python ./compile.py",
               `aws s3 sync --no-progress ./model ${props.bucket.s3UrlForObject(`${compiledArtifactPathPrefix}/model`)}`,
               `aws s3 sync --no-progress ./compiled ${props.bucket.s3UrlForObject(`${compiledArtifactPathPrefix}/compiled`)}`,
+              "echo 'compile completed'",
             ]
               .filter((v) => !!v)
               .join(" && "),
@@ -346,9 +347,9 @@ export class NeuronxCompile extends Construct {
       queryInterval: Duration.minutes(1),
       totalTimeout: Duration.hours(1),
     });
-    const compileJob = new CustomResource(this, "CompileJob", {
+    const compileJob = new CustomResource(this, "Resource", {
       serviceToken: provider.serviceToken,
-      resourceType: "Custom::CompileJob",
+      resourceType: "Custom::NeuronxCompile",
       properties: {
         jobDefinitionArn: jobDefinition.jobDefinitionArn,
         jobQueueArn: jobQueue.jobQueueArn,

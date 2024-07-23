@@ -2,7 +2,7 @@ import { IntegTest } from "@aws-cdk/integ-tests-alpha";
 import { App, CfnOutput, RemovalPolicy, Stack } from "aws-cdk-lib";
 import { Vpc } from "aws-cdk-lib/aws-ec2";
 import { Bucket } from "aws-cdk-lib/aws-s3";
-import { Model, NeuronxCompile, Parameters } from "../src";
+import { Model, NeuronxCompile, OptLevel, Parameters } from "../src";
 
 const app = new App();
 const stack = new Stack(app, "Calm3CompileStack");
@@ -17,6 +17,9 @@ const compile = new NeuronxCompile(stack, "NeuronxCompile", {
   model: Model.fromHuggingFace("cyberagent/calm3-22b-chat", {
     parameters: Parameters.billion(22),
   }),
+  compileOptions: {
+    optLevel: OptLevel.MINIMIZING_COMPILE_TIME,
+  },
 });
 new CfnOutput(stack, "CompiledArtifact", {
   value: compile.compiledArtifactS3Url,

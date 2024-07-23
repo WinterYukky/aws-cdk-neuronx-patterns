@@ -26,7 +26,7 @@ const compile = new NeuronxCompile(stack, "NeuronxCompile", {
   compileOptions: {
     nPositions: 1024,
     quantDtype: QuantDtype.S8,
-    optLevel: OptLevel.MODEL_EXECUTION_PERFORMANCE,
+    optLevel: OptLevel.MINIMIZING_COMPILE_TIME,
   },
   spot: true,
 });

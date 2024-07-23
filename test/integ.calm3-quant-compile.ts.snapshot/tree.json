@@ -1336,7 +1336,7 @@
                                                   "Arn"
                                                 ]
                                               },
-                                              "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/*"
+                                              "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/*"
                                             ]
                                           ]
                                         }
@@ -1652,11 +1652,11 @@
                                   {
                                     "Ref": "Bucket83908E77"
                                   },
-                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/model && aws s3 sync --no-progress ./compiled s3://",
+                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/model && aws s3 sync --no-progress ./compiled s3://",
                                   {
                                     "Ref": "Bucket83908E77"
                                   },
-                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8/compiled"
+                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/compiled && echo 'compile completed'"
                                 ]
                               ]
                             }
@@ -1676,7 +1676,7 @@
                             },
                             {
                               "name": "OPT_LEVEL",
-                              "value": "3"
+                              "value": "1"
                             },
                             {
                               "name": "QUANT_DTYPE",
@@ -1692,7 +1692,7 @@
                                     {
                                       "Ref": "Bucket83908E77"
                                     },
-                                    "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt3-quants8"
+                                    "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
                                   ]
                                 ]
                               }
@@ -2695,13 +2695,13 @@
                   "version": "2.149.0"
                 }
               },
-              "CompileJob": {
-                "id": "CompileJob",
-                "path": "Calm3QuantCompileStack/NeuronxCompile/CompileJob",
+              "Resource": {
+                "id": "Resource",
+                "path": "Calm3QuantCompileStack/NeuronxCompile/Resource",
                 "children": {
                   "Default": {
                     "id": "Default",
-                    "path": "Calm3QuantCompileStack/NeuronxCompile/CompileJob/Default",
+                    "path": "Calm3QuantCompileStack/NeuronxCompile/Resource/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.149.0"

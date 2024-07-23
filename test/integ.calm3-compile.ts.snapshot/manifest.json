@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bfbfbef82111b8df807048188aa7d85fa3916b2583b9a1b8b15160e0399ff7c2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e1e9187782a047eff9b73c0b783f5dc1c82725406c2a87a67db51d6cfa3e5d97.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -394,10 +394,10 @@
             "data": "NeuronxCompileCompileJobProviderwaiterstatemachine6B836FC7"
           }
         ],
-        "/Calm3CompileStack/NeuronxCompile/CompileJob/Default": [
+        "/Calm3CompileStack/NeuronxCompile/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NeuronxCompileCompileJobFF089164"
+            "data": "NeuronxCompile2DF99EDF"
           }
         ],
         "/Calm3CompileStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource": [

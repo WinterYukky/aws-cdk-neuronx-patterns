@@ -938,7 +938,7 @@
              "Arn"
             ]
            },
-           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt2/*"
+           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/*"
           ]
          ]
         }
@@ -1133,11 +1133,11 @@
          {
           "Ref": "Bucket83908E77"
          },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt2/model && aws s3 sync --no-progress ./compiled s3://",
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/model && aws s3 sync --no-progress ./compiled s3://",
          {
           "Ref": "Bucket83908E77"
          },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt2/compiled"
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/compiled && echo 'compile completed'"
         ]
        ]
       }
@@ -1157,7 +1157,7 @@
       },
       {
        "Name": "OPT_LEVEL",
-       "Value": "2"
+       "Value": "1"
       },
       {
        "Name": "QUANT_DTYPE",
@@ -1173,7 +1173,7 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt2"
+          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
          ]
         ]
        }
@@ -1866,8 +1866,8 @@
     "NeuronxCompileCompileJobProviderwaiterstatemachineRoleC71AF084"
    ]
   },
-  "NeuronxCompileCompileJobFF089164": {
-   "Type": "Custom::CompileJob",
+  "NeuronxCompile2DF99EDF": {
+   "Type": "Custom::NeuronxCompile",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
@@ -1892,7 +1892,7 @@
        {
         "Ref": "Bucket83908E77"
        },
-       "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt2"
+       "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
       ]
      ]
     }
@@ -2253,7 +2253,7 @@
   "CompiledArtifact": {
    "Value": {
     "Fn::GetAtt": [
-     "NeuronxCompileCompileJobFF089164",
+     "NeuronxCompile2DF99EDF",
      "ArtifactS3Url"
     ]
    }
