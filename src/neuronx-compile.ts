@@ -268,6 +268,19 @@ export class NeuronxCompile extends Construct {
     const compileScript = readFileSync(
       join(__dirname, "../scripts/compile.py"),
     ).toString();
+    const linuxParameters = new batch.LinuxParameters(this, "LinuxParameters");
+    linuxParameters.addDevices(
+      ...Array.from({
+        length: instanceType.acceleratorChips.chips,
+      }).map((_, index) => ({
+        hostPath: `/dev/neuron${index}`,
+        containerPath: `/dev/neuron${index}`,
+        permissions: [
+          batch.DevicePermission.READ,
+          batch.DevicePermission.WRITE,
+        ],
+      })),
+    );
     const jobDefinition = new batch.EcsJobDefinition(this, "JobDefinition", {
       container: new batch.EcsEc2ContainerDefinition(
         this,
@@ -314,10 +327,10 @@ export class NeuronxCompile extends Construct {
             NEURONX_TRANSFORMERS_VERSION:
               runtime.neuronxTransformersVersion ?? "",
           },
+          linuxParameters,
         },
       ),
     });
-    this.connectAcceleratorChips(jobDefinition, instanceType);
 
     const jobSubmitFunction = new SingletonFunction(this, "JobSubmitFunction", {
       code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
@@ -357,31 +370,6 @@ export class NeuronxCompile extends Construct {
       },
     });
     this.compiledArtifactS3Url = compileJob.getAttString("ArtifactS3Url");
-  }
-
-  private connectAcceleratorChips(
-    jobDefinition: batch.EcsJobDefinition,
-    instanceType: NeuronxInstanceType,
-  ) {
-    type PascalCase<T extends object> = {
-      [P in keyof T as P extends string ? Capitalize<P> : never]: T[P];
-    };
-    const devices = Array.from({
-      length: instanceType.acceleratorChips.chips,
-    }).map(
-      (_, index) =>
-        ({
-          HostPath: `/dev/neuron${index}`,
-          ContainerPath: `/dev/neuron${index}`,
-          Permissions: ["read", "write"],
-        }) satisfies PascalCase<batch.CfnJobDefinition.DeviceProperty>,
-    );
-    const cfnJobDefinition = jobDefinition.node
-      .defaultChild as batch.CfnJobDefinition;
-    cfnJobDefinition.addPropertyOverride(
-      "ContainerProperties.LinuxParameters.Devices",
-      devices,
-    );
   }
 
   private calcTpDegree(parameters: Parameters, compileOptions: CompileOptions) {
