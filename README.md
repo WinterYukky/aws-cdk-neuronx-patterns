@@ -6,9 +6,8 @@ This library provides high-level architectural patterns using neuronx (e.g. Infe
 
 ## Neuronx Compile
 
-:::note warn
-This construct uses an Inferentia2 instance on EC2. You may need to increase your request limit for your AWS account.
-:::
+> [!WARNING]
+> This construct uses an Inferentia2 instance on EC2. You may need to increase your request limit for your AWS account.
 
 This construct compiles models supported by Neuronx and uploads them to the specified S3 bucket.
 
@@ -56,9 +55,8 @@ After compiled, you can see like the this file tree in the S3 bucket.
 
 ### Spot Instance
 
-:::note warn
-If you use Spot Instances, check if the request limit for Spot has been increased.
-:::
+> [!WARNING]
+> If you use Spot Instances, check if the request limit for Spot has been increased.
 
 You can also use Spot Instances.
 
