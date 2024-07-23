@@ -9,12 +9,7 @@ This library provides high-level architectural patterns using neuronx (e.g. Infe
 > [!WARNING]
 > This construct uses an Inferentia2 instance on EC2. You may need to increase your request limit for your AWS account.
 
-This construct compiles models supported by Neuronx and uploads them to the specified S3 bucket.
-
-This is NeuronxCompile architecture.
-![NeuronxCompile architecture](./docs/neuronx-compile-architecture.png)
-
-To define
+This construct compiles models supported by Neuronx and uploads them to the specified S3 bucket. To define
 
 ```ts
 import { Vpc } from "aws-cdk-lib/aws-ec2";
@@ -52,6 +47,9 @@ After compiled, you can see like the this file tree in the S3 bucket.
     ├── xxx.neff
     └── xxx.neff
 ```
+
+This is NeuronxCompile architecture.
+![NeuronxCompile architecture](./docs/neuronx-compile-architecture.png)
 
 ### Spot Instance
 
