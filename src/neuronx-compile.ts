@@ -266,7 +266,7 @@ export class NeuronxCompile extends Construct {
     );
 
     const compileScript = readFileSync(
-      join(__dirname, "private/compile.py"),
+      join(__dirname, "../scripts/compile.py"),
     ).toString();
     const jobDefinition = new batch.EcsJobDefinition(this, "JobDefinition", {
       container: new batch.EcsEc2ContainerDefinition(
