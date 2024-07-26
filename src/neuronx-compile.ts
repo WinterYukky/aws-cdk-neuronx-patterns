@@ -179,6 +179,10 @@ export class NeuronxCompile extends Construct {
    * S3 URL that compiled artifact uploaded.
    */
   readonly compiledArtifactS3Url: string;
+  /**
+   * S3 Prefix that compiled artifact uploaded.
+   */
+  readonly compiledArtifactS3Prefix: string;
   constructor(scope: Construct, id: string, props: NeuronxCompileProps) {
     super(scope, id);
 
@@ -366,10 +370,13 @@ export class NeuronxCompile extends Construct {
       properties: {
         jobDefinitionArn: jobDefinition.jobDefinitionArn,
         jobQueueArn: jobQueue.jobQueueArn,
-        artifactS3Url: props.bucket.s3UrlForObject(compiledArtifactPathPrefix),
+        artifactS3Prefix: compiledArtifactPathPrefix,
       },
     });
-    this.compiledArtifactS3Url = compileJob.getAttString("ArtifactS3Url");
+    this.compiledArtifactS3Prefix = compileJob.getAttString("ArtifactS3Prefix");
+    this.compiledArtifactS3Url = props.bucket.s3UrlForObject(
+      this.compiledArtifactS3Prefix,
+    );
   }
 
   private calcTpDegree(parameters: Parameters, compileOptions: CompileOptions) {

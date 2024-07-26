@@ -20,6 +20,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: [
     `@aws-cdk/integ-runner@${cdkVersion}-alpha.0`,
     `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@types/aws-lambda",
     "@aws-sdk/client-batch",
     "esbuild",

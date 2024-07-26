@@ -73,7 +73,7 @@ var isComplete = async (event) => {
       return {
         IsComplete: true,
         Data: {
-          ArtifactS3Url: event.ResourceProperties.artifactS3Url
+          ArtifactS3Prefix: event.ResourceProperties.artifactS3Prefix
         }
       };
     case "FAILED":

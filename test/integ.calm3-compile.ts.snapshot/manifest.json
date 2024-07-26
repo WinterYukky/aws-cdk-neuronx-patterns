@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e1e9187782a047eff9b73c0b783f5dc1c82725406c2a87a67db51d6cfa3e5d97.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/472dd5ed760d61046e19794c273826ac3296acc41db472526da6caf7449b51cb.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -452,6 +452,186 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CompiledArtifact"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileLaunchTemplateA0D1180F"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicyDB10D7FE"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEvent221B8EEA"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/MachinImage/Image.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileMachinImageImageParameter352D1AFA"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmi/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileMachinImageNeuronxAmiEA3AC00D"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileComputeEnvironmentSecurityGroup7711E000"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleDefaultPolicyD047BB82"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileComputeEnvironmentInstanceProfile3C318C5F"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileComputeEnvironment884911E2"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/JobQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileJobQueue429E0A23"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileContainerDefinitionExecutionRoleDefaultPolicy038CC648"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/JobDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileJobDefinitionE9F8860B"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyBE32DCD4"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonEvent5159882B"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyF4B989B7"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicyE3767276"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicy8B287DF7"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineLogGroup11323B51"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832"
+          }
+        ],
+        "/Calm3CompileStack/NeuronxQuantCompile/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxQuantCompile0B27A228"
+          }
+        ],
+        "/Calm3CompileStack/QuantCompiledArtifact": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuantCompiledArtifact"
           }
         ],
         "/Calm3CompileStack/BootstrapVersion": [

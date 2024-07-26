@@ -89,6 +89,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Prefix">compiledArtifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Url">compiledArtifactS3Url</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
 
 ---
@@ -102,6 +103,18 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `compiledArtifactS3Prefix`<sup>Required</sup> <a name="compiledArtifactS3Prefix" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Prefix"></a>
+
+```typescript
+public readonly compiledArtifactS3Prefix: string;
+```
+
+- *Type:* string
+
+S3 Prefix that compiled artifact uploaded.
 
 ---
 

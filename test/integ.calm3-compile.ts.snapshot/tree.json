@@ -1508,6 +1508,14 @@
                   "version": "2.149.0"
                 }
               },
+              "LinuxParameters": {
+                "id": "LinuxParameters",
+                "path": "Calm3CompileStack/NeuronxCompile/LinuxParameters",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.LinuxParameters",
+                  "version": "2.149.0"
+                }
+              },
               "ContainerDefinition": {
                 "id": "ContainerDefinition",
                 "path": "Calm3CompileStack/NeuronxCompile/ContainerDefinition",
@@ -1706,6 +1714,58 @@
                             "Fn::GetAtt": [
                               "NeuronxCompileContainerDefinitionExecutionRoleBEA6A2DC",
                               "Arn"
+                            ]
+                          },
+                          "linuxParameters": {
+                            "devices": [
+                              {
+                                "containerPath": "/dev/neuron0",
+                                "hostPath": "/dev/neuron0",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              },
+                              {
+                                "containerPath": "/dev/neuron1",
+                                "hostPath": "/dev/neuron1",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              },
+                              {
+                                "containerPath": "/dev/neuron2",
+                                "hostPath": "/dev/neuron2",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              },
+                              {
+                                "containerPath": "/dev/neuron3",
+                                "hostPath": "/dev/neuron3",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              },
+                              {
+                                "containerPath": "/dev/neuron4",
+                                "hostPath": "/dev/neuron4",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              },
+                              {
+                                "containerPath": "/dev/neuron5",
+                                "hostPath": "/dev/neuron5",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              }
                             ]
                           },
                           "readonlyRootFilesystem": false,
@@ -2917,7 +2977,16 @@
                                       ]
                                     },
                                     {
+                                      "Fn::GetAtt": [
+                                        "NeuronxQuantCompileJobQueue429E0A23",
+                                        "JobQueueArn"
+                                      ]
+                                    },
+                                    {
                                       "Ref": "NeuronxCompileJobDefinition5C3FF87A"
+                                    },
+                                    {
+                                      "Ref": "NeuronxQuantCompileJobDefinitionE9F8860B"
                                     }
                                   ]
                                 }
@@ -2985,7 +3054,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "010bc4df414b244aa872aaf2b5774b013105099be758938dace7242b6b8d878f.zip"
+                      "s3Key": "665dbc8cb1c1eaab90c1f9a53c630e6d7d11838e916aa8804bc8305b67208d40.zip"
                     },
                     "handler": "index.onEvent",
                     "role": {
@@ -3144,7 +3213,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "010bc4df414b244aa872aaf2b5774b013105099be758938dace7242b6b8d878f.zip"
+                      "s3Key": "665dbc8cb1c1eaab90c1f9a53c630e6d7d11838e916aa8804bc8305b67208d40.zip"
                     },
                     "handler": "index.isComplete",
                     "role": {
@@ -3170,6 +3239,1891 @@
           "CompiledArtifact": {
             "id": "CompiledArtifact",
             "path": "Calm3CompileStack/CompiledArtifact",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.149.0"
+            }
+          },
+          "NeuronxQuantCompile": {
+            "id": "NeuronxQuantCompile",
+            "path": "Calm3CompileStack/NeuronxQuantCompile",
+            "children": {
+              "LaunchTemplate": {
+                "id": "LaunchTemplate",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::LaunchTemplate",
+                      "aws:cdk:cloudformation:props": {
+                        "launchTemplateData": {
+                          "blockDeviceMappings": [
+                            {
+                              "deviceName": "/dev/xvda",
+                              "ebs": {
+                                "volumeSize": 110
+                              }
+                            }
+                          ],
+                          "tagSpecifications": [
+                            {
+                              "resourceType": "instance",
+                              "tags": [
+                                {
+                                  "key": "Name",
+                                  "value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+                                }
+                              ]
+                            },
+                            {
+                              "resourceType": "volume",
+                              "tags": [
+                                {
+                                  "key": "Name",
+                                  "value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "tagSpecifications": [
+                          {
+                            "resourceType": "launch-template",
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnLaunchTemplate",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.LaunchTemplate",
+                  "version": "2.149.0"
+                }
+              },
+              "MachinImage": {
+                "id": "MachinImage",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage",
+                "children": {
+                  "NeuronxAmiFunction": {
+                    "id": "NeuronxAmiFunction",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiFunction",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "NeuronxAmiProvider": {
+                    "id": "NeuronxAmiProvider",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider",
+                    "children": {
+                      "framework-onEvent": {
+                        "id": "framework-onEvent",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent",
+                        "children": {
+                          "ServiceRole": {
+                            "id": "ServiceRole",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole",
+                            "children": {
+                              "ImportServiceRole": {
+                                "id": "ImportServiceRole",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/ImportServiceRole",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.Resource",
+                                  "version": "2.149.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "Service": "lambda.amazonaws.com"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "managedPolicyArns": [
+                                      {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                          ]
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                  "version": "2.149.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "lambda:InvokeFunction",
+                                              "Effect": "Allow",
+                                              "Resource": [
+                                                {
+                                                  "Fn::GetAtt": [
+                                                    "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+                                                    "Arn"
+                                                  ]
+                                                },
+                                                {
+                                                  "Fn::Join": [
+                                                    "",
+                                                    [
+                                                      {
+                                                        "Fn::GetAtt": [
+                                                          "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+                                                          "Arn"
+                                                        ]
+                                                      },
+                                                      ":*"
+                                                    ]
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicyDB10D7FE",
+                                        "roles": [
+                                          {
+                                            "Ref": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                      "version": "2.149.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Role",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Code": {
+                            "id": "Code",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Code",
+                            "children": {
+                              "Stage": {
+                                "id": "Stage",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Code/Stage",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.AssetStaging",
+                                  "version": "2.149.0"
+                                }
+                              },
+                              "AssetBucket": {
+                                "id": "AssetBucket",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Code/AssetBucket",
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                              "aws:cdk:cloudformation:props": {
+                                "code": {
+                                  "s3Bucket": {
+                                    "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                                  },
+                                  "s3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+                                },
+                                "description": "AWS CDK resource provider framework - onEvent (Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider)",
+                                "environment": {
+                                  "variables": {
+                                    "USER_ON_EVENT_FUNCTION_ARN": {
+                                      "Fn::GetAtt": [
+                                        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "handler": "framework.onEvent",
+                                "role": {
+                                  "Fn::GetAtt": [
+                                    "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4",
+                                    "Arn"
+                                  ]
+                                },
+                                "runtime": {
+                                  "Fn::FindInMap": [
+                                    "LatestNodeRuntimeMap",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    "value"
+                                  ]
+                                },
+                                "timeout": 900
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.Function",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.custom_resources.Provider",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "Image.Parameter": {
+                    "id": "Image.Parameter",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/Image.Parameter",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnParameter",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "Image": {
+                    "id": "Image",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/Image",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "NeuronxAmi": {
+                    "id": "NeuronxAmi",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmi",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmi/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.5"
+                }
+              },
+              "ComputeEnvironment": {
+                "id": "ComputeEnvironment",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment",
+                "children": {
+                  "SecurityGroup": {
+                    "id": "SecurityGroup",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/SecurityGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/SecurityGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "groupDescription": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/SecurityGroup",
+                            "securityGroupEgress": [
+                              {
+                                "cidrIp": "0.0.0.0/0",
+                                "description": "Allow all outbound traffic by default",
+                                "ipProtocol": "-1"
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "neuronx-compile-worker"
+                              }
+                            ],
+                            "vpcId": {
+                              "Ref": "VPCB9E5F0B4"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "InstanceProfileRole": {
+                    "id": "InstanceProfileRole",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole",
+                    "children": {
+                      "ImportInstanceProfileRole": {
+                        "id": "ImportInstanceProfileRole",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/ImportInstanceProfileRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "ec2.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+                                  ]
+                                ]
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "neuronx-compile-worker"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfileRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:Abort*",
+                                        "s3:DeleteObject*",
+                                        "s3:GetBucket*",
+                                        "s3:GetObject*",
+                                        "s3:List*",
+                                        "s3:PutObject",
+                                        "s3:PutObjectLegalHold",
+                                        "s3:PutObjectRetention",
+                                        "s3:PutObjectTagging",
+                                        "s3:PutObjectVersionTagging"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "Bucket83908E77",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "Bucket83908E77",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleDefaultPolicyD047BB82",
+                                "roles": [
+                                  {
+                                    "Ref": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "InstanceProfile": {
+                    "id": "InstanceProfile",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/InstanceProfile",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                      "aws:cdk:cloudformation:props": {
+                        "roles": [
+                          {
+                            "Ref": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Batch::ComputeEnvironment",
+                      "aws:cdk:cloudformation:props": {
+                        "computeResources": {
+                          "maxvCpus": 256,
+                          "type": "SPOT",
+                          "securityGroupIds": [
+                            {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileComputeEnvironmentSecurityGroup7711E000",
+                                "GroupId"
+                              ]
+                            }
+                          ],
+                          "subnets": [
+                            {
+                              "Ref": "VPCPrivateSubnet1Subnet8BCA10E0"
+                            },
+                            {
+                              "Ref": "VPCPrivateSubnet2SubnetCFCDAA7A"
+                            }
+                          ],
+                          "minvCpus": 0,
+                          "instanceRole": {
+                            "Fn::GetAtt": [
+                              "NeuronxQuantCompileComputeEnvironmentInstanceProfile3C318C5F",
+                              "Arn"
+                            ]
+                          },
+                          "instanceTypes": [
+                            "inf2.8xlarge"
+                          ],
+                          "allocationStrategy": "SPOT_PRICE_CAPACITY_OPTIMIZED",
+                          "launchTemplate": {
+                            "launchTemplateId": {
+                              "Ref": "NeuronxQuantCompileLaunchTemplateA0D1180F"
+                            }
+                          },
+                          "ec2Configuration": [
+                            {
+                              "imageIdOverride": {
+                                "Fn::GetAtt": [
+                                  "NeuronxQuantCompileMachinImageNeuronxAmiEA3AC00D",
+                                  "image_id"
+                                ]
+                              },
+                              "imageType": "ECS_AL2023"
+                            }
+                          ],
+                          "tags": {
+                            "Name": "neuronx-compile-worker"
+                          }
+                        },
+                        "replaceComputeEnvironment": false,
+                        "state": "ENABLED",
+                        "tags": {
+                          "Name": "neuronx-compile-worker"
+                        },
+                        "type": "managed",
+                        "updatePolicy": {}
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_batch.CfnComputeEnvironment",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.ManagedEc2EcsComputeEnvironment",
+                  "version": "2.149.0"
+                }
+              },
+              "JobQueue": {
+                "id": "JobQueue",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/JobQueue",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/JobQueue/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Batch::JobQueue",
+                      "aws:cdk:cloudformation:props": {
+                        "computeEnvironmentOrder": [
+                          {
+                            "computeEnvironment": {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileComputeEnvironment884911E2",
+                                "ComputeEnvironmentArn"
+                              ]
+                            },
+                            "order": 1
+                          }
+                        ],
+                        "jobStateTimeLimitActions": [
+                          {
+                            "action": "CANCEL",
+                            "maxTimeSeconds": 600,
+                            "reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
+                            "state": "RUNNABLE"
+                          }
+                        ],
+                        "priority": 1,
+                        "state": "ENABLED"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_batch.CfnJobQueue",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.JobQueue",
+                  "version": "2.149.0"
+                }
+              },
+              "LinuxParameters": {
+                "id": "LinuxParameters",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/LinuxParameters",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.LinuxParameters",
+                  "version": "2.149.0"
+                }
+              },
+              "ContainerDefinition": {
+                "id": "ContainerDefinition",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition",
+                "children": {
+                  "ExecutionRole": {
+                    "id": "ExecutionRole",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole",
+                    "children": {
+                      "ImportExecutionRole": {
+                        "id": "ImportExecutionRole",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/ImportExecutionRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "ecs-tasks.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":logs:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":log-group:/aws/batch/job:*"
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "NeuronxQuantCompileContainerDefinitionExecutionRoleDefaultPolicy038CC648",
+                                "roles": [
+                                  {
+                                    "Ref": "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "batchDefaultLogGroup": {
+                    "id": "batchDefaultLogGroup",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/ContainerDefinition/batchDefaultLogGroup",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.EcsEc2ContainerDefinition",
+                  "version": "2.149.0"
+                }
+              },
+              "JobDefinition": {
+                "id": "JobDefinition",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/JobDefinition",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/JobDefinition/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Batch::JobDefinition",
+                      "aws:cdk:cloudformation:props": {
+                        "containerProperties": {
+                          "image": "public.ecr.aws/neuron/pytorch-training-neuronx:2.1.2-neuronx-py310-sdk2.19.0-ubuntu20.04",
+                          "command": [
+                            "cat <<EOF > compile.py\nimport os\nfrom transformers_neuronx import NeuronAutoModelForCausalLM, NeuronConfig, QuantizationConfig\n\nmodel_path = \"./model\"\nbatch_size = 1\ntp_degree = int(os.environ['TP_DEGREE'])\namp = \"bf16\"\nquant_dtype = os.getenv('QUANT_DTYPE')\nn_positions = int(os.environ['N_POSITIONS'])\nopt_level = int(os.getenv('OPT_LEVEL', \"2\"))\n\n# compile the model\nprint(\"loading the model\")\nneuron_config = NeuronConfig(\n    quant=QuantizationConfig(quant_dtype=quant_dtype, dequant_dtype='bf16') if quant_dtype is not None and quant_dtype != '' else None,\n)\nos.environ['NEURON_CC_FLAGS'] = f\"--enable-saturate-infinity --enable-mixed-precision-accumulation --optlevel {opt_level}\"\nneuron_model = NeuronAutoModelForCausalLM.from_pretrained(\n    model_path, \n    batch_size=batch_size, # Batch size must be determined prior to inference time.\n    tp_degree=tp_degree,   # Tensor Parallelism degree. Controls the number of NeuronCores to execute on\n    amp=amp,               # This automatically casts the weights to the specified dtype.\n    n_positions=n_positions,      # Sequence length. This should be atleast as large as the sum of expected input and output tokens. \n    neuron_config=neuron_config\n)\n\nprint(\"compiling the model\")\nneuron_model.to_neuron()\n\nprint(\"saving the compiled model\")\nneuron_model.save('compiled') # can be copied and used on a different neuron instance\n\nEOF\n",
+                            {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "pip install -U --extra-index-url https://pip.repos.neuron.amazonaws.com transformers-neuronx==$NEURONX_TRANSFORMERS_VERSION && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install git-lfs && git lfs install && git clone https://huggingface.co/cyberagent/calm3-22b-chat model && rm -rf model/.git && python ./compile.py && aws s3 sync --no-progress ./model s3://",
+                                  {
+                                    "Ref": "Bucket83908E77"
+                                  },
+                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/model && aws s3 sync --no-progress ./compiled s3://",
+                                  {
+                                    "Ref": "Bucket83908E77"
+                                  },
+                                  "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/compiled && echo 'compile completed'"
+                                ]
+                              ]
+                            }
+                          ],
+                          "environment": [
+                            {
+                              "name": "MODEL_ID",
+                              "value": "cyberagent/calm3-22b-chat"
+                            },
+                            {
+                              "name": "TP_DEGREE",
+                              "value": "2"
+                            },
+                            {
+                              "name": "N_POSITIONS",
+                              "value": "1024"
+                            },
+                            {
+                              "name": "OPT_LEVEL",
+                              "value": "1"
+                            },
+                            {
+                              "name": "QUANT_DTYPE",
+                              "value": "s8"
+                            },
+                            {
+                              "name": "ARTIFACT_S3_URL",
+                              "value": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "s3://",
+                                    {
+                                      "Ref": "Bucket83908E77"
+                                    },
+                                    "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
+                                  ]
+                                ]
+                              }
+                            },
+                            {
+                              "name": "NEURONX_TRANSFORMERS_VERSION",
+                              "value": "0.11.351"
+                            }
+                          ],
+                          "executionRoleArn": {
+                            "Fn::GetAtt": [
+                              "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA",
+                              "Arn"
+                            ]
+                          },
+                          "linuxParameters": {
+                            "devices": [
+                              {
+                                "containerPath": "/dev/neuron0",
+                                "hostPath": "/dev/neuron0",
+                                "permissions": [
+                                  "read",
+                                  "write"
+                                ]
+                              }
+                            ]
+                          },
+                          "readonlyRootFilesystem": false,
+                          "resourceRequirements": [
+                            {
+                              "type": "MEMORY",
+                              "value": "124519"
+                            },
+                            {
+                              "type": "VCPU",
+                              "value": "32"
+                            }
+                          ]
+                        },
+                        "platformCapabilities": [
+                          "EC2"
+                        ],
+                        "retryStrategy": {},
+                        "timeout": {},
+                        "type": "container"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_batch.CfnJobDefinition",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_batch.EcsJobDefinition",
+                  "version": "2.149.0"
+                }
+              },
+              "JobSubmitFunction": {
+                "id": "JobSubmitFunction",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/JobSubmitFunction",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
+                  "version": "2.149.0"
+                }
+              },
+              "JobMonitoringFunction": {
+                "id": "JobMonitoringFunction",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/JobMonitoringFunction",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
+                  "version": "2.149.0"
+                }
+              },
+              "CompileJobProvider": {
+                "id": "CompileJobProvider",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider",
+                "children": {
+                  "framework-onEvent": {
+                    "id": "framework-onEvent",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent",
+                    "children": {
+                      "ServiceRole": {
+                        "id": "ServiceRole",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole",
+                        "children": {
+                          "ImportServiceRole": {
+                            "id": "ImportServiceRole",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/ImportServiceRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "lambda.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "lambda:InvokeFunction",
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": "states:StartExecution",
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyBE32DCD4",
+                                    "roles": [
+                                      {
+                                        "Ref": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Code": {
+                        "id": "Code",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onEvent/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+                            },
+                            "description": "AWS CDK resource provider framework - onEvent (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+                            "environment": {
+                              "variables": {
+                                "USER_ON_EVENT_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                    "Arn"
+                                  ]
+                                },
+                                "USER_IS_COMPLETE_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                    "Arn"
+                                  ]
+                                },
+                                "WAITER_STATE_MACHINE_ARN": {
+                                  "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832"
+                                }
+                              }
+                            },
+                            "handler": "framework.onEvent",
+                            "role": {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5",
+                                "Arn"
+                              ]
+                            },
+                            "runtime": {
+                              "Fn::FindInMap": [
+                                "LatestNodeRuntimeMap",
+                                {
+                                  "Ref": "AWS::Region"
+                                },
+                                "value"
+                              ]
+                            },
+                            "timeout": 900
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "framework-isComplete": {
+                    "id": "framework-isComplete",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete",
+                    "children": {
+                      "ServiceRole": {
+                        "id": "ServiceRole",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole",
+                        "children": {
+                          "ImportServiceRole": {
+                            "id": "ImportServiceRole",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/ImportServiceRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "lambda.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "lambda:InvokeFunction",
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyF4B989B7",
+                                    "roles": [
+                                      {
+                                        "Ref": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Code": {
+                        "id": "Code",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-isComplete/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+                            },
+                            "description": "AWS CDK resource provider framework - isComplete (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+                            "environment": {
+                              "variables": {
+                                "USER_ON_EVENT_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                    "Arn"
+                                  ]
+                                },
+                                "USER_IS_COMPLETE_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            },
+                            "handler": "framework.isComplete",
+                            "role": {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791",
+                                "Arn"
+                              ]
+                            },
+                            "runtime": {
+                              "Fn::FindInMap": [
+                                "LatestNodeRuntimeMap",
+                                {
+                                  "Ref": "AWS::Region"
+                                },
+                                "value"
+                              ]
+                            },
+                            "timeout": 900
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "framework-onTimeout": {
+                    "id": "framework-onTimeout",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout",
+                    "children": {
+                      "ServiceRole": {
+                        "id": "ServiceRole",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole",
+                        "children": {
+                          "ImportServiceRole": {
+                            "id": "ImportServiceRole",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/ImportServiceRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "lambda.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "lambda:InvokeFunction",
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicyE3767276",
+                                    "roles": [
+                                      {
+                                        "Ref": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Code": {
+                        "id": "Code",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/framework-onTimeout/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+                            },
+                            "description": "AWS CDK resource provider framework - onTimeout (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+                            "environment": {
+                              "variables": {
+                                "USER_ON_EVENT_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+                                    "Arn"
+                                  ]
+                                },
+                                "USER_IS_COMPLETE_FUNCTION_ARN": {
+                                  "Fn::GetAtt": [
+                                    "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            },
+                            "handler": "framework.onTimeout",
+                            "role": {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143",
+                                "Arn"
+                              ]
+                            },
+                            "runtime": {
+                              "Fn::FindInMap": [
+                                "LatestNodeRuntimeMap",
+                                {
+                                  "Ref": "AWS::Region"
+                                },
+                                "value"
+                              ]
+                            },
+                            "timeout": 900
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.149.0"
+                    }
+                  },
+                  "waiter-state-machine": {
+                    "id": "waiter-state-machine",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine",
+                    "children": {
+                      "Role": {
+                        "id": "Role",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role",
+                        "children": {
+                          "ImportRole": {
+                            "id": "ImportRole",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/ImportRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "states.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.149.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "lambda:InvokeFunction",
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::GetAtt": [
+                                                "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogDelivery",
+                                            "logs:CreateLogStream",
+                                            "logs:DeleteLogDelivery",
+                                            "logs:DescribeLogGroups",
+                                            "logs:DescribeResourcePolicies",
+                                            "logs:GetLogDelivery",
+                                            "logs:ListLogDeliveries",
+                                            "logs:PutLogEvents",
+                                            "logs:PutResourcePolicy",
+                                            "logs:UpdateLogDelivery"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicy8B287DF7",
+                                    "roles": [
+                                      {
+                                        "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.149.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "LogGroup": {
+                        "id": "LogGroup",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/LogGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/LogGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "logGroupName": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "/aws/vendedlogs/states/waiter-state-machine-",
+                                      {
+                                        "Ref": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B"
+                                      },
+                                      "-c8c1c39a9aa0640b1b1d501141a988c2f3a316244b"
+                                    ]
+                                  ]
+                                },
+                                "retentionInDays": 731
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                              "version": "2.149.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                          "version": "2.149.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider/waiter-state-machine/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::StepFunctions::StateMachine",
+                          "aws:cdk:cloudformation:props": {
+                            "definitionString": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":60,\"MaxAttempts\":60,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+                                      "Arn"
+                                    ]
+                                  },
+                                  "\"},\"framework-onTimeout-task\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+                                      "Arn"
+                                    ]
+                                  },
+                                  "\"}}}"
+                                ]
+                              ]
+                            },
+                            "loggingConfiguration": {
+                              "destinations": [
+                                {
+                                  "cloudWatchLogsLogGroup": {
+                                    "logGroupArn": {
+                                      "Fn::GetAtt": [
+                                        "NeuronxQuantCompileCompileJobProviderwaiterstatemachineLogGroup11323B51",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
+                              "includeExecutionData": false,
+                              "level": "ERROR"
+                            },
+                            "roleArn": {
+                              "Fn::GetAtt": [
+                                "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_stepfunctions.CfnStateMachine",
+                          "version": "2.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.custom_resources.WaiterStateMachine",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.custom_resources.Provider",
+                  "version": "2.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Calm3CompileStack/NeuronxQuantCompile/Resource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "Calm3CompileStack/NeuronxQuantCompile/Resource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.5"
+            }
+          },
+          "QuantCompiledArtifact": {
+            "id": "QuantCompiledArtifact",
+            "path": "Calm3CompileStack/QuantCompiledArtifact",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.149.0"

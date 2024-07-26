@@ -1193,48 +1193,48 @@
      "LinuxParameters": {
       "Devices": [
        {
-        "HostPath": "/dev/neuron0",
         "ContainerPath": "/dev/neuron0",
+        "HostPath": "/dev/neuron0",
         "Permissions": [
          "read",
          "write"
         ]
        },
        {
-        "HostPath": "/dev/neuron1",
         "ContainerPath": "/dev/neuron1",
+        "HostPath": "/dev/neuron1",
         "Permissions": [
          "read",
          "write"
         ]
        },
        {
-        "HostPath": "/dev/neuron2",
         "ContainerPath": "/dev/neuron2",
+        "HostPath": "/dev/neuron2",
         "Permissions": [
          "read",
          "write"
         ]
        },
        {
-        "HostPath": "/dev/neuron3",
         "ContainerPath": "/dev/neuron3",
+        "HostPath": "/dev/neuron3",
         "Permissions": [
          "read",
          "write"
         ]
        },
        {
-        "HostPath": "/dev/neuron4",
         "ContainerPath": "/dev/neuron4",
+        "HostPath": "/dev/neuron4",
         "Permissions": [
          "read",
          "write"
         ]
        },
        {
-        "HostPath": "/dev/neuron5",
         "ContainerPath": "/dev/neuron5",
+        "HostPath": "/dev/neuron5",
         "Permissions": [
          "read",
          "write"
@@ -1884,18 +1884,7 @@
       "JobQueueArn"
      ]
     },
-    "artifactS3Url": {
-     "Fn::Join": [
-      "",
-      [
-       "s3://",
-       {
-        "Ref": "Bucket83908E77"
-       },
-       "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
-      ]
-     ]
-    }
+    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -2000,7 +1989,16 @@
          ]
         },
         {
+         "Fn::GetAtt": [
+          "NeuronxQuantCompileJobQueue429E0A23",
+          "JobQueueArn"
+         ]
+        },
+        {
          "Ref": "NeuronxCompileJobDefinition5C3FF87A"
+        },
+        {
+         "Ref": "NeuronxQuantCompileJobDefinitionE9F8860B"
         }
        ]
       }
@@ -2022,7 +2020,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "010bc4df414b244aa872aaf2b5774b013105099be758938dace7242b6b8d878f.zip"
+     "S3Key": "665dbc8cb1c1eaab90c1f9a53c630e6d7d11838e916aa8804bc8305b67208d40.zip"
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2097,7 +2095,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "010bc4df414b244aa872aaf2b5774b013105099be758938dace7242b6b8d878f.zip"
+     "S3Key": "665dbc8cb1c1eaab90c1f9a53c630e6d7d11838e916aa8804bc8305b67208d40.zip"
     },
     "Handler": "index.isComplete",
     "Role": {
@@ -2112,6 +2110,1190 @@
     "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
     "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
    ]
+  },
+  "NeuronxQuantCompileLaunchTemplateA0D1180F": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "BlockDeviceMappings": [
+      {
+       "DeviceName": "/dev/xvda",
+       "Ebs": {
+        "VolumeSize": 110
+       }
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+        }
+       ]
+      }
+     ]
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "Calm3CompileStack/NeuronxQuantCompile/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicyDB10D7FE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicyDB10D7FE",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEvent221B8EEA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (Calm3CompileStack/NeuronxQuantCompile/MachinImage/NeuronxAmiProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicyDB10D7FE",
+    "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRole220936D4"
+   ]
+  },
+  "NeuronxQuantCompileMachinImageNeuronxAmiEA3AC00D": {
+   "Type": "Custom::NeuronxAmi",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileMachinImageNeuronxAmiProviderframeworkonEvent221B8EEA",
+      "Arn"
+     ]
+    },
+    "image": {
+     "Ref": "NeuronxQuantCompileMachinImageImageParameter352D1AFA"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "NeuronxQuantCompileComputeEnvironmentSecurityGroup7711E000": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Calm3CompileStack/NeuronxQuantCompile/ComputeEnvironment/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   }
+  },
+  "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleDefaultPolicyD047BB82": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleDefaultPolicyD047BB82",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileComputeEnvironmentInstanceProfile3C318C5F": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileComputeEnvironmentInstanceProfileRoleD15CA082"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileComputeEnvironment884911E2": {
+   "Type": "AWS::Batch::ComputeEnvironment",
+   "Properties": {
+    "ComputeResources": {
+     "AllocationStrategy": "SPOT_PRICE_CAPACITY_OPTIMIZED",
+     "Ec2Configuration": [
+      {
+       "ImageIdOverride": {
+        "Fn::GetAtt": [
+         "NeuronxQuantCompileMachinImageNeuronxAmiEA3AC00D",
+         "image_id"
+        ]
+       },
+       "ImageType": "ECS_AL2023"
+      }
+     ],
+     "InstanceRole": {
+      "Fn::GetAtt": [
+       "NeuronxQuantCompileComputeEnvironmentInstanceProfile3C318C5F",
+       "Arn"
+      ]
+     },
+     "InstanceTypes": [
+      "inf2.8xlarge"
+     ],
+     "LaunchTemplate": {
+      "LaunchTemplateId": {
+       "Ref": "NeuronxQuantCompileLaunchTemplateA0D1180F"
+      },
+      "Version": {
+       "Fn::GetAtt": [
+        "NeuronxQuantCompileLaunchTemplateA0D1180F",
+        "LatestVersionNumber"
+       ]
+      }
+     },
+     "MaxvCpus": 256,
+     "MinvCpus": 0,
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "NeuronxQuantCompileComputeEnvironmentSecurityGroup7711E000",
+        "GroupId"
+       ]
+      }
+     ],
+     "Subnets": [
+      {
+       "Ref": "VPCPrivateSubnet1Subnet8BCA10E0"
+      },
+      {
+       "Ref": "VPCPrivateSubnet2SubnetCFCDAA7A"
+      }
+     ],
+     "Tags": {
+      "Name": "neuronx-compile-worker"
+     },
+     "Type": "SPOT"
+    },
+    "ReplaceComputeEnvironment": false,
+    "State": "ENABLED",
+    "Tags": {
+     "Name": "neuronx-compile-worker"
+    },
+    "Type": "managed",
+    "UpdatePolicy": {}
+   }
+  },
+  "NeuronxQuantCompileJobQueue429E0A23": {
+   "Type": "AWS::Batch::JobQueue",
+   "Properties": {
+    "ComputeEnvironmentOrder": [
+     {
+      "ComputeEnvironment": {
+       "Fn::GetAtt": [
+        "NeuronxQuantCompileComputeEnvironment884911E2",
+        "ComputeEnvironmentArn"
+       ]
+      },
+      "Order": 1
+     }
+    ],
+    "JobStateTimeLimitActions": [
+     {
+      "Action": "CANCEL",
+      "MaxTimeSeconds": 600,
+      "Reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
+      "State": "RUNNABLE"
+     }
+    ],
+    "Priority": 1,
+    "State": "ENABLED"
+   }
+  },
+  "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "NeuronxQuantCompileContainerDefinitionExecutionRoleDefaultPolicy038CC648": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":logs:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":log-group:/aws/batch/job:*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileContainerDefinitionExecutionRoleDefaultPolicy038CC648",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileJobDefinitionE9F8860B": {
+   "Type": "AWS::Batch::JobDefinition",
+   "Properties": {
+    "ContainerProperties": {
+     "Command": [
+      "cat <<EOF > compile.py\nimport os\nfrom transformers_neuronx import NeuronAutoModelForCausalLM, NeuronConfig, QuantizationConfig\n\nmodel_path = \"./model\"\nbatch_size = 1\ntp_degree = int(os.environ['TP_DEGREE'])\namp = \"bf16\"\nquant_dtype = os.getenv('QUANT_DTYPE')\nn_positions = int(os.environ['N_POSITIONS'])\nopt_level = int(os.getenv('OPT_LEVEL', \"2\"))\n\n# compile the model\nprint(\"loading the model\")\nneuron_config = NeuronConfig(\n    quant=QuantizationConfig(quant_dtype=quant_dtype, dequant_dtype='bf16') if quant_dtype is not None and quant_dtype != '' else None,\n)\nos.environ['NEURON_CC_FLAGS'] = f\"--enable-saturate-infinity --enable-mixed-precision-accumulation --optlevel {opt_level}\"\nneuron_model = NeuronAutoModelForCausalLM.from_pretrained(\n    model_path, \n    batch_size=batch_size, # Batch size must be determined prior to inference time.\n    tp_degree=tp_degree,   # Tensor Parallelism degree. Controls the number of NeuronCores to execute on\n    amp=amp,               # This automatically casts the weights to the specified dtype.\n    n_positions=n_positions,      # Sequence length. This should be atleast as large as the sum of expected input and output tokens. \n    neuron_config=neuron_config\n)\n\nprint(\"compiling the model\")\nneuron_model.to_neuron()\n\nprint(\"saving the compiled model\")\nneuron_model.save('compiled') # can be copied and used on a different neuron instance\n\nEOF\n",
+      {
+       "Fn::Join": [
+        "",
+        [
+         "pip install -U --extra-index-url https://pip.repos.neuron.amazonaws.com transformers-neuronx==$NEURONX_TRANSFORMERS_VERSION && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install git-lfs && git lfs install && git clone https://huggingface.co/cyberagent/calm3-22b-chat model && rm -rf model/.git && python ./compile.py && aws s3 sync --no-progress ./model s3://",
+         {
+          "Ref": "Bucket83908E77"
+         },
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/model && aws s3 sync --no-progress ./compiled s3://",
+         {
+          "Ref": "Bucket83908E77"
+         },
+         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/compiled && echo 'compile completed'"
+        ]
+       ]
+      }
+     ],
+     "Environment": [
+      {
+       "Name": "MODEL_ID",
+       "Value": "cyberagent/calm3-22b-chat"
+      },
+      {
+       "Name": "TP_DEGREE",
+       "Value": "2"
+      },
+      {
+       "Name": "N_POSITIONS",
+       "Value": "1024"
+      },
+      {
+       "Name": "OPT_LEVEL",
+       "Value": "1"
+      },
+      {
+       "Name": "QUANT_DTYPE",
+       "Value": "s8"
+      },
+      {
+       "Name": "ARTIFACT_S3_URL",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "Bucket83908E77"
+          },
+          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
+         ]
+        ]
+       }
+      },
+      {
+       "Name": "NEURONX_TRANSFORMERS_VERSION",
+       "Value": "0.11.351"
+      }
+     ],
+     "ExecutionRoleArn": {
+      "Fn::GetAtt": [
+       "NeuronxQuantCompileContainerDefinitionExecutionRole1495D1EA",
+       "Arn"
+      ]
+     },
+     "Image": "public.ecr.aws/neuron/pytorch-training-neuronx:2.1.2-neuronx-py310-sdk2.19.0-ubuntu20.04",
+     "LinuxParameters": {
+      "Devices": [
+       {
+        "ContainerPath": "/dev/neuron0",
+        "HostPath": "/dev/neuron0",
+        "Permissions": [
+         "read",
+         "write"
+        ]
+       }
+      ]
+     },
+     "ReadonlyRootFilesystem": false,
+     "ResourceRequirements": [
+      {
+       "Type": "MEMORY",
+       "Value": "124519"
+      },
+      {
+       "Type": "VCPU",
+       "Value": "32"
+      }
+     ]
+    },
+    "PlatformCapabilities": [
+     "EC2"
+    ],
+    "RetryStrategy": {},
+    "Timeout": {},
+    "Type": "container"
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyBE32DCD4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyBE32DCD4",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonEvent5159882B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      },
+      "WAITER_STATE_MACHINE_ARN": {
+       "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832"
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyBE32DCD4",
+    "NeuronxQuantCompileCompileJobProviderframeworkonEventServiceRole0BBAC5A5"
+   ]
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyF4B989B7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyF4B989B7",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+    },
+    "Description": "AWS CDK resource provider framework - isComplete (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.isComplete",
+    "Role": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyF4B989B7",
+    "NeuronxQuantCompileCompileJobProviderframeworkisCompleteServiceRole01481791"
+   ]
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicyE3767276": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicyE3767276",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onTimeout (Calm3CompileStack/NeuronxQuantCompile/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onTimeout",
+    "Role": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicyE3767276",
+    "NeuronxQuantCompileCompileJobProviderframeworkonTimeoutServiceRoleEE28D143"
+   ]
+  },
+  "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicy8B287DF7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogDelivery",
+        "logs:CreateLogStream",
+        "logs:DeleteLogDelivery",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutLogEvents",
+        "logs:PutResourcePolicy",
+        "logs:UpdateLogDelivery"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicy8B287DF7",
+    "Roles": [
+     {
+      "Ref": "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E"
+     }
+    ]
+   }
+  },
+  "NeuronxQuantCompileCompileJobProviderwaiterstatemachineLogGroup11323B51": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/vendedlogs/states/waiter-state-machine-",
+       {
+        "Ref": "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B"
+       },
+       "-c8c1c39a9aa0640b1b1d501141a988c2f3a316244b"
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "NeuronxQuantCompileCompileJobProviderwaiterstatemachine8CCCD832": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":60,\"MaxAttempts\":60,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "NeuronxQuantCompileCompileJobProviderframeworkisCompleteB3CF2D8B",
+         "Arn"
+        ]
+       },
+       "\"},\"framework-onTimeout-task\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "NeuronxQuantCompileCompileJobProviderframeworkonTimeout0F728610",
+         "Arn"
+        ]
+       },
+       "\"}}}"
+      ]
+     ]
+    },
+    "LoggingConfiguration": {
+     "Destinations": [
+      {
+       "CloudWatchLogsLogGroup": {
+        "LogGroupArn": {
+         "Fn::GetAtt": [
+          "NeuronxQuantCompileCompileJobProviderwaiterstatemachineLogGroup11323B51",
+          "Arn"
+         ]
+        }
+       }
+      }
+     ],
+     "IncludeExecutionData": false,
+     "Level": "ERROR"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicy8B287DF7",
+    "NeuronxQuantCompileCompileJobProviderwaiterstatemachineRoleF30F4F1E"
+   ]
+  },
+  "NeuronxQuantCompile0B27A228": {
+   "Type": "Custom::NeuronxCompile",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileCompileJobProviderframeworkonEvent5159882B",
+      "Arn"
+     ]
+    },
+    "jobDefinitionArn": {
+     "Ref": "NeuronxQuantCompileJobDefinitionE9F8860B"
+    },
+    "jobQueueArn": {
+     "Fn::GetAtt": [
+      "NeuronxQuantCompileJobQueue429E0A23",
+      "JobQueueArn"
+     ]
+    },
+    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
   }
  },
  "Mappings": {
@@ -2243,6 +3425,10 @@
    "Type": "AWS::SSM::Parameter::Value<String>",
    "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
   },
+  "NeuronxQuantCompileMachinImageImageParameter352D1AFA": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
+  },
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",
    "Default": "/cdk-bootstrap/hnb659fds/version",
@@ -2252,9 +3438,41 @@
  "Outputs": {
   "CompiledArtifact": {
    "Value": {
-    "Fn::GetAtt": [
-     "NeuronxCompile2DF99EDF",
-     "ArtifactS3Url"
+    "Fn::Join": [
+     "",
+     [
+      "s3://",
+      {
+       "Ref": "Bucket83908E77"
+      },
+      "/",
+      {
+       "Fn::GetAtt": [
+        "NeuronxCompile2DF99EDF",
+        "ArtifactS3Prefix"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "QuantCompiledArtifact": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "s3://",
+      {
+       "Ref": "Bucket83908E77"
+      },
+      "/",
+      {
+       "Fn::GetAtt": [
+        "NeuronxQuantCompile0B27A228",
+        "ArtifactS3Prefix"
+       ]
+      }
+     ]
     ]
    }
   }
