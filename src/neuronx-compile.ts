@@ -1,4 +1,3 @@
-import { readFileSync } from "fs";
 import { join } from "path";
 import { CustomResource, Duration, Size, Tags } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
@@ -9,8 +8,16 @@ import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
 import { Construct } from "constructs";
+import {
+  CompileOptions,
+  Model,
+  OptLevel,
+  Parameters,
+  QuantDtype,
+} from "./model";
 import { NeuronxInstanceType } from "./neuronx-instance-type";
 import { NeuronOptimizedMachineImage } from "./private/neuron-optimized-machine-image";
+import { calcTpDegree } from "./private/util";
 
 /**
  * Compile runtime.
@@ -25,103 +32,6 @@ export interface CompileRuntime {
    */
   readonly neuronxVersion: string;
 }
-
-/**
- * Quant data type.
- */
-export enum QuantDtype {
-  /**
-   * int8 weight storage.
-   */
-  S8 = "s8",
-}
-
-/**
- * Optimization level.
- */
-export enum OptLevel {
-  /**
-   * enables the core performance optimizations in the compiler, while also minimizing compile time.
-   */
-  MINIMIZING_COMPILE_TIME = 1,
-  /**
-   * provides the best balance between model performance and compile time.
-   */
-  BEST_BALANCE = 2,
-  /**
-   * may provide additional model execution performance but may incur longer compile times and higher host memory usage during model compilation.
-   */
-  MODEL_EXECUTION_PERFORMANCE = 3,
-}
-
-/**
- * Compile options.
- */
-export interface CompileOptions {
-  /**
-   * @default - calc from parameters and quantDtype
-   */
-  readonly tpDegree?: number;
-  /**
-   * @default - No quant
-   */
-  readonly quantDtype?: QuantDtype;
-  /**
-   * @default 4092
-   */
-  readonly nPositions?: number;
-  /**
-   * @default OptLevel.BEST_BALANCE
-   */
-  readonly optLevel?: OptLevel;
-}
-
-/**
- * Represents the amount of parameters.
- */
-export class Parameters {
-  /**
-   * Create a Parameters representing an amount bilion.
-   * @param parameters number of parameters bilionX
-   * @returns parameters
-   */
-  static billion(parameters: number) {
-    return new Parameters(parameters);
-  }
-  private constructor(private readonly billion: number) {}
-  /**
-   * Return this number of parameters as bilion.
-   * @returns This number of parameters as bilion.
-   */
-  toBilion() {
-    return this.billion;
-  }
-}
-
-/**
- * Compile target model basic infromation
- */
-export interface ModelOptions {
-  readonly parameters: Parameters;
-}
-/**
- * Compile target model.
- */
-export class Model {
-  /**
-   * model informations at HuggingFace
-   * @param modelId model id on the HuggingFace
-   * @param options model basic infromation
-   * @returns model instance
-   */
-  static fromHuggingFace(modelId: string, options: ModelOptions) {
-    return new Model(modelId, options);
-  }
-  private constructor(
-    readonly modelId: string,
-    readonly options: ModelOptions,
-  ) {}
-}
 /**
  * Props of NeuronxCompile.
  */
@@ -131,10 +41,6 @@ export interface NeuronxCompileProps {
    */
   readonly vpc: ec2.IVpc;
   /**
-   * The instance type of compile worker instance.
-   */
-  readonly instanceType?: NeuronxInstanceType;
-  /**
    * The bucket to upload compiled artifacts.
    */
   readonly bucket: IBucket;
@@ -142,6 +48,10 @@ export interface NeuronxCompileProps {
    * The model to be compiled.
    */
   readonly model: Model;
+  /**
+   * The instance type of compile worker instance.
+   */
+  readonly instanceType?: NeuronxInstanceType;
   /**
    * The root volume of worker instance.
    * @default - N bilion parameters * 5GiB EBS
@@ -175,6 +85,7 @@ export interface NeuronxCompileProps {
  * Neuronx compile construct. Compile the model to work with Inferentia2 and Trainium1 and upload it to an S3 bucket.
  */
 export class NeuronxCompile extends Construct {
+  readonly compiledArtifactS3Bucket: IBucket;
   /**
    * S3 URL that compiled artifact uploaded.
    */
@@ -183,20 +94,27 @@ export class NeuronxCompile extends Construct {
    * S3 Prefix that compiled artifact uploaded.
    */
   readonly compiledArtifactS3Prefix: string;
+  readonly tpDegree: number;
+  readonly quantDtype?: QuantDtype;
+  readonly nPositions: number;
+  readonly optLevel: OptLevel;
+  readonly parameters: Parameters;
   constructor(scope: Construct, id: string, props: NeuronxCompileProps) {
     super(scope, id);
 
-    const nPositions = props.compileOptions?.nPositions ?? 4092;
-    const quantDtype = props.compileOptions?.quantDtype;
-    const optLevel = props.compileOptions?.optLevel ?? OptLevel.BEST_BALANCE;
-    const tpDegree =
+    this.parameters = props.model.options.parameters;
+    this.compiledArtifactS3Bucket = props.bucket;
+    this.nPositions = props.compileOptions?.nPositions ?? 4096;
+    this.quantDtype = props.compileOptions?.quantDtype;
+    this.optLevel = props.compileOptions?.optLevel ?? OptLevel.BEST_BALANCE;
+    this.tpDegree =
       props.compileOptions?.tpDegree ??
-      this.calcTpDegree(props.model.options.parameters, {
-        nPositions,
-        quantDtype,
+      calcTpDegree(props.model.options.parameters, {
+        nPositions: this.nPositions,
+        quantDtype: this.quantDtype,
       });
     const instanceType =
-      props.instanceType ?? this.selectInstanceTypeByTpDegree(tpDegree);
+      props.instanceType ?? this.selectInstanceTypeByTpDegree(this.tpDegree);
     const launchTemplate = new ec2.LaunchTemplate(this, "LaunchTemplate", {
       blockDevices: [
         {
@@ -252,26 +170,18 @@ export class NeuronxCompile extends Construct {
       ],
     });
 
-    const runtime: CompileRuntime & { neuronxTransformersVersion?: string } =
-      props.runtime ?? {
-        image: ContainerImage.fromRegistry(
-          "public.ecr.aws/neuron/pytorch-training-neuronx:2.1.2-neuronx-py310-sdk2.19.0-ubuntu20.04",
-        ),
-        neuronxVersion: "2.19.0",
-        neuronxTransformersVersion: "0.11.351" as const,
-      };
-    let compiledArtifactPathPrefix = `${props.model.modelId}/neuronx-${runtime.neuronxVersion}/tp${tpDegree}-np${nPositions}-opt${optLevel}`;
-    if (quantDtype!!) {
-      compiledArtifactPathPrefix = `${compiledArtifactPathPrefix}-quant${quantDtype}`;
+    const runtime: CompileRuntime = props.runtime ?? {
+      image: ContainerImage.fromAsset(join(__dirname, "../scripts/compile")),
+      neuronxVersion: "2.19.1",
+    };
+    let compiledArtifactPathPrefix = `${props.model.modelId}/neuronx-${runtime.neuronxVersion}/tp${this.tpDegree}-np${this.nPositions}-opt${this.optLevel}`;
+    if (this.quantDtype!!) {
+      compiledArtifactPathPrefix = `${compiledArtifactPathPrefix}-quant${this.quantDtype}`;
     }
     props.bucket.grantReadWrite(
       computeEnvironment.instanceRole!,
       `${compiledArtifactPathPrefix}/*`,
     );
-
-    const compileScript = readFileSync(
-      join(__dirname, "../scripts/compile.py"),
-    ).toString();
     const linuxParameters = new batch.LinuxParameters(this, "LinuxParameters");
     linuxParameters.addDevices(
       ...Array.from({
@@ -300,36 +210,15 @@ export class NeuronxCompile extends Construct {
             Math.ceil(instanceType.memory.toMebibytes() * 0.95),
           ),
           cpu: instanceType.vCpu,
-          command: [
-            `cat <<EOF > compile.py\n${compileScript}\nEOF\n`,
-            [
-              runtime.neuronxTransformersVersion
-                ? "pip install -U --extra-index-url https://pip.repos.neuron.amazonaws.com transformers-neuronx==$NEURONX_TRANSFORMERS_VERSION"
-                : undefined,
-              "curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash",
-              "apt-get install git-lfs",
-              "git lfs install",
-              `git clone https://huggingface.co/${props.model.modelId} model`,
-              "rm -rf model/.git",
-              "python ./compile.py",
-              `aws s3 sync --no-progress ./model ${props.bucket.s3UrlForObject(`${compiledArtifactPathPrefix}/model`)}`,
-              `aws s3 sync --no-progress ./compiled ${props.bucket.s3UrlForObject(`${compiledArtifactPathPrefix}/compiled`)}`,
-              "echo 'compile completed'",
-            ]
-              .filter((v) => !!v)
-              .join(" && "),
-          ],
           environment: {
             MODEL_ID: props.model.modelId,
-            TP_DEGREE: tpDegree.toString(),
-            N_POSITIONS: nPositions.toString(),
-            OPT_LEVEL: optLevel.toString(),
-            QUANT_DTYPE: quantDtype?.toString() ?? "",
+            TP_DEGREE: this.tpDegree.toString(),
+            N_POSITIONS: this.nPositions.toString(),
+            OPT_LEVEL: this.optLevel.toString(),
+            QUANT_DTYPE: this.quantDtype?.toString() ?? "",
             ARTIFACT_S3_URL: props.bucket.s3UrlForObject(
               compiledArtifactPathPrefix,
             ),
-            NEURONX_TRANSFORMERS_VERSION:
-              runtime.neuronxTransformersVersion ?? "",
           },
           linuxParameters,
         },
@@ -376,32 +265,6 @@ export class NeuronxCompile extends Construct {
     this.compiledArtifactS3Prefix = compileJob.getAttString("ArtifactS3Prefix");
     this.compiledArtifactS3Url = props.bucket.s3UrlForObject(
       this.compiledArtifactS3Prefix,
-    );
-  }
-
-  private calcTpDegree(parameters: Parameters, compileOptions: CompileOptions) {
-    // case of float16
-    const bytesPerParamete = 16 / 8;
-    // memory = bytes per parameter * number of parameters
-    let memory = Size.gibibytes(bytesPerParamete * parameters.toBilion());
-    switch (compileOptions.quantDtype) {
-      case QuantDtype.S8:
-        memory = Size.gibibytes(memory.toGibibytes() / 2);
-        break;
-    }
-    const neronxCoreMemory = Size.gibibytes(16);
-    const minimum = Math.ceil(
-      memory.toGibibytes() / neronxCoreMemory.toGibibytes(),
-    );
-
-    const tpDegrees = [1, 2, 4, 8, 24];
-    for (const tpDegree of tpDegrees) {
-      if (minimum <= tpDegree) {
-        return tpDegree;
-      }
-    }
-    throw new Error(
-      "This model is too large, I can not support this model current version.",
     );
   }
 

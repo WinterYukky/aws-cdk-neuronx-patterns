@@ -42,7 +42,7 @@ describe("NeuronxCompile", () => {
           },
           {
             Name: "N_POSITIONS",
-            Value: "4092",
+            Value: "4096",
           },
           {
             Name: "OPT_LEVEL",
@@ -62,14 +62,10 @@ describe("NeuronxCompile", () => {
                   {
                     Ref: "Bucket83908E77",
                   },
-                  "/example/example-model/neuronx-2.19.0/tp2-np4092-opt2",
+                  "/example/example-model/neuronx-2.19.1/tp2-np4096-opt2",
                 ],
               ],
             },
-          },
-          {
-            Name: "NEURONX_TRANSFORMERS_VERSION",
-            Value: "0.11.351",
           },
         ],
       },
@@ -106,7 +102,7 @@ describe("NeuronxCompile", () => {
           },
           {
             Name: "N_POSITIONS",
-            Value: "4092",
+            Value: "4096",
           },
           {
             Name: "OPT_LEVEL",
@@ -126,14 +122,10 @@ describe("NeuronxCompile", () => {
                   {
                     Ref: "Bucket83908E77",
                   },
-                  "/example/example-model/neuronx-2.19.0/tp4-np4092-opt2",
+                  "/example/example-model/neuronx-2.19.1/tp4-np4096-opt2",
                 ],
               ],
             },
-          },
-          {
-            Name: "NEURONX_TRANSFORMERS_VERSION",
-            Value: "0.11.351",
           },
         ],
       },
@@ -173,7 +165,7 @@ describe("NeuronxCompile", () => {
           },
           {
             Name: "N_POSITIONS",
-            Value: "4092",
+            Value: "4096",
           },
           {
             Name: "OPT_LEVEL",
@@ -193,14 +185,10 @@ describe("NeuronxCompile", () => {
                   {
                     Ref: "Bucket83908E77",
                   },
-                  "/example/example-model/neuronx-2.19.0/tp2-np4092-opt2-quants8",
+                  "/example/example-model/neuronx-2.19.1/tp2-np4096-opt2-quants8",
                 ],
               ],
             },
-          },
-          {
-            Name: "NEURONX_TRANSFORMERS_VERSION",
-            Value: "0.11.351",
           },
         ],
       },
@@ -288,7 +276,7 @@ describe("NeuronxCompile", () => {
           },
           {
             Name: "N_POSITIONS",
-            Value: "4092",
+            Value: "4096",
           },
           {
             Name: "OPT_LEVEL",
@@ -308,14 +296,10 @@ describe("NeuronxCompile", () => {
                   {
                     Ref: "Bucket83908E77",
                   },
-                  "/example/example-model/neuronx-2.19.0/tp2-np4092-opt3",
+                  "/example/example-model/neuronx-2.19.1/tp2-np4096-opt3",
                 ],
               ],
             },
-          },
-          {
-            Name: "NEURONX_TRANSFORMERS_VERSION",
-            Value: "0.11.351",
           },
         ],
       },

@@ -89,8 +89,14 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Bucket">compiledArtifactS3Bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Prefix">compiledArtifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Url">compiledArtifactS3Url</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.nPositions">nPositions</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.optLevel">optLevel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.OptLevel">OptLevel</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.parameters">parameters</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.tpDegree">tpDegree</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompile.property.quantDtype">quantDtype</a></code> | <code><a href="#aws-cdk-neuronx-patterns.QuantDtype">QuantDtype</a></code> | *No description.* |
 
 ---
 
@@ -103,6 +109,16 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `compiledArtifactS3Bucket`<sup>Required</sup> <a name="compiledArtifactS3Bucket" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.compiledArtifactS3Bucket"></a>
+
+```typescript
+public readonly compiledArtifactS3Bucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
 
 ---
 
@@ -130,8 +146,357 @@ S3 URL that compiled artifact uploaded.
 
 ---
 
+##### `nPositions`<sup>Required</sup> <a name="nPositions" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.nPositions"></a>
+
+```typescript
+public readonly nPositions: number;
+```
+
+- *Type:* number
+
+---
+
+##### `optLevel`<sup>Required</sup> <a name="optLevel" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.optLevel"></a>
+
+```typescript
+public readonly optLevel: OptLevel;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.OptLevel">OptLevel</a>
+
+---
+
+##### `parameters`<sup>Required</sup> <a name="parameters" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.parameters"></a>
+
+```typescript
+public readonly parameters: Parameters;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a>
+
+---
+
+##### `tpDegree`<sup>Required</sup> <a name="tpDegree" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.tpDegree"></a>
+
+```typescript
+public readonly tpDegree: number;
+```
+
+- *Type:* number
+
+---
+
+##### `quantDtype`<sup>Optional</sup> <a name="quantDtype" id="aws-cdk-neuronx-patterns.NeuronxCompile.property.quantDtype"></a>
+
+```typescript
+public readonly quantDtype: QuantDtype;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.QuantDtype">QuantDtype</a>
+
+---
+
+
+### TransformersNeuronxSageMakerRealtimeInferenceEndpoint <a name="TransformersNeuronxSageMakerRealtimeInferenceEndpoint" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint"></a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer"></a>
+
+```typescript
+import { TransformersNeuronxSageMakerRealtimeInferenceEndpoint } from 'aws-cdk-neuronx-patterns'
+
+new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(scope: Construct, id: string, props: TransformersNeuronxSageMakerRealtimeInferenceEndpointProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps">TransformersNeuronxSageMakerRealtimeInferenceEndpointProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps">TransformersNeuronxSageMakerRealtimeInferenceEndpointProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `grantInvoke` <a name="grantInvoke" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IGrantable): Grant
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.isConstruct"></a>
+
+```typescript
+import { TransformersNeuronxSageMakerRealtimeInferenceEndpoint } from 'aws-cdk-neuronx-patterns'
+
+TransformersNeuronxSageMakerRealtimeInferenceEndpoint.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.endpointArn">endpointArn</a></code> | <code>string</code> | The ARN of the endpoint. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.endpointName">endpointName</a></code> | <code>string</code> | The name of the endpoint. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `endpointArn`<sup>Required</sup> <a name="endpointArn" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.endpointArn"></a>
+
+```typescript
+public readonly endpointArn: string;
+```
+
+- *Type:* string
+
+The ARN of the endpoint.
+
+---
+
+##### `endpointName`<sup>Required</sup> <a name="endpointName" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpoint.property.endpointName"></a>
+
+```typescript
+public readonly endpointName: string;
+```
+
+- *Type:* string
+
+The name of the endpoint.
+
+---
+
 
 ## Structs <a name="Structs" id="Structs"></a>
+
+### BucketCompiledModelOptions <a name="BucketCompiledModelOptions" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions"></a>
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.Initializer"></a>
+
+```typescript
+import { BucketCompiledModelOptions } from 'aws-cdk-neuronx-patterns'
+
+const bucketCompiledModelOptions: BucketCompiledModelOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.code">code</a></code> | <code>aws-cdk-lib.aws_s3_deployment.ISource</code> | Code used for inference. |
+| <code><a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.compiledArtifactPath">compiledArtifactPath</a></code> | <code>string</code> | The path where compiled artifacts (i.e. xxx.neff) are stored. |
+| <code><a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.compileOptions">compileOptions</a></code> | <code><a href="#aws-cdk-neuronx-patterns.CompileOptions">CompileOptions</a></code> | Neuronx compile options. |
+| <code><a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.modelIdOrPath">modelIdOrPath</a></code> | <code>string</code> | Model ID or saved path. |
+| <code><a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.parameters">parameters</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a></code> | The number of parameters of model. |
+
+---
+
+##### `code`<sup>Optional</sup> <a name="code" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.code"></a>
+
+```typescript
+public readonly code: ISource;
+```
+
+- *Type:* aws-cdk-lib.aws_s3_deployment.ISource
+- *Default:* using the predefined code
+
+Code used for inference.
+
+---
+
+##### `compiledArtifactPath`<sup>Optional</sup> <a name="compiledArtifactPath" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.compiledArtifactPath"></a>
+
+```typescript
+public readonly compiledArtifactPath: string;
+```
+
+- *Type:* string
+- *Default:* "./compiled"
+
+The path where compiled artifacts (i.e. xxx.neff) are stored.
+
+---
+
+##### `compileOptions`<sup>Optional</sup> <a name="compileOptions" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.compileOptions"></a>
+
+```typescript
+public readonly compileOptions: CompileOptions;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.CompileOptions">CompileOptions</a>
+- *Default:* Each properties are set default.
+
+Neuronx compile options.
+
+---
+
+##### `modelIdOrPath`<sup>Optional</sup> <a name="modelIdOrPath" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.modelIdOrPath"></a>
+
+```typescript
+public readonly modelIdOrPath: string;
+```
+
+- *Type:* string
+- *Default:* "./model"
+
+Model ID or saved path.
+
+---
+
+##### `parameters`<sup>Required</sup> <a name="parameters" id="aws-cdk-neuronx-patterns.BucketCompiledModelOptions.property.parameters"></a>
+
+```typescript
+public readonly parameters: Parameters;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a>
+
+The number of parameters of model.
+
+---
+
+### CompiledModelOptions <a name="CompiledModelOptions" id="aws-cdk-neuronx-patterns.CompiledModelOptions"></a>
+
+Precompiled model options.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.CompiledModelOptions.Initializer"></a>
+
+```typescript
+import { CompiledModelOptions } from 'aws-cdk-neuronx-patterns'
+
+const compiledModelOptions: CompiledModelOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.CompiledModelOptions.property.code">code</a></code> | <code>aws-cdk-lib.aws_s3_deployment.ISource</code> | Code used for inference. |
+| <code><a href="#aws-cdk-neuronx-patterns.CompiledModelOptions.property.compiledArtifactPath">compiledArtifactPath</a></code> | <code>string</code> | The path where compiled artifacts (i.e. xxx.neff) are stored. |
+| <code><a href="#aws-cdk-neuronx-patterns.CompiledModelOptions.property.compileOptions">compileOptions</a></code> | <code><a href="#aws-cdk-neuronx-patterns.CompileOptions">CompileOptions</a></code> | Neuronx compile options. |
+| <code><a href="#aws-cdk-neuronx-patterns.CompiledModelOptions.property.modelIdOrPath">modelIdOrPath</a></code> | <code>string</code> | Model ID or saved path. |
+
+---
+
+##### `code`<sup>Optional</sup> <a name="code" id="aws-cdk-neuronx-patterns.CompiledModelOptions.property.code"></a>
+
+```typescript
+public readonly code: ISource;
+```
+
+- *Type:* aws-cdk-lib.aws_s3_deployment.ISource
+- *Default:* using the predefined code
+
+Code used for inference.
+
+---
+
+##### `compiledArtifactPath`<sup>Optional</sup> <a name="compiledArtifactPath" id="aws-cdk-neuronx-patterns.CompiledModelOptions.property.compiledArtifactPath"></a>
+
+```typescript
+public readonly compiledArtifactPath: string;
+```
+
+- *Type:* string
+- *Default:* "./compiled"
+
+The path where compiled artifacts (i.e. xxx.neff) are stored.
+
+---
+
+##### `compileOptions`<sup>Optional</sup> <a name="compileOptions" id="aws-cdk-neuronx-patterns.CompiledModelOptions.property.compileOptions"></a>
+
+```typescript
+public readonly compileOptions: CompileOptions;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.CompileOptions">CompileOptions</a>
+- *Default:* Each properties are set default.
+
+Neuronx compile options.
+
+---
+
+##### `modelIdOrPath`<sup>Optional</sup> <a name="modelIdOrPath" id="aws-cdk-neuronx-patterns.CompiledModelOptions.property.modelIdOrPath"></a>
+
+```typescript
+public readonly modelIdOrPath: string;
+```
+
+- *Type:* string
+- *Default:* "./model"
+
+Model ID or saved path.
+
+---
 
 ### CompileOptions <a name="CompileOptions" id="aws-cdk-neuronx-patterns.CompileOptions"></a>
 
@@ -163,7 +528,7 @@ public readonly nPositions: number;
 ```
 
 - *Type:* number
-- *Default:* 4092
+- *Default:* 4096
 
 ---
 
@@ -418,6 +783,127 @@ The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
+### TransformersNeuronxSageMakerRealtimeInferenceEndpointProps <a name="TransformersNeuronxSageMakerRealtimeInferenceEndpointProps" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps"></a>
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.Initializer"></a>
+
+```typescript
+import { TransformersNeuronxSageMakerRealtimeInferenceEndpointProps } from 'aws-cdk-neuronx-patterns'
+
+const transformersNeuronxSageMakerRealtimeInferenceEndpointProps: TransformersNeuronxSageMakerRealtimeInferenceEndpointProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.modelData">modelData</a></code> | <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData">TransformersNeuronxSageMakerInferenceModelData</a></code> | Model data for SageMaker inference. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.containerStartupHealthCheckTimeout">containerStartupHealthCheckTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The timeout value, for your inference container to pass health check by SageMaker Hosting. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | A map of environment variables to pass into the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.image">image</a></code> | <code>@aws-cdk/aws-sagemaker-alpha.ContainerImage</code> | An image of the container where the inference job is executed. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.instanceType">instanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType">NeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.modelDataDownloadTimeout">modelDataDownloadTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The timeout value, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The size, of the ML storage volume attached to individual inference instance associated with the production variant. |
+
+---
+
+##### `modelData`<sup>Required</sup> <a name="modelData" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.modelData"></a>
+
+```typescript
+public readonly modelData: TransformersNeuronxSageMakerInferenceModelData;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData">TransformersNeuronxSageMakerInferenceModelData</a>
+
+Model data for SageMaker inference.
+
+The model data requires at least compiled artifacts.
+
+---
+
+##### `containerStartupHealthCheckTimeout`<sup>Optional</sup> <a name="containerStartupHealthCheckTimeout" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.containerStartupHealthCheckTimeout"></a>
+
+```typescript
+public readonly containerStartupHealthCheckTimeout: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* 60 seconds, when set the `modelDataDownloadTimeout` then use same value (max 60 minutes)
+
+The timeout value, for your inference container to pass health check by SageMaker Hosting.
+
+> [https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests)
+
+---
+
+##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.environment"></a>
+
+```typescript
+public readonly environment: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* Only the predefined environment variables required to use Neuronx have been set.
+
+A map of environment variables to pass into the container.
+
+---
+
+##### `image`<sup>Optional</sup> <a name="image" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.image"></a>
+
+```typescript
+public readonly image: ContainerImage;
+```
+
+- *Type:* @aws-cdk/aws-sagemaker-alpha.ContainerImage
+
+An image of the container where the inference job is executed.
+
+---
+
+##### `instanceType`<sup>Optional</sup> <a name="instanceType" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.instanceType"></a>
+
+```typescript
+public readonly instanceType: NeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType">NeuronxInstanceType</a>
+- *Default:* It is determined automatically according to the number of model parameters and compilation options.
+
+The instance type of compile worker instance.
+
+---
+
+##### `modelDataDownloadTimeout`<sup>Optional</sup> <a name="modelDataDownloadTimeout" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.modelDataDownloadTimeout"></a>
+
+```typescript
+public readonly modelDataDownloadTimeout: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* 60 seconds, when `volumeSize` larger than 30GB then 1GB x 15 seconds (max 60 minutes)
+
+The timeout value, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant.
+
+---
+
+##### `volumeSize`<sup>Optional</sup> <a name="volumeSize" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerRealtimeInferenceEndpointProps.property.volumeSize"></a>
+
+```typescript
+public readonly volumeSize: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+- *Default:* 2.5 GB per billion parameter (Max 512 GB)
+
+The size, of the ML storage volume attached to individual inference instance associated with the production variant.
+
+Currently only Amazon EBS gp2 storage volumes are supported.
+
+> [https://aws.amazon.com/jp/releasenotes/host-instance-storage-volumes-table](https://aws.amazon.com/jp/releasenotes/host-instance-storage-volumes-table)
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### Inferentia2Chips <a name="Inferentia2Chips" id="aws-cdk-neuronx-patterns.Inferentia2Chips"></a>
@@ -496,7 +982,42 @@ Compile target model.
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.Model.fromBucket">fromBucket</a></code> | model informations at S3 Bucket. |
 | <code><a href="#aws-cdk-neuronx-patterns.Model.fromHuggingFace">fromHuggingFace</a></code> | model informations at HuggingFace. |
+
+---
+
+##### `fromBucket` <a name="fromBucket" id="aws-cdk-neuronx-patterns.Model.fromBucket"></a>
+
+```typescript
+import { Model } from 'aws-cdk-neuronx-patterns'
+
+Model.fromBucket(bucket: IBucket, prefix: string, options: ModelOptions)
+```
+
+model informations at S3 Bucket.
+
+###### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.Model.fromBucket.parameter.bucket"></a>
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+Model stored S3 Bucket.
+
+---
+
+###### `prefix`<sup>Required</sup> <a name="prefix" id="aws-cdk-neuronx-patterns.Model.fromBucket.parameter.prefix"></a>
+
+- *Type:* string
+
+Model stored objects prefix.
+
+---
+
+###### `options`<sup>Required</sup> <a name="options" id="aws-cdk-neuronx-patterns.Model.fromBucket.parameter.options"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.ModelOptions">ModelOptions</a>
+
+model basic infromation.
 
 ---
 
@@ -532,6 +1053,8 @@ model basic infromation.
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.Model.property.modelId">modelId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.Model.property.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.ModelOptions">ModelOptions</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.Model.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.Model.property.prefix">prefix</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -552,6 +1075,26 @@ public readonly options: ModelOptions;
 ```
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.ModelOptions">ModelOptions</a>
+
+---
+
+##### `bucket`<sup>Optional</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.Model.property.bucket"></a>
+
+```typescript
+public readonly bucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+##### `prefix`<sup>Optional</sup> <a name="prefix" id="aws-cdk-neuronx-patterns.Model.property.prefix"></a>
+
+```typescript
+public readonly prefix: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -731,6 +1274,182 @@ number of parameters bilionX.
 
 ---
 
+
+
+### TransformersNeuronxSageMakerInferenceModelData <a name="TransformersNeuronxSageMakerInferenceModelData" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData"></a>
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromBucket">fromBucket</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile">fromNeuronxCompile</a></code> | *No description.* |
+
+---
+
+##### `fromBucket` <a name="fromBucket" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromBucket"></a>
+
+```typescript
+import { TransformersNeuronxSageMakerInferenceModelData } from 'aws-cdk-neuronx-patterns'
+
+TransformersNeuronxSageMakerInferenceModelData.fromBucket(bucket: IBucket, prefix: string, options: BucketCompiledModelOptions)
+```
+
+###### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromBucket.parameter.bucket"></a>
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+###### `prefix`<sup>Required</sup> <a name="prefix" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromBucket.parameter.prefix"></a>
+
+- *Type:* string
+
+---
+
+###### `options`<sup>Required</sup> <a name="options" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromBucket.parameter.options"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.BucketCompiledModelOptions">BucketCompiledModelOptions</a>
+
+---
+
+##### `fromNeuronxCompile` <a name="fromNeuronxCompile" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile"></a>
+
+```typescript
+import { TransformersNeuronxSageMakerInferenceModelData } from 'aws-cdk-neuronx-patterns'
+
+TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile(compile: NeuronxCompile, code?: ISource)
+```
+
+###### `compile`<sup>Required</sup> <a name="compile" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile.parameter.compile"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompile">NeuronxCompile</a>
+
+---
+
+###### `code`<sup>Optional</sup> <a name="code" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile.parameter.code"></a>
+
+- *Type:* aws-cdk-lib.aws_s3_deployment.ISource
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.code">code</a></code> | <code>aws-cdk-lib.aws_s3_deployment.ISource</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.compiledArtifactS3Prefix">compiledArtifactS3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.nPositions">nPositions</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.optLevel">optLevel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.OptLevel">OptLevel</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.parameters">parameters</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.tpDegree">tpDegree</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.compiledArtifactPath">compiledArtifactPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.modelIdOrPath">modelIdOrPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.quantDtype">quantDtype</a></code> | <code><a href="#aws-cdk-neuronx-patterns.QuantDtype">QuantDtype</a></code> | *No description.* |
+
+---
+
+##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.bucket"></a>
+
+```typescript
+public readonly bucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+##### `code`<sup>Required</sup> <a name="code" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.code"></a>
+
+```typescript
+public readonly code: ISource;
+```
+
+- *Type:* aws-cdk-lib.aws_s3_deployment.ISource
+
+---
+
+##### `compiledArtifactS3Prefix`<sup>Required</sup> <a name="compiledArtifactS3Prefix" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.compiledArtifactS3Prefix"></a>
+
+```typescript
+public readonly compiledArtifactS3Prefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `nPositions`<sup>Required</sup> <a name="nPositions" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.nPositions"></a>
+
+```typescript
+public readonly nPositions: number;
+```
+
+- *Type:* number
+
+---
+
+##### `optLevel`<sup>Required</sup> <a name="optLevel" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.optLevel"></a>
+
+```typescript
+public readonly optLevel: OptLevel;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.OptLevel">OptLevel</a>
+
+---
+
+##### `parameters`<sup>Required</sup> <a name="parameters" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.parameters"></a>
+
+```typescript
+public readonly parameters: Parameters;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.Parameters">Parameters</a>
+
+---
+
+##### `tpDegree`<sup>Required</sup> <a name="tpDegree" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.tpDegree"></a>
+
+```typescript
+public readonly tpDegree: number;
+```
+
+- *Type:* number
+
+---
+
+##### `compiledArtifactPath`<sup>Optional</sup> <a name="compiledArtifactPath" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.compiledArtifactPath"></a>
+
+```typescript
+public readonly compiledArtifactPath: string;
+```
+
+- *Type:* string
+
+---
+
+##### `modelIdOrPath`<sup>Optional</sup> <a name="modelIdOrPath" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.modelIdOrPath"></a>
+
+```typescript
+public readonly modelIdOrPath: string;
+```
+
+- *Type:* string
+
+---
+
+##### `quantDtype`<sup>Optional</sup> <a name="quantDtype" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.property.quantDtype"></a>
+
+```typescript
+public readonly quantDtype: QuantDtype;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.QuantDtype">QuantDtype</a>
+
+---
 
 
 ## Protocols <a name="Protocols" id="Protocols"></a>

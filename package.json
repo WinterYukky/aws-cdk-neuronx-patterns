@@ -36,7 +36,6 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/aws-sagemaker-alpha": "2.149.0-alpha.0",
     "@aws-cdk/integ-runner": "2.149.0-alpha.0",
     "@aws-cdk/integ-tests-alpha": "2.149.0-alpha.0",
     "@aws-sdk/client-batch": "^3.620.0",
@@ -68,8 +67,12 @@
     "typescript": "^5.5.4"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-sagemaker-alpha": "2.149.0-alpha.0",
     "aws-cdk-lib": "^2.149.0",
     "constructs": "^10.0.5"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-sagemaker-alpha": "2.149.0-alpha.0"
   },
   "keywords": [
     "cdk",
