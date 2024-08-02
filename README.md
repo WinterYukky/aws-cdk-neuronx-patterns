@@ -13,7 +13,7 @@ This library provides high-level architectural patterns using neuronx (e.g. Infe
 > [!WARNING]
 > This construct uses an Inferentia2 instance on SageMaker. You may need to increase your request limit for your AWS account.
 
-By using the `NeuronXCompile` construct included in this construct library, models published on HuggingFace can be easily deployed to SageMaker Real-time inference. To define using the `NeuronXCompile` construct:
+By using the `NeuronxCompile` construct included in this construct library, models published on HuggingFace can be easily deployed to SageMaker Real-time inference. To define using the `NeuronxCompile` construct:
 
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
