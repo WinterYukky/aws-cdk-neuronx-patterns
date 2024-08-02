@@ -262,7 +262,9 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
     );
     cfnEndpointConfig.addPropertyOverride(
       "ProductionVariants.0.VolumeSizeInGB",
-      volumeSize.toGibibytes(),
+      instanceType.toString().startsWith("ml.trn1")
+        ? undefined
+        : volumeSize.toGibibytes(),
     );
     const modelDataDownloadTimeout =
       props.modelDataDownloadTimeout ??
