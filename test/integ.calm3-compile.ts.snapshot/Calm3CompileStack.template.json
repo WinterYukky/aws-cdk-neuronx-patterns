@@ -938,7 +938,7 @@
              "Arn"
             ]
            },
-           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/*"
+           "/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp4-np4096-opt1/*"
           ]
          ]
         }
@@ -1107,6 +1107,42 @@
          ]
         ]
        }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
       }
      ],
      "Version": "2012-10-17"
@@ -1123,25 +1159,6 @@
    "Type": "AWS::Batch::JobDefinition",
    "Properties": {
     "ContainerProperties": {
-     "Command": [
-      "cat <<EOF > compile.py\nimport os\nfrom transformers_neuronx import NeuronAutoModelForCausalLM, NeuronConfig, QuantizationConfig\n\nmodel_path = \"./model\"\nbatch_size = 1\ntp_degree = int(os.environ['TP_DEGREE'])\namp = \"bf16\"\nquant_dtype = os.getenv('QUANT_DTYPE')\nn_positions = int(os.environ['N_POSITIONS'])\nopt_level = int(os.getenv('OPT_LEVEL', \"2\"))\n\n# compile the model\nprint(\"loading the model\")\nneuron_config = NeuronConfig(\n    quant=QuantizationConfig(quant_dtype=quant_dtype, dequant_dtype='bf16') if quant_dtype is not None and quant_dtype != '' else None,\n)\nos.environ['NEURON_CC_FLAGS'] = f\"--enable-saturate-infinity --enable-mixed-precision-accumulation --optlevel {opt_level}\"\nneuron_model = NeuronAutoModelForCausalLM.from_pretrained(\n    model_path, \n    batch_size=batch_size, # Batch size must be determined prior to inference time.\n    tp_degree=tp_degree,   # Tensor Parallelism degree. Controls the number of NeuronCores to execute on\n    amp=amp,               # This automatically casts the weights to the specified dtype.\n    n_positions=n_positions,      # Sequence length. This should be atleast as large as the sum of expected input and output tokens. \n    neuron_config=neuron_config\n)\n\nprint(\"compiling the model\")\nneuron_model.to_neuron()\n\nprint(\"saving the compiled model\")\nneuron_model.save('compiled') # can be copied and used on a different neuron instance\n\nEOF\n",
-      {
-       "Fn::Join": [
-        "",
-        [
-         "pip install -U --extra-index-url https://pip.repos.neuron.amazonaws.com transformers-neuronx==$NEURONX_TRANSFORMERS_VERSION && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install git-lfs && git lfs install && git clone https://huggingface.co/cyberagent/calm3-22b-chat model && rm -rf model/.git && python ./compile.py && aws s3 sync --no-progress ./model s3://",
-         {
-          "Ref": "Bucket83908E77"
-         },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/model && aws s3 sync --no-progress ./compiled s3://",
-         {
-          "Ref": "Bucket83908E77"
-         },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1/compiled && echo 'compile completed'"
-        ]
-       ]
-      }
-     ],
      "Environment": [
       {
        "Name": "MODEL_ID",
@@ -1153,7 +1170,7 @@
       },
       {
        "Name": "N_POSITIONS",
-       "Value": "4092"
+       "Value": "4096"
       },
       {
        "Name": "OPT_LEVEL",
@@ -1173,14 +1190,10 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
+          "/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp4-np4096-opt1"
          ]
         ]
        }
-      },
-      {
-       "Name": "NEURONX_TRANSFORMERS_VERSION",
-       "Value": "0.11.351"
       }
      ],
      "ExecutionRoleArn": {
@@ -1189,7 +1202,9 @@
        "Arn"
       ]
      },
-     "Image": "public.ecr.aws/neuron/pytorch-training-neuronx:2.1.2-neuronx-py310-sdk2.19.0-ubuntu20.04",
+     "Image": {
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2ba1a7843b8bcffbb0c4b4cd6f738c9922ab98e7058a5f078f425160293684fd"
+     },
      "LinuxParameters": {
       "Devices": [
        {
@@ -1884,7 +1899,7 @@
       "JobQueueArn"
      ]
     },
-    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.0/tp4-np4092-opt1"
+    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.1/tp4-np4096-opt1"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -2384,7 +2399,7 @@
              "Arn"
             ]
            },
-           "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/*"
+           "/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8/*"
           ]
          ]
         }
@@ -2553,6 +2568,42 @@
          ]
         ]
        }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
       }
      ],
      "Version": "2012-10-17"
@@ -2569,25 +2620,6 @@
    "Type": "AWS::Batch::JobDefinition",
    "Properties": {
     "ContainerProperties": {
-     "Command": [
-      "cat <<EOF > compile.py\nimport os\nfrom transformers_neuronx import NeuronAutoModelForCausalLM, NeuronConfig, QuantizationConfig\n\nmodel_path = \"./model\"\nbatch_size = 1\ntp_degree = int(os.environ['TP_DEGREE'])\namp = \"bf16\"\nquant_dtype = os.getenv('QUANT_DTYPE')\nn_positions = int(os.environ['N_POSITIONS'])\nopt_level = int(os.getenv('OPT_LEVEL', \"2\"))\n\n# compile the model\nprint(\"loading the model\")\nneuron_config = NeuronConfig(\n    quant=QuantizationConfig(quant_dtype=quant_dtype, dequant_dtype='bf16') if quant_dtype is not None and quant_dtype != '' else None,\n)\nos.environ['NEURON_CC_FLAGS'] = f\"--enable-saturate-infinity --enable-mixed-precision-accumulation --optlevel {opt_level}\"\nneuron_model = NeuronAutoModelForCausalLM.from_pretrained(\n    model_path, \n    batch_size=batch_size, # Batch size must be determined prior to inference time.\n    tp_degree=tp_degree,   # Tensor Parallelism degree. Controls the number of NeuronCores to execute on\n    amp=amp,               # This automatically casts the weights to the specified dtype.\n    n_positions=n_positions,      # Sequence length. This should be atleast as large as the sum of expected input and output tokens. \n    neuron_config=neuron_config\n)\n\nprint(\"compiling the model\")\nneuron_model.to_neuron()\n\nprint(\"saving the compiled model\")\nneuron_model.save('compiled') # can be copied and used on a different neuron instance\n\nEOF\n",
-      {
-       "Fn::Join": [
-        "",
-        [
-         "pip install -U --extra-index-url https://pip.repos.neuron.amazonaws.com transformers-neuronx==$NEURONX_TRANSFORMERS_VERSION && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install git-lfs && git lfs install && git clone https://huggingface.co/cyberagent/calm3-22b-chat model && rm -rf model/.git && python ./compile.py && aws s3 sync --no-progress ./model s3://",
-         {
-          "Ref": "Bucket83908E77"
-         },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/model && aws s3 sync --no-progress ./compiled s3://",
-         {
-          "Ref": "Bucket83908E77"
-         },
-         "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8/compiled && echo 'compile completed'"
-        ]
-       ]
-      }
-     ],
      "Environment": [
       {
        "Name": "MODEL_ID",
@@ -2619,14 +2651,10 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
+          "/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8"
          ]
         ]
        }
-      },
-      {
-       "Name": "NEURONX_TRANSFORMERS_VERSION",
-       "Value": "0.11.351"
       }
      ],
      "ExecutionRoleArn": {
@@ -2635,7 +2663,9 @@
        "Arn"
       ]
      },
-     "Image": "public.ecr.aws/neuron/pytorch-training-neuronx:2.1.2-neuronx-py310-sdk2.19.0-ubuntu20.04",
+     "Image": {
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2ba1a7843b8bcffbb0c4b4cd6f738c9922ab98e7058a5f078f425160293684fd"
+     },
      "LinuxParameters": {
       "Devices": [
        {
@@ -3290,7 +3320,7 @@
       "JobQueueArn"
      ]
     },
-    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.0/tp2-np1024-opt1-quants8"
+    "artifactS3Prefix": "cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"

@@ -1,0 +1,239 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "IntegTransformersNeuronxSageMakerRealtimeInferenceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegTransformersNeuronxSageMakerRealtimeInferenceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegTransformersNeuronxSageMakerRealtimeInferenceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "IntegTransformersNeuronxSageMakerRealtimeInferenceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a13bb662f390ba93e5a4e670cabc1ca0e482be86d93cff27f8875e2a56bb6a3f.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegTransformersNeuronxSageMakerRealtimeInferenceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "IntegTransformersNeuronxSageMakerRealtimeInferenceStack.assets"
+      ],
+      "metadata": {
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Bucket83908E77"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketPolicyE9A3008A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketAutoDeleteObjectsCustomResourceBAFD23C2"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/CompiledArtifactDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompiledArtifactDeploymentAwsCliLayerF334285B"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/CompiledArtifactDeployment/CustomResource-512MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB6723FB92"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/CodeDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/CodeDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/Model/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelRoleA7BC5AFD"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/Model/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelRoleDefaultPolicy859668FB"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/Model/Model": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelA77E7705",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
+            ]
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/EndpointConfig/EndpointConfig": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceEndpointConfig179F3433",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
+            ]
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/RealtimeInference/Endpoint/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceEndpointE9D4BAB7"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegTransformersNeuronxSageMakerRealtimeInferenceStack"
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegTestDefaultTestDeployAssertE3E7D2A4.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "IntegTestDefaultTestDeployAssertE3E7D2A4.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+      ],
+      "metadata": {
+        "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegTest/DefaultTest/DeployAssert"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

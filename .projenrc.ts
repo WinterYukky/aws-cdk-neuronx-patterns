@@ -15,16 +15,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
     dirs: ["src", "test"],
     prettier: true,
   },
-  // deps: [],                /* Runtime dependencies of this module. */
+  deps: [
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+  ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
     `@aws-cdk/integ-runner@${cdkVersion}-alpha.0`,
     `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
-    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@types/aws-lambda",
     "@aws-sdk/client-batch",
     "esbuild",
   ],
+  peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: [
     "src/private/await-compile-job/index.js",
     "src/private/neuronx-ami/index.js",
