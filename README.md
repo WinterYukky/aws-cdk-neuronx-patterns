@@ -86,7 +86,7 @@ client
   });
 ```
 
-To change your own inference code, you can pass the code source.
+To use your own inference code, you can pass the code to model data option.
 
 ```ts
 import * as s3Deplyment from "aws-cdk-lib/aws-s3-deployment";
