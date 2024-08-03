@@ -40,6 +40,9 @@ new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
 );
 ```
 
+This is TransformersNeuronxSageMakerRealtimeInferenceEndpoint architecture.
+![TransformersNeuronxSageMakerRealtimeInferenceEndpoint architecture](./docs/transformers-neuronx-sagemaker-realtime-inference-architecture.png)
+
 ### Default inference code
 
 By default, default inference code is deployed to implement the chat interface. The default inference code takes an object array like [transformers' conversations](https://huggingface.co/docs/transformers/main/en/conversations) and responds to the generated text. The following code is an example using the AWS SDK for JavaScript v3.
