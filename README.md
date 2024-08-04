@@ -24,9 +24,7 @@ declare const bucket: s3.Bucket;
 const compile = new NeuronxCompile(this, "NeuronxCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("example/example-7b-chat", {
-    parameters: Parameters.billion(7),
-  }),
+  model: Model.fromHuggingFace("example/example-7b-chat"),
 });
 new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
   this,
@@ -121,9 +119,7 @@ declare const bucket: s3.Bucket;
 const compile = new NeuronxCompile(this, "NeuronxCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("example/example-7b-chat", {
-    parameters: Parameters.billion(7),
-  }),
+  model: Model.fromHuggingFace("example/example-7b-chat"),
 });
 
 // Get the compiled artifacts from this S3 URL
@@ -188,9 +184,7 @@ declare const bucket: s3.Bucket;
 new NeuronxCompile(this, "NeuronxCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("example/example-22b-chat", {
-    parameters: Parameters.billion(22),
-  }),
+  model: Model.fromHuggingFace("example/example-22b-chat"),
   compileOptions: {
     nPositions: 1024,
     quantDtype: QuantDtype.S8,
