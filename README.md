@@ -164,9 +164,7 @@ declare const bucket: s3.Bucket;
 new NeuronxCompile(this, "NeuronxCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("example/example-7b-chat", {
-    parameters: Parameters.billion(7),
-  }),
+  model: Model.fromHuggingFace("example/example-7b-chat"),
   spot: true,
 });
 ```
