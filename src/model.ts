@@ -88,8 +88,19 @@ export class Model {
    * @param options model basic infromation
    * @returns model instance
    */
-  static fromHuggingFace(modelId: string, options: ModelOptions) {
-    return new Model(modelId, options);
+  static fromHuggingFace(modelId: string, options?: ModelOptions) {
+    const inferParameters = modelId.match(/(\d+)b/);
+    if (!options?.parameters && !inferParameters) {
+      throw new Error(
+        "The number of parameters cannot be inferred from the model ID. Set optional parameters.",
+      );
+    }
+    const parameters =
+      options?.parameters ?? Parameters.billion(parseInt(inferParameters![1]));
+    return new Model(modelId, {
+      ...options,
+      parameters,
+    });
   }
   /**
    * model informations at S3 Bucket

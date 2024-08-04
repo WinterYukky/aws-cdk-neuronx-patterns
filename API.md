@@ -1026,7 +1026,7 @@ model basic infromation.
 ```typescript
 import { Model } from 'aws-cdk-neuronx-patterns'
 
-Model.fromHuggingFace(modelId: string, options: ModelOptions)
+Model.fromHuggingFace(modelId: string, options?: ModelOptions)
 ```
 
 model informations at HuggingFace.
@@ -1039,7 +1039,7 @@ model id on the HuggingFace.
 
 ---
 
-###### `options`<sup>Required</sup> <a name="options" id="aws-cdk-neuronx-patterns.Model.fromHuggingFace.parameter.options"></a>
+###### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.Model.fromHuggingFace.parameter.options"></a>
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.ModelOptions">ModelOptions</a>
 

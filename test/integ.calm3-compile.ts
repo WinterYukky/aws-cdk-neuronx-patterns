@@ -2,13 +2,7 @@ import { IntegTest } from "@aws-cdk/integ-tests-alpha";
 import { App, CfnOutput, RemovalPolicy, Stack } from "aws-cdk-lib";
 import { Vpc } from "aws-cdk-lib/aws-ec2";
 import { Bucket } from "aws-cdk-lib/aws-s3";
-import {
-  Model,
-  NeuronxCompile,
-  OptLevel,
-  Parameters,
-  QuantDtype,
-} from "../src";
+import { Model, NeuronxCompile, OptLevel, QuantDtype } from "../src";
 
 const app = new App();
 const stack = new Stack(app, "Calm3CompileStack");
@@ -20,9 +14,7 @@ const bucket = new Bucket(stack, "Bucket", {
 const compile = new NeuronxCompile(stack, "NeuronxCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("cyberagent/calm3-22b-chat", {
-    parameters: Parameters.billion(22),
-  }),
+  model: Model.fromHuggingFace("cyberagent/calm3-22b-chat"),
   compileOptions: {
     optLevel: OptLevel.MINIMIZING_COMPILE_TIME,
   },
@@ -34,9 +26,7 @@ new CfnOutput(stack, "CompiledArtifact", {
 const quantCompile = new NeuronxCompile(stack, "NeuronxQuantCompile", {
   vpc,
   bucket,
-  model: Model.fromHuggingFace("cyberagent/calm3-22b-chat", {
-    parameters: Parameters.billion(22),
-  }),
+  model: Model.fromHuggingFace("cyberagent/calm3-22b-chat"),
   compileOptions: {
     nPositions: 1024,
     quantDtype: QuantDtype.S8,
