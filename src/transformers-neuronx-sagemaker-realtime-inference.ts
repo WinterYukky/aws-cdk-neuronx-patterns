@@ -9,7 +9,7 @@ import {
   Source,
 } from "aws-cdk-lib/aws-s3-deployment";
 import { CfnEndpointConfig, CfnModel } from "aws-cdk-lib/aws-sagemaker";
-import { Construct } from "constructs";
+import { Construct, IDependable } from "constructs";
 import { CompileOptions, OptLevel, Parameters, QuantDtype } from "./model";
 import { NeuronxCompile } from "./neuronx-compile";
 import { NeuronxInstanceType } from "./neuronx-instance-type";
@@ -93,6 +93,10 @@ export class TransformersNeuronxSageMakerInferenceModelData {
   readonly modelIdOrPath?: string;
   readonly compiledArtifactPath?: string;
   readonly parameters: Parameters;
+  /**
+   * @internal
+   */
+  readonly _dependables: IDependable[];
 
   private constructor(options: {
     readonly bucket: IBucket;
@@ -105,6 +109,7 @@ export class TransformersNeuronxSageMakerInferenceModelData {
     readonly modelIdOrPath?: string;
     readonly compiledArtifactPath?: string;
     readonly parameters: Parameters;
+    readonly dependables?: IDependable[];
   }) {
     this.bucket = options.bucket;
     this.compiledArtifactS3Prefix = options.compiledArtifactS3Prefix;
@@ -120,6 +125,7 @@ export class TransformersNeuronxSageMakerInferenceModelData {
     this.modelIdOrPath = options.modelIdOrPath;
     this.compiledArtifactPath = options.compiledArtifactPath;
     this.parameters = options.parameters;
+    this._dependables = options.dependables ?? [];
   }
 }
 
@@ -238,6 +244,7 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
     );
     props.modelData.bucket.grantRead(model);
     model.node.addDependency(deploy);
+    model.node.addDependency(...props.modelData._dependables);
     const endpointConfig = new sagemaker.EndpointConfig(
       this,
       "EndpointConfig",
