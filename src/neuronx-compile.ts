@@ -99,6 +99,12 @@ export class NeuronxCompile extends Construct {
   readonly nPositions: number;
   readonly optLevel: OptLevel;
   readonly parameters: Parameters;
+  /**
+   * S3 Prefix that compiled artifact uploaded.
+   * This property is not depends on compile job finish.
+   * @internal
+   */
+  readonly _compiledArtifactS3Prefix: string;
   constructor(scope: Construct, id: string, props: NeuronxCompileProps) {
     super(scope, id);
 
@@ -262,6 +268,7 @@ export class NeuronxCompile extends Construct {
         artifactS3Prefix: compiledArtifactPathPrefix,
       },
     });
+    this._compiledArtifactS3Prefix = compiledArtifactPathPrefix;
     this.compiledArtifactS3Prefix = compileJob.getAttString("ArtifactS3Prefix");
     this.compiledArtifactS3Url = props.bucket.s3UrlForObject(
       this.compiledArtifactS3Prefix,
