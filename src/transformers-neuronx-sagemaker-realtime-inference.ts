@@ -79,7 +79,7 @@ export class TransformersNeuronxSageMakerInferenceModelData {
     return new TransformersNeuronxSageMakerInferenceModelData({
       ...compile,
       bucket: compile.compiledArtifactS3Bucket,
-      compiledArtifactS3Prefix: compile.compiledArtifactS3Prefix,
+      compiledArtifactS3Prefix: compile._compiledArtifactS3Prefix,
       code,
     });
   }
@@ -254,12 +254,15 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
     const cfnEndpointConfig = endpointConfig.node.findChild(
       "EndpointConfig",
     ) as CfnEndpointConfig;
-    const volumeSize = Size.gibibytes(
-      props.volumeSize?.toGibibytes() ??
-        (props.modelData.parameters.toBilion() * 2.5 > 512
-          ? 512
-          : props.modelData.parameters.toBilion() * 2.5),
-    );
+    const volumeSize =
+      props.volumeSize ??
+      Size.gibibytes(
+        Math.ceil(
+          props.modelData.parameters.toBilion() * 2.5 > 512
+            ? 512
+            : props.modelData.parameters.toBilion() * 2.5,
+        ),
+      );
     cfnEndpointConfig.addPropertyOverride(
       "ProductionVariants.0.VolumeSizeInGB",
       instanceType.toString().startsWith("ml.trn1")
