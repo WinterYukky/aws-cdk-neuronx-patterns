@@ -1,6 +1,6 @@
 import { join } from "path";
 import * as sagemaker from "@aws-cdk/aws-sagemaker-alpha";
-import { Duration, Size } from "aws-cdk-lib";
+import { Duration, Size, Token } from "aws-cdk-lib";
 import { Grant, IGrantable } from "aws-cdk-lib/aws-iam";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import {
@@ -81,6 +81,7 @@ export class TransformersNeuronxSageMakerInferenceModelData {
       bucket: compile.compiledArtifactS3Bucket,
       compiledArtifactS3Prefix: compile._compiledArtifactS3Prefix,
       code,
+      dependables: [compile.node.defaultChild!],
     });
   }
   readonly bucket: IBucket;
@@ -93,10 +94,7 @@ export class TransformersNeuronxSageMakerInferenceModelData {
   readonly modelIdOrPath?: string;
   readonly compiledArtifactPath?: string;
   readonly parameters: Parameters;
-  /**
-   * @internal
-   */
-  readonly _dependables: IDependable[];
+  private readonly dependables: IDependable[];
 
   private constructor(options: {
     readonly bucket: IBucket;
@@ -125,7 +123,17 @@ export class TransformersNeuronxSageMakerInferenceModelData {
     this.modelIdOrPath = options.modelIdOrPath;
     this.compiledArtifactPath = options.compiledArtifactPath;
     this.parameters = options.parameters;
-    this._dependables = options.dependables ?? [];
+    this.dependables = options.dependables ?? [];
+  }
+
+  bind(model: sagemaker.IModel) {
+    const deploy = new BucketDeployment(this.bucket, "CodeDeployment", {
+      destinationBucket: this.bucket,
+      sources: [this.code],
+      destinationKeyPrefix: join(this.compiledArtifactS3Prefix, "code"),
+    });
+    deploy.node.addDependency(...this.dependables);
+    model.node.addDependency(deploy);
   }
 }
 
@@ -153,7 +161,7 @@ export interface TransformersNeuronxSageMakerRealtimeInferenceEndpointProps {
    * The size, of the ML storage volume attached to individual inference instance associated with the production variant.
    * Currently only Amazon EBS gp2 storage volumes are supported.
    * @see https://aws.amazon.com/jp/releasenotes/host-instance-storage-volumes-table
-   * @default - 2.5 GB per billion parameter (Max 512 GB)
+   * @default - 3 GB per billion parameter (Max 512 GB)
    */
   readonly volumeSize?: Size;
   /**
@@ -196,14 +204,6 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
     const instanceType =
       props.instanceType ??
       this.selectInstanceTypeByTpDegree(props.modelData.tpDegree);
-    const deploy = new BucketDeployment(this, "CodeDeployment", {
-      destinationBucket: props.modelData.bucket,
-      sources: [props.modelData.code],
-      destinationKeyPrefix: join(
-        props.modelData.compiledArtifactS3Prefix,
-        "code",
-      ),
-    });
     const model = new sagemaker.Model(this, "Model", {
       containers: [
         {
@@ -231,7 +231,10 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
     cfnModel.addPropertyOverride(
       "PrimaryContainer.ModelDataSource.S3DataSource.S3Uri",
       props.modelData.bucket.s3UrlForObject(
-        props.modelData.compiledArtifactS3Prefix,
+        Token.isUnresolved(props.modelData.compiledArtifactS3Prefix) ||
+          props.modelData.compiledArtifactS3Prefix.endsWith("/")
+          ? props.modelData.compiledArtifactS3Prefix
+          : `${props.modelData.compiledArtifactS3Prefix}/`,
       ),
     );
     cfnModel.addPropertyOverride(
@@ -243,8 +246,7 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
       "None",
     );
     props.modelData.bucket.grantRead(model);
-    model.node.addDependency(deploy);
-    model.node.addDependency(...props.modelData._dependables);
+    props.modelData.bind(model);
     const endpointConfig = new sagemaker.EndpointConfig(
       this,
       "EndpointConfig",
@@ -265,9 +267,9 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
       props.volumeSize ??
       Size.gibibytes(
         Math.ceil(
-          props.modelData.parameters.toBilion() * 2.5 > 512
+          props.modelData.parameters.toBilion() * 3 > 512
             ? 512
-            : props.modelData.parameters.toBilion() * 2.5,
+            : props.modelData.parameters.toBilion() * 3,
         ),
       );
     cfnEndpointConfig.addPropertyOverride(

@@ -9,7 +9,7 @@
       "Value": "true"
      },
      {
-      "Key": "aws-cdk:cr-owned:model-data/code:d8ecdb94",
+      "Key": "aws-cdk:cr-owned:model-data/code:e043fd68",
       "Value": "true"
      },
      {
@@ -89,6 +89,44 @@
    "DependsOn": [
     "BucketPolicyE9A3008A"
    ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "BucketCodeDeploymentAwsCliLayer768ED73F": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   }
+  },
+  "BucketCodeDeploymentCustomResource6AF648D5": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "Arn"
+     ]
+    },
+    "SourceBucketNames": [
+     {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     }
+    ],
+    "SourceObjectKeys": [
+     "d6896f4744346384bc550562fde54b5957960e0b064d31e2f8b57478a4332620.zip"
+    ],
+    "DestinationBucketName": {
+     "Ref": "Bucket83908E77"
+    },
+    "DestinationBucketKeyPrefix": "model-data/code",
+    "Prune": true
+   },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
@@ -356,52 +394,6 @@
     "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
    ]
   },
-  "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC": {
-   "Type": "AWS::Lambda::LayerVersion",
-   "Properties": {
-    "Content": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     },
-     "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
-    },
-    "Description": "/opt/awscli/aws"
-   },
-   "DependsOn": [
-    "CompiledArtifactDeploymentAwsCliLayerF334285B",
-    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F"
-   ]
-  },
-  "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5": {
-   "Type": "Custom::CDKBucketDeployment",
-   "Properties": {
-    "ServiceToken": {
-     "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
-      "Arn"
-     ]
-    },
-    "SourceBucketNames": [
-     {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     }
-    ],
-    "SourceObjectKeys": [
-     "d6896f4744346384bc550562fde54b5957960e0b064d31e2f8b57478a4332620.zip"
-    ],
-    "DestinationBucketName": {
-     "Ref": "Bucket83908E77"
-    },
-    "DestinationBucketKeyPrefix": "model-data/code",
-    "Prune": true
-   },
-   "DependsOn": [
-    "CompiledArtifactDeploymentAwsCliLayerF334285B",
-    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F"
-   ],
-   "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete"
-  },
   "RealtimeInferenceModelRoleA7BC5AFD": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -433,10 +425,10 @@
     ]
    },
    "DependsOn": [
+    "BucketCodeDeploymentAwsCliLayer768ED73F",
+    "BucketCodeDeploymentCustomResource6AF648D5",
     "CompiledArtifactDeploymentAwsCliLayerF334285B",
-    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F",
-    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
-    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
+    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F"
    ]
   },
   "RealtimeInferenceModelRoleDefaultPolicy859668FB": {
@@ -521,10 +513,10 @@
     ]
    },
    "DependsOn": [
+    "BucketCodeDeploymentAwsCliLayer768ED73F",
+    "BucketCodeDeploymentCustomResource6AF648D5",
     "CompiledArtifactDeploymentAwsCliLayerF334285B",
-    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F",
-    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
-    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
+    "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F"
    ]
   },
   "RealtimeInferenceModelA77E7705": {
@@ -572,10 +564,10 @@
     }
    },
    "DependsOn": [
+    "BucketCodeDeploymentAwsCliLayer768ED73F",
+    "BucketCodeDeploymentCustomResource6AF648D5",
     "CompiledArtifactDeploymentAwsCliLayerF334285B",
     "CompiledArtifactDeploymentCustomResource512MiB2F6A5A1F",
-    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
-    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5",
     "RealtimeInferenceModelRoleDefaultPolicy859668FB",
     "RealtimeInferenceModelRoleA7BC5AFD"
    ]
@@ -585,11 +577,11 @@
    "Properties": {
     "ProductionVariants": [
      {
-      "ContainerStartupHealthCheckTimeoutInSeconds": 825,
+      "ContainerStartupHealthCheckTimeoutInSeconds": 990,
       "InitialInstanceCount": 1,
       "InitialVariantWeight": 1,
       "InstanceType": "ml.inf2.24xlarge",
-      "ModelDataDownloadTimeoutInSeconds": 825,
+      "ModelDataDownloadTimeoutInSeconds": 990,
       "ModelName": {
        "Fn::GetAtt": [
         "RealtimeInferenceModelA77E7705",
@@ -597,7 +589,7 @@
        ]
       },
       "VariantName": "PrimaryVariant",
-      "VolumeSizeInGB": 55
+      "VolumeSizeInGB": 66
      }
     ]
    },
@@ -763,7 +755,7 @@
     "Handler": "index.handler",
     "Layers": [
      {
-      "Ref": "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC"
+      "Ref": "BucketCodeDeploymentAwsCliLayer768ED73F"
      }
     ],
     "Role": {

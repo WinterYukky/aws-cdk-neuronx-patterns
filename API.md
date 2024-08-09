@@ -894,7 +894,7 @@ public readonly volumeSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
-- *Default:* 2.5 GB per billion parameter (Max 512 GB)
+- *Default:* 3 GB per billion parameter (Max 512 GB)
 
 The size, of the ML storage volume attached to individual inference instance associated with the production variant.
 
@@ -1371,6 +1371,25 @@ public readonly neuronxCores: number;
 
 ### TransformersNeuronxSageMakerInferenceModelData <a name="TransformersNeuronxSageMakerInferenceModelData" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData"></a>
 
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind">bind</a></code> | *No description.* |
+
+---
+
+##### `bind` <a name="bind" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind"></a>
+
+```typescript
+public bind(model: IModel): void
+```
+
+###### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind.parameter.model"></a>
+
+- *Type:* @aws-cdk/aws-sagemaker-alpha.IModel
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
