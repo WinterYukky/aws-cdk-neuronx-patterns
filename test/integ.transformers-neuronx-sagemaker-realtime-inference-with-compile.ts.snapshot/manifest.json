@@ -1,0 +1,581 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cdd09e20d45bfb03331ace3c39df62a2d0311246f979eb14513847804041d938.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.assets"
+      ],
+      "metadata": {
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Vpc8378EB38"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1Subnet5C2D37C4"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1RouteTable6C95E38E"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1RouteTableAssociation97140677"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1DefaultRoute3DA9E72A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1EIPD7E02669"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1NATGateway4D7517AA"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2Subnet691E08A3"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2RouteTable94F7E489"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2RouteTableAssociationDD5762D8"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2DefaultRoute97F91067"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2EIP3C605A87"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2NATGateway9182C01D"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1Subnet536B997A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1RouteTableB2C5B500"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1RouteTableAssociation70C59FA6"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1DefaultRouteBE02A9ED"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2Subnet3788AAA1"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2RouteTableA678073B"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2DefaultRoute060D2087"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcIGWD7BA715C"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcVPCGWBF912B6E"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Bucket83908E77"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketPolicyE9A3008A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketAutoDeleteObjectsCustomResourceBAFD23C2"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/CodeDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketCodeDeploymentAwsCliLayer768ED73F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/CodeDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketCodeDeploymentCustomResource6AF648D5"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileLaunchTemplate4C04A440"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleB356015F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileMachinImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy17E75FBE"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/MachinImage/NeuronxAmiProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileMachinImageNeuronxAmiProviderframeworkonEvent92C9E12F"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/MachinImage/Image.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileMachinImageImageParameter4D5CDC05"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/MachinImage/NeuronxAmi/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileMachinImageNeuronxAmi5584B979"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ComputeEnvironment/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileComputeEnvironmentSecurityGroup49BBBE62"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ComputeEnvironment/InstanceProfileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileComputeEnvironmentInstanceProfileRole0364B0BD"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ComputeEnvironment/InstanceProfileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileComputeEnvironmentInstanceProfileRoleDefaultPolicyE3B08907"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ComputeEnvironment/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileComputeEnvironmentInstanceProfileA2A02790"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ComputeEnvironment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileComputeEnvironment672E2299"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/JobQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileJobQueueB7D6AE97"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ContainerDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileContainerDefinitionExecutionRoleBEA6A2DC"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileContainerDefinitionExecutionRoleDefaultPolicyEFD948B0"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/JobDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileJobDefinition5C3FF87A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonEventServiceRoleF7F53533"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonEventServiceRoleDefaultPolicyC11D7BCB"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonEventDFC28052"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkisCompleteServiceRole7B213791"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicy8FED3143"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkisCompleteA66E5E9A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonTimeoutServiceRole0EB0D950"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy58481096"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderframeworkonTimeout4D01EFE9"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderwaiterstatemachineRoleC71AF084"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderwaiterstatemachineRoleDefaultPolicyB4A73752"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/waiter-state-machine/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderwaiterstatemachineLogGroupF14C2137"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/CompileJobProvider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompileCompileJobProviderwaiterstatemachine6B836FC7"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/NeuronxCompile/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NeuronxCompile2DF99EDF"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/Model/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelRoleA7BC5AFD"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/Model/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelRoleDefaultPolicy859668FB"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/Model/Model": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceModelA77E7705"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/EndpointConfig/EndpointConfig": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceEndpointConfig179F3433"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/Endpoint/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceEndpointE9D4BAB7"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack"
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegTestDefaultTestDeployAssertE3E7D2A4.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "IntegTestDefaultTestDeployAssertE3E7D2A4.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+      ],
+      "metadata": {
+        "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegTest/DefaultTest/DeployAssert"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

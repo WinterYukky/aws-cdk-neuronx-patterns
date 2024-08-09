@@ -1,3 +1,4 @@
+import { join } from "path";
 import { IntegTest } from "@aws-cdk/integ-tests-alpha";
 import { App, RemovalPolicy, Stack } from "aws-cdk-lib";
 import * as s3 from "aws-cdk-lib/aws-s3";
@@ -25,7 +26,10 @@ const deploy = new s3Deplyment.BucketDeployment(
     destinationBucket: bucket,
     sources: [
       s3Deplyment.Source.asset(
-        "precompiled/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp4-np4096-opt1",
+        join(
+          __dirname,
+          "precompiled/cyberagent/calm3-22b-chat/neuronx-2.19.1/tp4-np4096-opt1",
+        ),
       ),
     ],
     destinationKeyPrefix: "model-data/compiled",
