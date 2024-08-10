@@ -5,6 +5,7 @@
       "stacks": [
         "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack"
       ],
+      "diffAssets": true,
       "assertionStack": "IntegTest/DefaultTest/DeployAssert",
       "assertionStackName": "IntegTestDefaultTestDeployAssertE3E7D2A4"
     }

@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cdd09e20d45bfb03331ace3c39df62a2d0311246f979eb14513847804041d938.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/59652780dea34518850ed91a6c366720af38aa35adc633ff96f07e2e9e1e8c1b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -212,18 +212,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "BucketAutoDeleteObjectsCustomResourceBAFD23C2"
-          }
-        ],
-        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/CodeDeployment/AwsCliLayer/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "BucketCodeDeploymentAwsCliLayer768ED73F"
-          }
-        ],
-        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Bucket/CodeDeployment/CustomResource/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "BucketCodeDeploymentCustomResource6AF648D5"
           }
         ],
         "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
@@ -478,6 +466,18 @@
             "data": "RealtimeInferenceModelA77E7705"
           }
         ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/CodeDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/CodeDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
+          }
+        ],
         "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/RealtimeInference/EndpointConfig/EndpointConfig": [
           {
             "type": "aws:cdk:logicalId",
@@ -506,6 +506,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/Exports/Output{\"Fn::GetAtt\":[\"RealtimeInferenceEndpointE9D4BAB7\",\"EndpointName\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttRealtimeInferenceEndpointE9D4BAB7EndpointNameA18593C0"
           }
         ],
         "/IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack/BootstrapVersion": [
@@ -540,7 +546,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0d8a34385380014a607aa4fbaccbf99847a9ea7a95328d78faaf822ccecff113.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -553,9 +559,88 @@
         }
       },
       "dependencies": [
+        "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack",
         "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
       ],
       "metadata": {
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/WaitFor/IsCompleteProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717WaitForIsCompleteProviderInvoke472EB06C"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/WaitFor/TimeoutProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717WaitForTimeoutProviderInvoke17D777EA"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/WaitFor/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717WaitForRole697B04D0"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/WaitFor/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717WaitForB30B0DBA"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCall@aws-sdk--client-sagemaker-runtimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717/AssertionResults": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssertionResultsAwsApiCallawssdkclientsagemakerruntimeInvokeEndpoint9aa724579cb6da8d021ff917bb39d717"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Role918961BB"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aRoleB84BD8CE"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
+          }
+        ],
         "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",

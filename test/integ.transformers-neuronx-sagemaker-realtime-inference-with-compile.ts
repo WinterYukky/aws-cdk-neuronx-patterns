@@ -1,4 +1,4 @@
-import { IntegTest } from "@aws-cdk/integ-tests-alpha";
+import { ExpectedResult, IntegTest } from "@aws-cdk/integ-tests-alpha";
 import { App, RemovalPolicy, Stack } from "aws-cdk-lib";
 import { Vpc } from "aws-cdk-lib/aws-ec2";
 import * as s3 from "aws-cdk-lib/aws-s3";
@@ -31,7 +31,7 @@ const compile = new NeuronxCompile(stack, "NeuronxCompile", {
     quantDtype: QuantDtype.S8,
   },
 });
-new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
+const endpoint = new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
   stack,
   "RealtimeInference",
   {
@@ -42,6 +42,37 @@ new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
   },
 );
 
-new IntegTest(app, "IntegTest", {
+const integ = new IntegTest(app, "IntegTest", {
   testCases: [stack],
+  diffAssets: true,
 });
+const output = integ.assertions.awsApiCall(
+  "@aws-sdk/client-sagemaker-runtime",
+  "InvokeEndpoint",
+  {
+    EndpointName: endpoint.endpointName,
+    Body: JSON.stringify({
+      messages: [
+        {
+          role: "system",
+          content: `You are helpfull assistant.`,
+        },
+        {
+          role: "user",
+          content:
+            "please answer '1+1=?'. You must answer only answer numeric.",
+        },
+      ],
+    }),
+    ContentType: "application/json",
+    Accept: "application/json",
+  },
+);
+
+output
+  .expect(
+    ExpectedResult.objectLike({
+      Body: '{"generated_text": "2"}',
+    }),
+  )
+  .waitForAssertions();

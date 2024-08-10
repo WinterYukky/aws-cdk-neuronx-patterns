@@ -524,7 +524,7 @@
       "Value": "true"
      },
      {
-      "Key": "aws-cdk:cr-owned:cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8/code:8207db73",
+      "Key": "aws-cdk:cr-owned:cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8/code:e7716eaf",
       "Value": "true"
      }
     ]
@@ -599,50 +599,6 @@
    },
    "DependsOn": [
     "BucketPolicyE9A3008A"
-   ],
-   "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete"
-  },
-  "BucketCodeDeploymentAwsCliLayer768ED73F": {
-   "Type": "AWS::Lambda::LayerVersion",
-   "Properties": {
-    "Content": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     },
-     "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
-    },
-    "Description": "/opt/awscli/aws"
-   },
-   "DependsOn": [
-    "NeuronxCompile2DF99EDF"
-   ]
-  },
-  "BucketCodeDeploymentCustomResource6AF648D5": {
-   "Type": "Custom::CDKBucketDeployment",
-   "Properties": {
-    "ServiceToken": {
-     "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
-      "Arn"
-     ]
-    },
-    "SourceBucketNames": [
-     {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     }
-    ],
-    "SourceObjectKeys": [
-     "d6896f4744346384bc550562fde54b5957960e0b064d31e2f8b57478a4332620.zip"
-    ],
-    "DestinationBucketName": {
-     "Ref": "Bucket83908E77"
-    },
-    "DestinationBucketKeyPrefix": "cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8/code",
-    "Prune": true
-   },
-   "DependsOn": [
-    "NeuronxCompile2DF99EDF"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -2156,8 +2112,8 @@
     ]
    },
    "DependsOn": [
-    "BucketCodeDeploymentAwsCliLayer768ED73F",
-    "BucketCodeDeploymentCustomResource6AF648D5"
+    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
+    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
    ]
   },
   "RealtimeInferenceModelRoleDefaultPolicy859668FB": {
@@ -2242,8 +2198,8 @@
     ]
    },
    "DependsOn": [
-    "BucketCodeDeploymentAwsCliLayer768ED73F",
-    "BucketCodeDeploymentCustomResource6AF648D5"
+    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
+    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5"
    ]
   },
   "RealtimeInferenceModelA77E7705": {
@@ -2291,11 +2247,55 @@
     }
    },
    "DependsOn": [
-    "BucketCodeDeploymentAwsCliLayer768ED73F",
-    "BucketCodeDeploymentCustomResource6AF648D5",
+    "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC",
+    "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5",
     "RealtimeInferenceModelRoleDefaultPolicy859668FB",
     "RealtimeInferenceModelRoleA7BC5AFD"
    ]
+  },
+  "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   },
+   "DependsOn": [
+    "NeuronxCompile2DF99EDF"
+   ]
+  },
+  "RealtimeInferenceCodeDeploymentCustomResourceABC9D5A5": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "Arn"
+     ]
+    },
+    "SourceBucketNames": [
+     {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     }
+    ],
+    "SourceObjectKeys": [
+     "d6896f4744346384bc550562fde54b5957960e0b064d31e2f8b57478a4332620.zip"
+    ],
+    "DestinationBucketName": {
+     "Ref": "Bucket83908E77"
+    },
+    "DestinationBucketKeyPrefix": "cyberagent/calm3-22b-chat/neuronx-2.19.1/tp2-np1024-opt1-quants8/code",
+    "Prune": true
+   },
+   "DependsOn": [
+    "NeuronxCompile2DF99EDF"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
   },
   "RealtimeInferenceEndpointConfig179F3433": {
    "Type": "AWS::SageMaker::EndpointConfig",
@@ -2472,7 +2472,7 @@
     "Handler": "index.handler",
     "Layers": [
      {
-      "Ref": "BucketCodeDeploymentAwsCliLayer768ED73F"
+      "Ref": "RealtimeInferenceCodeDeploymentAwsCliLayerF3CAE9AC"
      }
     ],
     "Role": {
@@ -2623,6 +2623,19 @@
    "Type": "AWS::SSM::Parameter::Value<String>",
    "Default": "/cdk-bootstrap/hnb659fds/version",
    "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttRealtimeInferenceEndpointE9D4BAB7EndpointNameA18593C0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "RealtimeInferenceEndpointE9D4BAB7",
+     "EndpointName"
+    ]
+   },
+   "Export": {
+    "Name": "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack:ExportsOutputFnGetAttRealtimeInferenceEndpointE9D4BAB7EndpointNameA18593C0"
+   }
   }
  },
  "Rules": {

@@ -1382,8 +1382,14 @@ public readonly neuronxCores: number;
 ##### `bind` <a name="bind" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind"></a>
 
 ```typescript
-public bind(model: IModel): void
+public bind(scope: Construct, model: IModel): void
 ```
+
+###### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
 
 ###### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.TransformersNeuronxSageMakerInferenceModelData.bind.parameter.model"></a>
 

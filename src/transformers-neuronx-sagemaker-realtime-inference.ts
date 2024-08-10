@@ -126,8 +126,8 @@ export class TransformersNeuronxSageMakerInferenceModelData {
     this.dependables = options.dependables ?? [];
   }
 
-  bind(model: sagemaker.IModel) {
-    const deploy = new BucketDeployment(this.bucket, "CodeDeployment", {
+  bind(scope: Construct, model: sagemaker.IModel) {
+    const deploy = new BucketDeployment(scope, "CodeDeployment", {
       destinationBucket: this.bucket,
       sources: [this.code],
       destinationKeyPrefix: join(this.compiledArtifactS3Prefix, "code"),
@@ -246,7 +246,7 @@ export class TransformersNeuronxSageMakerRealtimeInferenceEndpoint extends Const
       "None",
     );
     props.modelData.bucket.grantRead(model);
-    props.modelData.bind(model);
+    props.modelData.bind(this, model);
     const endpointConfig = new sagemaker.EndpointConfig(
       this,
       "EndpointConfig",
