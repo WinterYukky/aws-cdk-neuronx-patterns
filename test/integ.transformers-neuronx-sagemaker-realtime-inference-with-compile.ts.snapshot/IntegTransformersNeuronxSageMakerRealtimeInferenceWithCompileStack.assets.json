@@ -105,7 +105,7 @@
         }
       }
     },
-    "cdd09e20d45bfb03331ace3c39df62a2d0311246f979eb14513847804041d938": {
+    "59652780dea34518850ed91a6c366720af38aa35adc633ff96f07e2e9e1e8c1b": {
       "source": {
         "path": "IntegTransformersNeuronxSageMakerRealtimeInferenceWithCompileStack.template.json",
         "packaging": "file"
@@ -113,7 +113,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "cdd09e20d45bfb03331ace3c39df62a2d0311246f979eb14513847804041d938.json",
+          "objectKey": "59652780dea34518850ed91a6c366720af38aa35adc633ff96f07e2e9e1e8c1b.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

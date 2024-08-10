@@ -15,8 +15,8 @@ import {
   Parameters,
   QuantDtype,
 } from "./model";
+import { NeuronOptimizedMachineImage } from "./neuron-optimized-machine-image";
 import { NeuronxInstanceType } from "./neuronx-instance-type";
-import { NeuronOptimizedMachineImage } from "./private/neuron-optimized-machine-image";
 import { calcTpDegree } from "./private/util";
 
 /**
