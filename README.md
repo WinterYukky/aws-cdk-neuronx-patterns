@@ -5,15 +5,15 @@
 
 This library provides high-level architectural patterns using neuronx (e.g. Inferentia2 and Trainium1). It contains:
 
-- Transformers Neuronx SageMaker Real-time Inference Endpoint
-- Neuronx Compile
+- vLLM with NxD Inference on ALB & ECS on EC2
+- Neuronx Compiler
 
-## Transformers Neuronx SageMaker Real-time Inference Endpoint
+## vLLM NxD Inference on ALB & ECS on EC2
 
 > [!WARNING]
-> This construct uses an Inferentia2 instance on SageMaker. You may need to increase your request limit for your AWS account.
+> This construct uses an Inferentia2 instance on ECS. You may need to increase your request limit for your AWS account.
 
-By using the `NeuronxCompile` construct included in this construct library, models published on HuggingFace can be easily deployed to SageMaker Real-time inference. To define using the `NeuronxCompile` construct:
+By using the `VllmNxdInferenceCompiler` construct included in this construct library, models published on HuggingFace can be easily deployed to ECS with Application Load Balancer. To define using the `VllmNxdInferenceCompiler` construct:
 
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
@@ -21,89 +21,44 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
-const compile = new NeuronxCompile(this, "NeuronxCompile", {
+const compiler = new VllmNxdInferenceCompiler(this, "Compiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("example/example-7b-chat"),
 });
-new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
+const compiledModel = compiler.compile();
+const taskDefinition = new VllmNxdInferenceTaskDefinition(
   this,
-  "RealtimeInference",
+  "TaskDefinition",
   {
-    modelData:
-      TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile(
-        compile,
-      ),
+    vpc,
+    compiledModel,
+  },
+);
+this.service = new ApplicationLoadBalancedVllmNxDInferenceService(
+  this,
+  "Service",
+  {
+    vpc,
+    taskDefinition,
   },
 );
 ```
 
-This is TransformersNeuronxSageMakerRealtimeInferenceEndpoint architecture.
-![TransformersNeuronxSageMakerRealtimeInferenceEndpoint architecture](./docs/transformers-neuronx-sagemaker-realtime-inference-architecture.png)
+This is VllmNxDInferenceApplicationLoadBalancedEc2Service architecture.
+![VllmNxDInferenceApplicationLoadBalancedEc2Service architecture](./docs/vllm-nxd-inference-architecture.png)
 
-### Default inference code
+The construct will automatically:
 
-By default, default inference code is deployed to implement the chat interface. The default inference code takes an object array like [transformers' conversations](https://huggingface.co/docs/transformers/main/en/conversations) and responds to the generated text. The following code is an example using the AWS SDK for JavaScript v3.
+- Calculate optimal tensor parallelism based on model size
+- Configure memory footprint for the ECS tasks
+- Set up the Application Load Balancer
+- Deploy the compiled model to ECS tasks
+- Configure health checks and auto-scaling
 
-```ts
-import {
-  InvokeEndpointCommand,
-  SageMakerRuntimeClient,
-} from "@aws-sdk/client-sagemaker-runtime";
+The service exposes a REST API endpoint through the Application Load Balancer that can be used to perform inference with the deployed model.
 
-const client = new SageMakerRuntimeClient({
-  region: "us-east-1",
-});
-client
-  .send(
-    new InvokeEndpointCommand({
-      EndpointName: "my-endpoint-id",
-      Body: JSON.stringify({
-        // Optional. You can change answer role.
-        role: "ai",
-        // Require. The messages like conversation.
-        messages: [
-          {
-            role: "system",
-            content: `You are helpfull assistant.`,
-          },
-          {
-            role: "user",
-            content:
-              "please answer '1+1=?'. You must answer only answer numeric.",
-          },
-        ],
-      }),
-      ContentType: "application/json",
-      Accept: "application/json",
-    }),
-  )
-  .then((res) => {
-    // { generated_text: "2" }
-    console.log(JSON.parse(res.Body.transformToString()));
-  });
-```
-
-To use your own inference code, you can pass the code to model data option.
-
-```ts
-import * as s3Deplyment from "aws-cdk-lib/aws-s3-deployment";
-
-declare const compile: NeuronxCompile;
-new TransformersNeuronxSageMakerRealtimeInferenceEndpoint(
-  this,
-  "RealtimeInference",
-  {
-    modelData:
-      TransformersNeuronxSageMakerInferenceModelData.fromNeuronxCompile(
-        compile,
-        s3Deplyment.Source.asset("path/to/my/code/directory"),
-      ),
-  },
-);
-```
-
-## Neuronx Compile
+## Neuronx Compiler
 
 > [!WARNING]
 > This construct uses an Inferentia2 instance on EC2. You may need to increase your request limit for your AWS account.
@@ -116,37 +71,25 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
-const compile = new NeuronxCompile(this, "NeuronxCompile", {
+const compile = new NeuronxCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("example/example-7b-chat"),
+  artifactS3Prefix: "my-compiled-artifacts",
+  image:
 });
+const compiledModel = compiler.compile();
 
 // Get the compiled artifacts from this S3 URL
 new CfnOutput(this, "CompiledArtifact", {
-  value: compile.compiledArtifactS3Url,
+  value: compiledModel.s3Url,
 });
 ```
 
 This construct assumes the required instance type depending on the number of model parameters.
 
-After compiled, you can see like the this file tree in the S3 bucket.
-
-```txt
-{compiledArtifactS3Url}/
-├── model
-│   ├── config.json
-│   ├── tokenizer_config.json
-│   ├── xxx.safetensors
-│   └── xxx.safetensors
-└── compiled
-    ├── xxx.neff
-    ├── xxx.neff
-    └── xxx.neff
-```
-
-This is NeuronxCompile architecture.
-![NeuronxCompile architecture](./docs/neuronx-compile-architecture.png)
+This is NeuronxCompiler architecture.
+![NeuronxCompiler architecture](./docs/neuronx-compile-architecture.png)
 
 ### Spot Instance
 
@@ -184,7 +127,7 @@ new NeuronxCompile(this, "NeuronxCompile", {
   bucket,
   model: Model.fromHuggingFace("example/example-22b-chat"),
   compileOptions: {
-    nPositions: 1024,
+    maxModelLength: 1024,
     quantDtype: QuantDtype.S8,
     optLevel: OptLevel.MODEL_EXECUTION_PERFORMANCE,
   },

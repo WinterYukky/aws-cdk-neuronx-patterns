@@ -1,11 +1,11 @@
 import { ReleasableCommits, awscdk } from "projen";
-const cdkVersion = "2.149.0";
+const cdkVersion = "2.200.0";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
   authorAddress: "49480575+WinterYukky@users.noreply.github.com",
   cdkVersion,
   defaultReleaseBranch: "main",
-  jsiiVersion: "~5.4.0",
+  jsiiVersion: "~5.8.0",
   name: "aws-cdk-neuronx-patterns",
   projenrcTs: true,
   repositoryUrl: "https://github.com/WinterYukky/aws-cdk-neuronx-patterns.git",
@@ -20,17 +20,15 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
-    `@aws-cdk/integ-runner@${cdkVersion}-alpha.0`,
+    `@aws-cdk/integ-runner@2.186.11`,
     `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@types/aws-lambda",
     "@aws-sdk/client-batch",
     "esbuild",
   ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
-  gitignore: [
-    "src/private/await-compile-job/index.js",
-    "src/private/neuronx-ami/index.js",
-  ],
+  gitignore: ["src/**/index.js"],
   githubOptions: {
     pullRequestLintOptions: {
       semanticTitleOptions: {
@@ -59,16 +57,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ]),
   // packageName: undefined,  /* The "name" in package.json. */
 });
+project.eslint?.addRules({
+  "import/order": "off",
+});
+
 project.projectBuild.compileTask.prependExec(
   "esbuild index.ts --bundle --outdir=./ --platform=node --external:@aws-sdk/*",
   {
-    cwd: "src/private/await-compile-job",
+    cwd: "src/base/neuronx-compiler/private/await-compile-job",
   },
 );
 project.projectBuild.compileTask.prependExec(
   "esbuild index.ts --bundle --outdir=./ --platform=node --external:@aws-sdk/*",
   {
-    cwd: "src/private/neuronx-ami",
+    cwd: "src/base/neuronx/private/neuronx-ami",
   },
 );
 project.addTask("integ", {

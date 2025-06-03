@@ -63,19 +63,7 @@
     "import/no-unresolved": [
       "error"
     ],
-    "import/order": [
-      "warn",
-      {
-        "groups": [
-          "builtin",
-          "external"
-        ],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
+    "import/order": "off",
     "import/no-duplicates": [
       "error"
     ],
