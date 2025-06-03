@@ -30,8 +30,7 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-src/private/await-compile-job/index.js
-src/private/neuronx-ami/index.js
+src/**/index.js
 /test-reports/
 junit.xml
 /coverage/
