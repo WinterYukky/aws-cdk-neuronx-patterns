@@ -3,8 +3,6 @@ import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { Grant } from "aws-cdk-lib/aws-iam";
-
-
 import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
