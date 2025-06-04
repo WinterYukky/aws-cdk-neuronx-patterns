@@ -21,7 +21,6 @@ import {
   INeuronxContainerImage,
   NeuronxCompiledModel,
   NeuronxCompiler,
-  Secret,
 } from "../base/neuronx-compiler";
 import {
   VllmEngineArguments,
@@ -207,7 +206,7 @@ export class VllmNxdInferenceCompiler extends Construct {
     };
     
     // Handle hfToken if provided
-    const secrets: { [key: string]: Secret } = {};
+    const secrets: { [key: string]: batch.Secret } = {};
     if (props.vllmArgs?.hfToken) {
       secrets["HF_TOKEN"] = batch.Secret.fromSecretsManager(props.vllmArgs.hfToken);
     }
