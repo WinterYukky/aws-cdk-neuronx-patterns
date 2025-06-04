@@ -2,13 +2,18 @@ import { CustomResource, Duration, Size, Tags } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
-import { Grant, IRole } from "aws-cdk-lib/aws-iam";
+import { Grant } from "aws-cdk-lib/aws-iam";
 import { ISecret } from "aws-cdk-lib/aws-secretsmanager";
+
+/**
+ * Import types from aws-cdk-lib batch module
+ */
+import * as batch from "aws-cdk-lib/aws-batch";
 
 /**
  * Secret type for container definition.
  */
-export type Secret = ISecret | string;
+export type Secret = batch.Secret;
 import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
