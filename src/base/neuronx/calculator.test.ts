@@ -1,5 +1,6 @@
 import { Size } from "aws-cdk-lib";
-import { calcTensorParallel } from "./calculator";
+import { calcMemoryFootprint, calcTensorParallel } from "./calculator";
+import { DataTypeBits } from "./model";
 import { NeuronxInstanceType } from "./neuronx-instance-type";
 
 describe("When the attention head is divisible", () => {
@@ -125,5 +126,28 @@ describe("The one with low usage is shown last", () => {
         usage: 1,
       },
     ]);
+  });
+});
+
+describe("When the memory footprint is calculated", () => {
+  test("Million size models are calculatable", () => {
+    const memoryFootprint = calcMemoryFootprint(
+      576,
+      30,
+      DataTypeBits.BF16_OR_FP16,
+      128,
+      1,
+    );
+    expect(memoryFootprint.toGibibytes()).toEqual(1);
+  });
+  test("Billion size models are calculatable", () => {
+    const memoryFootprint = calcMemoryFootprint(
+      6144,
+      48,
+      DataTypeBits.BF16_OR_FP16,
+      1024,
+      1,
+    );
+    expect(memoryFootprint.toGibibytes()).toEqual(42);
   });
 });

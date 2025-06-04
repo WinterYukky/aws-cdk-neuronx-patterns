@@ -20,8 +20,8 @@ RUN pip install -U pip && \
 WORKDIR /usr/src
 
 RUN git clone -b ${VLLM_GIT_BRANCH} https://github.com/aws-neuron/upstreaming-to-vllm.git && \
-    pip install -r ./upstreaming-to-vllm/requirements-neuron.txt && \
-    VLLM_TARGET_DEVICE="neuron" pip install -e ./upstreaming-to-vllm
+    pip install -r ./upstreaming-to-vllm/requirements/neuron.txt && \
+    SETUPTOOLS_SCM_PRETEND_VERSION="0.9.0" VLLM_TARGET_DEVICE="neuron" pip install -e ./upstreaming-to-vllm
 
 WORKDIR /home/$USERNAME/vllm
 
