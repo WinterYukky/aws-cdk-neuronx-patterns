@@ -2201,8 +2201,6 @@ The tree node.
 
 ### VllmNxdInferenceTaskDefinition <a name="VllmNxdInferenceTaskDefinition" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition"></a>
 
-- *Implements:* <a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a>
-
 Task definition for VllmNxdInference.
 
 #### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.Initializer"></a>
@@ -2245,6 +2243,19 @@ new VllmNxdInferenceTaskDefinition(scope: Construct, id: string, props: VllmNxdI
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainer">addContainer</a></code> | Tasks running in AWSVPC networking mode requires an additional environment variable for the region to be sourced. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addExtension">addExtension</a></code> | Adds the specified extension to the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addFirelensLogRouter">addFirelensLogRouter</a></code> | Adds a firelens log router to the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addInferenceAccelerator">addInferenceAccelerator</a></code> | Adds an inference accelerator to the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addPlacementConstraint">addPlacementConstraint</a></code> | Adds the specified placement constraint to the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToExecutionRolePolicy">addToExecutionRolePolicy</a></code> | Adds a policy statement to the task execution IAM role. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToTaskRolePolicy">addToTaskRolePolicy</a></code> | Adds a policy statement to the task IAM role. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addVolume">addVolume</a></code> | Adds a volume to the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findContainer">findContainer</a></code> | Returns the container that match the provided containerName. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findPortMappingByName">findPortMappingByName</a></code> | Determine the existing port mapping for the provided name. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.grantRun">grantRun</a></code> | Grants permissions to run this task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.obtainExecutionRole">obtainExecutionRole</a></code> | Creates the task execution IAM role if it doesn't already exist. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault">addContainerWithDefault</a></code> | *No description.* |
 
 ---
 
@@ -2278,11 +2289,223 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
+##### `addContainer` <a name="addContainer" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainer"></a>
+
+```typescript
+public addContainer(id: string, props: ContainerDefinitionOptions): ContainerDefinition
+```
+
+Tasks running in AWSVPC networking mode requires an additional environment variable for the region to be sourced.
+
+This override adds in the additional environment variable as required
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainer.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.ContainerDefinitionOptions
+
+---
+
+##### `addExtension` <a name="addExtension" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addExtension"></a>
+
+```typescript
+public addExtension(extension: ITaskDefinitionExtension): void
+```
+
+Adds the specified extension to the task definition.
+
+Extension can be used to apply a packaged modification to
+a task definition.
+
+###### `extension`<sup>Required</sup> <a name="extension" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addExtension.parameter.extension"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.ITaskDefinitionExtension
+
+---
+
+##### `addFirelensLogRouter` <a name="addFirelensLogRouter" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addFirelensLogRouter"></a>
+
+```typescript
+public addFirelensLogRouter(id: string, props: FirelensLogRouterDefinitionOptions): FirelensLogRouter
+```
+
+Adds a firelens log router to the task definition.
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addFirelensLogRouter.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addFirelensLogRouter.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.FirelensLogRouterDefinitionOptions
+
+---
+
+##### ~~`addInferenceAccelerator`~~ <a name="addInferenceAccelerator" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addInferenceAccelerator"></a>
+
+```typescript
+public addInferenceAccelerator(inferenceAccelerator: InferenceAccelerator): void
+```
+
+Adds an inference accelerator to the task definition.
+
+###### `inferenceAccelerator`<sup>Required</sup> <a name="inferenceAccelerator" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addInferenceAccelerator.parameter.inferenceAccelerator"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.InferenceAccelerator
+
+---
+
+##### `addPlacementConstraint` <a name="addPlacementConstraint" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addPlacementConstraint"></a>
+
+```typescript
+public addPlacementConstraint(constraint: PlacementConstraint): void
+```
+
+Adds the specified placement constraint to the task definition.
+
+###### `constraint`<sup>Required</sup> <a name="constraint" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addPlacementConstraint.parameter.constraint"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.PlacementConstraint
+
+---
+
+##### `addToExecutionRolePolicy` <a name="addToExecutionRolePolicy" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToExecutionRolePolicy"></a>
+
+```typescript
+public addToExecutionRolePolicy(statement: PolicyStatement): void
+```
+
+Adds a policy statement to the task execution IAM role.
+
+###### `statement`<sup>Required</sup> <a name="statement" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToExecutionRolePolicy.parameter.statement"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement
+
+---
+
+##### `addToTaskRolePolicy` <a name="addToTaskRolePolicy" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToTaskRolePolicy"></a>
+
+```typescript
+public addToTaskRolePolicy(statement: PolicyStatement): void
+```
+
+Adds a policy statement to the task IAM role.
+
+###### `statement`<sup>Required</sup> <a name="statement" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addToTaskRolePolicy.parameter.statement"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement
+
+---
+
+##### `addVolume` <a name="addVolume" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addVolume"></a>
+
+```typescript
+public addVolume(volume: Volume): void
+```
+
+Adds a volume to the task definition.
+
+###### `volume`<sup>Required</sup> <a name="volume" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addVolume.parameter.volume"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.Volume
+
+---
+
+##### `findContainer` <a name="findContainer" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findContainer"></a>
+
+```typescript
+public findContainer(containerName: string): ContainerDefinition
+```
+
+Returns the container that match the provided containerName.
+
+###### `containerName`<sup>Required</sup> <a name="containerName" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findContainer.parameter.containerName"></a>
+
+- *Type:* string
+
+---
+
+##### `findPortMappingByName` <a name="findPortMappingByName" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findPortMappingByName"></a>
+
+```typescript
+public findPortMappingByName(name: string): PortMapping
+```
+
+Determine the existing port mapping for the provided name.
+
+###### `name`<sup>Required</sup> <a name="name" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.findPortMappingByName.parameter.name"></a>
+
+- *Type:* string
+
+: port mapping name.
+
+---
+
+##### `grantRun` <a name="grantRun" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.grantRun"></a>
+
+```typescript
+public grantRun(grantee: IGrantable): Grant
+```
+
+Grants permissions to run this task definition.
+
+This will grant the following permissions:
+
+  - ecs:RunTask
+  - iam:PassRole
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.grantRun.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+Principal to grant consume rights to.
+
+---
+
+##### `obtainExecutionRole` <a name="obtainExecutionRole" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.obtainExecutionRole"></a>
+
+```typescript
+public obtainExecutionRole(): IRole
+```
+
+Creates the task execution IAM role if it doesn't already exist.
+
+##### `addContainerWithDefault` <a name="addContainerWithDefault" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault"></a>
+
+```typescript
+public addContainerWithDefault(id: string, props: ContainerDefinitionOptions): ContainerDefinition
+```
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.ContainerDefinitionOptions
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn">fromTaskDefinitionArn</a></code> | Imports a task definition from the specified task definition ARN. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes">fromTaskDefinitionAttributes</a></code> | Create a task definition from a task definition reference. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn">fromEc2TaskDefinitionArn</a></code> | Imports a task definition from the specified task definition ARN. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes">fromEc2TaskDefinitionAttributes</a></code> | Imports an existing Ec2 task definition from its attributes. |
 
 ---
 
@@ -2304,25 +2527,177 @@ Any object.
 
 ---
 
+##### `isOwnedResource` <a name="isOwnedResource" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isOwnedResource"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `isResource` <a name="isResource" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isResource"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.isResource(construct: IConstruct)
+```
+
+Check whether the given construct is a Resource.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.isResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `fromTaskDefinitionArn` <a name="fromTaskDefinitionArn" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn(scope: Construct, id: string, taskDefinitionArn: string)
+```
+
+Imports a task definition from the specified task definition ARN.
+
+The task will have a compatibility of EC2+Fargate.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `taskDefinitionArn`<sup>Required</sup> <a name="taskDefinitionArn" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionArn.parameter.taskDefinitionArn"></a>
+
+- *Type:* string
+
+---
+
+##### `fromTaskDefinitionAttributes` <a name="fromTaskDefinitionAttributes" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes(scope: Construct, id: string, attrs: TaskDefinitionAttributes)
+```
+
+Create a task definition from a task definition reference.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `attrs`<sup>Required</sup> <a name="attrs" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromTaskDefinitionAttributes.parameter.attrs"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.TaskDefinitionAttributes
+
+---
+
+##### `fromEc2TaskDefinitionArn` <a name="fromEc2TaskDefinitionArn" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn(scope: Construct, id: string, ec2TaskDefinitionArn: string)
+```
+
+Imports a task definition from the specified task definition ARN.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `ec2TaskDefinitionArn`<sup>Required</sup> <a name="ec2TaskDefinitionArn" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionArn.parameter.ec2TaskDefinitionArn"></a>
+
+- *Type:* string
+
+---
+
+##### `fromEc2TaskDefinitionAttributes` <a name="fromEc2TaskDefinitionAttributes" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes"></a>
+
+```typescript
+import { VllmNxdInferenceTaskDefinition } from 'aws-cdk-neuronx-patterns'
+
+VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes(scope: Construct, id: string, attrs: Ec2TaskDefinitionAttributes)
+```
+
+Imports an existing Ec2 task definition from its attributes.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `attrs`<sup>Required</sup> <a name="attrs" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.fromEc2TaskDefinitionAttributes.parameter.attrs"></a>
+
+- *Type:* aws-cdk-lib.aws_ecs.Ec2TaskDefinitionAttributes
+
+---
+
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compatibility">compatibility</a></code> | <code>aws-cdk-lib.aws_ecs.Compatibility</code> | What launch types this task definition should be compatible with. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a></code> | The compiled model. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compatibility">compatibility</a></code> | <code>aws-cdk-lib.aws_ecs.Compatibility</code> | The task launch type compatibility requirement. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.inferenceAccelerators">inferenceAccelerators</a></code> | <code>aws-cdk-lib.aws_ecs.InferenceAccelerator[]</code> | Public getter method to access list of inference accelerators attached to the instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isEc2Compatible">isEc2Compatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on an EC2 cluster. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isExternalCompatible">isExternalCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a ECS Anywhere cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isExternalCompatible">isExternalCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a ECS anywhere cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isFargateCompatible">isFargateCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a Fargate cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The networking mode to use for the containers in the task. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionArn">taskDefinitionArn</a></code> | <code>string</code> | ARN of this task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionArn">taskDefinitionArn</a></code> | <code>string</code> | The full Amazon Resource Name (ARN) of the task definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskRole">taskRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.ephemeralStorageGiB">ephemeralStorageGiB</a></code> | <code>number</code> | The amount (in GiB) of ephemeral storage to be allocated to the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Execution role for this task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.pidMode">pidMode</a></code> | <code>aws-cdk-lib.aws_ecs.PidMode</code> | The process namespace to use for the containers in the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.referencesSecretJsonField">referencesSecretJsonField</a></code> | <code>boolean</code> | Whether this task definition has at least a container that references a specific JSON field of a secret stored in Secrets Manager. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.defaultContainer">defaultContainer</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerDefinition</code> | Default container for this task. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.tasksPerInstance">tasksPerInstance</a></code> | <code>number</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Execution role for this task definition. |
 
 ---
 
@@ -2335,30 +2710,6 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
-
----
-
-##### `compatibility`<sup>Required</sup> <a name="compatibility" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compatibility"></a>
-
-```typescript
-public readonly compatibility: Compatibility;
-```
-
-- *Type:* aws-cdk-lib.aws_ecs.Compatibility
-
-What launch types this task definition should be compatible with.
-
----
-
-##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compiledModel"></a>
-
-```typescript
-public readonly compiledModel: NeuronxCompiledModel;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a>
-
-The compiled model.
 
 ---
 
@@ -2378,6 +2729,56 @@ this is always the same as the environment of the stack they belong to;
 however, for imported resources
 (those obtained from static methods like fromRoleArn, fromBucketName, etc.),
 that might be different than the stack they were imported into.
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.stack"></a>
+
+```typescript
+public readonly stack: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+The stack in which this resource is defined.
+
+---
+
+##### `compatibility`<sup>Required</sup> <a name="compatibility" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compatibility"></a>
+
+```typescript
+public readonly compatibility: Compatibility;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.Compatibility
+
+The task launch type compatibility requirement.
+
+---
+
+##### `family`<sup>Required</sup> <a name="family" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.family"></a>
+
+```typescript
+public readonly family: string;
+```
+
+- *Type:* string
+
+The name of a family that this task definition is registered to.
+
+A family groups multiple versions of a task definition.
+
+---
+
+##### `inferenceAccelerators`<sup>Required</sup> <a name="inferenceAccelerators" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.inferenceAccelerators"></a>
+
+```typescript
+public readonly inferenceAccelerators: InferenceAccelerator[];
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.InferenceAccelerator[]
+
+Public getter method to access list of inference accelerators attached to the instance.
 
 ---
 
@@ -2401,7 +2802,7 @@ public readonly isExternalCompatible: boolean;
 
 - *Type:* boolean
 
-Return true if the task definition can be run on a ECS Anywhere cluster.
+Return true if the task definition can be run on a ECS anywhere cluster.
 
 ---
 
@@ -2429,28 +2830,6 @@ The networking mode to use for the containers in the task.
 
 ---
 
-##### `neuronxInstanceType`<sup>Required</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.neuronxInstanceType"></a>
-
-```typescript
-public readonly neuronxInstanceType: INeuronxInstanceType;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
-
----
-
-##### `stack`<sup>Required</sup> <a name="stack" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.stack"></a>
-
-```typescript
-public readonly stack: Stack;
-```
-
-- *Type:* aws-cdk-lib.Stack
-
-The stack in which this resource is defined.
-
----
-
 ##### `taskDefinitionArn`<sup>Required</sup> <a name="taskDefinitionArn" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionArn"></a>
 
 ```typescript
@@ -2459,7 +2838,7 @@ public readonly taskDefinitionArn: string;
 
 - *Type:* string
 
-ARN of this task definition.
+The full Amazon Resource Name (ARN) of the task definition.
 
 ---
 
@@ -2472,6 +2851,98 @@ public readonly taskRole: IRole;
 - *Type:* aws-cdk-lib.aws_iam.IRole
 
 The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf.
+
+---
+
+##### `ephemeralStorageGiB`<sup>Optional</sup> <a name="ephemeralStorageGiB" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.ephemeralStorageGiB"></a>
+
+```typescript
+public readonly ephemeralStorageGiB: number;
+```
+
+- *Type:* number
+
+The amount (in GiB) of ephemeral storage to be allocated to the task.
+
+Only supported in Fargate platform version 1.4.0 or later.
+
+---
+
+##### `executionRole`<sup>Optional</sup> <a name="executionRole" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.executionRole"></a>
+
+```typescript
+public readonly executionRole: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+Execution role for this task definition.
+
+---
+
+##### `pidMode`<sup>Optional</sup> <a name="pidMode" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.pidMode"></a>
+
+```typescript
+public readonly pidMode: PidMode;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.PidMode
+
+The process namespace to use for the containers in the task.
+
+Only supported for tasks that are hosted on AWS Fargate if the tasks
+are using platform version 1.4.0 or later (Linux). Not supported in
+Windows containers. If pidMode is specified for a Fargate task,
+then runtimePlatform.operatingSystemFamily must also be specified.  For more
+information, see [Task Definition Parameters](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode).
+
+---
+
+##### `referencesSecretJsonField`<sup>Optional</sup> <a name="referencesSecretJsonField" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.referencesSecretJsonField"></a>
+
+```typescript
+public readonly referencesSecretJsonField: boolean;
+```
+
+- *Type:* boolean
+
+Whether this task definition has at least a container that references a specific JSON field of a secret stored in Secrets Manager.
+
+---
+
+##### `defaultContainer`<sup>Optional</sup> <a name="defaultContainer" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.defaultContainer"></a>
+
+```typescript
+public readonly defaultContainer: ContainerDefinition;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.ContainerDefinition
+
+Default container for this task.
+
+Load balancers will send traffic to this container. The first
+essential container that is added to this task will become the default
+container.
+
+---
+
+##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compiledModel"></a>
+
+```typescript
+public readonly compiledModel: NeuronxCompiledModel;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a>
+
+---
+
+##### `neuronxInstanceType`<sup>Required</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.neuronxInstanceType"></a>
+
+```typescript
+public readonly neuronxInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
 ---
 
@@ -2495,18 +2966,25 @@ public readonly tensorParallelSize: number;
 
 ---
 
-##### `executionRole`<sup>Optional</sup> <a name="executionRole" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.executionRole"></a>
+#### Constants <a name="Constants" id="Constants"></a>
 
-```typescript
-public readonly executionRole: IRole;
-```
-
-- *Type:* aws-cdk-lib.aws_iam.IRole
-
-Execution role for this task definition.
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.PROPERTY_INJECTION_ID">PROPERTY_INJECTION_ID</a></code> | <code>string</code> | Uniquely identifies this class. |
 
 ---
 
+##### `PROPERTY_INJECTION_ID`<sup>Required</sup> <a name="PROPERTY_INJECTION_ID" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.PROPERTY_INJECTION_ID"></a>
+
+```typescript
+public readonly PROPERTY_INJECTION_ID: string;
+```
+
+- *Type:* string
+
+Uniquely identifies this class.
+
+---
 
 ## Structs <a name="Structs" id="Structs"></a>
 
@@ -2561,7 +3039,6 @@ const applicationLoadBalancedNeuronxServiceProps: ApplicationLoadBalancedNeuronx
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | The placement constraints to use for tasks in the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.placementStrategies">placementStrategies</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementStrategy[]</code> | The placement strategies to use for tasks in the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.taskDefinition">taskDefinition</a></code> | <code>aws-cdk-lib.aws_ecs.Ec2TaskDefinition</code> | The task definition to use for tasks in the service. TaskDefinition or TaskImageOptions must be specified, but not both.. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.neuronTaskDefinition">neuronTaskDefinition</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a></code> | *No description.* |
 
 ---
 
@@ -3119,16 +3596,6 @@ The task definition to use for tasks in the service. TaskDefinition or TaskImage
 
 ---
 
-##### `neuronTaskDefinition`<sup>Required</sup> <a name="neuronTaskDefinition" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.neuronTaskDefinition"></a>
-
-```typescript
-public readonly neuronTaskDefinition: INeuronxTaskDefinition;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a>
-
----
-
 ### ApplicationLoadBalancedVllmNxDInferenceServiceProps <a name="ApplicationLoadBalancedVllmNxDInferenceServiceProps" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps"></a>
 
 Props for ApplicationLoadBalancedVllmNxDInferenceService.
@@ -3182,7 +3649,6 @@ const applicationLoadBalancedVllmNxDInferenceServiceProps: ApplicationLoadBalanc
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | The placement constraints to use for tasks in the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.placementStrategies">placementStrategies</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementStrategy[]</code> | The placement strategies to use for tasks in the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.taskDefinition">taskDefinition</a></code> | <code>aws-cdk-lib.aws_ecs.Ec2TaskDefinition</code> | The task definition to use for tasks in the service. TaskDefinition or TaskImageOptions must be specified, but not both.. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.neuronTaskDefinition">neuronTaskDefinition</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a></code> | *No description.* |
 
 ---
 
@@ -3737,16 +4203,6 @@ public readonly taskDefinition: Ec2TaskDefinition;
 The task definition to use for tasks in the service. TaskDefinition or TaskImageOptions must be specified, but not both..
 
 [disable-awslint:ref-via-interface]
-
----
-
-##### `neuronTaskDefinition`<sup>Required</sup> <a name="neuronTaskDefinition" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.neuronTaskDefinition"></a>
-
-```typescript
-public readonly neuronTaskDefinition: INeuronxTaskDefinition;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a>
 
 ---
 
@@ -5272,13 +5728,9 @@ const neuronxTaskDefinitionProps: NeuronxTaskDefinitionProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The Docker networking mode to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.pidMode">pidMode</a></code> | <code>aws-cdk-lib.aws_ecs.PidMode</code> | The process namespace to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | An array of placement constraint objects to use for the task. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a></code> | The model to be compiled. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker and container instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a></code> | The model to be compiled. |
 
 ---
 
@@ -5446,45 +5898,6 @@ constraints in the task definition and those specified at run time).
 
 ---
 
-##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.compiledModel"></a>
-
-```typescript
-public readonly compiledModel: NeuronxCompiledModel;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a>
-
-The model to be compiled.
-
----
-
-##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.vpc"></a>
-
-```typescript
-public readonly vpc: IVpc;
-```
-
-- *Type:* aws-cdk-lib.aws_ec2.IVpc
-
-VPC in which this will launch compile worker and container instance.
-
----
-
-##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.environment"></a>
-
-```typescript
-public readonly environment: {[ key: string ]: string};
-```
-
-- *Type:* {[ key: string ]: string}
-- *Default:* No environment variables.
-
-The environment variables to pass to the container.
-
-This is only applicable when using container runtime.
-
----
-
 ##### `neuronxInstanceType`<sup>Optional</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.neuronxInstanceType"></a>
 
 ```typescript
@@ -5510,29 +5923,234 @@ The number of tensor parallel size.
 
 ---
 
-##### `volumeSize`<sup>Optional</sup> <a name="volumeSize" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.volumeSize"></a>
+##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.compiledModel"></a>
 
 ```typescript
-public readonly volumeSize: Size;
+public readonly compiledModel: NeuronxCompiledModel;
 ```
 
-- *Type:* aws-cdk-lib.Size
-- *Default:* N bilion parameters * 5GiB EBS
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a>
 
-The root volume of worker instance.
+The model to be compiled.
 
 ---
 
-##### `vpcSubnets`<sup>Optional</sup> <a name="vpcSubnets" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.vpcSubnets"></a>
+### NeuronxTaskDefinitionPropsBase <a name="NeuronxTaskDefinitionPropsBase" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase"></a>
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.Initializer"></a>
 
 ```typescript
-public readonly vpcSubnets: SubnetSelection;
+import { NeuronxTaskDefinitionPropsBase } from 'aws-cdk-neuronx-patterns'
+
+const neuronxTaskDefinitionPropsBase: NeuronxTaskDefinitionPropsBase = { ... }
 ```
 
-- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
-- *Default:* new subnets will be created
+#### Properties <a name="Properties" id="Properties"></a>
 
-The VPC Subnets this Compute Environment will launch instances in.
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.enableFaultInjection">enableFaultInjection</a></code> | <code>boolean</code> | Enables fault injection and allows for fault injection requests to be accepted from the task's containers. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM task execution role that grants the ECS agent permission to call AWS APIs on your behalf. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.proxyConfiguration">proxyConfiguration</a></code> | <code>aws-cdk-lib.aws_ecs.ProxyConfiguration</code> | The configuration details for the App Mesh proxy. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.taskRole">taskRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.volumes">volumes</a></code> | <code>aws-cdk-lib.aws_ecs.Volume[]</code> | The list of volume definitions for the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.inferenceAccelerators">inferenceAccelerators</a></code> | <code>aws-cdk-lib.aws_ecs.InferenceAccelerator[]</code> | The inference accelerators to use for the containers in the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.ipcMode">ipcMode</a></code> | <code>aws-cdk-lib.aws_ecs.IpcMode</code> | The IPC resource namespace to use for the containers in the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The Docker networking mode to use for the containers in the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.pidMode">pidMode</a></code> | <code>aws-cdk-lib.aws_ecs.PidMode</code> | The process namespace to use for the containers in the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | An array of placement constraint objects to use for the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
+
+---
+
+##### `enableFaultInjection`<sup>Optional</sup> <a name="enableFaultInjection" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.enableFaultInjection"></a>
+
+```typescript
+public readonly enableFaultInjection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined - ECS default setting is false
+
+Enables fault injection and allows for fault injection requests to be accepted from the task's containers.
+
+Fault injection only works with tasks using the {@link NetworkMode.AWS_VPC} or {@link NetworkMode.HOST} network modes.
+
+---
+
+##### `executionRole`<sup>Optional</sup> <a name="executionRole" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.executionRole"></a>
+
+```typescript
+public readonly executionRole: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+- *Default:* An execution role will be automatically created if you use ECR images in your task definition.
+
+The name of the IAM task execution role that grants the ECS agent permission to call AWS APIs on your behalf.
+
+The role will be used to retrieve container images from ECR and create CloudWatch log groups.
+
+---
+
+##### `family`<sup>Optional</sup> <a name="family" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.family"></a>
+
+```typescript
+public readonly family: string;
+```
+
+- *Type:* string
+- *Default:* Automatically generated name.
+
+The name of a family that this task definition is registered to.
+
+A family groups multiple versions of a task definition.
+
+---
+
+##### `proxyConfiguration`<sup>Optional</sup> <a name="proxyConfiguration" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.proxyConfiguration"></a>
+
+```typescript
+public readonly proxyConfiguration: ProxyConfiguration;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.ProxyConfiguration
+- *Default:* No proxy configuration.
+
+The configuration details for the App Mesh proxy.
+
+---
+
+##### `taskRole`<sup>Optional</sup> <a name="taskRole" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.taskRole"></a>
+
+```typescript
+public readonly taskRole: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+- *Default:* A task role is automatically created for you.
+
+The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf.
+
+---
+
+##### `volumes`<sup>Optional</sup> <a name="volumes" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.volumes"></a>
+
+```typescript
+public readonly volumes: Volume[];
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.Volume[]
+- *Default:* No volumes are passed to the Docker daemon on a container instance.
+
+The list of volume definitions for the task.
+
+For more information, see
+[Task Definition Parameter Volumes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide//task_definition_parameters.html#volumes).
+
+---
+
+##### `inferenceAccelerators`<sup>Optional</sup> <a name="inferenceAccelerators" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.inferenceAccelerators"></a>
+
+```typescript
+public readonly inferenceAccelerators: InferenceAccelerator[];
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.InferenceAccelerator[]
+- *Default:* No inference accelerators.
+
+The inference accelerators to use for the containers in the task.
+
+Not supported in Fargate.
+
+---
+
+##### `ipcMode`<sup>Optional</sup> <a name="ipcMode" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.ipcMode"></a>
+
+```typescript
+public readonly ipcMode: IpcMode;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.IpcMode
+- *Default:* IpcMode used by the task is not specified
+
+The IPC resource namespace to use for the containers in the task.
+
+Not supported in Fargate and Windows containers.
+
+---
+
+##### `networkMode`<sup>Optional</sup> <a name="networkMode" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.networkMode"></a>
+
+```typescript
+public readonly networkMode: NetworkMode;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.NetworkMode
+- *Default:* NetworkMode.BRIDGE for EC2 tasks, AWS_VPC for Fargate tasks.
+
+The Docker networking mode to use for the containers in the task.
+
+The valid values are NONE, BRIDGE, AWS_VPC, and HOST.
+
+---
+
+##### `pidMode`<sup>Optional</sup> <a name="pidMode" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.pidMode"></a>
+
+```typescript
+public readonly pidMode: PidMode;
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.PidMode
+- *Default:* PidMode used by the task is not specified
+
+The process namespace to use for the containers in the task.
+
+Not supported in Windows containers.
+
+---
+
+##### `placementConstraints`<sup>Optional</sup> <a name="placementConstraints" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.placementConstraints"></a>
+
+```typescript
+public readonly placementConstraints: PlacementConstraint[];
+```
+
+- *Type:* aws-cdk-lib.aws_ecs.PlacementConstraint[]
+- *Default:* No placement constraints.
+
+An array of placement constraint objects to use for the task.
+
+You can
+specify a maximum of 10 constraints per task (this limit includes
+constraints in the task definition and those specified at run time).
+
+---
+
+##### `neuronxInstanceType`<sup>Optional</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.neuronxInstanceType"></a>
+
+```typescript
+public readonly neuronxInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+The instance type of compile worker instance.
+
+---
+
+##### `tensorParallelSize`<sup>Optional</sup> <a name="tensorParallelSize" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.tensorParallelSize"></a>
+
+```typescript
+public readonly tensorParallelSize: number;
+```
+
+- *Type:* number
+- *Default:* 1
+
+The number of tensor parallel size.
 
 ---
 
@@ -9689,13 +10307,11 @@ const vllmNxdInferenceTaskDefinitionProps: VllmNxdInferenceTaskDefinitionProps =
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The Docker networking mode to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.pidMode">pidMode</a></code> | <code>aws-cdk-lib.aws_ecs.PidMode</code> | The process namespace to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | An array of placement constraint objects to use for the task. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a></code> | The model to be compiled. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker and container instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a></code> | The image to be used for the container. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
 
 ---
 
@@ -9863,6 +10479,31 @@ constraints in the task definition and those specified at run time).
 
 ---
 
+##### `neuronxInstanceType`<sup>Optional</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.neuronxInstanceType"></a>
+
+```typescript
+public readonly neuronxInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+The instance type of compile worker instance.
+
+---
+
+##### `tensorParallelSize`<sup>Optional</sup> <a name="tensorParallelSize" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.tensorParallelSize"></a>
+
+```typescript
+public readonly tensorParallelSize: number;
+```
+
+- *Type:* number
+- *Default:* 1
+
+The number of tensor parallel size.
+
+---
+
 ##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.compiledModel"></a>
 
 ```typescript
@@ -9872,18 +10513,6 @@ public readonly compiledModel: VllmNxdInferenceCompiledModel;
 - *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a>
 
 The model to be compiled.
-
----
-
-##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.vpc"></a>
-
-```typescript
-public readonly vpc: IVpc;
-```
-
-- *Type:* aws-cdk-lib.aws_ec2.IVpc
-
-VPC in which this will launch compile worker and container instance.
 
 ---
 
@@ -9912,44 +10541,6 @@ public readonly image: VllmNxdInferenceImage;
 - *Default:* latest VllmNxdInferenceImage
 
 The image to be used for the container.
-
----
-
-##### `neuronxInstanceType`<sup>Optional</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.neuronxInstanceType"></a>
-
-```typescript
-public readonly neuronxInstanceType: INeuronxInstanceType;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
-
-The instance type of compile worker instance.
-
----
-
-##### `volumeSize`<sup>Optional</sup> <a name="volumeSize" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.volumeSize"></a>
-
-```typescript
-public readonly volumeSize: Size;
-```
-
-- *Type:* aws-cdk-lib.Size
-- *Default:* N bilion parameters * 5GiB EBS
-
-The root volume of worker instance.
-
----
-
-##### `vpcSubnets`<sup>Optional</sup> <a name="vpcSubnets" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.vpcSubnets"></a>
-
-```typescript
-public readonly vpcSubnets: SubnetSelection;
-```
-
-- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
-- *Default:* new subnets will be created
-
-The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
