@@ -1,3 +1,5 @@
+import { ISecret } from "aws-cdk-lib/aws-secretsmanager";
+
 /**
  * Log level options for Uvicorn
  */
@@ -624,7 +626,7 @@ export interface VllmNamedArguments {
    * To use the token generated when running huggingface-cli login (stored in ~/.huggingface),
    * set the `--hf-token` flag directly in the command line arguments.
    */
-  readonly hfToken?: import("aws-cdk-lib/aws-secretsmanager").ISecret;
+  readonly hfToken?: ISecret;
 
   /**
    * Extra arguments for the HuggingFace config.
