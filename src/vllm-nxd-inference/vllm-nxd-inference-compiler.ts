@@ -218,7 +218,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       image: image,
       command: vllmCliArgs,
       environment,
-      secrets: Object.keys(secrets).length > 0 ? secrets : undefined,
+      secrets,
     });
     this.vllmArgs = vllmArgs;
     this.compiler = compiler;

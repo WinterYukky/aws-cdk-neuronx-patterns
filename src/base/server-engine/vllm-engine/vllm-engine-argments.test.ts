@@ -21,6 +21,7 @@ import {
   VllmEngineArgumentsParser,
   VllmTask,
 } from "./vllm-engine-argments";
+import { Secret } from "aws-cdk-lib/aws-secretsmanager";
 
 describe("VllmEngineArgumentsToConfig", () => {
   it("should convert all camelCase properties to kebab-case", () => {
@@ -77,6 +78,20 @@ describe("VllmEngineArgumentsToConfig", () => {
       quantization: Quantization.AWQ,
       ropeScaling: {},
       ropeTheta: 1.0,
+      hfToken: Secret.fromSecretNameV2(
+        {
+          node: {
+            id: "MockConstruct",
+            path: "Mock/Construct",
+            tryGetContext: () => undefined,
+            addError: () => {},
+            addWarning: () => {},
+            addInfo: () => {},
+          },
+        } as any,
+        "MockSecret",
+        "huggingface-token"
+      ),
       hfOverrides: {},
       enforceEager: true,
       maxSeqLenToCapture: 4096,
@@ -217,7 +232,6 @@ describe("VllmEngineArgumentsToConfig", () => {
       quantization: "awq",
       "rope-scaling": "{}",
       "rope-theta": 1.0,
-      "hf-token": true,
       "hf-overrides": "{}",
       "enforce-eager": true,
       "max-seq-len-to-capture": 4096,

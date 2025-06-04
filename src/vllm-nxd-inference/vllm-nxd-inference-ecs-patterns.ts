@@ -147,7 +147,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       },
       command: vllmCliArgs,
       environment,
-      secrets: Object.keys(secrets).length > 0 ? secrets : undefined,
+      secrets,
     });
   }
 }
