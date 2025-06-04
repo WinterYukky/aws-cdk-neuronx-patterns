@@ -205,9 +205,9 @@ export class VllmNxdInferenceCompiler extends Construct {
         props.bucket.s3UrlForObject(artifactS3Prefix),
     };
     
-    // Handle hfToken if it's a Secret
+    // Handle hfToken if provided
     const secrets: { [key: string]: Secret } = {};
-    if (typeof props.vllmArgs?.hfToken === 'object' && props.vllmArgs?.hfToken && 'secretArn' in props.vllmArgs.hfToken) {
+    if (props.vllmArgs?.hfToken) {
       secrets["HF_TOKEN"] = props.vllmArgs.hfToken;
     }
 

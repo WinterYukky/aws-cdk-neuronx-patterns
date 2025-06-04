@@ -127,9 +127,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
 
     // Handle secrets for HF Token if available
     const secrets: Record<string, ecs.Secret> = {};
-    if (typeof props.compiledModel.vllmArgs.hfToken === 'object' && 
-        props.compiledModel.vllmArgs.hfToken && 
-        'secretArn' in props.compiledModel.vllmArgs.hfToken) {
+    if (props.compiledModel.vllmArgs.hfToken) {
       secrets["HF_TOKEN"] = ecs.Secret.fromSecretsManager(props.compiledModel.vllmArgs.hfToken);
     }
 
