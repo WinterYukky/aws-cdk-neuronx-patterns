@@ -51,7 +51,7 @@ export interface NeuronxCompilerProps {
   /**
    * Secrets to pass to the container.
    */
-  readonly secrets?: { [key: string]: Secret };
+  readonly secrets?: { [key: string]: batch.Secret };
   /**
    * S3 Prefix that compiled artifact uploaded.
    * This property is not depends on compile job finish.
