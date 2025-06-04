@@ -115,6 +115,24 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
     const vllmCliArgs = VllmEngineArgumentsParser.cli(
       props.compiledModel.vllmArgs,
     );
+    // Prepare environment variables
+    const environment: Record<string, string> = {
+      ...props.environment,
+      VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
+      NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
+      NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
+      MODEL_NAME: props.compiledModel.modelName,
+      COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
+    };
+
+    // Handle secrets for HF Token if available
+    const secrets: Record<string, ecs.Secret> = {};
+    if (typeof props.compiledModel.vllmArgs.hfToken === 'object' && 
+        props.compiledModel.vllmArgs.hfToken && 
+        'secretArn' in props.compiledModel.vllmArgs.hfToken) {
+      secrets["HF_TOKEN"] = ecs.Secret.fromSecretsManager(props.compiledModel.vllmArgs.hfToken);
+    }
+
     this.addContainerWithDefault("vLLM", {
       image: image.image,
       portMappings: [
@@ -130,14 +148,8 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
         startPeriod: Duration.minutes(5),
       },
       command: vllmCliArgs,
-      environment: {
-        ...props.environment,
-        VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
-        NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
-        NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
-        MODEL_NAME: props.compiledModel.modelName,
-        COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
-      },
+      environment,
+      secrets: Object.keys(secrets).length > 0 ? secrets : undefined,
     });
   }
 }

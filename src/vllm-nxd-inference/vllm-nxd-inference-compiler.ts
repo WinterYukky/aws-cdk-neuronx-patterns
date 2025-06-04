@@ -20,6 +20,7 @@ import {
   INeuronxContainerImage,
   NeuronxCompiledModel,
   NeuronxCompiler,
+  Secret,
 } from "../base/neuronx-compiler";
 import {
   VllmEngineArguments,
@@ -192,22 +193,32 @@ export class VllmNxdInferenceCompiler extends Construct {
       createHash("sha256").update(str).digest("hex");
     const artifactS3Prefix = `sdk-${image.sdkVersion}/${hash(JSON.stringify(vllmArgs))}`;
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
+    // Prepare environment and secrets
+    const environment: Record<string, string> = {
+      ...props.environment,
+      VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
+      NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
+      NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
+      MODEL_ID: props.model.modelId,
+      MODEL_NAME: props.model.modelName,
+      COMPILED_ARTIFACTS_S3_URI:
+        props.bucket.s3UrlForObject(artifactS3Prefix),
+    };
+    
+    // Handle hfToken if it's a Secret
+    const secrets: { [key: string]: Secret } = {};
+    if (typeof props.vllmArgs?.hfToken === 'object' && props.vllmArgs?.hfToken && 'secretArn' in props.vllmArgs.hfToken) {
+      secrets["HF_TOKEN"] = props.vllmArgs.hfToken;
+    }
+
     const compiler = new NeuronxCompiler(this, "Resource", {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
       artifactS3Prefix,
       image: image,
       command: vllmCliArgs,
-      environment: {
-        ...props.environment,
-        VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
-        NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
-        NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
-        MODEL_ID: props.model.modelId,
-        MODEL_NAME: props.model.modelName,
-        COMPILED_ARTIFACTS_S3_URI:
-          props.bucket.s3UrlForObject(artifactS3Prefix),
-      },
+      environment,
+      secrets: Object.keys(secrets).length > 0 ? secrets : undefined,
     });
     this.vllmArgs = vllmArgs;
     this.compiler = compiler;

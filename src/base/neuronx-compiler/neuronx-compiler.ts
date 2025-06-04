@@ -2,7 +2,13 @@ import { CustomResource, Duration, Size, Tags } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
-import { Grant } from "aws-cdk-lib/aws-iam";
+import { Grant, IRole } from "aws-cdk-lib/aws-iam";
+import { ISecret } from "aws-cdk-lib/aws-secretsmanager";
+
+/**
+ * Secret type for container definition.
+ */
+export type Secret = ISecret | string;
 import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
@@ -46,6 +52,10 @@ export interface NeuronxCompilerProps {
    * The bucket to upload compiled artifacts.
    */
   readonly bucket: IBucket;
+  /**
+   * Secrets to pass to the container.
+   */
+  readonly secrets?: { [key: string]: Secret };
   /**
    * S3 Prefix that compiled artifact uploaded.
    * This property is not depends on compile job finish.
@@ -201,6 +211,7 @@ export class NeuronxCompiler extends Construct {
         cpu: neuronxInstanceType.vCpu,
         environment: props.environment,
         command: props.command,
+        secrets: props.secrets,
       },
     );
 

@@ -619,9 +619,10 @@ export interface VllmNamedArguments {
 
   /**
    * The token to use as HTTP bearer authorization for remote files.
-   * If True, will use the token generated when running huggingface-cli login (stored in ~/.huggingface)..
+   * If a Secret is provided, it will be passed as HF_TOKEN environment variable.
+   * If True, will use the token generated when running huggingface-cli login (stored in ~/.huggingface).
    */
-  readonly hfToken?: boolean;
+  readonly hfToken?: boolean | import("aws-cdk-lib/aws-secretsmanager").ISecret;
 
   /**
    * Extra arguments for the HuggingFace config.
@@ -1259,6 +1260,10 @@ export abstract class VllmEngineArgumentsParser {
       .filter(([key]) => key !== "model")
       .reduce<{ [key in string]: any }>((prev, [key, value]) => {
         const k = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+        // Skip ISecret objects as they will be handled through environment variables
+        if (typeof value === "object" && value && "secretArn" in value) {
+          return prev;
+        }
         if (
           jsonValueProperties.includes(key as keyof VllmEngineArguments) ||
           (!Array.isArray(value) && typeof value === "object")
@@ -1274,6 +1279,10 @@ export abstract class VllmEngineArgumentsParser {
       .filter(([key]) => key !== "model")
       .flatMap(([k, value]) => {
         const key = k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+        // Skip ISecret objects as they will be handled through environment variables
+        if (typeof value === "object" && value && "secretArn" in value) {
+          return [];
+        }
         if (typeof value === "boolean") {
           return value ? [`--${key}`] : [];
         }
