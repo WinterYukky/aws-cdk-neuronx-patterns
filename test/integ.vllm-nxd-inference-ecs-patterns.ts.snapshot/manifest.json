@@ -1,0 +1,3914 @@
+{
+  "version": "44.0.0",
+  "artifacts": {
+    "VllmNxDInferenceIntegTestStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "VllmNxDInferenceIntegTestStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "VllmNxDInferenceIntegTestStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "VllmNxDInferenceIntegTestStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b7a05f4f22b45a61892cd362d3fe09894ad2045c835eca25a389d149717978e9.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "VllmNxDInferenceIntegTestStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "VllmNxDInferenceIntegTestStack.assets"
+      ],
+      "metadata": {
+        "/VllmNxDInferenceIntegTestStack/Vpc": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "natGateways": "*",
+              "gatewayEndpoints": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Vpc8378EB38"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addNatGateway": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1Subnet5C2D37C4"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1RouteTable6C95E38E"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1RouteTableAssociation97140677"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1DefaultRoute3DA9E72A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1EIPD7E02669"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet1NATGateway4D7517AA"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2Subnet691E08A3"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2RouteTable94F7E489"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2RouteTableAssociationDD5762D8"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet2DefaultRoute97F91067"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1Subnet536B997A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1RouteTableB2C5B500"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1RouteTableAssociation70C59FA6"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet1DefaultRouteBE02A9ED"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2Subnet3788AAA1"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2RouteTableA678073B"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet2DefaultRoute060D2087"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcIGWD7BA715C"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcVPCGWBF912B6E"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/S3": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "service": {
+                "name": "*"
+              }
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/S3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcS3A5408339"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/RestrictDefaultSecurityGroupCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy",
+              "autoDeleteObjects": true
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Bucket83908E77"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketPolicyE9A3008A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket/AutoDeleteObjectsCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketAutoDeleteObjectsCustomResourceBAFD23C2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "blockDevices": [
+                {
+                  "deviceName": "*",
+                  "volume": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerLaunchTemplate4C63C08A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*",
+              "uuid": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "description": "*",
+              "runtime": "*",
+              "handler": "*",
+              "timeout": "*",
+              "logGroup": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "role": "*",
+              "functionName": "*",
+              "environmentEncryption": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/Image.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmi": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmi/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "instanceTypes": "*",
+              "useOptimalInstanceClasses": false,
+              "launchTemplate": "*",
+              "spot": "*",
+              "images": [
+                {
+                  "image": "*",
+                  "imageType": "ECS_AL2023"
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentSecurityGroup3ADC0F04"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/ImportInstanceProfileRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileA05F57F0"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironment83CAC2B9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {}
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobQueue59AB0D38"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "roleName": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/ImportExecutionRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "container": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "grantSubmitJob": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionE25875BC"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobSubmitFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*",
+              "uuid": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobMonitoringFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*",
+              "uuid": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "description": "*",
+              "runtime": "*",
+              "handler": "*",
+              "timeout": "*",
+              "logGroup": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "role": "*",
+              "functionName": "*",
+              "environmentEncryption": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEvent782775F0"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEventLogGroup7DA40C11"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "description": "*",
+              "runtime": "*",
+              "handler": "*",
+              "timeout": "*",
+              "logGroup": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "role": "*",
+              "functionName": "*",
+              "environmentEncryption": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisComplete3CEC6FB9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisCompleteLogGroup4D3BBE69"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "description": "*",
+              "runtime": "*",
+              "handler": "*",
+              "timeout": "*",
+              "logGroup": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "role": "*",
+              "functionName": "*",
+              "environmentEncryption": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeout00B040EB"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeoutLogGroup756C2566"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/ImportRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderwaiterstatemachineLogGroupA99CC327"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileJobProviderwaiterstatemachine094C7791"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/NeuronxCompile": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/NeuronxCompile/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerNeuronxCompile8E2589B5"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacLogGroup0B81A182"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62LogGroup25096071"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/ImportTaskRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionTaskRoleFD40A61D"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionTaskRoleDefaultPolicy282E8624"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionB36D86D9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "retention": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionvLLMLogGroupF04E471E"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "roleName": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/ImportExecutionRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionExecutionRole8D61C2FB"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLB4B41E788"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "description": "*",
+              "allowAllOutbound": false
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addIngressRule": [
+                {
+                  "canInlineRule": true,
+                  "connections": "*",
+                  "uniqueId": "*"
+                },
+                {},
+                "*",
+                false
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEgressRule": [
+                "*",
+                {},
+                "*",
+                true
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addIngressRule": [
+                "*",
+                {},
+                "*",
+                false
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBSecurityGroup45E2FC86"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/to VllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF73:32768-60999": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBSecurityGrouptoVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF733276860999B4FB0366"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/from VllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D86537:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBSecurityGroupfromVllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D8653780C8F7E958"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/PublicListener": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/PublicListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBPublicListener78E1CF05"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/PublicListener/ECSGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLBPublicListenerECSGroup03C812D2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LoadBalancerDNS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceLoadBalancerDNSA8A7A1E7"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/ServiceURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceServiceURL99821597"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/Service": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]"
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceService775D3AE5"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*",
+              "uuid": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "description": "*",
+              "runtime": "*",
+              "handler": "*",
+              "timeout": "*",
+              "logGroup": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "securityGroups": "*",
+              "role": "*",
+              "functionName": "*",
+              "environmentEncryption": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroup8981F636"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/Image.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageImageParameter22D845C6"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmi": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmi/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addCapacity": [
+                "*",
+                {
+                  "instanceType": "*",
+                  "machineImage": "*",
+                  "blockDevices": [
+                    {
+                      "deviceName": "*",
+                      "volume": "*"
+                    }
+                  ],
+                  "minCapacity": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addAutoScalingGroup": [
+                "*",
+                {
+                  "machineImageType": 0
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "machineImage": "*",
+              "updateType": "Replace",
+              "instanceType": "*",
+              "blockDevices": [
+                {
+                  "deviceName": "*",
+                  "volume": "*"
+                }
+              ],
+              "minCapacity": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addUserData": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "allowAllOutbound": true
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addIngressRule": [
+                "*",
+                {},
+                "*",
+                false
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup/from VllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B:32768-60999": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupfromVllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B327686099917C7D365"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "roleName": "*",
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/ImportInstanceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleDefaultPolicy0C3E1BAD"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceProfileFBD277E0"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "machineImage": "*",
+              "instanceType": "*",
+              "detailedMonitoring": false,
+              "securityGroup": "*",
+              "userData": "*",
+              "associatePublicIpAddress": "*",
+              "spotOptions": "*",
+              "blockDevices": [
+                {
+                  "deviceName": "*",
+                  "volume": "*"
+                }
+              ],
+              "instanceProfile": "*",
+              "keyPair": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLaunchTemplate345F7E9C"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/ASG": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*",
+              "timeout": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionLogGroup84C7CC53"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/AllowInvoke:VllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic0A63A176": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic0A63A176F9E9B1DF"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Topic": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "topic": "*",
+              "endpoint": "*",
+              "protocol": "lambda",
+              "filterPolicy": "*",
+              "filterPolicyWithMessageBody": "*",
+              "region": "*",
+              "deadLetterQueue": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Topic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionTopicF4C13E3E"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-2": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-3": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-4": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "statements": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "autoScalingGroup": "*",
+              "lifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
+              "defaultResult": "CONTINUE",
+              "notificationTarget": "*",
+              "heartbeatTimeout": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Topic": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "masterKey": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Topic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/ImportRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRoleDefaultPolicy395B42DB"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHook3BA125AD"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/CompiledArtifact": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompiledArtifact"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "entry": "*",
+              "vpc": "*",
+              "timeout": "*",
+              "runtime": "*",
+              "code": "*",
+              "handler": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "entry": "*",
+              "vpc": "*",
+              "timeout": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                },
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionServiceRoleA142BB7F"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/SecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "description": "*",
+              "allowAllOutbound": "*",
+              "allowAllIpv6Outbound": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEgressRule": [
+                "*",
+                {},
+                "*",
+                true
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionSecurityGroup5EFA4275"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionB264F32C"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionLogGroup1EA954C2"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Exports/Output{\"Ref\":\"HttpRequestFromVpcFunctionB264F32C\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Exports/Output{\"Fn::GetAtt\":[\"ServiceLB4B41E788\",\"DNSName\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttServiceLB4B41E788DNSName4B4235FA"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "VllmNxDInferenceIntegTestStack"
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "IntegTestDefaultTestDeployAssertE3E7D2A4.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "IntegTestDefaultTestDeployAssertE3E7D2A4": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "IntegTestDefaultTestDeployAssertE3E7D2A4.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ffe6032924f9c6d82578c910f4e1ff367df4764ba9b90488cdc429dc20a1d54b.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "VllmNxDInferenceIntegTestStack",
+        "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+      ],
+      "metadata": {
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/Default": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cInvoke4ABEFCDF"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/IsCompleteProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForIsCompleteProviderInvokeD336993F"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/TimeoutProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForTimeoutProviderInvokeADBDB95C"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForRoleDD4582B8"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitFor6E9BA117"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/AssertionResults": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssertionResultsLambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Role918961BB"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aRoleB84BD8CE"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "IntegTest/DefaultTest/DeployAssert"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  },
+  "minimumCliVersion": "2.1017.1"
+}

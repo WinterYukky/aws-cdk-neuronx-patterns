@@ -1,9 +1,9 @@
-import { Duration, Size } from "aws-cdk-lib";
+import { Duration } from "aws-cdk-lib";
 import {
   BlockDeviceVolume,
   EbsDeviceVolumeType,
 } from "aws-cdk-lib/aws-autoscaling";
-import { IVpc, Port, SubnetSelection } from "aws-cdk-lib/aws-ec2";
+import { Port } from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import {
   ApplicationLoadBalancedEc2Service,
@@ -17,11 +17,8 @@ import {
 } from "../neuronx";
 import { NeuronxCompiledModel } from "../neuronx-compiler";
 
-export interface NeuronxTaskDefinitionProps extends ecs.Ec2TaskDefinitionProps {
-  /**
-   * VPC in which this will launch compile worker and container instance.
-   */
-  readonly vpc: IVpc;
+export interface NeuronxTaskDefinitionPropsBase
+  extends ecs.Ec2TaskDefinitionProps {
   /**
    * The instance type of compile worker instance.
    */
@@ -31,30 +28,14 @@ export interface NeuronxTaskDefinitionProps extends ecs.Ec2TaskDefinitionProps {
    * @default - 1
    */
   readonly tensorParallelSize?: number;
+}
+
+export interface NeuronxTaskDefinitionProps
+  extends NeuronxTaskDefinitionPropsBase {
   /**
    * The model to be compiled.
    */
   readonly compiledModel: NeuronxCompiledModel;
-  /**
-   * The root volume of worker instance.
-   * @default - N bilion parameters * 5GiB EBS
-   */
-  readonly volumeSize?: Size;
-  /**
-   * The VPC Subnets this Compute Environment will launch instances in.
-   *
-   * @default - new subnets will be created
-   */
-  readonly vpcSubnets?: SubnetSelection;
-  /**
-   * The environment variables to pass to the container.
-   * This is only applicable when using container runtime.
-   *
-   * @default - No environment variables.
-   */
-  readonly environment?: {
-    [key: string]: string;
-  };
 }
 
 export interface INeuronxTaskDefinition extends ecs.IEc2TaskDefinition {
@@ -123,30 +104,36 @@ export class NeuronxTaskDefinition
 }
 
 export interface ApplicationLoadBalancedNeuronxServiceProps
-  extends ApplicationLoadBalancedEc2ServiceProps {
-  readonly neuronTaskDefinition: INeuronxTaskDefinition;
-}
+  extends ApplicationLoadBalancedEc2ServiceProps {}
 export class ApplicationLoadBalancedNeuronxService extends ApplicationLoadBalancedEc2Service {
   constructor(
     scope: Construct,
     id: string,
     props: ApplicationLoadBalancedNeuronxServiceProps,
   ) {
+    const neuronxTaskDefinition = props.taskDefinition;
+    if (
+      !neuronxTaskDefinition ||
+      !(neuronxTaskDefinition instanceof NeuronxTaskDefinition)
+    ) {
+      throw new Error("taskDefinition must extend NeuronxTaskDefinition");
+    }
     super(scope, id, {
       healthCheckGracePeriod:
         props.healthCheckGracePeriod ?? Duration.minutes(5),
       ...props,
     });
     const cluster = this.getDefaultCluster(this, props.vpc);
+
     const volumeSize = Math.ceil(
-      props.neuronTaskDefinition.tasksPerInstance *
-        props.neuronTaskDefinition.compiledModel.weightSize.toGibibytes() +
+      neuronxTaskDefinition.tasksPerInstance *
+        neuronxTaskDefinition.compiledModel.weightSize.toGibibytes() +
         PytorchTrainingNeuronxImage.size.toGibibytes() +
         NeuronOptimizedMachineImage.size.toGibibytes(),
     );
     cluster.addCapacity("InstanceCapacity", {
       ...props,
-      instanceType: props.neuronTaskDefinition.neuronxInstanceType.instanceType,
+      instanceType: neuronxTaskDefinition.neuronxInstanceType.instanceType,
       machineImage: new NeuronOptimizedMachineImage(
         this,
         "NeuronOptimizedMachineImage",
@@ -161,7 +148,7 @@ export class ApplicationLoadBalancedNeuronxService extends ApplicationLoadBalanc
         },
       ],
       minCapacity: Math.ceil(
-        (props.desiredCount ?? 1) / props.neuronTaskDefinition.tasksPerInstance,
+        (props.desiredCount ?? 1) / neuronxTaskDefinition.tasksPerInstance,
       ),
     });
     cluster.connections.allowFrom(

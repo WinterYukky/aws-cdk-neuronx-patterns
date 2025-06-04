@@ -1,4 +1,4 @@
-import { Size } from "aws-cdk-lib";
+import { Size, SizeRoundingBehavior } from "aws-cdk-lib";
 import { DataTypeBits, Parameters } from "./model";
 import { INeuronxInstanceType } from "./neuronx-instance-type";
 
@@ -54,8 +54,11 @@ export function calcMemoryFootprint(
     maxSequenceLength,
     batchSize,
   );
+  const bytes = Size.bytes(
+    weightMemFootprint.toBytes() + kvCacheMemFootprint.toBytes(),
+  );
   return Size.gibibytes(
-    weightMemFootprint.toGibibytes() + kvCacheMemFootprint.toGibibytes(),
+    Math.ceil(bytes.toGibibytes({ rounding: SizeRoundingBehavior.NONE })),
   );
 }
 
@@ -64,6 +67,12 @@ export function calcTensorParallel(
   memoryFootprint: Size,
   attentionHeads?: number,
 ) {
+  const toGibibytesCeil = (size: Size) =>
+    Math.ceil(
+      size.toGibibytes({
+        rounding: SizeRoundingBehavior.NONE,
+      }),
+    );
   return (
     neuronxInstanceType.supportedTensorParallelism
       // Attention heads need to be divisible by TP
@@ -72,8 +81,10 @@ export function calcTensorParallel(
       .filter(
         (tp) =>
           tp *
-            neuronxInstanceType.acceleratorChips.acceleratorMemory.toGibibytes() >=
-          memoryFootprint.toGibibytes(),
+            toGibibytesCeil(
+              neuronxInstanceType.acceleratorChips.acceleratorMemory,
+            ) >=
+          toGibibytesCeil(memoryFootprint),
       )
       .map((tp) => {
         const workers = Math.floor(

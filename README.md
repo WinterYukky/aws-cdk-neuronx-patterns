@@ -31,11 +31,10 @@ const taskDefinition = new VllmNxdInferenceTaskDefinition(
   this,
   "TaskDefinition",
   {
-    vpc,
     compiledModel,
   },
 );
-this.service = new ApplicationLoadBalancedVllmNxDInferenceService(
+const service = new ApplicationLoadBalancedVllmNxDInferenceService(
   this,
   "Service",
   {
@@ -71,12 +70,13 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
+declare const image: INeuronxContainerImage;
 const compile = new NeuronxCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("example/example-7b-chat"),
   artifactS3Prefix: "my-compiled-artifacts",
-  image:
+  image,
 });
 const compiledModel = compiler.compile();
 
@@ -104,32 +104,13 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
-new NeuronxCompile(this, "NeuronxCompile", {
+declare const image: INeuronxContainerImage;
+new NeuronxCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("example/example-7b-chat"),
+  artifactS3Prefix: "my-compiled-artifacts",
+  image,
   spot: true,
-});
-```
-
-### Compile Options
-
-If you are familiar with Neuronx, you can also specify compilation options to better meet your requirements.
-
-```ts
-import * as ec2 from "aws-cdk-lib/aws-ec2";
-import * as s3 from "aws-cdk-lib/aws-s3";
-
-declare const vpc: ec2.Vpc;
-declare const bucket: s3.Bucket;
-new NeuronxCompile(this, "NeuronxCompile", {
-  vpc,
-  bucket,
-  model: Model.fromHuggingFace("example/example-22b-chat"),
-  compileOptions: {
-    maxModelLength: 1024,
-    quantDtype: QuantDtype.S8,
-    optLevel: OptLevel.MODEL_EXECUTION_PERFORMANCE,
-  },
 });
 ```

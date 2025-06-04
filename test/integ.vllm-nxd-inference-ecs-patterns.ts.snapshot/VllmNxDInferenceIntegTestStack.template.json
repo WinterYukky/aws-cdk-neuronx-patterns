@@ -1,0 +1,4069 @@
+{
+ "Resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcPublicSubnet1Subnet5C2D37C4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet1RouteTable6C95E38E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet1RouteTableAssociation97140677": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
+    }
+   }
+  },
+  "VpcPublicSubnet1DefaultRoute3DA9E72A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPublicSubnet1EIPD7E02669": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "VpcPublicSubnet1NATGateway4D7517AA": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcPublicSubnet1EIPD7E02669",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPublicSubnet1DefaultRoute3DA9E72A",
+    "VpcPublicSubnet1RouteTableAssociation97140677"
+   ]
+  },
+  "VpcPublicSubnet2Subnet691E08A3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet2RouteTable94F7E489": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet2Subnet691E08A3"
+    }
+   }
+  },
+  "VpcPublicSubnet2DefaultRoute97F91067": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPrivateSubnet1Subnet536B997A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet1RouteTableB2C5B500": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet1RouteTableAssociation70C59FA6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet1Subnet536B997A"
+    }
+   }
+  },
+  "VpcPrivateSubnet1DefaultRouteBE02A9ED": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+    }
+   }
+  },
+  "VpcPrivateSubnet2Subnet3788AAA1": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet2RouteTableA678073B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet2RouteTableAssociationA89CAD56": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+    }
+   }
+  },
+  "VpcPrivateSubnet2DefaultRoute060D2087": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+    }
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcS3A5408339": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+     },
+     {
+      "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+     },
+     {
+      "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+     },
+     {
+      "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".s3"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/Vpc"
+     }
+    ],
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "Vpc8378EB38",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "Vpc8378EB38",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  },
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "BucketPolicyE9A3008A": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "Bucket83908E77"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "BucketAutoDeleteObjectsCustomResourceBAFD23C2": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "Bucket83908E77"
+    }
+   },
+   "DependsOn": [
+    "BucketPolicyE9A3008A"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "Bucket83908E77"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ]
+  },
+  "CompilerLaunchTemplate4C63C08A": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "BlockDeviceMappings": [
+      {
+       "DeviceName": "/dev/xvda",
+       "Ebs": {
+        "Encrypted": true,
+        "VolumeSize": 61,
+        "VolumeType": "gp3"
+       }
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate"
+        }
+       ]
+      }
+     ]
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ],
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
+    "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
+   ]
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731,
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD",
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": {
+   "Type": "Custom::NeuronxAmi",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF",
+      "Arn"
+     ]
+    },
+    "image": {
+     "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CompilerComputeEnvironmentSecurityGroup3ADC0F04": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-compile-worker"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B",
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfileA05F57F0": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironment83CAC2B9": {
+   "Type": "AWS::Batch::ComputeEnvironment",
+   "Properties": {
+    "ComputeResources": {
+     "AllocationStrategy": "BEST_FIT_PROGRESSIVE",
+     "Ec2Configuration": [
+      {
+       "ImageIdOverride": {
+        "Fn::GetAtt": [
+         "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1",
+         "image_id"
+        ]
+       },
+       "ImageType": "ECS_AL2023"
+      }
+     ],
+     "InstanceRole": {
+      "Fn::GetAtt": [
+       "CompilerComputeEnvironmentInstanceProfileA05F57F0",
+       "Arn"
+      ]
+     },
+     "InstanceTypes": [
+      "inf2.8xlarge"
+     ],
+     "LaunchTemplate": {
+      "LaunchTemplateId": {
+       "Ref": "CompilerLaunchTemplate4C63C08A"
+      },
+      "Version": {
+       "Fn::GetAtt": [
+        "CompilerLaunchTemplate4C63C08A",
+        "LatestVersionNumber"
+       ]
+      }
+     },
+     "MaxvCpus": 256,
+     "MinvCpus": 0,
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "CompilerComputeEnvironmentSecurityGroup3ADC0F04",
+        "GroupId"
+       ]
+      }
+     ],
+     "Subnets": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      }
+     ],
+     "Tags": {
+      "Name": "neuronx-compile-worker"
+     },
+     "Type": "EC2"
+    },
+    "ReplaceComputeEnvironment": false,
+    "State": "ENABLED",
+    "Tags": {
+     "Name": "neuronx-compile-worker"
+    },
+    "Type": "managed",
+    "UpdatePolicy": {}
+   }
+  },
+  "CompilerJobQueue59AB0D38": {
+   "Type": "AWS::Batch::JobQueue",
+   "Properties": {
+    "ComputeEnvironmentOrder": [
+     {
+      "ComputeEnvironment": {
+       "Fn::GetAtt": [
+        "CompilerComputeEnvironment83CAC2B9",
+        "ComputeEnvironmentArn"
+       ]
+      },
+      "Order": 1
+     }
+    ],
+    "JobStateTimeLimitActions": [
+     {
+      "Action": "CANCEL",
+      "MaxTimeSeconds": 600,
+      "Reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
+      "State": "RUNNABLE"
+     }
+    ],
+    "Priority": 1,
+    "State": "ENABLED"
+   }
+  },
+  "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":logs:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":log-group:/aws/batch/job:*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993",
+    "Roles": [
+     {
+      "Ref": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A"
+     }
+    ]
+   }
+  },
+  "CompilerJobDefinitionE25875BC": {
+   "Type": "AWS::Batch::JobDefinition",
+   "Properties": {
+    "ContainerProperties": {
+     "Command": [
+      "--served-model-name",
+      "HuggingFaceTB/SmolLM-135M-Instruct",
+      "--max-model-len",
+      "128",
+      "--max-num-seqs",
+      "1",
+      "--tensor-parallel-size",
+      "1"
+     ],
+     "Environment": [
+      {
+       "Name": "VLLM_NEURON_FRAMEWORK",
+       "Value": "neuronx-distributed-inference"
+      },
+      {
+       "Name": "NEURON_COMPILED_ARTIFACTS",
+       "Value": "neuron-compiled-artifacts"
+      },
+      {
+       "Name": "NEURON_RT_NUM_CORES",
+       "Value": "1"
+      },
+      {
+       "Name": "MODEL_ID",
+       "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
+      },
+      {
+       "Name": "MODEL_NAME",
+       "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
+      },
+      {
+       "Name": "COMPILED_ARTIFACTS_S3_URI",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "Bucket83908E77"
+          },
+          "/sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+         ]
+        ]
+       }
+      }
+     ],
+     "ExecutionRoleArn": {
+      "Fn::GetAtt": [
+       "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A",
+       "Arn"
+      ]
+     },
+     "Image": {
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:89b8a1ae7d278d60420c6d05330aebd95207b35726d398ab1babd30c26409d13"
+     },
+     "LinuxParameters": {
+      "Devices": [
+       {
+        "ContainerPath": "/dev/neuron0",
+        "HostPath": "/dev/neuron0",
+        "Permissions": [
+         "read",
+         "write"
+        ]
+       }
+      ]
+     },
+     "ReadonlyRootFilesystem": false,
+     "ResourceRequirements": [
+      {
+       "Type": "MEMORY",
+       "Value": "124519"
+      },
+      {
+       "Type": "VCPU",
+       "Value": "32"
+      }
+     ]
+    },
+    "PlatformCapabilities": [
+     "EC2"
+    ],
+    "RetryStrategy": {},
+    "Timeout": {},
+    "Type": "container"
+   }
+  },
+  "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "CompilerCompileJobProviderwaiterstatemachine094C7791"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonEvent782775F0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      },
+      "WAITER_STATE_MACHINE_ARN": {
+       "Ref": "CompilerCompileJobProviderwaiterstatemachine094C7791"
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2",
+    "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
+   ]
+  },
+  "CompilerCompileJobProviderframeworkonEventLogGroup7DA40C11": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CompilerCompileJobProviderframeworkonEvent782775F0"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkisComplete3CEC6FB9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+    },
+    "Description": "AWS CDK resource provider framework - isComplete (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.isComplete",
+    "Role": {
+     "Fn::GetAtt": [
+      "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA",
+    "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
+   ]
+  },
+  "CompilerCompileJobProviderframeworkisCompleteLogGroup4D3BBE69": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CompilerCompileJobProviderframeworkisComplete3CEC6FB9"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonTimeout00B040EB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onTimeout (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+        "Arn"
+       ]
+      },
+      "USER_IS_COMPLETE_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onTimeout",
+    "Role": {
+     "Fn::GetAtt": [
+      "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50",
+    "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
+   ]
+  },
+  "CompilerCompileJobProviderframeworkonTimeoutLogGroup756C2566": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CompilerCompileJobProviderframeworkonTimeout00B040EB"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "CompilerCompileJobProviderframeworkisComplete3CEC6FB9",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "CompilerCompileJobProviderframeworkonTimeout00B040EB",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "CompilerCompileJobProviderframeworkisComplete3CEC6FB9",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "CompilerCompileJobProviderframeworkonTimeout00B040EB",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "logs:CreateLogDelivery",
+        "logs:CreateLogStream",
+        "logs:DeleteLogDelivery",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutLogEvents",
+        "logs:PutResourcePolicy",
+        "logs:UpdateLogDelivery"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
+     }
+    ]
+   }
+  },
+  "CompilerCompileJobProviderwaiterstatemachineLogGroupA99CC327": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/vendedlogs/states/waiter-state-machine-",
+       {
+        "Ref": "CompilerCompileJobProviderframeworkisComplete3CEC6FB9"
+       },
+       "-c84a9ff97768eeff3940a722442fac9a0b733490b9"
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "CompilerCompileJobProviderwaiterstatemachine094C7791": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":60,\"MaxAttempts\":60,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "CompilerCompileJobProviderframeworkisComplete3CEC6FB9",
+         "Arn"
+        ]
+       },
+       "\"},\"framework-onTimeout-task\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "CompilerCompileJobProviderframeworkonTimeout00B040EB",
+         "Arn"
+        ]
+       },
+       "\"}}}"
+      ]
+     ]
+    },
+    "LoggingConfiguration": {
+     "Destinations": [
+      {
+       "CloudWatchLogsLogGroup": {
+        "LogGroupArn": {
+         "Fn::GetAtt": [
+          "CompilerCompileJobProviderwaiterstatemachineLogGroupA99CC327",
+          "Arn"
+         ]
+        }
+       }
+      }
+     ],
+     "IncludeExecutionData": false,
+     "Level": "ERROR"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE",
+    "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
+   ]
+  },
+  "CompilerNeuronxCompile8E2589B5": {
+   "Type": "Custom::NeuronxCompile",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CompilerCompileJobProviderframeworkonEvent782775F0",
+      "Arn"
+     ]
+    },
+    "jobDefinitionArn": {
+     "Ref": "CompilerJobDefinitionE25875BC"
+    },
+    "jobQueueArn": {
+     "Fn::GetAtt": [
+      "CompilerJobQueue59AB0D38",
+      "JobQueueArn"
+     ]
+    },
+    "artifactS3Prefix": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "c2b19c211a26f010ddd3faa2eabd397cfd16b532a8e0b8426ea98a285b6714e6.zip"
+    },
+    "Handler": "index.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
+   ]
+  },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "batch:SubmitJob",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "CompilerJobQueue59AB0D38",
+          "JobQueueArn"
+         ]
+        },
+        {
+         "Ref": "CompilerJobDefinitionE25875BC"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D",
+    "Roles": [
+     {
+      "Ref": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
+     }
+    ]
+   }
+  },
+  "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "901330da6ba196740063935585030f77b01246b17f89f3a39a9143a1b2d892dc.zip"
+    },
+    "Handler": "index.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D",
+    "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
+   ]
+  },
+  "SingletonLambda1361f4695c924c469e115d1dbf925bacLogGroup0B81A182": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "batch:DescribeJobs",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
+    "Roles": [
+     {
+      "Ref": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
+     }
+    ]
+   }
+  },
+  "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "901330da6ba196740063935585030f77b01246b17f89f3a39a9143a1b2d892dc.zip"
+    },
+    "Handler": "index.isComplete",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
+    "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
+   ]
+  },
+  "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62LogGroup25096071": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TaskDefinitionTaskRoleFD40A61D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDefinitionTaskRoleDefaultPolicy282E8624": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TaskDefinitionTaskRoleDefaultPolicy282E8624",
+    "Roles": [
+     {
+      "Ref": "TaskDefinitionTaskRoleFD40A61D"
+     }
+    ]
+   }
+  },
+  "TaskDefinitionB36D86D9": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Command": [
+       "--served-model-name",
+       "HuggingFaceTB/SmolLM-135M-Instruct",
+       "--max-model-len",
+       "128",
+       "--max-num-seqs",
+       "1",
+       "--tensor-parallel-size",
+       "1"
+      ],
+      "Environment": [
+       {
+        "Name": "VLLM_NEURON_FRAMEWORK",
+        "Value": "neuronx-distributed-inference"
+       },
+       {
+        "Name": "NEURON_COMPILED_ARTIFACTS",
+        "Value": "neuron-compiled-artifacts"
+       },
+       {
+        "Name": "NEURON_RT_NUM_CORES",
+        "Value": "1"
+       },
+       {
+        "Name": "MODEL_NAME",
+        "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
+       },
+       {
+        "Name": "COMPILED_ARTIFACTS_S3_URI",
+        "Value": {
+         "Fn::Join": [
+          "",
+          [
+           "s3://",
+           {
+            "Ref": "Bucket83908E77"
+           },
+           "/",
+           {
+            "Fn::GetAtt": [
+             "CompilerNeuronxCompile8E2589B5",
+             "ArtifactS3Prefix"
+            ]
+           }
+          ]
+         ]
+        }
+       }
+      ],
+      "Essential": true,
+      "HealthCheck": {
+       "Command": [
+        "CMD-SHELL",
+        "curl -f http://localhost:8000/health || exit 1"
+       ],
+       "Interval": 30,
+       "Retries": 3,
+       "StartPeriod": 300,
+       "Timeout": 5
+      },
+      "Image": {
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:b448e110f01d1fe5ee731a998367a6ba0f2a9e36d2dff2f93a0fcde2537cb6f2"
+      },
+      "LinuxParameters": {
+       "Capabilities": {},
+       "Devices": [
+        {
+         "ContainerPath": "/dev/neuron0",
+         "HostPath": "/dev/neuron0",
+         "Permissions": [
+          "read",
+          "write"
+         ]
+        }
+       ]
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "TaskDefinitionvLLMLogGroupF04E471E"
+        },
+        "awslogs-stream-prefix": "vLLM",
+        "awslogs-region": {
+         "Ref": "AWS::Region"
+        }
+       }
+      },
+      "MemoryReservation": 6554,
+      "Name": "vLLM",
+      "PortMappings": [
+       {
+        "ContainerPort": 8000,
+        "HostPort": 0,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "TaskDefinitionExecutionRole8D61C2FB",
+      "Arn"
+     ]
+    },
+    "Family": "VllmNxDInferenceIntegTestStackTaskDefinitionA02144A9",
+    "NetworkMode": "bridge",
+    "PlacementConstraints": [
+     {
+      "Expression": "runningTasksCount<2",
+      "Type": "memberOf"
+     }
+    ],
+    "RequiresCompatibilities": [
+     "EC2"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "TaskDefinitionTaskRoleFD40A61D",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "TaskDefinitionvLLMLogGroupF04E471E": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "TaskDefinitionExecutionRole8D61C2FB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "TaskDefinitionvLLMLogGroupF04E471E",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5",
+    "Roles": [
+     {
+      "Ref": "TaskDefinitionExecutionRole8D61C2FB"
+     }
+    ]
+   }
+  },
+  "ServiceLB4B41E788": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internal",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "ServiceLBSecurityGroup45E2FC86",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "VpcPrivateSubnet1Subnet536B997A"
+     },
+     {
+      "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+     }
+    ],
+    "Type": "application"
+   }
+  },
+  "ServiceLBSecurityGroup45E2FC86": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB VllmNxDInferenceIntegTestStackServiceLB785954FF",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "ServiceLBSecurityGrouptoVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF733276860999B4FB0366": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "to VllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF73:32768-60999",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845",
+      "GroupId"
+     ]
+    },
+    "FromPort": 32768,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ServiceLBSecurityGroup45E2FC86",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "ToPort": 60999
+   }
+  },
+  "ServiceLBSecurityGroupfromVllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D8653780C8F7E958": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from VllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D86537:80",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ServiceLBSecurityGroup45E2FC86",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   }
+  },
+  "ServiceLBPublicListener78E1CF05": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "ServiceLBPublicListenerECSGroup03C812D2"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "ServiceLB4B41E788"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   }
+  },
+  "ServiceLBPublicListenerECSGroup03C812D2": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckPath": "/health",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "instance",
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "ServiceService775D3AE5": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 2,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 300,
+    "LaunchType": "EC2",
+    "LoadBalancers": [
+     {
+      "ContainerName": "vLLM",
+      "ContainerPort": 8000,
+      "TargetGroupArn": {
+       "Ref": "ServiceLBPublicListenerECSGroup03C812D2"
+      }
+     }
+    ],
+    "SchedulingStrategy": "REPLICA",
+    "TaskDefinition": {
+     "Ref": "TaskDefinitionB36D86D9"
+    }
+   },
+   "DependsOn": [
+    "ServiceLBPublicListenerECSGroup03C812D2",
+    "ServiceLBPublicListener78E1CF05",
+    "TaskDefinitionTaskRoleDefaultPolicy282E8624",
+    "TaskDefinitionTaskRoleFD40A61D"
+   ]
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2",
+    "Roles": [
+     {
+      "Ref": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
+     }
+    ]
+   }
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B",
+      "Arn"
+     ]
+    },
+    "Runtime": {
+     "Fn::FindInMap": [
+      "LatestNodeRuntimeMap",
+      {
+       "Ref": "AWS::Region"
+      },
+      "value"
+     ]
+    },
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2",
+    "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
+   ]
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroup8981F636": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285",
+    "Roles": [
+     {
+      "Ref": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
+     }
+    ]
+   }
+  },
+  "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A": {
+   "Type": "Custom::NeuronxAmi",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C",
+      "Arn"
+     ]
+    },
+    "image": {
+     "Ref": "ServiceNeuronOptimizedMachineImageImageParameter22D845C6"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "EcsDefaultClusterMnL3mNNYNVpc18E0451A": {
+   "Type": "AWS::ECS::Cluster"
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupfromVllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B327686099917C7D365": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "from VllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B:32768-60999",
+    "FromPort": 32768,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ServiceLBSecurityGroup45E2FC86",
+      "GroupId"
+     ]
+    },
+    "ToPort": 60999
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleDefaultPolicy0C3E1BAD": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:DeregisterContainerInstance",
+        "ecs:RegisterContainerInstance",
+        "ecs:Submit*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecs:Poll",
+        "ecs:StartTelemetrySession"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": {
+          "Fn::GetAtt": [
+           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+           "Arn"
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecs:DiscoverPollEndpoint",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleDefaultPolicy0C3E1BAD",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceProfileFBD277E0": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLaunchTemplate345F7E9C": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "BlockDeviceMappings": [
+      {
+       "DeviceName": "/dev/xvda",
+       "Ebs": {
+        "Encrypted": true,
+        "VolumeSize": 61,
+        "VolumeType": "gp3"
+       }
+      }
+     ],
+     "IamInstanceProfile": {
+      "Arn": {
+       "Fn::GetAtt": [
+        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceProfileFBD277E0",
+        "Arn"
+       ]
+      }
+     },
+     "ImageId": {
+      "Fn::GetAtt": [
+       "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A",
+       "image_id"
+      ]
+     },
+     "InstanceType": "inf2.xlarge",
+     "Monitoring": {
+      "Enabled": false
+     },
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845",
+        "GroupId"
+       ]
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": {
+       "Fn::Join": [
+        "",
+        [
+         "#!/bin/bash\necho ECS_CLUSTER=",
+         {
+          "Ref": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
+         },
+         " >> /etc/ecs/ecs.config"
+        ]
+       ]
+      }
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleDefaultPolicy0C3E1BAD",
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492"
+   ]
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "LaunchTemplate": {
+     "LaunchTemplateId": {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLaunchTemplate345F7E9C"
+     },
+     "Version": {
+      "Fn::GetAtt": [
+       "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLaunchTemplate345F7E9C",
+       "LatestVersionNumber"
+      ]
+     }
+    },
+    "MaxSize": "1",
+    "MinSize": "1",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     {
+      "Ref": "VpcPrivateSubnet1Subnet536B997A"
+     },
+     {
+      "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+     }
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingReplacingUpdate": {
+     "WillReplace": true
+    },
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "import boto3, json, os, time\n\necs = boto3.client('ecs')\nautoscaling = boto3.client('autoscaling')\n\n\ndef lambda_handler(event, context):\n  print(json.dumps(dict(event, ResponseURL='...')))\n  cluster = os.environ['CLUSTER']\n  snsTopicArn = event['Records'][0]['Sns']['TopicArn']\n  lifecycle_event = json.loads(event['Records'][0]['Sns']['Message'])\n  instance_id = lifecycle_event.get('EC2InstanceId')\n  if not instance_id:\n    print('Got event without EC2InstanceId: %s', json.dumps(dict(event, ResponseURL='...')))\n    return\n\n  instance_arn = container_instance_arn(cluster, instance_id)\n  print('Instance %s has container instance ARN %s' % (lifecycle_event['EC2InstanceId'], instance_arn))\n\n  if not instance_arn:\n    return\n\n  task_arns = container_instance_task_arns(cluster, instance_arn)\n\n  if task_arns:\n    print('Instance ARN %s has task ARNs %s' % (instance_arn, ', '.join(task_arns)))\n\n  while has_tasks(cluster, instance_arn, task_arns):\n    time.sleep(10)\n\n  try:\n    print('Terminating instance %s' % instance_id)\n    autoscaling.complete_lifecycle_action(\n        LifecycleActionResult='CONTINUE',\n        **pick(lifecycle_event, 'LifecycleHookName', 'LifecycleActionToken', 'AutoScalingGroupName'))\n  except Exception as e:\n    # Lifecycle action may have already completed.\n    print(str(e))\n\n\ndef container_instance_arn(cluster, instance_id):\n  \"\"\"Turn an instance ID into a container instance ARN.\"\"\"\n  arns = ecs.list_container_instances(cluster=cluster, filter='ec2InstanceId==' + instance_id)['containerInstanceArns']\n  if not arns:\n    return None\n  return arns[0]\n\ndef container_instance_task_arns(cluster, instance_arn):\n  \"\"\"Fetch tasks for a container instance ARN.\"\"\"\n  arns = ecs.list_tasks(cluster=cluster, containerInstance=instance_arn)['taskArns']\n  return arns\n\ndef has_tasks(cluster, instance_arn, task_arns):\n  \"\"\"Return True if the instance is running tasks for the given cluster.\"\"\"\n  instances = ecs.describe_container_instances(cluster=cluster, containerInstances=[instance_arn])['containerInstances']\n  if not instances:\n    return False\n  instance = instances[0]\n\n  if instance['status'] == 'ACTIVE':\n    # Start draining, then try again later\n    set_container_instance_to_draining(cluster, instance_arn)\n    return True\n\n  task_count = None\n\n  if task_arns:\n    # Fetch details for tasks running on the container instance\n    tasks = ecs.describe_tasks(cluster=cluster, tasks=task_arns)['tasks']\n    if tasks:\n      # Consider any non-stopped tasks as running\n      task_count = sum(task['lastStatus'] != 'STOPPED' for task in tasks) + instance['pendingTasksCount']\n\n  if not task_count:\n    # Fallback to instance task counts if detailed task information is unavailable\n    task_count = instance['runningTasksCount'] + instance['pendingTasksCount']\n\n  print('Instance %s has %s tasks' % (instance_arn, task_count))\n\n  return task_count > 0\n\ndef set_container_instance_to_draining(cluster, instance_arn):\n  ecs.update_container_instances_state(\n      cluster=cluster,\n      containerInstances=[instance_arn], status='DRAINING')\n\n\ndef pick(dct, *keys):\n  \"\"\"Pick a subset of a dict.\"\"\"\n  return {k: v for k, v in dct.items() if k in keys}\n"
+    },
+    "Environment": {
+     "Variables": {
+      "CLUSTER": {
+       "Ref": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
+      }
+     }
+    },
+    "Handler": "index.lambda_handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.9",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ],
+    "Timeout": 310
+   },
+   "DependsOn": [
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+   ]
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionLogGroup84C7CC53": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731,
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic0A63A176F9E9B1DF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9",
+      "Arn"
+     ]
+    },
+    "Principal": "sns.amazonaws.com",
+    "SourceArn": {
+     "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
+    }
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionTopicF4C13E3E": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9",
+      "Arn"
+     ]
+    },
+    "Protocol": "lambda",
+    "TopicArn": {
+     "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
+    }
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:DescribeHosts",
+        "ec2:DescribeInstanceAttribute",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeInstances"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "autoscaling:CompleteLifecycleAction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":autoscaling:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":autoScalingGroup:*:autoScalingGroupName/",
+          {
+           "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:DescribeContainerInstances",
+        "ecs:DescribeTasks"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": {
+          "Fn::GetAtt": [
+           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+           "Arn"
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:ListContainerInstances",
+        "ecs:SubmitContainerStateChange",
+        "ecs:SubmitTaskStateChange"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecs:ListTasks",
+        "ecs:UpdateContainerInstancesState"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": {
+          "Fn::GetAtt": [
+           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+           "Arn"
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "autoscaling.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRoleDefaultPolicy395B42DB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRoleDefaultPolicy395B42DB",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561"
+     }
+    ]
+   }
+  },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHook3BA125AD": {
+   "Type": "AWS::AutoScaling::LifecycleHook",
+   "Properties": {
+    "AutoScalingGroupName": {
+     "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
+    },
+    "DefaultResult": "CONTINUE",
+    "HeartbeatTimeout": 300,
+    "LifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
+    "NotificationTargetARN": {
+     "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
+    },
+    "RoleARN": {
+     "Fn::GetAtt": [
+      "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRoleDefaultPolicy395B42DB",
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561"
+   ]
+  },
+  "HttpRequestFromVpcFunctionServiceRoleA142BB7F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+   ]
+  },
+  "HttpRequestFromVpcFunctionSecurityGroup5EFA4275": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function VllmNxDInferenceIntegTestStackHttpRequestFromVpcFunction4188EB87",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+   ]
+  },
+  "HttpRequestFromVpcFunctionB264F32C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "d382f7751ce017fd6891c9140bfd0d4346e837d38ae77eebf6d0a4fba880f8d7.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 30,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+   ]
+  },
+  "HttpRequestFromVpcFunctionLogGroup1EA954C2": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HttpRequestFromVpcFunctionB264F32C"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "Mappings": {
+  "LatestNodeRuntimeMap": {
+   "af-south-1": {
+    "value": "nodejs22.x"
+   },
+   "ap-east-1": {
+    "value": "nodejs22.x"
+   },
+   "ap-east-2": {
+    "value": "nodejs22.x"
+   },
+   "ap-northeast-1": {
+    "value": "nodejs22.x"
+   },
+   "ap-northeast-2": {
+    "value": "nodejs22.x"
+   },
+   "ap-northeast-3": {
+    "value": "nodejs22.x"
+   },
+   "ap-south-1": {
+    "value": "nodejs22.x"
+   },
+   "ap-south-2": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-1": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-2": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-3": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-4": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-5": {
+    "value": "nodejs22.x"
+   },
+   "ap-southeast-7": {
+    "value": "nodejs22.x"
+   },
+   "ca-central-1": {
+    "value": "nodejs22.x"
+   },
+   "ca-west-1": {
+    "value": "nodejs22.x"
+   },
+   "cn-north-1": {
+    "value": "nodejs22.x"
+   },
+   "cn-northwest-1": {
+    "value": "nodejs22.x"
+   },
+   "eu-central-1": {
+    "value": "nodejs22.x"
+   },
+   "eu-central-2": {
+    "value": "nodejs22.x"
+   },
+   "eu-isoe-west-1": {
+    "value": "nodejs18.x"
+   },
+   "eu-north-1": {
+    "value": "nodejs22.x"
+   },
+   "eu-south-1": {
+    "value": "nodejs22.x"
+   },
+   "eu-south-2": {
+    "value": "nodejs22.x"
+   },
+   "eu-west-1": {
+    "value": "nodejs22.x"
+   },
+   "eu-west-2": {
+    "value": "nodejs22.x"
+   },
+   "eu-west-3": {
+    "value": "nodejs22.x"
+   },
+   "il-central-1": {
+    "value": "nodejs22.x"
+   },
+   "me-central-1": {
+    "value": "nodejs22.x"
+   },
+   "me-south-1": {
+    "value": "nodejs22.x"
+   },
+   "mx-central-1": {
+    "value": "nodejs22.x"
+   },
+   "sa-east-1": {
+    "value": "nodejs22.x"
+   },
+   "us-east-1": {
+    "value": "nodejs22.x"
+   },
+   "us-east-2": {
+    "value": "nodejs22.x"
+   },
+   "us-gov-east-1": {
+    "value": "nodejs22.x"
+   },
+   "us-gov-west-1": {
+    "value": "nodejs22.x"
+   },
+   "us-iso-east-1": {
+    "value": "nodejs18.x"
+   },
+   "us-iso-west-1": {
+    "value": "nodejs18.x"
+   },
+   "us-isob-east-1": {
+    "value": "nodejs18.x"
+   },
+   "us-isob-west-1": {
+    "value": "nodejs18.x"
+   },
+   "us-west-1": {
+    "value": "nodejs22.x"
+   },
+   "us-west-2": {
+    "value": "nodejs22.x"
+   }
+  }
+ },
+ "Parameters": {
+  "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
+  },
+  "ServiceNeuronOptimizedMachineImageImageParameter22D845C6": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "ServiceLoadBalancerDNSA8A7A1E7": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ServiceLB4B41E788",
+     "DNSName"
+    ]
+   }
+  },
+  "ServiceServiceURL99821597": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "ServiceLB4B41E788",
+        "DNSName"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "CompiledArtifact": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "s3://",
+      {
+       "Ref": "Bucket83908E77"
+      },
+      "/",
+      {
+       "Fn::GetAtt": [
+        "CompilerNeuronxCompile8E2589B5",
+        "ArtifactS3Prefix"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158": {
+   "Value": {
+    "Ref": "HttpRequestFromVpcFunctionB264F32C"
+   },
+   "Export": {
+    "Name": "VllmNxDInferenceIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+   }
+  },
+  "ExportsOutputFnGetAttServiceLB4B41E788DNSName4B4235FA": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ServiceLB4B41E788",
+     "DNSName"
+    ]
+   },
+   "Export": {
+    "Name": "VllmNxDInferenceIntegTestStack:ExportsOutputFnGetAttServiceLB4B41E788DNSName4B4235FA"
+   }
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
