@@ -1264,8 +1264,8 @@ export abstract class VllmEngineArgumentsParser {
       .filter(([key]) => key !== "model")
       .reduce<{ [key in string]: any }>((prev, [key, value]) => {
         const k = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
-        // Skip Secret objects as they will be handled through environment variables
-        if (key === "hfToken" && value) {
+        // Skip hfToken as it will be handled through environment variables
+        if (key === "hfToken") {
           return prev;
         }
         if (
@@ -1283,8 +1283,8 @@ export abstract class VllmEngineArgumentsParser {
       .filter(([key]) => key !== "model")
       .flatMap(([k, value]) => {
         const key = k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
-        // Skip Secret objects as they will be handled through environment variables
-        if (key === "hfToken" && value) {
+        // Skip hfToken as it will be handled through environment variables
+        if (key === "hfToken") {
           return [];
         }
         if (typeof value === "boolean") {
