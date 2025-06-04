@@ -77,7 +77,6 @@ describe("VllmEngineArgumentsToConfig", () => {
       quantization: Quantization.AWQ,
       ropeScaling: {},
       ropeTheta: 1.0,
-      hfToken: true,
       hfOverrides: {},
       enforceEager: true,
       maxSeqLenToCapture: 4096,

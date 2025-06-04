@@ -3,12 +3,6 @@ import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { Grant } from "aws-cdk-lib/aws-iam";
-import { ISecret } from "aws-cdk-lib/aws-secretsmanager";
-
-/**
- * Import types from aws-cdk-lib batch module
- */
-import * as batch from "aws-cdk-lib/aws-batch";
 
 /**
  * Secret type for container definition.

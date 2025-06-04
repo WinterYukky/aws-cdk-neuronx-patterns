@@ -5,6 +5,7 @@ import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 import { createHash } from "crypto";
 import { join } from "path";
+import * as batch from "aws-cdk-lib/aws-batch";
 import {
   calcMemoryFootprint,
   calcTensorParallel,
@@ -208,7 +209,7 @@ export class VllmNxdInferenceCompiler extends Construct {
     // Handle hfToken if provided
     const secrets: { [key: string]: Secret } = {};
     if (props.vllmArgs?.hfToken) {
-      secrets["HF_TOKEN"] = props.vllmArgs.hfToken;
+      secrets["HF_TOKEN"] = batch.Secret.fromSecretsManager(props.vllmArgs.hfToken);
     }
 
     const compiler = new NeuronxCompiler(this, "Resource", {
