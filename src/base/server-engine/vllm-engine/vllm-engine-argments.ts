@@ -1,3 +1,5 @@
+import { VllmLoraModule } from "../../lora";
+
 /**
  * Log level options for Uvicorn
  */
@@ -355,9 +357,13 @@ export interface VllmNamedArguments {
 
   /**
    * LoRA module configurations.
+  /**
+   * LoRA module configurations.
    * @example {"name": "name", "path": "lora_path", "base_model_name": "id"}
+   * 
+   * Can be either a JSON object or an array of VllmLoraModule objects.
    */
-  readonly loraModules?: { [key: string]: any };
+  readonly loraModules?: { [key: string]: any } | VllmLoraModule[];
 
   /**
    * Prompt adapter configurations in the format name=path. Multiple adapters can be specified.
@@ -1278,7 +1284,7 @@ export abstract class VllmEngineArgumentsParser {
           return value ? [`--${key}`] : [];
         }
         if (Array.isArray(value)) {
-          return [`--${key}`, ...value.map((v) => `${v}`)];
+          return [`--${key}`, ...value.map(String)];
         }
         if (typeof value === "object") {
           return [`--${key}`, `'${JSON.stringify(value)}'`];

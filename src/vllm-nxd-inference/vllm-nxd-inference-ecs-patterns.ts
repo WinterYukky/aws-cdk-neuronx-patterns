@@ -1,5 +1,7 @@
 import { Duration } from "aws-cdk-lib";
 import * as ecs from "aws-cdk-lib/aws-ecs";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import * as s3assets from "aws-cdk-lib/aws-s3-assets";
 import {
   ApplicationListener,
   ApplicationLoadBalancer,
@@ -13,6 +15,7 @@ import {
   NeuronxTaskDefinition,
   NeuronxTaskDefinitionPropsBase,
 } from "../base/aws-ecs-patterns";
+import { VllmLoraModule } from "../base/lora";
 import { INeuronxImage, PytorchTrainingNeuronxImage } from "../base/neuronx";
 import { INeuronxContainerImage } from "../base/neuronx-compiler";
 import { VllmEngineArgumentsParser } from "../base/server-engine/vllm-engine";
@@ -88,12 +91,33 @@ export interface VllmNxdInferenceTaskDefinitionProps
   readonly environment?: {
     [key: string]: string;
   };
+  
+  /**
+   * LoRA modules to be used with this task definition.
+   * @default - No LoRA modules
+   */
+  readonly loraModules?: VllmLoraModule[];
 }
 
 /**
  * Task definition for VllmNxdInference.
  */
 export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
+  private readonly loraModules: VllmLoraModule[] = [];
+
+  /**
+   * Add a LoRA module to this task definition.
+   * 
+   * @param module The LoRA module to add
+   * @returns This task definition for chaining
+   */
+  public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition {
+    // Grant read access to the module's source
+    module.source.grantRead(this.taskRole);
+    
+    this.loraModules.push(module);
+    return this;
+  }
   constructor(
     scope: Construct,
     id: string,
@@ -112,9 +136,26 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       props.image ??
       new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST);
     const port = props.compiledModel.vllmArgs.port ?? 8000;
-    const vllmCliArgs = VllmEngineArgumentsParser.cli(
-      props.compiledModel.vllmArgs,
-    );
+    
+    // Add LoRA modules if specified in props
+    if (props.loraModules) {
+      for (const module of props.loraModules) {
+        this.addLoraModule(module);
+      }
+    }
+    
+    // Prepare vllmArgs with LoRA modules if any
+    let vllmArgs = { ...props.compiledModel.vllmArgs };
+    
+    if (this.loraModules.length > 0) {
+      // Add or override the loraModules property in vllmArgs
+      vllmArgs = {
+        ...vllmArgs,
+        loraModules: this.loraModules,
+      };
+    }
+    
+    const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
     this.addContainerWithDefault("vLLM", {
       image: image.image,
       portMappings: [
