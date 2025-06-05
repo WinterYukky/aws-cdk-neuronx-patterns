@@ -86,20 +86,16 @@ export interface LoraAdapterConfig {
   readonly localPath?: string;
 
   /**
-   * The S3 location of the LoRA adapter.
-   * Either localPath or s3Location must be specified.
+   * The S3 bucket containing the adapter.
+   * Either localPath or both s3Bucket and s3Key must be specified.
    */
-  readonly s3Location?: {
-    /**
-     * The S3 bucket containing the adapter.
-     */
-    readonly bucket: s3.IBucket;
-    
-    /**
-     * The S3 key of the adapter.
-     */
-    readonly key: string;
-  };
+  readonly s3Bucket?: s3.IBucket;
+  
+  /**
+   * The S3 key of the adapter.
+   * Either localPath or both s3Bucket and s3Key must be specified.
+   */
+  readonly s3Key?: string;
 
   /**
    * The base model name for this adapter (optional).
@@ -167,12 +163,12 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       asset.grantRead(this.taskRole);
       
       s3Uri = asset.s3ObjectUrl;
-    } else if (adapter.s3Location) {
+    } else if (adapter.s3Bucket && adapter.s3Key) {
       // Use existing S3 object
-      s3Uri = `s3://${adapter.s3Location.bucket.bucketName}/${adapter.s3Location.key}`;
-      adapter.s3Location.bucket.grantRead(this.taskRole, adapter.s3Location.key);
+      s3Uri = `s3://${adapter.s3Bucket.bucketName}/${adapter.s3Key}`;
+      adapter.s3Bucket.grantRead(this.taskRole, adapter.s3Key);
     } else {
-      throw new Error(`LoRA adapter ${adapter.name} must specify either localPath or s3Location`);
+      throw new Error(`LoRA adapter ${adapter.name} must specify either localPath or both s3Bucket and s3Key`);
     }
     
     this.loraAdapters.push({
