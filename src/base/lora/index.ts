@@ -38,7 +38,8 @@ export class LocalLoraAdapterSource implements ILoraAdapterSource {
   }
   
   public grantRead(grantee: iam.IGrantable): iam.Grant {
-    return this.asset.grantRead(grantee);
+    this.asset.grantRead(grantee);
+    return iam.Grant.drop(this, 'Read');
   }
   
   public getS3Uri(): string {

@@ -1,7 +1,5 @@
 import { Duration } from "aws-cdk-lib";
 import * as ecs from "aws-cdk-lib/aws-ecs";
-import * as s3 from "aws-cdk-lib/aws-s3";
-import * as s3assets from "aws-cdk-lib/aws-s3-assets";
 import {
   ApplicationListener,
   ApplicationLoadBalancer,
