@@ -1,4 +1,4 @@
-import { ISecret } from "aws-cdk-lib/aws-secretsmanager";
+import { Secret } from "aws-cdk-lib/aws-batch";
 
 /**
  * Log level options for Uvicorn
@@ -621,12 +621,9 @@ export interface VllmNamedArguments {
 
   /**
    * The token to use as HTTP bearer authorization for remote files.
-   * If provided, the Secret will be passed as HF_TOKEN environment variable.
-   * 
-   * To use the token generated when running huggingface-cli login (stored in ~/.huggingface),
-   * set the `--hf-token` flag directly in the command line arguments.
+   * If provided, the Secret will be passed as HF_TOKEN secret to compile environment.
    */
-  readonly hfToken?: ISecret;
+  readonly hfToken?: Secret;
 
   /**
    * Extra arguments for the HuggingFace config.
@@ -1251,6 +1248,7 @@ const jsonValueProperties: (keyof VllmEngineArguments)[] = [
   "allowedHeaders",
   "allowedMethods",
 ];
+const ignoreKeys: (keyof VllmEngineArguments)[] = ["model", "hfToken"];
 
 export abstract class VllmEngineArgumentsParser {
   /**
@@ -1261,13 +1259,9 @@ export abstract class VllmEngineArgumentsParser {
    */
   static config(args: VllmEngineArguments) {
     return Object.entries(args)
-      .filter(([key]) => key !== "model")
+      .filter(([key]) => !ignoreKeys.includes(key as keyof VllmEngineArguments))
       .reduce<{ [key in string]: any }>((prev, [key, value]) => {
         const k = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
-        // Skip hfToken as it will be handled through environment variables
-        if (key === "hfToken") {
-          return prev;
-        }
         if (
           jsonValueProperties.includes(key as keyof VllmEngineArguments) ||
           (!Array.isArray(value) && typeof value === "object")
@@ -1280,13 +1274,9 @@ export abstract class VllmEngineArgumentsParser {
   }
   static cli(args: VllmEngineArguments) {
     return Object.entries(args)
-      .filter(([key]) => key !== "model")
+      .filter(([key]) => !ignoreKeys.includes(key as keyof VllmEngineArguments))
       .flatMap(([k, value]) => {
         const key = k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
-        // Skip hfToken as it will be handled through environment variables
-        if (key === "hfToken") {
-          return [];
-        }
         if (typeof value === "boolean") {
           return value ? [`--${key}`] : [];
         }

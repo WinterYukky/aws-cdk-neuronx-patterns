@@ -1,11 +1,11 @@
 import { Size } from "aws-cdk-lib";
+import * as batch from "aws-cdk-lib/aws-batch";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 import { createHash } from "crypto";
 import { join } from "path";
-import * as batch from "aws-cdk-lib/aws-batch";
 import {
   calcMemoryFootprint,
   calcTensorParallel,
@@ -201,14 +201,12 @@ export class VllmNxdInferenceCompiler extends Construct {
       NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
       MODEL_ID: props.model.modelId,
       MODEL_NAME: props.model.modelName,
-      COMPILED_ARTIFACTS_S3_URI:
-        props.bucket.s3UrlForObject(artifactS3Prefix),
+      COMPILED_ARTIFACTS_S3_URI: props.bucket.s3UrlForObject(artifactS3Prefix),
     };
-    
     // Handle hfToken if provided
     const secrets: { [key: string]: batch.Secret } = {};
     if (props.vllmArgs?.hfToken) {
-      secrets["HF_TOKEN"] = batch.Secret.fromSecretsManager(props.vllmArgs.hfToken);
+      secrets.HF_TOKEN = props.vllmArgs.hfToken;
     }
 
     const compiler = new NeuronxCompiler(this, "Resource", {

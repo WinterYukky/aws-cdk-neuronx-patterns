@@ -125,12 +125,6 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
     };
 
-    // Handle secrets for HF Token if available
-    const secrets: Record<string, ecs.Secret> = {};
-    if (props.compiledModel.vllmArgs.hfToken) {
-      secrets["HF_TOKEN"] = ecs.Secret.fromSecretsManager(props.compiledModel.vllmArgs.hfToken);
-    }
-
     this.addContainerWithDefault("vLLM", {
       image: image.image,
       portMappings: [
@@ -147,7 +141,6 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       },
       command: vllmCliArgs,
       environment,
-      secrets,
     });
   }
 }
