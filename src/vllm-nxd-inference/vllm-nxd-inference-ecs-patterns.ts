@@ -102,20 +102,6 @@ export interface VllmNxdInferenceTaskDefinitionProps
  */
 export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
   private readonly loraModules: VllmLoraModule[] = [];
-
-  /**
-   * Add a LoRA module to this task definition.
-   * 
-   * @param module The LoRA module to add
-   * @returns This task definition for chaining
-   */
-  public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition {
-    // Grant read access to the module's source
-    module.source.grantRead(this.taskRole);
-    
-    this.loraModules.push(module);
-    return this;
-  }
   constructor(
     scope: Construct,
     id: string,
@@ -154,6 +140,22 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
     }
     
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
+    
+  }
+  
+  /**
+   * Add a LoRA module to this task definition.
+   * 
+   * @param module The LoRA module to add
+   * @returns This task definition for chaining
+   */
+  public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition {
+    // Grant read access to the module's source
+    module.source.grantRead(this.taskRole);
+    
+    this.loraModules.push(module);
+    return this;
+  }
     this.addContainerWithDefault("vLLM", {
       image: image.image,
       portMappings: [
