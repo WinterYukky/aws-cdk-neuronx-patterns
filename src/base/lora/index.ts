@@ -11,7 +11,7 @@ export interface ILoraAdapterSource {
    * Grant read access to this LoRA adapter source
    * @param grantee The IAM principal to grant access to
    */
-  grantRead(grantee: iam.IGrantable): iam.Grant;
+  grantRead(grantee: iam.IGrantable): void;
   
   /**
    * Return the S3 URI for this LoRA adapter source
@@ -37,8 +37,8 @@ export class LocalLoraAdapterSource implements ILoraAdapterSource {
     this.asset = new s3assets.Asset(scope, id, { path, ...options });
   }
   
-  public grantRead(grantee: iam.IGrantable): iam.Grant {
-    return this.asset.grantRead(grantee);
+  public grantRead(grantee: iam.IGrantable): void {
+    this.asset.grantRead(grantee);
   }
   
   public s3Uri(): string {
@@ -57,8 +57,8 @@ export class S3LoraAdapterSource implements ILoraAdapterSource {
    */
   constructor(private readonly bucket: s3.IBucket, private readonly key: string) {}
   
-  public grantRead(grantee: iam.IGrantable): iam.Grant {
-    return this.bucket.grantRead(grantee, this.key);
+  public grantRead(grantee: iam.IGrantable): void {
+    this.bucket.grantRead(grantee, this.key);
   }
   
   public s3Uri(): string {
