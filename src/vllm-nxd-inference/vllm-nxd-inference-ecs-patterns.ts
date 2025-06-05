@@ -15,6 +15,7 @@ import {
   NeuronxTaskDefinition,
   NeuronxTaskDefinitionPropsBase,
 } from "../base/aws-ecs-patterns";
+import { VllmLoraModule } from "../base/lora";
 import { INeuronxImage, PytorchTrainingNeuronxImage } from "../base/neuronx";
 import { INeuronxContainerImage } from "../base/neuronx-compiler";
 import { VllmEngineArgumentsParser } from "../base/server-engine/vllm-engine";
@@ -73,41 +74,7 @@ export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
 /**
  * Configuration for a LoRA adapter.
  */
-export interface LoraAdapterConfig {
-  /**
-   * The name of the adapter.
-   */
-  readonly name: string;
 
-  /**
-   * The path to the local LoRA adapter file or directory.
-   * Either localPath or s3Location must be specified.
-   */
-  readonly localPath?: string;
-
-  /**
-   * The S3 bucket containing the adapter.
-   * Either localPath or both s3Bucket and s3Key must be specified.
-   */
-  readonly s3Bucket?: s3.IBucket;
-  
-  /**
-   * The S3 key of the adapter.
-   * Either localPath or both s3Bucket and s3Key must be specified.
-   */
-  readonly s3Key?: string;
-
-  /**
-   * The base model name for this adapter (optional).
-   */
-  readonly baseModelName?: string;
-
-  /**
-   * Additional asset options when using localPath.
-   * @default - No additional options
-   */
-  readonly assetOptions?: s3assets.AssetOptions;
-}
 
 export interface VllmNxdInferenceTaskDefinitionProps
   extends NeuronxTaskDefinitionPropsBase {
@@ -131,52 +98,29 @@ export interface VllmNxdInferenceTaskDefinitionProps
   };
   
   /**
-   * LoRA adapters to be used with this task definition.
-   * @default - No LoRA adapters
+   * LoRA modules to be used with this task definition.
+   * @default - No LoRA modules
    */
-  readonly loraAdapters?: LoraAdapterConfig[];
+  readonly loraModules?: VllmLoraModule[];
 }
 
 /**
  * Task definition for VllmNxdInference.
  */
 export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
-  private readonly loraAdapters: { name: string; s3Uri: string; baseModelName?: string }[] = [];
+  private readonly loraModules: VllmLoraModule[] = [];
 
   /**
-   * Add a LoRA adapter to this task definition.
+   * Add a LoRA module to this task definition.
    * 
-   * @param adapter The LoRA adapter configuration
+   * @param module The LoRA module to add
    * @returns This task definition for chaining
    */
-  public addLoraAdapter(adapter: LoraAdapterConfig): VllmNxdInferenceTaskDefinition {
-    let s3Uri: string;
+  public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition {
+    // Grant read access to the module's source
+    module.source.grantRead(this.taskRole);
     
-    if (adapter.localPath) {
-      // Create an asset for local path
-      const asset = new s3assets.Asset(this, `LoraAdapter-${adapter.name}`, {
-        path: adapter.localPath,
-        ...adapter.assetOptions
-      });
-      
-      // Grant read access to the task role
-      asset.grantRead(this.taskRole);
-      
-      s3Uri = asset.s3ObjectUrl;
-    } else if (adapter.s3Bucket && adapter.s3Key) {
-      // Use existing S3 object
-      s3Uri = `s3://${adapter.s3Bucket.bucketName}/${adapter.s3Key}`;
-      adapter.s3Bucket.grantRead(this.taskRole, adapter.s3Key);
-    } else {
-      throw new Error(`LoRA adapter ${adapter.name} must specify either localPath or both s3Bucket and s3Key`);
-    }
-    
-    this.loraAdapters.push({
-      name: adapter.name,
-      s3Uri,
-      baseModelName: adapter.baseModelName,
-    });
-    
+    this.loraModules.push(module);
     return this;
   }
   
@@ -199,28 +143,21 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST);
     const port = props.compiledModel.vllmArgs.port ?? 8000;
     
-    // Add LoRA adapters if specified in props
-    if (props.loraAdapters) {
-      for (const adapter of props.loraAdapters) {
-        this.addLoraAdapter(adapter);
+    // Add LoRA modules if specified in props
+    if (props.loraModules) {
+      for (const module of props.loraModules) {
+        this.addLoraModule(module);
       }
     }
     
     // Prepare vllmArgs with LoRA modules if any
     let vllmArgs = { ...props.compiledModel.vllmArgs };
     
-    if (this.loraAdapters.length > 0) {
-      // Convert our LoRA adapters to the format expected by vllm
-      const loraModulesArray = this.loraAdapters.map(adapter => ({
-        name: adapter.name,
-        path: adapter.s3Uri,
-        base_model_name: adapter.baseModelName,
-      }));
-      
+    if (this.loraModules.length > 0) {
       // Add or override the loraModules property in vllmArgs
       vllmArgs = {
         ...vllmArgs,
-        loraModules: loraModulesArray,
+        loraModules: this.loraModules,
       };
     }
     
