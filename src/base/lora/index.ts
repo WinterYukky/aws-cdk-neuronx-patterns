@@ -12,7 +12,7 @@ export interface ILoraAdapterSource {
    * @param grantee The IAM principal to grant access to
    */
   grantRead(grantee: iam.IGrantable): void;
-  
+
   /**
    * Return the S3 URI for this LoRA adapter source
    * @returns S3 URI string
@@ -25,7 +25,7 @@ export interface ILoraAdapterSource {
  */
 export class LocalLoraAdapterSource implements ILoraAdapterSource {
   private readonly asset: s3assets.Asset;
-  
+
   /**
    * Create a LoRA adapter source from a local directory
    * @param scope The construct scope
@@ -33,14 +33,19 @@ export class LocalLoraAdapterSource implements ILoraAdapterSource {
    * @param path Path to the local LoRA adapter directory or file
    * @param options Optional asset options
    */
-  constructor(scope: Construct, id: string, path: string, options?: s3assets.AssetOptions) {
+  constructor(
+    scope: Construct,
+    id: string,
+    path: string,
+    options?: s3assets.AssetOptions,
+  ) {
     this.asset = new s3assets.Asset(scope, id, { path, ...options });
   }
-  
+
   public grantRead(grantee: iam.IGrantable): void {
     this.asset.grantRead(grantee);
   }
-  
+
   public s3Uri(): string {
     return this.asset.s3ObjectUrl;
   }
@@ -55,12 +60,15 @@ export class S3LoraAdapterSource implements ILoraAdapterSource {
    * @param bucket The S3 bucket containing the LoRA adapter
    * @param key The S3 key to the LoRA adapter
    */
-  constructor(private readonly bucket: s3.IBucket, private readonly key: string) {}
-  
+  constructor(
+    private readonly bucket: s3.IBucket,
+    private readonly key: string,
+  ) {}
+
   public grantRead(grantee: iam.IGrantable): void {
     this.bucket.grantRead(grantee, this.key);
   }
-  
+
   public s3Uri(): string {
     return `s3://${this.bucket.bucketName}/${this.key}`;
   }
@@ -75,12 +83,12 @@ export interface VllmLoraModuleProps {
    * @default Construct ID
    */
   readonly loraName?: string;
-  
+
   /**
    * Source of the LoRA adapter
    */
   readonly source: ILoraAdapterSource;
-  
+
   /**
    * Base model name for this adapter
    * @default undefined
@@ -96,17 +104,17 @@ export class VllmLoraModule extends Construct {
    * Name of the LoRA adapter
    */
   public readonly loraName: string;
-  
+
   /**
    * Source of the LoRA adapter
    */
   public readonly source: ILoraAdapterSource;
-  
+
   /**
    * Base model name (optional)
    */
   public readonly baseModelName?: string;
-  
+
   /**
    * Create a vLLM LoRA module
    * @param scope The construct scope
@@ -119,7 +127,7 @@ export class VllmLoraModule extends Construct {
     this.source = props.source;
     this.baseModelName = props.baseModelName;
   }
-  
+
   /**
    * Convert to JSON object in the format expected by vLLM
    */
@@ -127,10 +135,10 @@ export class VllmLoraModule extends Construct {
     return {
       name: this.loraName,
       path: this.source.s3Uri(),
-      base_model_name: this.baseModelName
+      base_model_name: this.baseModelName,
     };
   }
-  
+
   /**
    * Convert to string representation
    */

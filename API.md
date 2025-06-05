@@ -2087,6 +2087,161 @@ Uniquely identifies this class.
 
 ---
 
+### VllmLoraModule <a name="VllmLoraModule" id="aws-cdk-neuronx-patterns.VllmLoraModule"></a>
+
+Represents a vLLM LoRA module.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmLoraModule.Initializer"></a>
+
+```typescript
+import { VllmLoraModule } from 'aws-cdk-neuronx-patterns'
+
+new VllmLoraModule(scope: Construct, id: string, props: VllmLoraModuleProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The construct scope. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModuleProps">VllmLoraModuleProps</a></code> | The module properties. |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+The construct scope.
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+The construct ID.
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.VllmLoraModule.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmLoraModuleProps">VllmLoraModuleProps</a>
+
+The module properties.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.toString">toString</a></code> | Convert to string representation. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.toJSON">toJSON</a></code> | Convert to JSON object in the format expected by vLLM. |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.VllmLoraModule.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Convert to string representation.
+
+##### `toJSON` <a name="toJSON" id="aws-cdk-neuronx-patterns.VllmLoraModule.toJSON"></a>
+
+```typescript
+public toJSON(): {[ key: string ]: any}
+```
+
+Convert to JSON object in the format expected by vLLM.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="aws-cdk-neuronx-patterns.VllmLoraModule.isConstruct"></a>
+
+```typescript
+import { VllmLoraModule } from 'aws-cdk-neuronx-patterns'
+
+VllmLoraModule.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.VllmLoraModule.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.property.loraName">loraName</a></code> | <code>string</code> | Name of the LoRA adapter. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.property.source">source</a></code> | <code><a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a></code> | Source of the LoRA adapter. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule.property.baseModelName">baseModelName</a></code> | <code>string</code> | Base model name (optional). |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.VllmLoraModule.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `loraName`<sup>Required</sup> <a name="loraName" id="aws-cdk-neuronx-patterns.VllmLoraModule.property.loraName"></a>
+
+```typescript
+public readonly loraName: string;
+```
+
+- *Type:* string
+
+Name of the LoRA adapter.
+
+---
+
+##### `source`<sup>Required</sup> <a name="source" id="aws-cdk-neuronx-patterns.VllmLoraModule.property.source"></a>
+
+```typescript
+public readonly source: ILoraAdapterSource;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a>
+
+Source of the LoRA adapter.
+
+---
+
+##### `baseModelName`<sup>Optional</sup> <a name="baseModelName" id="aws-cdk-neuronx-patterns.VllmLoraModule.property.baseModelName"></a>
+
+```typescript
+public readonly baseModelName: string;
+```
+
+- *Type:* string
+
+Base model name (optional).
+
+---
+
+
 ### VllmNxdInferenceCompiler <a name="VllmNxdInferenceCompiler" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler"></a>
 
 Neuronx compiler construct for vLLM on NxD Inference.
@@ -2256,6 +2411,7 @@ new VllmNxdInferenceTaskDefinition(scope: Construct, id: string, props: VllmNxdI
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.grantRun">grantRun</a></code> | Grants permissions to run this task definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.obtainExecutionRole">obtainExecutionRole</a></code> | Creates the task execution IAM role if it doesn't already exist. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault">addContainerWithDefault</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addLoraModule">addLoraModule</a></code> | Add a LoRA module to this task definition. |
 
 ---
 
@@ -2492,6 +2648,22 @@ public addContainerWithDefault(id: string, props: ContainerDefinitionOptions): C
 ###### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainerWithDefault.parameter.props"></a>
 
 - *Type:* aws-cdk-lib.aws_ecs.ContainerDefinitionOptions
+
+---
+
+##### `addLoraModule` <a name="addLoraModule" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addLoraModule"></a>
+
+```typescript
+public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition
+```
+
+Add a LoRA module to this task definition.
+
+###### `module`<sup>Required</sup> <a name="module" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addLoraModule.parameter.module"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>
+
+The LoRA module to add.
 
 ---
 
@@ -6460,7 +6632,7 @@ const vllmEngineArguments: VllmEngineArguments = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.ignorePatterns">ignorePatterns</a></code> | <code>string[]</code> | The pattern(s) to ignore when loading the model.Default to original/**\/* to avoid repeated loading of llama’s checkpoints. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.kvTransferConfig">kvTransferConfig</a></code> | <code>{[ key: string ]: any}</code> | Configurations for distributed KV cache transfer in object. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.logitsProcessorPattern">logitsProcessorPattern</a></code> | <code>string</code> | Optional regex pattern specifying valid logits processor qualified names that can be passed with the logits_processors extra completion argument. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.loraModules">loraModules</a></code> | <code>{[ key: string ]: any}</code> | LoRA module configurations. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.loraModules">loraModules</a></code> | <code>{[ key: string ]: any} \| <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]</code> | LoRA module configurations. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.maxLogLen">maxLogLen</a></code> | <code>number</code> | Max number of prompt characters or prompt ID numbers in log. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.maxLogprobs">maxLogprobs</a></code> | <code>number</code> | Max number of log probs to return logprobs is specified in SamplingParams. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.maxModelLen">maxModelLen</a></code> | <code>number</code> | Model context length. |
@@ -7104,11 +7276,14 @@ Defaults to None, which allows no processors.
 ##### `loraModules`<sup>Optional</sup> <a name="loraModules" id="aws-cdk-neuronx-patterns.VllmEngineArguments.property.loraModules"></a>
 
 ```typescript
-public readonly loraModules: {[ key: string ]: any};
+public readonly loraModules: {[ key: string ]: any} | VllmLoraModule[];
 ```
 
-- *Type:* {[ key: string ]: any}
+- *Type:* {[ key: string ]: any} | <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]
 
+LoRA module configurations.
+
+/**
 LoRA module configurations.
 
 ---
@@ -7117,6 +7292,8 @@ LoRA module configurations.
 
 ```typescript
 {"name": "name", "path": "lora_path", "base_model_name": "id"}
+
+Can be either a JSON object or an array of VllmLoraModule objects.
 ```
 
 
@@ -8709,6 +8886,66 @@ Max number of LoRAs in a single batch.
 
 ---
 
+### VllmLoraModuleProps <a name="VllmLoraModuleProps" id="aws-cdk-neuronx-patterns.VllmLoraModuleProps"></a>
+
+Properties for VllmLoraModule.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.VllmLoraModuleProps.Initializer"></a>
+
+```typescript
+import { VllmLoraModuleProps } from 'aws-cdk-neuronx-patterns'
+
+const vllmLoraModuleProps: VllmLoraModuleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.source">source</a></code> | <code><a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a></code> | Source of the LoRA adapter. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.baseModelName">baseModelName</a></code> | <code>string</code> | Base model name for this adapter. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.loraName">loraName</a></code> | <code>string</code> | Name of the LoRA adapter. |
+
+---
+
+##### `source`<sup>Required</sup> <a name="source" id="aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.source"></a>
+
+```typescript
+public readonly source: ILoraAdapterSource;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a>
+
+Source of the LoRA adapter.
+
+---
+
+##### `baseModelName`<sup>Optional</sup> <a name="baseModelName" id="aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.baseModelName"></a>
+
+```typescript
+public readonly baseModelName: string;
+```
+
+- *Type:* string
+- *Default:* undefined
+
+Base model name for this adapter.
+
+---
+
+##### `loraName`<sup>Optional</sup> <a name="loraName" id="aws-cdk-neuronx-patterns.VllmLoraModuleProps.property.loraName"></a>
+
+```typescript
+public readonly loraName: string;
+```
+
+- *Type:* string
+- *Default:* Construct ID
+
+Name of the LoRA adapter.
+
+---
+
 ### VllmMultiModalConfig <a name="VllmMultiModalConfig" id="aws-cdk-neuronx-patterns.VllmMultiModalConfig"></a>
 
 Controls the behavior of multimodal models.
@@ -8799,7 +9036,7 @@ const vllmNamedArguments: VllmNamedArguments = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.ignorePatterns">ignorePatterns</a></code> | <code>string[]</code> | The pattern(s) to ignore when loading the model.Default to original/**\/* to avoid repeated loading of llama’s checkpoints. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.kvTransferConfig">kvTransferConfig</a></code> | <code>{[ key: string ]: any}</code> | Configurations for distributed KV cache transfer in object. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.logitsProcessorPattern">logitsProcessorPattern</a></code> | <code>string</code> | Optional regex pattern specifying valid logits processor qualified names that can be passed with the logits_processors extra completion argument. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.loraModules">loraModules</a></code> | <code>{[ key: string ]: any}</code> | LoRA module configurations. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.loraModules">loraModules</a></code> | <code>{[ key: string ]: any} \| <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]</code> | LoRA module configurations. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.maxLogLen">maxLogLen</a></code> | <code>number</code> | Max number of prompt characters or prompt ID numbers in log. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.maxLogprobs">maxLogprobs</a></code> | <code>number</code> | Max number of log probs to return logprobs is specified in SamplingParams. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.maxModelLen">maxModelLen</a></code> | <code>number</code> | Model context length. |
@@ -9392,11 +9629,14 @@ Defaults to None, which allows no processors.
 ##### `loraModules`<sup>Optional</sup> <a name="loraModules" id="aws-cdk-neuronx-patterns.VllmNamedArguments.property.loraModules"></a>
 
 ```typescript
-public readonly loraModules: {[ key: string ]: any};
+public readonly loraModules: {[ key: string ]: any} | VllmLoraModule[];
 ```
 
-- *Type:* {[ key: string ]: any}
+- *Type:* {[ key: string ]: any} | <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]
 
+LoRA module configurations.
+
+/**
 LoRA module configurations.
 
 ---
@@ -9405,6 +9645,8 @@ LoRA module configurations.
 
 ```typescript
 {"name": "name", "path": "lora_path", "base_model_name": "id"}
+
+Can be either a JSON object or an array of VllmLoraModule objects.
 ```
 
 
@@ -10312,6 +10554,7 @@ const vllmNxdInferenceTaskDefinitionProps: VllmNxdInferenceTaskDefinitionProps =
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a></code> | The model to be compiled. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a></code> | The image to be used for the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.loraModules">loraModules</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]</code> | LoRA modules to be used with this task definition. |
 
 ---
 
@@ -10541,6 +10784,19 @@ public readonly image: VllmNxdInferenceImage;
 - *Default:* latest VllmNxdInferenceImage
 
 The image to be used for the container.
+
+---
+
+##### `loraModules`<sup>Optional</sup> <a name="loraModules" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.loraModules"></a>
+
+```typescript
+public readonly loraModules: VllmLoraModule[];
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmLoraModule">VllmLoraModule</a>[]
+- *Default:* No LoRA modules
+
+LoRA modules to be used with this task definition.
 
 ---
 
@@ -11060,6 +11316,95 @@ public readonly neuronxCores: number;
 - *Type:* number
 
 ---
+
+
+### LocalLoraAdapterSource <a name="LocalLoraAdapterSource" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource"></a>
+
+- *Implements:* <a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a>
+
+LoRA adapter source from a local directory.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer"></a>
+
+```typescript
+import { LocalLoraAdapterSource } from 'aws-cdk-neuronx-patterns'
+
+new LocalLoraAdapterSource(scope: Construct, id: string, path: string, options?: AssetOptions)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The construct scope. |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.path">path</a></code> | <code>string</code> | Path to the local LoRA adapter directory or file. |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.options">options</a></code> | <code>aws-cdk-lib.aws_s3_assets.AssetOptions</code> | Optional asset options. |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+The construct scope.
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+The construct ID.
+
+---
+
+##### `path`<sup>Required</sup> <a name="path" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.path"></a>
+
+- *Type:* string
+
+Path to the local LoRA adapter directory or file.
+
+---
+
+##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.Initializer.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.aws_s3_assets.AssetOptions
+
+Optional asset options.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.grantRead">grantRead</a></code> | Grant read access to this LoRA adapter source. |
+| <code><a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource.s3Uri">s3Uri</a></code> | Return the S3 URI for this LoRA adapter source. |
+
+---
+
+##### `grantRead` <a name="grantRead" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.grantRead"></a>
+
+```typescript
+public grantRead(grantee: IGrantable): void
+```
+
+Grant read access to this LoRA adapter source.
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.grantRead.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `s3Uri` <a name="s3Uri" id="aws-cdk-neuronx-patterns.LocalLoraAdapterSource.s3Uri"></a>
+
+```typescript
+public s3Uri(): string
+```
+
+Return the S3 URI for this LoRA adapter source.
+
+
 
 
 ### Model <a name="Model" id="aws-cdk-neuronx-patterns.Model"></a>
@@ -11640,6 +11985,77 @@ public readonly size: Size;
 
 ---
 
+### S3LoraAdapterSource <a name="S3LoraAdapterSource" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource"></a>
+
+- *Implements:* <a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a>
+
+LoRA adapter source from an S3 bucket.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.Initializer"></a>
+
+```typescript
+import { S3LoraAdapterSource } from 'aws-cdk-neuronx-patterns'
+
+new S3LoraAdapterSource(bucket: IBucket, key: string)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.S3LoraAdapterSource.Initializer.parameter.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The S3 bucket containing the LoRA adapter. |
+| <code><a href="#aws-cdk-neuronx-patterns.S3LoraAdapterSource.Initializer.parameter.key">key</a></code> | <code>string</code> | The S3 key to the LoRA adapter. |
+
+---
+
+##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.Initializer.parameter.bucket"></a>
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+The S3 bucket containing the LoRA adapter.
+
+---
+
+##### `key`<sup>Required</sup> <a name="key" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.Initializer.parameter.key"></a>
+
+- *Type:* string
+
+The S3 key to the LoRA adapter.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.S3LoraAdapterSource.grantRead">grantRead</a></code> | Grant read access to this LoRA adapter source. |
+| <code><a href="#aws-cdk-neuronx-patterns.S3LoraAdapterSource.s3Uri">s3Uri</a></code> | Return the S3 URI for this LoRA adapter source. |
+
+---
+
+##### `grantRead` <a name="grantRead" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.grantRead"></a>
+
+```typescript
+public grantRead(grantee: IGrantable): void
+```
+
+Grant read access to this LoRA adapter source.
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.grantRead.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `s3Uri` <a name="s3Uri" id="aws-cdk-neuronx-patterns.S3LoraAdapterSource.s3Uri"></a>
+
+```typescript
+public s3Uri(): string
+```
+
+Return the S3 URI for this LoRA adapter source.
+
+
+
+
 ### Trainium1Chips <a name="Trainium1Chips" id="aws-cdk-neuronx-patterns.Trainium1Chips"></a>
 
 - *Implements:* <a href="#aws-cdk-neuronx-patterns.IAcceleratorChips">IAcceleratorChips</a>
@@ -12048,6 +12464,46 @@ public readonly neuronxCores: number;
 - *Type:* number
 
 ---
+
+### ILoraAdapterSource <a name="ILoraAdapterSource" id="aws-cdk-neuronx-patterns.ILoraAdapterSource"></a>
+
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.LocalLoraAdapterSource">LocalLoraAdapterSource</a>, <a href="#aws-cdk-neuronx-patterns.S3LoraAdapterSource">S3LoraAdapterSource</a>, <a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource">ILoraAdapterSource</a>
+
+Interface for LoRA adapter sources.
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource.grantRead">grantRead</a></code> | Grant read access to this LoRA adapter source. |
+| <code><a href="#aws-cdk-neuronx-patterns.ILoraAdapterSource.s3Uri">s3Uri</a></code> | Return the S3 URI for this LoRA adapter source. |
+
+---
+
+##### `grantRead` <a name="grantRead" id="aws-cdk-neuronx-patterns.ILoraAdapterSource.grantRead"></a>
+
+```typescript
+public grantRead(grantee: IGrantable): void
+```
+
+Grant read access to this LoRA adapter source.
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.ILoraAdapterSource.grantRead.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+The IAM principal to grant access to.
+
+---
+
+##### `s3Uri` <a name="s3Uri" id="aws-cdk-neuronx-patterns.ILoraAdapterSource.s3Uri"></a>
+
+```typescript
+public s3Uri(): string
+```
+
+Return the S3 URI for this LoRA adapter source.
+
 
 ### INeuronxContainerImage <a name="INeuronxContainerImage" id="aws-cdk-neuronx-patterns.INeuronxContainerImage"></a>
 

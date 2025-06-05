@@ -89,7 +89,7 @@ export interface VllmNxdInferenceTaskDefinitionProps
   readonly environment?: {
     [key: string]: string;
   };
-  
+
   /**
    * LoRA modules to be used with this task definition.
    * @default - No LoRA modules
@@ -120,17 +120,17 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       props.image ??
       new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST);
     const port = props.compiledModel.vllmArgs.port ?? 8000;
-    
+
     // Add LoRA modules if specified in props
     if (props.loraModules) {
       for (const module of props.loraModules) {
         this.addLoraModule(module);
       }
     }
-    
+
     // Prepare vllmArgs with LoRA modules if any
     let vllmArgs = { ...props.compiledModel.vllmArgs };
-    
+
     if (this.loraModules.length > 0) {
       // Add or override the loraModules property in vllmArgs
       vllmArgs = {
@@ -138,7 +138,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
         loraModules: this.loraModules,
       };
     }
-    
+
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
     this.addContainerWithDefault("vLLM", {
       image: image.image,
@@ -165,17 +165,17 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       },
     });
   }
-  
+
   /**
    * Add a LoRA module to this task definition.
-   * 
+   *
    * @param module The LoRA module to add
    * @returns This task definition for chaining
    */
   public addLoraModule(module: VllmLoraModule): VllmNxdInferenceTaskDefinition {
     // Grant read access to the module's source
     module.source.grantRead(this.taskRole);
-    
+
     this.loraModules.push(module);
     return this;
   }
