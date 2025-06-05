@@ -14,10 +14,10 @@ export interface ILoraAdapterSource {
   grantRead(grantee: iam.IGrantable): iam.Grant;
   
   /**
-   * Get the S3 URI for this LoRA adapter source
+   * Return the S3 URI for this LoRA adapter source
    * @returns S3 URI string
    */
-  getS3Uri(): string;
+  s3Uri(): string;
 }
 
 /**
@@ -38,11 +38,10 @@ export class LocalLoraAdapterSource implements ILoraAdapterSource {
   }
   
   public grantRead(grantee: iam.IGrantable): iam.Grant {
-    this.asset.grantRead(grantee);
-    return iam.Grant.drop(this, 'Read');
+    return this.asset.grantRead(grantee);
   }
   
-  public getS3Uri(): string {
+  public s3Uri(): string {
     return this.asset.s3ObjectUrl;
   }
 }
@@ -62,7 +61,7 @@ export class S3LoraAdapterSource implements ILoraAdapterSource {
     return this.bucket.grantRead(grantee, this.key);
   }
   
-  public getS3Uri(): string {
+  public s3Uri(): string {
     return `s3://${this.bucket.bucketName}/${this.key}`;
   }
 }
@@ -127,7 +126,7 @@ export class VllmLoraModule extends Construct {
   public toJSON(): { [key: string]: any } {
     return {
       name: this.loraName,
-      path: this.source.getS3Uri(),
+      path: this.source.s3Uri(),
       base_model_name: this.baseModelName
     };
   }
