@@ -5557,6 +5557,7 @@ const neuronxCompilerProps: NeuronxCompilerProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | Secrets to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | Whether or not to use spot instances. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
@@ -5659,6 +5660,18 @@ public readonly environment: {[ key: string ]: string};
 The environment variables to pass to the container.
 
 This is only applicable when using container runtime.
+
+---
+
+##### `secrets`<sup>Optional</sup> <a name="secrets" id="aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.secrets"></a>
+
+```typescript
+public readonly secrets: {[ key: string ]: Secret};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
+
+Secrets to pass to the container.
 
 ---
 
@@ -6455,7 +6468,7 @@ const vllmEngineArguments: VllmEngineArguments = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.generationConfig">generationConfig</a></code> | <code>string</code> | The folder path to the generation config. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.hfConfigPath">hfConfigPath</a></code> | <code>string</code> | Name or path of the huggingface config to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.hfOverrides">hfOverrides</a></code> | <code>{[ key: string ]: any}</code> | Extra arguments for the HuggingFace config. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.hfToken">hfToken</a></code> | <code>boolean</code> | The token to use as HTTP bearer authorization for remote files. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.hfToken">hfToken</a></code> | <code>aws-cdk-lib.aws_batch.Secret</code> | The token to use as HTTP bearer authorization for remote files. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.host">host</a></code> | <code>string</code> | Host name. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.ignorePatterns">ignorePatterns</a></code> | <code>string[]</code> | The pattern(s) to ignore when loading the model.Default to original/**\/* to avoid repeated loading of llama’s checkpoints. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments.property.kvTransferConfig">kvTransferConfig</a></code> | <code>{[ key: string ]: any}</code> | Configurations for distributed KV cache transfer in object. |
@@ -7039,14 +7052,14 @@ This should be a object that will be parsed into a dictionary.
 ##### `hfToken`<sup>Optional</sup> <a name="hfToken" id="aws-cdk-neuronx-patterns.VllmEngineArguments.property.hfToken"></a>
 
 ```typescript
-public readonly hfToken: boolean;
+public readonly hfToken: Secret;
 ```
 
-- *Type:* boolean
+- *Type:* aws-cdk-lib.aws_batch.Secret
 
 The token to use as HTTP bearer authorization for remote files.
 
-If True, will use the token generated when running huggingface-cli login (stored in ~/.huggingface)..
+If provided, the Secret will be passed as HF_TOKEN secret to compile environment.
 
 ---
 
@@ -8794,7 +8807,7 @@ const vllmNamedArguments: VllmNamedArguments = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.generationConfig">generationConfig</a></code> | <code>string</code> | The folder path to the generation config. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.hfConfigPath">hfConfigPath</a></code> | <code>string</code> | Name or path of the huggingface config to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.hfOverrides">hfOverrides</a></code> | <code>{[ key: string ]: any}</code> | Extra arguments for the HuggingFace config. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.hfToken">hfToken</a></code> | <code>boolean</code> | The token to use as HTTP bearer authorization for remote files. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.hfToken">hfToken</a></code> | <code>aws-cdk-lib.aws_batch.Secret</code> | The token to use as HTTP bearer authorization for remote files. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.host">host</a></code> | <code>string</code> | Host name. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.ignorePatterns">ignorePatterns</a></code> | <code>string[]</code> | The pattern(s) to ignore when loading the model.Default to original/**\/* to avoid repeated loading of llama’s checkpoints. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNamedArguments.property.kvTransferConfig">kvTransferConfig</a></code> | <code>{[ key: string ]: any}</code> | Configurations for distributed KV cache transfer in object. |
@@ -9327,14 +9340,14 @@ This should be a object that will be parsed into a dictionary.
 ##### `hfToken`<sup>Optional</sup> <a name="hfToken" id="aws-cdk-neuronx-patterns.VllmNamedArguments.property.hfToken"></a>
 
 ```typescript
-public readonly hfToken: boolean;
+public readonly hfToken: Secret;
 ```
 
-- *Type:* boolean
+- *Type:* aws-cdk-lib.aws_batch.Secret
 
 The token to use as HTTP bearer authorization for remote files.
 
-If True, will use the token generated when running huggingface-cli login (stored in ~/.huggingface)..
+If provided, the Secret will be passed as HF_TOKEN secret to compile environment.
 
 ---
 

@@ -1,4 +1,5 @@
 import { Size } from "aws-cdk-lib";
+import * as batch from "aws-cdk-lib/aws-batch";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { IBucket } from "aws-cdk-lib/aws-s3";
@@ -192,22 +193,28 @@ export class VllmNxdInferenceCompiler extends Construct {
       createHash("sha256").update(str).digest("hex");
     const artifactS3Prefix = `sdk-${image.sdkVersion}/${hash(JSON.stringify(vllmArgs))}`;
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
+    const environment: Record<string, string> = {
+      ...props.environment,
+      VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
+      NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
+      NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
+      MODEL_ID: props.model.modelId,
+      MODEL_NAME: props.model.modelName,
+      COMPILED_ARTIFACTS_S3_URI: props.bucket.s3UrlForObject(artifactS3Prefix),
+    };
+    const secrets: { [key: string]: batch.Secret } = {};
+    if (props.vllmArgs?.hfToken) {
+      secrets.HF_TOKEN = props.vllmArgs.hfToken;
+    }
+
     const compiler = new NeuronxCompiler(this, "Resource", {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
       artifactS3Prefix,
       image: image,
       command: vllmCliArgs,
-      environment: {
-        ...props.environment,
-        VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
-        NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
-        NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
-        MODEL_ID: props.model.modelId,
-        MODEL_NAME: props.model.modelName,
-        COMPILED_ARTIFACTS_S3_URI:
-          props.bucket.s3UrlForObject(artifactS3Prefix),
-      },
+      environment,
+      secrets,
     });
     this.vllmArgs = vllmArgs;
     this.compiler = compiler;

@@ -57,6 +57,58 @@ The construct will automatically:
 
 The service exposes a REST API endpoint through the Application Load Balancer that can be used to perform inference with the deployed model.
 
+### Using HuggingFace Token with Secrets
+
+When working with private or gated models on HuggingFace, you need to provide an authentication token. For security best practices, you can store your HuggingFace token in AWS Secrets Manager or SSM secure string and pass it to both the compiler and inference environments:
+
+```ts
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import * as batch from "aws-cdk-lib/aws-batch";
+import { Secret } from "aws-cdk-lib/aws-secretsmanager";
+
+declare const vpc: ec2.Vpc;
+declare const bucket: s3.Bucket;
+
+// Reference an existing secret containing your HuggingFace token
+const hfTokenSecret = Secret.fromSecretNameV2(
+  this,
+  "HFTokenSecret",
+  "my-huggingface-token",
+);
+const hfToken = batch.Secret.fromSecretsManager(secret, "readonlyToken");
+
+// Pass the secret to the compiler
+const compiler = new VllmNxdInferenceCompiler(this, "Compiler", {
+  vpc,
+  bucket,
+  model: Model.fromHuggingFace("example/example-7b-chat"),
+  vllmArgs: {
+    hfToken, // Pass the HF token secret here
+  },
+});
+
+const compiledModel = compiler.compile();
+const taskDefinition = new VllmNxdInferenceTaskDefinition(
+  this,
+  "TaskDefinition",
+  {
+    compiledModel,
+  },
+);
+
+const service = new ApplicationLoadBalancedVllmNxDInferenceService(
+  this,
+  "Service",
+  {
+    vpc,
+    taskDefinition,
+  },
+);
+```
+
+The secret will be securely passed as an environment variable to the compilation batch job and the ECS tasks running the inference server.
+
 ## Neuronx Compiler
 
 > [!WARNING]

@@ -1,3 +1,6 @@
+import { App, Stack } from "aws-cdk-lib";
+import * as batch from "aws-cdk-lib/aws-batch";
+import { Secret } from "aws-cdk-lib/aws-secretsmanager";
 import {
   ChatTemplateContentFormat,
   ConfigFormat,
@@ -23,8 +26,14 @@ import {
 } from "./vllm-engine-argments";
 
 describe("VllmEngineArgumentsToConfig", () => {
+  const app = new App();
+  const stack = new Stack(app);
+  const secret = Secret.fromSecretNameV2(
+    stack,
+    "DummySecret",
+    "huggingface-token",
+  );
   it("should convert all camelCase properties to kebab-case", () => {
-    // 全てのプロパティを含むテスト用オブジェクト
     const testObj: VllmEngineArguments = {
       host: "localhost",
       port: 8080,
@@ -77,7 +86,7 @@ describe("VllmEngineArgumentsToConfig", () => {
       quantization: Quantization.AWQ,
       ropeScaling: {},
       ropeTheta: 1.0,
-      hfToken: true,
+      hfToken: batch.Secret.fromSecretsManager(secret),
       hfOverrides: {},
       enforceEager: true,
       maxSeqLenToCapture: 4096,
@@ -163,7 +172,6 @@ describe("VllmEngineArgumentsToConfig", () => {
 
     const result = VllmEngineArgumentsParser.config(testObj);
 
-    // 変換結果の検証
     expect(result).toMatchObject({
       host: "localhost",
       port: 8080,
@@ -197,6 +205,8 @@ describe("VllmEngineArgumentsToConfig", () => {
       // model: "model-name",
       task: "generate",
       tokenizer: "tokenizer-name",
+      // should ignore the hf-token property
+      // "hf-token": "dummy",
       "hf-config-path": "config.json",
       "skip-tokenizer-init": true,
       revision: "v1.0",
@@ -218,7 +228,6 @@ describe("VllmEngineArgumentsToConfig", () => {
       quantization: "awq",
       "rope-scaling": "{}",
       "rope-theta": 1.0,
-      "hf-token": true,
       "hf-overrides": "{}",
       "enforce-eager": true,
       "max-seq-len-to-capture": 4096,

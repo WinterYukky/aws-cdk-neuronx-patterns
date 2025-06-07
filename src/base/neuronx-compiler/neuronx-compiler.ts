@@ -47,6 +47,10 @@ export interface NeuronxCompilerProps {
    */
   readonly bucket: IBucket;
   /**
+   * Secrets to pass to the container.
+   */
+  readonly secrets?: { [key: string]: batch.Secret };
+  /**
    * S3 Prefix that compiled artifact uploaded.
    * This property is not depends on compile job finish.
    */
@@ -201,6 +205,7 @@ export class NeuronxCompiler extends Construct {
         cpu: neuronxInstanceType.vCpu,
         environment: props.environment,
         command: props.command,
+        secrets: props.secrets,
       },
     );
 
