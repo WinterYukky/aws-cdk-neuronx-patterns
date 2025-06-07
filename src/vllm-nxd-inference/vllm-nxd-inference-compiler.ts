@@ -193,7 +193,6 @@ export class VllmNxdInferenceCompiler extends Construct {
       createHash("sha256").update(str).digest("hex");
     const artifactS3Prefix = `sdk-${image.sdkVersion}/${hash(JSON.stringify(vllmArgs))}`;
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
-    // Prepare environment and secrets
     const environment: Record<string, string> = {
       ...props.environment,
       VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
@@ -203,7 +202,6 @@ export class VllmNxdInferenceCompiler extends Construct {
       MODEL_NAME: props.model.modelName,
       COMPILED_ARTIFACTS_S3_URI: props.bucket.s3UrlForObject(artifactS3Prefix),
     };
-    // Handle hfToken if provided
     const secrets: { [key: string]: batch.Secret } = {};
     if (props.vllmArgs?.hfToken) {
       secrets.HF_TOKEN = props.vllmArgs.hfToken;
