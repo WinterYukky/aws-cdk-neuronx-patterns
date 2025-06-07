@@ -76,7 +76,7 @@ const hfTokenSecret = Secret.fromSecretNameV2(
   "HFTokenSecret",
   "my-huggingface-token",
 );
-const hfToken = batch.Secret.fromSecretsManager(secret, "readonlyToken");
+const hfToken = batch.Secret.fromSecretsManager(hfTokenSecret, "readonlyToken");
 
 // Pass the secret to the compiler
 const compiler = new VllmNxdInferenceCompiler(this, "Compiler", {
