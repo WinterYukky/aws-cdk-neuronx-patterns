@@ -8,6 +8,19 @@ This library provides high-level architectural patterns using neuronx (e.g. Infe
 - vLLM with NxD Inference on ALB & ECS on EC2
 - Neuronx Compiler
 
+## Install
+
+```bash
+# NPM
+npm i aws-cdk-neuronx-patterns
+
+# yarn
+yarn add aws-cdk-neuronx-patterns
+
+# PNPM
+pnpm i aws-cdk-neuronx-patterns
+```
+
 ## vLLM NxD Inference on ALB & ECS on EC2
 
 > [!WARNING]
