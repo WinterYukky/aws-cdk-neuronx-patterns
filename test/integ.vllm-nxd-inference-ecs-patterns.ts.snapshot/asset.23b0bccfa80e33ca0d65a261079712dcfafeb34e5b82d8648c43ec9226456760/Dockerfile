@@ -19,6 +19,11 @@ RUN pip install -U pip && \
 
 WORKDIR /usr/src
 
+# install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install
+
 RUN git clone -b ${VLLM_GIT_BRANCH} https://github.com/aws-neuron/upstreaming-to-vllm.git && \
     pip install -r ./upstreaming-to-vllm/requirements/neuron.txt && \
     SETUPTOOLS_SCM_PRETEND_VERSION="0.9.0" VLLM_TARGET_DEVICE="neuron" pip install -e ./upstreaming-to-vllm
@@ -29,6 +34,8 @@ RUN chown -R $USERNAME:$USERNAME /home/$USERNAME && chsh -s /bin/bash $USERNAME
 COPY --chown=$USERNAME:$USERNAME entrypoint.sh /home/$USERNAME/vllm/
 RUN chmod +x /home/$USERNAME/vllm/entrypoint.sh
 USER $USERNAME
+
+RUN aws configure set default.s3.preferred_transfer_client crt
 
 RUN pip install -U "huggingface_hub[hf_xet]"
 

@@ -20,10 +20,8 @@ else
     huggingface-cli download $MODEL_ID --local-dir $MODEL_NAME
 fi
 
-aws s3 cp --no-progress $CONFIG_S3_URI vllm-config.yaml
-
 vllm serve ./$MODEL_NAME "$@" 2>&1 | tee $LOG_FILE &
 
 wait_for_log_to_be_detected "Application startup complete" || exit 1
 
-aws s3 cp --no-progress --recursive ./ $COMPILED_ARTIFACTS_S3_URI --exclude ".cache/*"
+aws s3 cp --no-progress --recursive ./ $COMPILED_ARTIFACTS_S3_URI --exclude "$MODEL_NAME/.cache"

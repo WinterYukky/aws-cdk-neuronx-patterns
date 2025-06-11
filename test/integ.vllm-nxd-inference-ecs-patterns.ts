@@ -91,7 +91,6 @@ const stack = new VllmNxDInferenceIntegTestStack(
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
-  diffAssets: true,
 });
 vllmChatAssersion(
   integTest,

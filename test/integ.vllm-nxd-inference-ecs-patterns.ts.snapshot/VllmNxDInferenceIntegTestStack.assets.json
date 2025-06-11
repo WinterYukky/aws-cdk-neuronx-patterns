@@ -85,7 +85,7 @@
         }
       }
     },
-    "68e55662b41e3392456b9d0eee356bcf69d130725c88cff99f9b169995bfa911": {
+    "1a1fc20e40a0ef6b3f3569f08dc6d6f84f510dd1173fc2ecb076d6f17e0e8d64": {
       "displayName": "VllmNxDInferenceIntegTestStack Template",
       "source": {
         "path": "VllmNxDInferenceIntegTestStack.template.json",
@@ -94,17 +94,17 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "68e55662b41e3392456b9d0eee356bcf69d130725c88cff99f9b169995bfa911.json",
+          "objectKey": "1a1fc20e40a0ef6b3f3569f08dc6d6f84f510dd1173fc2ecb076d6f17e0e8d64.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     }
   },
   "dockerImages": {
-    "89b8a1ae7d278d60420c6d05330aebd95207b35726d398ab1babd30c26409d13": {
+    "0526385d04766561ae4bd326925667527f02b3a5c95bf0fd7c1fd69b2c5ca4de": {
       "displayName": "Compiler/Resource/JobDefinition/ContainerDefinition/AssetImage",
       "source": {
-        "directory": "asset.89b8a1ae7d278d60420c6d05330aebd95207b35726d398ab1babd30c26409d13",
+        "directory": "asset.0526385d04766561ae4bd326925667527f02b3a5c95bf0fd7c1fd69b2c5ca4de",
         "dockerBuildArgs": {
           "IMAGE_TAG": "2.6.0-neuronx-py310-sdk2.23.0-ubuntu22.04",
           "VLLM_GIT_BRANCH": "main"
@@ -113,15 +113,15 @@
       "destinations": {
         "current_account-current_region": {
           "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "89b8a1ae7d278d60420c6d05330aebd95207b35726d398ab1babd30c26409d13",
+          "imageTag": "0526385d04766561ae4bd326925667527f02b3a5c95bf0fd7c1fd69b2c5ca4de",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
-    "b448e110f01d1fe5ee731a998367a6ba0f2a9e36d2dff2f93a0fcde2537cb6f2": {
+    "23b0bccfa80e33ca0d65a261079712dcfafeb34e5b82d8648c43ec9226456760": {
       "displayName": "TaskDefinition/vLLM/AssetImage",
       "source": {
-        "directory": "asset.b448e110f01d1fe5ee731a998367a6ba0f2a9e36d2dff2f93a0fcde2537cb6f2",
+        "directory": "asset.23b0bccfa80e33ca0d65a261079712dcfafeb34e5b82d8648c43ec9226456760",
         "dockerBuildArgs": {
           "IMAGE_TAG": "2.6.0-neuronx-py310-sdk2.23.0-ubuntu22.04",
           "VLLM_GIT_BRANCH": "main"
@@ -130,7 +130,7 @@
       "destinations": {
         "current_account-current_region": {
           "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "b448e110f01d1fe5ee731a998367a6ba0f2a9e36d2dff2f93a0fcde2537cb6f2",
+          "imageTag": "23b0bccfa80e33ca0d65a261079712dcfafeb34e5b82d8648c43ec9226456760",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

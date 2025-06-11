@@ -785,6 +785,16 @@
          ]
         }
        ]
+      },
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+         "Arn"
+        ]
+       }
       }
      ],
      "Version": "2012-10-17"
@@ -870,32 +880,6 @@
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
-  },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD",
-    "Roles": [
-     {
-      "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
-     }
-    ]
-   }
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": {
    "Type": "Custom::NeuronxAmi",
@@ -1283,7 +1267,7 @@
       ]
      },
      "Image": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:89b8a1ae7d278d60420c6d05330aebd95207b35726d398ab1babd30c26409d13"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:0526385d04766561ae4bd326925667527f02b3a5c95bf0fd7c1fd69b2c5ca4de"
      },
      "LinuxParameters": {
       "Devices": [
@@ -1401,6 +1385,24 @@
        ]
       },
       {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
+         ]
+        }
+       ]
+      },
+      {
        "Action": "states:StartExecution",
        "Effect": "Allow",
        "Resource": {
@@ -1489,58 +1491,6 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
   },
-  "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
-     }
-    ]
-   }
-  },
-  "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
-     }
-    ]
-   }
-  },
   "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -1619,6 +1569,24 @@
            },
            ":*"
           ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
          ]
         }
        ]
@@ -1702,58 +1670,6 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
   },
-  "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
-     }
-    ]
-   }
-  },
-  "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
-     }
-    ]
-   }
-  },
   "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -1832,6 +1748,24 @@
            },
            ":*"
           ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
+          "Arn"
          ]
         }
        ]
@@ -1914,58 +1848,6 @@
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
-  },
-  "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
-     }
-    ]
-   }
-  },
-  "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB",
-    "Roles": [
-     {
-      "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
-     }
-    ]
-   }
   },
   "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D": {
    "Type": "AWS::IAM::Role",
@@ -2557,7 +2439,7 @@
        "Timeout": 5
       },
       "Image": {
-       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:b448e110f01d1fe5ee731a998367a6ba0f2a9e36d2dff2f93a0fcde2537cb6f2"
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:23b0bccfa80e33ca0d65a261079712dcfafeb34e5b82d8648c43ec9226456760"
       },
       "LinuxParameters": {
        "Capabilities": {},
@@ -2928,6 +2810,16 @@
          ]
         }
        ]
+      },
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
+         "Arn"
+        ]
+       }
       }
      ],
      "Version": "2012-10-17"
@@ -3001,32 +2893,6 @@
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
-  },
-  "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285",
-    "Roles": [
-     {
-      "Ref": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
-     }
-    ]
-   }
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A": {
    "Type": "Custom::NeuronxAmi",
@@ -3351,6 +3217,93 @@
     ]
    }
   },
+  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRoleDefaultPolicyAC8F0347": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:DescribeHosts",
+        "ec2:DescribeInstanceAttribute",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeInstances"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "autoscaling:CompleteLifecycleAction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":autoscaling:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":autoScalingGroup:*:autoScalingGroupName/",
+          {
+           "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecs:DescribeContainerInstances",
+        "ecs:DescribeTasks",
+        "ecs:ListTasks",
+        "ecs:UpdateContainerInstancesState"
+       ],
+       "Condition": {
+        "ArnEquals": {
+         "ecs:cluster": {
+          "Fn::GetAtt": [
+           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+           "Arn"
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecs:ListContainerInstances",
+        "ecs:SubmitContainerStateChange",
+        "ecs:SubmitTaskStateChange"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRoleDefaultPolicyAC8F0347",
+    "Roles": [
+     {
+      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+     }
+    ]
+   }
+  },
   "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
@@ -3381,6 +3334,7 @@
     "Timeout": 310
    },
    "DependsOn": [
+    "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRoleDefaultPolicyAC8F0347",
     "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
    ]
   },
@@ -3438,173 +3392,6 @@
     "TopicArn": {
      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
     }
-   }
-  },
-  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "ec2:DescribeHosts",
-        "ec2:DescribeInstanceAttribute",
-        "ec2:DescribeInstanceStatus",
-        "ec2:DescribeInstances"
-       ],
-       "Effect": "Allow",
-       "Resource": "*"
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9",
-    "Roles": [
-     {
-      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
-     }
-    ]
-   }
-  },
-  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "autoscaling:CompleteLifecycleAction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::Join": [
-         "",
-         [
-          "arn:",
-          {
-           "Ref": "AWS::Partition"
-          },
-          ":autoscaling:",
-          {
-           "Ref": "AWS::Region"
-          },
-          ":",
-          {
-           "Ref": "AWS::AccountId"
-          },
-          ":autoScalingGroup:*:autoScalingGroupName/",
-          {
-           "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
-          }
-         ]
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1",
-    "Roles": [
-     {
-      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
-     }
-    ]
-   }
-  },
-  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "ecs:DescribeContainerInstances",
-        "ecs:DescribeTasks"
-       ],
-       "Condition": {
-        "ArnEquals": {
-         "ecs:cluster": {
-          "Fn::GetAtt": [
-           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
-           "Arn"
-          ]
-         }
-        }
-       },
-       "Effect": "Allow",
-       "Resource": "*"
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002",
-    "Roles": [
-     {
-      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
-     }
-    ]
-   }
-  },
-  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "ecs:ListContainerInstances",
-        "ecs:SubmitContainerStateChange",
-        "ecs:SubmitTaskStateChange"
-       ],
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09",
-    "Roles": [
-     {
-      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
-     }
-    ]
-   }
-  },
-  "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": [
-        "ecs:ListTasks",
-        "ecs:UpdateContainerInstancesState"
-       ],
-       "Condition": {
-        "ArnEquals": {
-         "ecs:cluster": {
-          "Fn::GetAtt": [
-           "EcsDefaultClusterMnL3mNNYNVpc18E0451A",
-           "Arn"
-          ]
-         }
-        }
-       },
-       "Effect": "Allow",
-       "Resource": "*"
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A",
-    "Roles": [
-     {
-      "Ref": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
-     }
-    ]
    }
   },
   "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843": {
