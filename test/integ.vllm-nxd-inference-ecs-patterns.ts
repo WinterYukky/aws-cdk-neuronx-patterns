@@ -5,6 +5,8 @@ import { ApplicationLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancingv2"
 import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Bucket } from "aws-cdk-lib/aws-s3";
+import { LAMBDA_CREATE_NEW_POLICIES_WITH_ADDTOROLEPOLICY } from "aws-cdk-lib/cx-api";
+import { writeFileSync } from "fs";
 import { join } from "path";
 import {
   ApplicationLoadBalancedVllmNxDInferenceService,
@@ -17,11 +19,16 @@ import {
 import { HttpRequestFromVpcFunctionPayload } from "./private/http-request-from-vpc";
 
 const app = new App();
+app.node.setContext(LAMBDA_CREATE_NEW_POLICIES_WITH_ADDTOROLEPOLICY, false);
 class VllmNxDInferenceIntegTestStack extends Stack {
   readonly httpRequestFromVpcFunction: NodejsFunction;
   readonly service: ApplicationLoadBalancedVllmNxDInferenceService;
   constructor(scope: App, id: string) {
     super(scope, id);
+    writeFileSync(
+      `/workspaces/aws-cdk-neuronx-patterns/${Date.now()}.txt`,
+      `${this.node.tryGetContext(LAMBDA_CREATE_NEW_POLICIES_WITH_ADDTOROLEPOLICY)}`,
+    );
     const vpc = new Vpc(this, "Vpc", {
       natGateways: 1,
       gatewayEndpoints: {

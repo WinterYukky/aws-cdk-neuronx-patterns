@@ -1,6 +1,6 @@
 import { ReleasableCommits, awscdk } from "projen";
 import { JobPermission } from "projen/lib/github/workflows-model";
-const cdkVersion = "2.200.0";
+const cdkVersion = "2.200.1";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
   authorAddress: "49480575+WinterYukky@users.noreply.github.com",
@@ -17,18 +17,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
     prettier: true,
   },
   deps: [
-    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    `@aws-cdk/aws-sagemaker-alpha`,
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
-    `@aws-cdk/integ-runner@2.186.11`,
-    `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
-    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    `@aws-cdk/integ-runner`,
+    `@aws-cdk/integ-tests-alpha`,
+    `@aws-cdk/aws-sagemaker-alpha`,
     "@types/aws-lambda",
     "@aws-sdk/client-batch",
     "esbuild",
   ],
-  peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
+  peerDeps: [`@aws-cdk/aws-sagemaker-alpha`],
   gitignore: ["src/**/index.js"],
   githubOptions: {
     pullRequestLintOptions: {

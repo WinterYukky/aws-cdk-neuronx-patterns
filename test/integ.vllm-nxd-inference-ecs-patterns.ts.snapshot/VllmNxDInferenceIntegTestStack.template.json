@@ -1267,7 +1267,7 @@
       ]
      },
      "Image": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:0526385d04766561ae4bd326925667527f02b3a5c95bf0fd7c1fd69b2c5ca4de"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:54c17ee39c102d44f4bb332be4728fde7104b9c0321e426be57de2c96b72311c"
      },
      "LinuxParameters": {
       "Devices": [

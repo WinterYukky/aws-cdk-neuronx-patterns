@@ -24,4 +24,4 @@ vllm serve ./$MODEL_NAME "$@" 2>&1 | tee $LOG_FILE &
 
 wait_for_log_to_be_detected "Application startup complete" || exit 1
 
-aws s3 cp --no-progress --recursive ./ $COMPILED_ARTIFACTS_S3_URI --exclude "$MODEL_NAME/.cache"
+aws s3 cp --no-progress --recursive ./ $COMPILED_ARTIFACTS_S3_URI --exclude "**/.cache/*"
