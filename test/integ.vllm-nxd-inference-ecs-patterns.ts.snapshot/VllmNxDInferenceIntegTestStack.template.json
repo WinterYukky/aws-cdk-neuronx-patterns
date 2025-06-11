@@ -1307,7 +1307,8 @@
        "Type": "VCPU",
        "Value": "32"
       }
-     ]
+     ],
+     "Secrets": []
     },
     "PlatformCapabilities": [
      "EC2"
@@ -2195,7 +2196,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "c2b19c211a26f010ddd3faa2eabd397cfd16b532a8e0b8426ea98a285b6714e6.zip"
+     "S3Key": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip"
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2298,7 +2299,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "901330da6ba196740063935585030f77b01246b17f89f3a39a9143a1b2d892dc.zip"
+     "S3Key": "7d8cced9da872de6574397ad46c241c2c143dd8bbcd382c0983e066b28ccf98c.zip"
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2392,7 +2393,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "901330da6ba196740063935585030f77b01246b17f89f3a39a9143a1b2d892dc.zip"
+     "S3Key": "7d8cced9da872de6574397ad46c241c2c143dd8bbcd382c0983e066b28ccf98c.zip"
     },
     "Handler": "index.isComplete",
     "Role": {

@@ -1449,7 +1449,7 @@ Adds a firelens log router to the task definition.
 
 ---
 
-##### ~~`addInferenceAccelerator`~~ <a name="addInferenceAccelerator" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.addInferenceAccelerator"></a>
+##### `addInferenceAccelerator` <a name="addInferenceAccelerator" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.addInferenceAccelerator"></a>
 
 ```typescript
 public addInferenceAccelerator(inferenceAccelerator: InferenceAccelerator): void
@@ -2067,25 +2067,6 @@ public readonly tensorParallelSize: number;
 
 ---
 
-#### Constants <a name="Constants" id="Constants"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.PROPERTY_INJECTION_ID">PROPERTY_INJECTION_ID</a></code> | <code>string</code> | Uniquely identifies this class. |
-
----
-
-##### `PROPERTY_INJECTION_ID`<sup>Required</sup> <a name="PROPERTY_INJECTION_ID" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.PROPERTY_INJECTION_ID"></a>
-
-```typescript
-public readonly PROPERTY_INJECTION_ID: string;
-```
-
-- *Type:* string
-
-Uniquely identifies this class.
-
----
 
 ### VllmNxdInferenceCompiler <a name="VllmNxdInferenceCompiler" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler"></a>
 
@@ -2348,7 +2329,7 @@ Adds a firelens log router to the task definition.
 
 ---
 
-##### ~~`addInferenceAccelerator`~~ <a name="addInferenceAccelerator" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addInferenceAccelerator"></a>
+##### `addInferenceAccelerator` <a name="addInferenceAccelerator" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addInferenceAccelerator"></a>
 
 ```typescript
 public addInferenceAccelerator(inferenceAccelerator: InferenceAccelerator): void
@@ -2966,25 +2947,6 @@ public readonly tensorParallelSize: number;
 
 ---
 
-#### Constants <a name="Constants" id="Constants"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.PROPERTY_INJECTION_ID">PROPERTY_INJECTION_ID</a></code> | <code>string</code> | Uniquely identifies this class. |
-
----
-
-##### `PROPERTY_INJECTION_ID`<sup>Required</sup> <a name="PROPERTY_INJECTION_ID" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.PROPERTY_INJECTION_ID"></a>
-
-```typescript
-public readonly PROPERTY_INJECTION_ID: string;
-```
-
-- *Type:* string
-
-Uniquely identifies this class.
-
----
 
 ## Structs <a name="Structs" id="Structs"></a>
 
@@ -3015,7 +2977,6 @@ const applicationLoadBalancedNeuronxServiceProps: ApplicationLoadBalancedNeuronx
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.enableExecuteCommand">enableExecuteCommand</a></code> | <code>boolean</code> | Whether ECS Exec should be enabled. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.healthCheckGracePeriod">healthCheckGracePeriod</a></code> | <code>aws-cdk-lib.Duration</code> | The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks after a task has first started. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.idleTimeout">idleTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The load balancer idle timeout, in seconds. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.ipAddressType">ipAddressType</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.IpAddressType</code> | The type of IP address to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.listenerPort">listenerPort</a></code> | <code>number</code> | Listener port of the application load balancer that will serve traffic to the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.loadBalancer">loadBalancer</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.IApplicationLoadBalancer</code> | The application load balancer that will serve traffic to the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.loadBalancerName">loadBalancerName</a></code> | <code>string</code> | Name of the load balancer. |
@@ -3027,7 +2988,7 @@ const applicationLoadBalancedNeuronxServiceProps: ApplicationLoadBalancedNeuronx
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.protocolVersion">protocolVersion</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationProtocolVersion</code> | The protocol version to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.publicLoadBalancer">publicLoadBalancer</a></code> | <code>boolean</code> | Determines whether the Load Balancer will be internet-facing. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.recordType">recordType</a></code> | <code>aws-cdk-lib.aws_ecs_patterns.ApplicationLoadBalancedServiceRecordType</code> | Specifies whether the Route53 record should be a CNAME, an A record using the Alias feature or no record at all. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.redirectHTTP">redirectHTTP</a></code> | <code>boolean</code> | Specifies whether the load balancer should redirect traffic on port 80 to the {@link listenerPort} to support HTTP->HTTPS redirects. |
+| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.redirectHTTP">redirectHTTP</a></code> | <code>boolean</code> | Specifies whether the load balancer should redirect traffic on port 80 to port 443 to support HTTP->HTTPS redirects This is only valid if the protocol of the ALB is HTTPS. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.serviceName">serviceName</a></code> | <code>string</code> | The name of the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.sslPolicy">sslPolicy</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.SslPolicy</code> | The security policy that defines which ciphers and protocols are supported by the ALB Listener. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.targetProtocol">targetProtocol</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationProtocol</code> | The protocol for connections from the load balancer to the ECS tasks. |
@@ -3228,19 +3189,6 @@ Can be between 1 and 4000 seconds
 
 ---
 
-##### `ipAddressType`<sup>Optional</sup> <a name="ipAddressType" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.ipAddressType"></a>
-
-```typescript
-public readonly ipAddressType: IpAddressType;
-```
-
-- *Type:* aws-cdk-lib.aws_elasticloadbalancingv2.IpAddressType
-- *Default:* IpAddressType.IPV4
-
-The type of IP address to use.
-
----
-
 ##### `listenerPort`<sup>Optional</sup> <a name="listenerPort" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxServiceProps.property.listenerPort"></a>
 
 ```typescript
@@ -3406,9 +3354,7 @@ public readonly redirectHTTP: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Specifies whether the load balancer should redirect traffic on port 80 to the {@link listenerPort} to support HTTP->HTTPS redirects.
-
-This is only valid if the protocol of the ALB is HTTPS.
+Specifies whether the load balancer should redirect traffic on port 80 to port 443 to support HTTP->HTTPS redirects This is only valid if the protocol of the ALB is HTTPS.
 
 ---
 
@@ -3625,7 +3571,6 @@ const applicationLoadBalancedVllmNxDInferenceServiceProps: ApplicationLoadBalanc
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.enableExecuteCommand">enableExecuteCommand</a></code> | <code>boolean</code> | Whether ECS Exec should be enabled. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.healthCheckGracePeriod">healthCheckGracePeriod</a></code> | <code>aws-cdk-lib.Duration</code> | The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks after a task has first started. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.idleTimeout">idleTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The load balancer idle timeout, in seconds. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.ipAddressType">ipAddressType</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.IpAddressType</code> | The type of IP address to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.listenerPort">listenerPort</a></code> | <code>number</code> | Listener port of the application load balancer that will serve traffic to the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.loadBalancer">loadBalancer</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.IApplicationLoadBalancer</code> | The application load balancer that will serve traffic to the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.loadBalancerName">loadBalancerName</a></code> | <code>string</code> | Name of the load balancer. |
@@ -3637,7 +3582,7 @@ const applicationLoadBalancedVllmNxDInferenceServiceProps: ApplicationLoadBalanc
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.protocolVersion">protocolVersion</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationProtocolVersion</code> | The protocol version to use. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.publicLoadBalancer">publicLoadBalancer</a></code> | <code>boolean</code> | Determines whether the Load Balancer will be internet-facing. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.recordType">recordType</a></code> | <code>aws-cdk-lib.aws_ecs_patterns.ApplicationLoadBalancedServiceRecordType</code> | Specifies whether the Route53 record should be a CNAME, an A record using the Alias feature or no record at all. |
-| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.redirectHTTP">redirectHTTP</a></code> | <code>boolean</code> | Specifies whether the load balancer should redirect traffic on port 80 to the {@link listenerPort} to support HTTP->HTTPS redirects. |
+| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.redirectHTTP">redirectHTTP</a></code> | <code>boolean</code> | Specifies whether the load balancer should redirect traffic on port 80 to port 443 to support HTTP->HTTPS redirects This is only valid if the protocol of the ALB is HTTPS. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.serviceName">serviceName</a></code> | <code>string</code> | The name of the service. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.sslPolicy">sslPolicy</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.SslPolicy</code> | The security policy that defines which ciphers and protocols are supported by the ALB Listener. |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.targetProtocol">targetProtocol</a></code> | <code>aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationProtocol</code> | The protocol for connections from the load balancer to the ECS tasks. |
@@ -3838,19 +3783,6 @@ Can be between 1 and 4000 seconds
 
 ---
 
-##### `ipAddressType`<sup>Optional</sup> <a name="ipAddressType" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.ipAddressType"></a>
-
-```typescript
-public readonly ipAddressType: IpAddressType;
-```
-
-- *Type:* aws-cdk-lib.aws_elasticloadbalancingv2.IpAddressType
-- *Default:* IpAddressType.IPV4
-
-The type of IP address to use.
-
----
-
 ##### `listenerPort`<sup>Optional</sup> <a name="listenerPort" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceServiceProps.property.listenerPort"></a>
 
 ```typescript
@@ -4016,9 +3948,7 @@ public readonly redirectHTTP: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Specifies whether the load balancer should redirect traffic on port 80 to the {@link listenerPort} to support HTTP->HTTPS redirects.
-
-This is only valid if the protocol of the ALB is HTTPS.
+Specifies whether the load balancer should redirect traffic on port 80 to port 443 to support HTTP->HTTPS redirects This is only valid if the protocol of the ALB is HTTPS.
 
 ---
 
@@ -4531,16 +4461,11 @@ public readonly updateToLatestImageVersion: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* true
 
 Whether or not the AMI is updated to the latest one supported by Batch when an infrastructure update occurs.
 
 If you specify a specific AMI, this property will be ignored.
-
-Note: the CDK will never set this value by default, `false` will set by CFN.
-This is to avoid a deployment failure that occurs when this value is set.
-
-> [https://github.com/aws/aws-cdk/issues/27054](https://github.com/aws/aws-cdk/issues/27054)
 
 ---
 
@@ -5730,7 +5655,6 @@ const neuronxTaskDefinitionProps: NeuronxTaskDefinitionProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.enableFaultInjection">enableFaultInjection</a></code> | <code>boolean</code> | Enables fault injection and allows for fault injection requests to be accepted from the task's containers. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM task execution role that grants the ECS agent permission to call AWS APIs on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.proxyConfiguration">proxyConfiguration</a></code> | <code>aws-cdk-lib.aws_ecs.ProxyConfiguration</code> | The configuration details for the App Mesh proxy. |
@@ -5744,21 +5668,6 @@ const neuronxTaskDefinitionProps: NeuronxTaskDefinitionProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel">NeuronxCompiledModel</a></code> | The model to be compiled. |
-
----
-
-##### `enableFaultInjection`<sup>Optional</sup> <a name="enableFaultInjection" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionProps.property.enableFaultInjection"></a>
-
-```typescript
-public readonly enableFaultInjection: boolean;
-```
-
-- *Type:* boolean
-- *Default:* undefined - ECS default setting is false
-
-Enables fault injection and allows for fault injection requests to be accepted from the task's containers.
-
-Fault injection only works with tasks using the {@link NetworkMode.AWS_VPC} or {@link NetworkMode.HOST} network modes.
 
 ---
 
@@ -5962,7 +5871,6 @@ const neuronxTaskDefinitionPropsBase: NeuronxTaskDefinitionPropsBase = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.enableFaultInjection">enableFaultInjection</a></code> | <code>boolean</code> | Enables fault injection and allows for fault injection requests to be accepted from the task's containers. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM task execution role that grants the ECS agent permission to call AWS APIs on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.proxyConfiguration">proxyConfiguration</a></code> | <code>aws-cdk-lib.aws_ecs.ProxyConfiguration</code> | The configuration details for the App Mesh proxy. |
@@ -5975,21 +5883,6 @@ const neuronxTaskDefinitionPropsBase: NeuronxTaskDefinitionPropsBase = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.placementConstraints">placementConstraints</a></code> | <code>aws-cdk-lib.aws_ecs.PlacementConstraint[]</code> | An array of placement constraint objects to use for the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
-
----
-
-##### `enableFaultInjection`<sup>Optional</sup> <a name="enableFaultInjection" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinitionPropsBase.property.enableFaultInjection"></a>
-
-```typescript
-public readonly enableFaultInjection: boolean;
-```
-
-- *Type:* boolean
-- *Default:* undefined - ECS default setting is false
-
-Enables fault injection and allows for fault injection requests to be accepted from the task's containers.
-
-Fault injection only works with tasks using the {@link NetworkMode.AWS_VPC} or {@link NetworkMode.HOST} network modes.
 
 ---
 
@@ -10309,7 +10202,6 @@ const vllmNxdInferenceTaskDefinitionProps: VllmNxdInferenceTaskDefinitionProps =
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.enableFaultInjection">enableFaultInjection</a></code> | <code>boolean</code> | Enables fault injection and allows for fault injection requests to be accepted from the task's containers. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM task execution role that grants the ECS agent permission to call AWS APIs on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.proxyConfiguration">proxyConfiguration</a></code> | <code>aws-cdk-lib.aws_ecs.ProxyConfiguration</code> | The configuration details for the App Mesh proxy. |
@@ -10325,21 +10217,6 @@ const vllmNxdInferenceTaskDefinitionProps: VllmNxdInferenceTaskDefinitionProps =
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a></code> | The model to be compiled. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a></code> | The image to be used for the container. |
-
----
-
-##### `enableFaultInjection`<sup>Optional</sup> <a name="enableFaultInjection" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.enableFaultInjection"></a>
-
-```typescript
-public readonly enableFaultInjection: boolean;
-```
-
-- *Type:* boolean
-- *Default:* undefined - ECS default setting is false
-
-Enables fault injection and allows for fault injection requests to be accepted from the task's containers.
-
-Fault injection only works with tasks using the {@link NetworkMode.AWS_VPC} or {@link NetworkMode.HOST} network modes.
 
 ---
 

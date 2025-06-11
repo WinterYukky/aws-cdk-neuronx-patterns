@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b7a05f4f22b45a61892cd362d3fe09894ad2045c835eca25a389d149717978e9.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/68e55662b41e3392456b9d0eee356bcf69d130725c88cff99f9b169995bfa911.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -618,7 +618,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD"
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/Image.Parameter": [
@@ -1206,7 +1209,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878"
+            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-1": [
@@ -1244,7 +1250,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9"
+            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete": [
@@ -1475,7 +1484,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4"
+            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-1": [
@@ -1513,7 +1525,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/inlinePolicyAddedToExecutionRole-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6"
+            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout": [
@@ -1744,7 +1759,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34"
+            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-1": [
@@ -1782,7 +1800,10 @@
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/inlinePolicyAddedToExecutionRole-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB"
+            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role": [
@@ -2832,7 +2853,10 @@
         "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285"
+            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/Image.Parameter": [
@@ -3353,7 +3377,10 @@
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-0/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-1": [
@@ -3391,7 +3418,10 @@
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-2": [
@@ -3429,7 +3459,10 @@
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-2/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-3": [
@@ -3467,7 +3500,10 @@
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-3/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-4": [
@@ -3505,7 +3541,10 @@
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/inlinePolicyAddedToExecutionRole-4/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook": [
@@ -3773,7 +3812,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ffe6032924f9c6d82578c910f4e1ff367df4764ba9b90488cdc429dc20a1d54b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b122bb8f6de21e6b9ce731ba74c68ffd8813d0f36d5f5614ab7ca6f42c0ada2d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

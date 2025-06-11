@@ -18,13 +18,13 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // index.ts
-var await_compile_job_exports = {};
-__export(await_compile_job_exports, {
+var index_exports = {};
+__export(index_exports, {
   isComplete: () => isComplete,
   onCreate: () => onCreate,
   onEvent: () => onEvent
 });
-module.exports = __toCommonJS(await_compile_job_exports);
+module.exports = __toCommonJS(index_exports);
 var import_client_batch = require("@aws-sdk/client-batch");
 var region = process.env.AWS_DEFAULT_REGION ?? "us-east-1";
 var client = new import_client_batch.BatchClient({

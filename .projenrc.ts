@@ -1,4 +1,5 @@
 import { ReleasableCommits, awscdk } from "projen";
+import { JobPermission } from "projen/lib/github/workflows-model";
 const cdkVersion = "2.200.0";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
@@ -84,4 +85,16 @@ project.addTask("integ:update", {
   description: "Run integration tests and update on any failed tests",
   receiveArgs: true,
 });
+project.github?.workflows
+  .find((w) => w.name === "build")
+  ?.addJob("integ-test", {
+    permissions: {
+      contents: JobPermission.READ,
+    },
+    steps: [
+      {
+        run: "yarn integ",
+      },
+    ],
+  });
 project.synth();

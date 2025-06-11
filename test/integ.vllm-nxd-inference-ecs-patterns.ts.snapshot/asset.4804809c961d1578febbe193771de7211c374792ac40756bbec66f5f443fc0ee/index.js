@@ -18,11 +18,11 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // index.ts
-var neuronx_ami_exports = {};
-__export(neuronx_ami_exports, {
+var index_exports = {};
+__export(index_exports, {
   onEvent: () => onEvent
 });
-module.exports = __toCommonJS(neuronx_ami_exports);
+module.exports = __toCommonJS(index_exports);
 var onEvent = async (event) => {
   console.log(event);
   const image = JSON.parse(event.ResourceProperties.image);
