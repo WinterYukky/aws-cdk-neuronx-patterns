@@ -2,17 +2,14 @@
   "dependencies": [
     {
       "name": "@aws-cdk/aws-sagemaker-alpha",
-      "version": "2.200.0-alpha.0",
       "type": "build"
     },
     {
       "name": "@aws-cdk/integ-runner",
-      "version": "2.186.11",
       "type": "build"
     },
     {
       "name": "@aws-cdk/integ-tests-alpha",
-      "version": "2.200.0-alpha.0",
       "type": "build"
     },
     {
@@ -125,12 +122,11 @@
     },
     {
       "name": "@aws-cdk/aws-sagemaker-alpha",
-      "version": "2.200.0-alpha.0",
       "type": "peer"
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.200.0",
+      "version": "^2.200.1",
       "type": "peer"
     },
     {
@@ -140,7 +136,6 @@
     },
     {
       "name": "@aws-cdk/aws-sagemaker-alpha",
-      "version": "2.200.0-alpha.0",
       "type": "runtime"
     }
   ],

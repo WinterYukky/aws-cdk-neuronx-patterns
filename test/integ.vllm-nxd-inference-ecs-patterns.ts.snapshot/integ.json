@@ -5,10 +5,9 @@
       "stacks": [
         "VllmNxDInferenceIntegTestStack"
       ],
-      "diffAssets": true,
       "assertionStack": "IntegTest/DefaultTest/DeployAssert",
       "assertionStackName": "IntegTestDefaultTestDeployAssertE3E7D2A4"
     }
   },
-  "minimumCliVersion": "2.1017.1"
+  "minimumCliVersion": "2.1018.0"
 }

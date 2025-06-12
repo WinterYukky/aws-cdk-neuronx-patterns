@@ -5,6 +5,7 @@ import { ApplicationLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancingv2"
 import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Bucket } from "aws-cdk-lib/aws-s3";
+import * as cxapi from "aws-cdk-lib/cx-api";
 import { join } from "path";
 import {
   ApplicationLoadBalancedVllmNxDInferenceService,
@@ -17,6 +18,9 @@ import {
 import { HttpRequestFromVpcFunctionPayload } from "./private/http-request-from-vpc";
 
 const app = new App();
+Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
+  app.node.setContext(key, value),
+);
 class VllmNxDInferenceIntegTestStack extends Stack {
   readonly httpRequestFromVpcFunction: NodejsFunction;
   readonly service: ApplicationLoadBalancedVllmNxDInferenceService;
@@ -91,7 +95,6 @@ const stack = new VllmNxDInferenceIntegTestStack(
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
-  diffAssets: true,
 });
 vllmChatAssersion(
   integTest,
