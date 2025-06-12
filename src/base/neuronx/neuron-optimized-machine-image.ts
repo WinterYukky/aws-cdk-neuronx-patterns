@@ -28,7 +28,7 @@ export class NeuronOptimizedMachineImage
       onEventHandler: new SingletonFunction(this, "NeuronxAmiFunction", {
         code: Code.fromAsset(path.join(__dirname, "private/neuronx-ami")),
         handler: "index.onEvent",
-        runtime: Runtime.NODEJS_20_X,
+        runtime: Runtime.NODEJS_LATEST,
         uuid: "08c9850a-6f13-4ed4-9e2d-7888d7b5a258",
       }),
     });
