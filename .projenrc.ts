@@ -85,16 +85,39 @@ project.addTask("integ:update", {
   description: "Run integration tests and update on any failed tests",
   receiveArgs: true,
 });
-project.github?.workflows
-  .find((w) => w.name === "build")
-  ?.addJob("integ-test", {
-    permissions: {
-      contents: JobPermission.READ,
+const integWorkflow = project.github?.addWorkflow("integ-test-workflow");
+integWorkflow?.on({
+  pullRequest: {
+    types: ["opened", "synchronize"],
+  },
+  push: {
+    branches: ["main"],
+  },
+});
+integWorkflow?.addJob("integ-test", {
+  permissions: {
+    contents: JobPermission.READ,
+  },
+  steps: [
+    {
+      name: "Checkout",
+      uses: "actions/checkout@v4",
     },
-    steps: [
-      {
-        run: "yarn integ",
+    {
+      name: "Setup Node.js",
+      uses: "actions/setup-node@v3",
+      with: {
+        "node-version": "22",
       },
-    ],
-  });
+    },
+    {
+      name: "Install Dependencies",
+      run: "yarn install --frozen-lockfile",
+    },
+    {
+      name: "Run Integration Tests",
+      run: "yarn integ",
+    },
+  ],
+});
 project.synth();

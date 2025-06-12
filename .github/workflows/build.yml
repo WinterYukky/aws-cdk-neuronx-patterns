@@ -120,8 +120,3 @@ jobs:
         run: cd .repo && npx projen package:js
       - name: Collect js artifact
         run: mv .repo/dist dist
-  integ-test:
-    permissions:
-      contents: read
-    steps:
-      - run: yarn integ
