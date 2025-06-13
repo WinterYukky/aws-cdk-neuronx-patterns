@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0d4c021dc0daec5e8a895749b47fadbdfbc133d67bb11aada0ebea4a8a3c7164.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8a49fd7aa0eb79e4c1279465234b9a2c804aad68a680aac3e0821f8c20ffe452.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1998,6 +1998,10 @@
           {
             "type": "aws:cdk:analytics:method",
             "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole": [
@@ -2288,10 +2292,10 @@
             "data": "ServiceLBSecurityGroup45E2FC86"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/to VllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF73:32768-60999": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/to VllmNxDInferenceIntegTestStackServiceAutoScalingGroupInstanceSecurityGroupD0B1DCE3:32768-60999": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ServiceLBSecurityGrouptoVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupA348CF733276860999B4FB0366"
+            "data": "ServiceLBSecurityGrouptoVllmNxDInferenceIntegTestStackServiceAutoScalingGroupInstanceSecurityGroupD0B1DCE33276860999072EDFA2"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/from VllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D86537:80": [
@@ -2551,65 +2555,31 @@
             "data": "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "vpc": "*"
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addCapacity": [
-                "*",
-                {
-                  "instanceType": "*",
-                  "machineImage": "*",
-                  "blockDevices": [
-                    {
-                      "deviceName": "*",
-                      "volume": "*"
-                    }
-                  ],
-                  "minCapacity": "*"
-                }
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addAutoScalingGroup": [
-                "*",
-                {
-                  "machineImageType": 0
-                }
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
               "vpc": "*",
-              "machineImage": "*",
-              "updateType": "Replace",
               "instanceType": "*",
+              "machineImage": "*",
               "blockDevices": [
                 {
                   "deviceName": "*",
                   "volume": "*"
                 }
               ],
-              "minCapacity": "*"
+              "userData": "*",
+              "desiredCapacity": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "desiredCapacity has been configured. Be aware this will reset the size of your AutoScalingGroup on every deployment. See https://github.com/aws/aws-cdk/issues/5215 [ack: @aws-cdk/aws-autoscaling:desiredCapacitySet]"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "protectNewInstancesFromScaleIn": []
             }
           },
           {
@@ -2645,7 +2615,7 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceSecurityGroup": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -2665,19 +2635,19 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceSecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroup6D20A845"
+            "data": "ServiceAutoScalingGroupInstanceSecurityGroup113C6E6E"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceSecurityGroup/from VllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B:32768-60999": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceSecurityGroup/from VllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B:32768-60999": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceSecurityGroupfromVllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B327686099917C7D365"
+            "data": "ServiceAutoScalingGroupInstanceSecurityGroupfromVllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B3276860999051CD2D7"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -2727,21 +2697,29 @@
                 {}
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/ImportInstanceRole": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/ImportInstanceRole": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleD405A492"
+            "data": "ServiceAutoScalingGroupInstanceRole02DE3C6C"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/DefaultPolicy": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/DefaultPolicy": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -2785,21 +2763,29 @@
                 {}
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceRole/DefaultPolicy/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceRoleDefaultPolicy0C3E1BAD"
+            "data": "ServiceAutoScalingGroupInstanceRoleDefaultPolicy66CAC56B"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/InstanceProfile": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceProfile": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityInstanceProfileFBD277E0"
+            "data": "ServiceAutoScalingGroupInstanceProfileB8BA9494"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LaunchTemplate": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -2821,350 +2807,50 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LaunchTemplate/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LaunchTemplate/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLaunchTemplate345F7E9C"
+            "data": "ServiceAutoScalingGroupLaunchTemplateCF787618"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/ASG": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/ASG": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityASGA8DED843"
+            "data": "ServiceAutoScalingGroupASGFA49D7FB"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function": [
+        "/VllmNxDInferenceIntegTestStack/Service/Resource/AsgCapacityProvider/AsgCapacityProvider": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAsgCapacityProviderC55593FF"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
-              "code": "*",
-              "handler": "*",
-              "runtime": "*",
-              "timeout": "*",
-              "environment": "*"
+              "vpc": "*"
             }
           },
           {
             "type": "aws:cdk:analytics:method",
             "data": {
-              "addEnvironment": [
-                "*",
+              "addAsgCapacityProvider": [
                 "*"
               ]
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              },
-              "managedPolicies": [
-                {
-                  "managedPolicyArn": "*"
-                }
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/ImportServiceRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/Resource": [
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRole7FE4EF68"
+            "data": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/DefaultPolicy": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/ServiceRole/DefaultPolicy/Resource": [
+        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/EcsDefaultClusterMnL3mNNYNVpc": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionServiceRoleDefaultPolicyAC8F0347"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionC75312A9"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/LogGroup": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "logGroupName": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/LogGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionLogGroup84C7CC53"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/AllowInvoke:VllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic0A63A176": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackEcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic0A63A176F9E9B1DF"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Topic": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "topic": "*",
-              "endpoint": "*",
-              "protocol": "lambda",
-              "filterPolicy": "*",
-              "filterPolicyWithMessageBody": "*",
-              "region": "*",
-              "deadLetterQueue": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/DrainECSHook/Function/Topic/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctionTopicF4C13E3E"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "autoScalingGroup": "*",
-              "lifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
-              "defaultResult": "CONTINUE",
-              "notificationTarget": "*",
-              "heartbeatTimeout": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Topic": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "masterKey": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Topic/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookTopic9B8FA843"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              }
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/ImportRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRole6CCEE561"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/DefaultPolicy": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Role/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHookRoleDefaultPolicy395B42DB"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/InstanceCapacity/LifecycleHookDrainHook/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityLifecycleHookDrainHook3BA125AD"
+            "data": "EcsDefaultClusterMnL3mNNYNVpcF07F0074"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/CompiledArtifact": [
@@ -3296,123 +2982,6 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
-        ],
-        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole0C4A930CD",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole003EAA878",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventinlinePolicyAddedToExecutionRole1319194D9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole03BC19FC4",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteinlinePolicyAddedToExecutionRole103BB0CB6",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole053BEDA34",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutinlinePolicyAddedToExecutionRole160C850BB",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventinlinePolicyAddedToExecutionRole01DE49285",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole045754FA9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole1588F9CC1",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole29CE90002",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole3A92B9D09",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "EcsDefaultClusterMnL3mNNYNVpcInstanceCapacityDrainECSHookFunctioninlinePolicyAddedToExecutionRole48CDD2C0A",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
         ]
       },
       "displayName": "VllmNxDInferenceIntegTestStack"
@@ -3434,7 +3003,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2dd624e315d02ae1a5dcbc53bc8dc0cb18a803350b1b4af3c37868810049fdaa.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/18a9732aeb719566ec83d573983b7b9202558ed7d12a6c88ed224405c6ea8305.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

@@ -31,8 +31,7 @@ RUN git clone -b ${VLLM_GIT_BRANCH} https://github.com/aws-neuron/upstreaming-to
 WORKDIR /home/$USERNAME/vllm
 
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME && chsh -s /bin/bash $USERNAME
-COPY --chown=$USERNAME:$USERNAME entrypoint.sh /home/$USERNAME/vllm/
-RUN chmod +x /home/$USERNAME/vllm/entrypoint.sh
+COPY --chown=$USERNAME:$USERNAME --chmod=755 entrypoint.sh /home/$USERNAME/vllm/
 USER $USERNAME
 
 RUN aws configure set default.s3.preferred_transfer_client crt

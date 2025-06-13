@@ -123,6 +123,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
       MODEL_NAME: props.compiledModel.modelName,
       COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
+      COMPILED_ARTIFACTS_S3_PREFIX: props.compiledModel.s3Prefix,
     };
 
     this.addContainerWithDefault("vLLM", {
