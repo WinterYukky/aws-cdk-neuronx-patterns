@@ -1,9 +1,10 @@
 import { Duration } from "aws-cdk-lib";
 import {
+  AutoScalingGroup,
   BlockDeviceVolume,
   EbsDeviceVolumeType,
 } from "aws-cdk-lib/aws-autoscaling";
-import { Port } from "aws-cdk-lib/aws-ec2";
+import { Port, UserData } from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import {
   ApplicationLoadBalancedEc2Service,
@@ -78,6 +79,9 @@ export class NeuronxTaskDefinition
         permissions: [ecs.DevicePermission.READ, ecs.DevicePermission.WRITE],
       })),
     );
+    if (this.executionRole) {
+      props.compiledModel.bucket.grantRead(this.executionRole);
+    }
     props.compiledModel.bucket.grantRead(this.taskRole);
     this.compiledModel = props.compiledModel;
     this.neuronxInstanceType = neuronxInstanceType;
@@ -89,7 +93,7 @@ export class NeuronxTaskDefinition
     id: string,
     props: ecs.ContainerDefinitionOptions,
   ): ecs.ContainerDefinition {
-    return super.addContainer(id, {
+    const container = super.addContainer(id, {
       logging: ecs.LogDriver.awsLogs({
         streamPrefix: id,
       }),
@@ -100,6 +104,12 @@ export class NeuronxTaskDefinition
       ),
       ...props,
     });
+    container.addMountPoints({
+      sourceVolume: "model",
+      containerPath: "/opt/ml/model",
+      readOnly: false,
+    });
+    return container;
   }
 }
 
@@ -120,19 +130,53 @@ export class ApplicationLoadBalancedNeuronxService extends ApplicationLoadBalanc
     }
     super(scope, id, {
       healthCheckGracePeriod:
-        props.healthCheckGracePeriod ?? Duration.minutes(5),
+        props.healthCheckGracePeriod ?? Duration.minutes(15),
       ...props,
     });
+
     const cluster = this.getDefaultCluster(this, props.vpc);
 
+    // install and mount mountpoint for s3
+    const userData = UserData.forLinux();
+    userData.addCommands(`
+#!/bin/bash -e
+
+# Install Mountpoint
+MP_RPM=$(mktemp --suffix=.rpm)
+curl https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm > $MP_RPM
+
+# cloud-init installs conflict with SSM agent: https://github.com/amazonlinux/amazon-linux-2023/issues/397
+attempt=0
+max_attempts=5
+until dnf install -y $MP_RPM; do
+    attempt=$((attempt + 1))
+    if [ $attempt -ge $max_attempts ]; then
+        echo "Failed to install mount-s3 after $max_attempts attempts. Exiting."
+        exit 1
+    fi
+    echo "dnf install mount-s3 failed (attempt $attempt/$max_attempts), retrying in 3 seconds..."
+    sleep 3
+done
+
+rm $MP_RPM
+
+# Setup the fstab file and create the mount
+mkdir --parents /mnt/${neuronxTaskDefinition.compiledModel.bucket.bucketName}
+mount-s3 ${neuronxTaskDefinition.compiledModel.bucket.bucketName} /mnt/${neuronxTaskDefinition.compiledModel.bucket.bucketName} --allow-other --file-mode=644 --dir-mode=755`);
+
+    neuronxTaskDefinition.addVolume({
+      name: "model",
+      host: {
+        sourcePath: `/mnt/${neuronxTaskDefinition.compiledModel.bucket.bucketName}`,
+      },
+    });
+
     const volumeSize = Math.ceil(
-      neuronxTaskDefinition.tasksPerInstance *
-        neuronxTaskDefinition.compiledModel.weightSize.toGibibytes() +
-        PytorchTrainingNeuronxImage.size.toGibibytes() +
+      PytorchTrainingNeuronxImage.size.toGibibytes() +
         NeuronOptimizedMachineImage.size.toGibibytes(),
     );
-    cluster.addCapacity("InstanceCapacity", {
-      ...props,
+    const autoScalingGroup = new AutoScalingGroup(this, "AutoScalingGroup", {
+      vpc: cluster.vpc,
       instanceType: neuronxTaskDefinition.neuronxInstanceType.instanceType,
       machineImage: new NeuronOptimizedMachineImage(
         this,
@@ -147,13 +191,19 @@ export class ApplicationLoadBalancedNeuronxService extends ApplicationLoadBalanc
           }),
         },
       ],
-      minCapacity: Math.ceil(
+      userData,
+      desiredCapacity: Math.ceil(
         (props.desiredCount ?? 1) / neuronxTaskDefinition.tasksPerInstance,
       ),
     });
-    cluster.connections.allowFrom(
+    autoScalingGroup.connections.allowFrom(
       this.loadBalancer,
       Port.tcpRange(32768, 60999),
     );
+    neuronxTaskDefinition.compiledModel.bucket.grantRead(autoScalingGroup);
+    const provider = new ecs.AsgCapacityProvider(this, "AsgCapacityProvider", {
+      autoScalingGroup,
+    });
+    cluster.addAsgCapacityProvider(provider);
   }
 }

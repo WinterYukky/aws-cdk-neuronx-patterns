@@ -1273,7 +1273,7 @@ export abstract class VllmEngineArgumentsParser {
       }, {});
   }
   static cli(args: VllmEngineArguments) {
-    return Object.entries(args)
+    const generalArgs = Object.entries(args)
       .filter(([key]) => !ignoreKeys.includes(key as keyof VllmEngineArguments))
       .flatMap(([k, value]) => {
         const key = k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
@@ -1288,5 +1288,6 @@ export abstract class VllmEngineArgumentsParser {
         }
         return [`--${key}`, `${value}`];
       });
+    return [args.model!, ...generalArgs];
   }
 }
