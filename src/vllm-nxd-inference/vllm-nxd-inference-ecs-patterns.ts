@@ -121,6 +121,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
       NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
       NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
+      XLA_HANDLE_SPECIAL_SCALAR: "1",
       MODEL_NAME: props.compiledModel.modelName,
       COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
       COMPILED_ARTIFACTS_S3_PREFIX: props.compiledModel.s3Prefix,

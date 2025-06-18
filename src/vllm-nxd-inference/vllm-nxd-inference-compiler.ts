@@ -14,6 +14,7 @@ import {
   INeuronxInstanceType,
   inferMemoryFootprintFromParameters,
   Model,
+  NeuronOptimizedMachineImage,
   NeuronxInstanceType,
   PytorchTrainingNeuronxImage,
 } from "../base/neuronx";
@@ -198,14 +199,30 @@ export class VllmNxdInferenceCompiler extends Construct {
       VLLM_NEURON_FRAMEWORK: "neuronx-distributed-inference",
       NEURON_COMPILED_ARTIFACTS: "neuron-compiled-artifacts",
       NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
+      XLA_HANDLE_SPECIAL_SCALAR: "1",
       MODEL_ID: props.model.modelId,
       MODEL_NAME: props.model.modelName,
       COMPILED_ARTIFACTS_S3_URI: props.bucket.s3UrlForObject(artifactS3Prefix),
+      COMPILED_ARTIFACTS_S3_PREFIX: artifactS3Prefix,
     };
     const secrets: { [key: string]: batch.Secret } = {};
     if (props.vllmArgs?.hfToken) {
       secrets.HF_TOKEN = props.vllmArgs.hfToken;
     }
+    const weightSize = Size.gibibytes(
+      props.model.options.parameters.toBillion() * 2.5,
+    );
+    const quantizedWightSize = props.vllmArgs?.overrideNeuronConfig?.quantized
+      ? weightSize
+      : Size.bytes(0);
+    const volumeSize = Size.gibibytes(
+      Math.ceil(
+        weightSize.toGibibytes() +
+          quantizedWightSize.toGibibytes() +
+          PytorchTrainingNeuronxImage.size.toGibibytes() +
+          NeuronOptimizedMachineImage.size.toGibibytes(),
+      ),
+    );
 
     const compiler = new NeuronxCompiler(this, "Resource", {
       ...props,
@@ -215,6 +232,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       command: vllmCliArgs,
       environment,
       secrets,
+      volumeSize,
     });
     this.vllmArgs = vllmArgs;
     this.compiler = compiler;
