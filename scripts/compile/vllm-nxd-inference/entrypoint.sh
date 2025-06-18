@@ -24,6 +24,8 @@ else
     huggingface-cli download $MODEL_ID --local-dir $MODEL_NAME
 fi
 
+python ~/vllm/quantize.py "$@"
+
 vllm serve "$@" 2>&1 | tee $LOG_FILE &
 
 wait_for_log_to_be_detected "Application startup complete" || exit 1

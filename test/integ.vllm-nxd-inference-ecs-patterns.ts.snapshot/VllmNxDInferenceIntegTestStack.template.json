@@ -1214,6 +1214,10 @@
        "Value": "1"
       },
       {
+       "Name": "XLA_HANDLE_SPECIAL_SCALAR",
+       "Value": "1"
+      },
+      {
        "Name": "MODEL_ID",
        "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
       },
@@ -1235,6 +1239,10 @@
          ]
         ]
        }
+      },
+      {
+       "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
+       "Value": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
       }
      ],
      "ExecutionRoleArn": {
@@ -1244,7 +1252,7 @@
       ]
      },
      "Image": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:720d5e74d6e7256efac7463d76d6a838ef3dd530d7c5fdddceca5f6f1cfbea18"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:95fc71bba74242771675d18068a88f988a57c0dab4d4bd0b96bdfc57fb070fb1"
      },
      "LinuxParameters": {
       "Devices": [
@@ -2353,6 +2361,10 @@
        },
        {
         "Name": "NEURON_RT_NUM_CORES",
+        "Value": "1"
+       },
+       {
+        "Name": "XLA_HANDLE_SPECIAL_SCALAR",
         "Value": "1"
        },
        {
