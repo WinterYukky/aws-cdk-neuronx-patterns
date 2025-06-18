@@ -187,6 +187,7 @@ export class NeuronxCompiler extends Construct {
         },
       ],
     });
+    props.model.bucket?.grantRead(computeEnvironment.instanceRole);
     props.bucket.grantReadWrite(computeEnvironment.instanceRole);
     this.jobDefinition = new NeuronxBatchEcsJobDefinition(
       this,
