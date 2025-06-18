@@ -1284,7 +1284,7 @@ export abstract class VllmEngineArgumentsParser {
           return [`--${key}`, ...value.map((v) => `${v}`)];
         }
         if (typeof value === "object") {
-          return [`--${key}`, `'${JSON.stringify(value)}'`];
+          return [`--${key}`, JSON.stringify(value)];
         }
         return [`--${key}`, `${value}`];
       });
