@@ -1,9 +1,22 @@
-import { CustomResource, Duration, Size, Tags } from "aws-cdk-lib";
+import {
+  CfnWaitCondition,
+  CfnWaitConditionHandle,
+  CustomResource,
+  Duration,
+  Fn,
+  Size,
+  Tags,
+} from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { Grant } from "aws-cdk-lib/aws-iam";
-import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
+import {
+  Code,
+  Function,
+  Runtime,
+  SingletonFunction,
+} from "aws-cdk-lib/aws-lambda";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
 import { Construct } from "constructs";
@@ -123,7 +136,7 @@ export interface NeuronxCompiledModel {
  */
 export class NeuronxCompiler extends Construct {
   private compiledModel?: NeuronxCompiledModel;
-  private readonly provider: Provider;
+  private readonly entrypoint: SingletonFunction;
   private readonly jobDefinition: NeuronxBatchEcsJobDefinition;
   private readonly jobQueue: batch.JobQueue;
   private readonly artifactS3Prefix: string;
@@ -215,6 +228,10 @@ export class NeuronxCompiler extends Construct {
       handler: "index.onEvent",
       runtime: Runtime.NODEJS_LATEST,
       uuid: "1361f469-5c92-4c46-9e11-5d1dbf925bac",
+      environment: {
+        JOB_DEFINITION_ARN: this.jobDefinition.jobDefinitionArn,
+        JOB_QUEUE_ARN: this.jobQueue.jobQueueArn,
+      },
     });
     this.jobDefinition.grantSubmitJob(jobSubmitFunction, this.jobQueue);
     const jobMonitoringFunction = new SingletonFunction(
@@ -225,6 +242,9 @@ export class NeuronxCompiler extends Construct {
         handler: "index.isComplete",
         runtime: Runtime.NODEJS_LATEST,
         uuid: "df16dba8-5f77-480c-a6ad-cfdf74c3de62",
+        environment: {
+          ARTIFACT_S3_PREFIX: props.artifactS3Prefix,
+        },
       },
     );
     Grant.addToPrincipal({
@@ -232,12 +252,28 @@ export class NeuronxCompiler extends Construct {
       grantee: jobMonitoringFunction,
       actions: ["batch:DescribeJobs"],
     });
-    this.provider = new Provider(this, "CompileJobProvider", {
+    const provider = new Provider(this, "CompileJobProvider", {
       onEventHandler: jobSubmitFunction,
       isCompleteHandler: jobMonitoringFunction,
       queryInterval: Duration.minutes(1),
-      totalTimeout: Duration.hours(1),
+      totalTimeout: Duration.hours(12),
     });
+    this.entrypoint = new SingletonFunction(this, "JobEntrypointFunction", {
+      code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
+      handler: "index.entrypoint",
+      environment: {
+        PROVIDER_ARN: provider.serviceToken,
+      },
+      timeout: Duration.minutes(15),
+      runtime: Runtime.NODEJS_LATEST,
+      uuid: "f6e66997-5042-4df1-8781-bd68b3ac5313",
+    });
+    Function.fromFunctionArn(
+      this,
+      "ProviderFunction",
+      provider.serviceToken,
+    ).grantInvoke(this.entrypoint);
+
     this.model = props.model;
     this.bucket = props.bucket;
     this.artifactS3Prefix = props.artifactS3Prefix;
@@ -245,27 +281,41 @@ export class NeuronxCompiler extends Construct {
     this.neuronxInstanceType = neuronxInstanceType;
   }
   compile() {
-    if (!this.compiledModel) {
-      const compileJob = new CustomResource(this, "NeuronxCompile", {
-        serviceToken: this.provider.serviceToken,
-        resourceType: "Custom::NeuronxCompile",
-        properties: {
-          jobDefinitionArn: this.jobDefinition.jobDefinitionArn,
-          jobQueueArn: this.jobQueue.jobQueueArn,
-          artifactS3Prefix: this.artifactS3Prefix,
-        },
-      });
-      this.compiledModel = {
-        modelName: this.model.modelName,
-        compileTimeInstanceType: this.neuronxInstanceType,
-        bucket: this.bucket,
-        s3Uri: this.bucket.s3UrlForObject(
-          compileJob.getAttString("ArtifactS3Prefix"),
-        ),
-        s3Prefix: compileJob.getAttString("ArtifactS3Prefix"),
-        weightSize: this.weightSize,
-      };
+    // when invoke multiple times
+    if (this.compiledModel) {
+      return this.compiledModel;
     }
+    const waitConditionHandle = new CfnWaitConditionHandle(
+      this,
+      `WaitConditionHandle${this.artifactS3Prefix}`,
+    );
+    const compileJob = new CustomResource(this, "NeuronxCompile", {
+      serviceToken: this.entrypoint.functionArn,
+      resourceType: "Custom::NeuronxCompile",
+      properties: {
+        waitConditionCallbackURL: waitConditionHandle.ref,
+      },
+    });
+    const wait = new CfnWaitCondition(
+      this,
+      `WaitCondition${this.artifactS3Prefix}`,
+      {
+        count: 1,
+        timeout: Duration.hours(12).toSeconds().toString(),
+        handle: waitConditionHandle.ref,
+      },
+    );
+    wait.node.addDependency(compileJob);
+    const s3Prefix = Fn.select(3, Fn.split('"', wait.attrData.toString()));
+
+    this.compiledModel = {
+      modelName: this.model.modelName,
+      compileTimeInstanceType: this.neuronxInstanceType,
+      bucket: this.bucket,
+      s3Prefix,
+      s3Uri: this.bucket.s3UrlForObject(s3Prefix),
+      weightSize: this.weightSize,
+    };
     return this.compiledModel;
   }
 }

@@ -1932,7 +1932,7 @@
      "Fn::Join": [
       "",
       [
-       "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":60,\"MaxAttempts\":60,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
+       "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":60,\"MaxAttempts\":720,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
        {
         "Fn::GetAtt": [
          "CompilerCompileJobProviderframeworkisComplete3CEC6FB9",
@@ -1978,28 +1978,37 @@
     "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
    ]
   },
+  "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9": {
+   "Type": "AWS::CloudFormation::WaitConditionHandle"
+  },
   "CompilerNeuronxCompile8E2589B5": {
    "Type": "Custom::NeuronxCompile",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
-      "CompilerCompileJobProviderframeworkonEvent782775F0",
+      "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0",
       "Arn"
      ]
     },
-    "jobDefinitionArn": {
-     "Ref": "CompilerJobDefinitionE25875BC"
-    },
-    "jobQueueArn": {
-     "Fn::GetAtt": [
-      "CompilerJobQueue59AB0D38",
-      "JobQueueArn"
-     ]
-    },
-    "artifactS3Prefix": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+    "waitConditionCallbackURL": {
+     "Ref": "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9"
+    }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
+  },
+  "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A": {
+   "Type": "AWS::CloudFormation::WaitCondition",
+   "Properties": {
+    "Count": 1,
+    "Handle": {
+     "Ref": "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9"
+    },
+    "Timeout": "43200"
+   },
+   "DependsOn": [
+    "CompilerNeuronxCompile8E2589B5"
+   ]
   },
   "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": {
    "Type": "AWS::IAM::Role",
@@ -2142,7 +2151,20 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "7d8cced9da872de6574397ad46c241c2c143dd8bbcd382c0983e066b28ccf98c.zip"
+     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "JOB_DEFINITION_ARN": {
+       "Ref": "CompilerJobDefinitionE25875BC"
+      },
+      "JOB_QUEUE_ARN": {
+       "Fn::GetAtt": [
+        "CompilerJobQueue59AB0D38",
+        "JobQueueArn"
+       ]
+      }
+     }
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2236,7 +2258,12 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "7d8cced9da872de6574397ad46c241c2c143dd8bbcd382c0983e066b28ccf98c.zip"
+     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "ARTIFACT_S3_PREFIX": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+     }
     },
     "Handler": "index.isComplete",
     "Role": {
@@ -2262,6 +2289,132 @@
        "/aws/lambda/",
        {
         "Ref": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "CompilerCompileJobProviderframeworkonEvent782775F0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "CompilerCompileJobProviderframeworkonEvent782775F0",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4",
+    "Roles": [
+     {
+      "Ref": "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9"
+     }
+    ]
+   }
+  },
+  "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "PROVIDER_ARN": {
+       "Fn::GetAtt": [
+        "CompilerCompileJobProviderframeworkonEvent782775F0",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "index.entrypoint",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4",
+    "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9"
+   ]
+  },
+  "SingletonLambdaf6e6699750424df18781bd68b3ac5313LogGroupFB3C121A": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0"
        }
       ]
      ]
@@ -2383,9 +2536,19 @@
            },
            "/",
            {
-            "Fn::GetAtt": [
-             "CompilerNeuronxCompile8E2589B5",
-             "ArtifactS3Prefix"
+            "Fn::Select": [
+             3,
+             {
+              "Fn::Split": [
+               "\"",
+               {
+                "Fn::GetAtt": [
+                 "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
+                 "Data"
+                ]
+               }
+              ]
+             }
             ]
            }
           ]
@@ -2395,9 +2558,19 @@
        {
         "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
         "Value": {
-         "Fn::GetAtt": [
-          "CompilerNeuronxCompile8E2589B5",
-          "ArtifactS3Prefix"
+         "Fn::Select": [
+          3,
+          {
+           "Fn::Split": [
+            "\"",
+            {
+             "Fn::GetAtt": [
+              "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
+              "Data"
+             ]
+            }
+           ]
+          }
          ]
         }
        }
@@ -3435,9 +3608,19 @@
       },
       "/",
       {
-       "Fn::GetAtt": [
-        "CompilerNeuronxCompile8E2589B5",
-        "ArtifactS3Prefix"
+       "Fn::Select": [
+        3,
+        {
+         "Fn::Split": [
+          "\"",
+          {
+           "Fn::GetAtt": [
+            "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
+            "Data"
+           ]
+          }
+         ]
+        }
        ]
       }
      ]
