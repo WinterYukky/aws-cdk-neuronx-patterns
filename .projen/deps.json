@@ -2,6 +2,7 @@
   "dependencies": [
     {
       "name": "@aws-cdk/aws-sagemaker-alpha",
+      "version": "2.200.1-alpha.0",
       "type": "build"
     },
     {
@@ -17,7 +18,15 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-lambda",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
+      "type": "build"
+    },
+    {
+      "name": "@types/cfn-response",
       "type": "build"
     },
     {
@@ -121,7 +130,12 @@
       "type": "build"
     },
     {
+      "name": "cfn-response",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-cdk/aws-sagemaker-alpha",
+      "version": "2.200.1-alpha.0",
       "type": "peer"
     },
     {
@@ -136,6 +150,7 @@
     },
     {
       "name": "@aws-cdk/aws-sagemaker-alpha",
+      "version": "2.200.1-alpha.0",
       "type": "runtime"
     }
   ],

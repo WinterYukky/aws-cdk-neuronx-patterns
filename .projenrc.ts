@@ -17,18 +17,21 @@ const project = new awscdk.AwsCdkConstructLibrary({
     prettier: true,
   },
   deps: [
-    `@aws-cdk/aws-sagemaker-alpha`,
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
     `@aws-cdk/integ-runner`,
     `@aws-cdk/integ-tests-alpha`,
-    `@aws-cdk/aws-sagemaker-alpha`,
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@types/aws-lambda",
+    "@types/cfn-response",
     "@aws-sdk/client-batch",
+    "@aws-sdk/client-lambda",
     "esbuild",
   ],
-  peerDeps: [`@aws-cdk/aws-sagemaker-alpha`],
+  bundledDeps: ["cfn-response"],
+  peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js"],
   githubOptions: {
     pullRequestLintOptions: {
