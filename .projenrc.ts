@@ -30,7 +30,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "@aws-sdk/client-lambda",
     "esbuild",
   ],
-  bundledDeps: ["cfn-response"],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js"],
   githubOptions: {
