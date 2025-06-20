@@ -18,6 +18,10 @@ import { INeuronxContainerImage } from "../base/neuronx-compiler";
 import { VllmEngineArgumentsParser } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceCompiledModel } from "./vllm-nxd-inference-compiler";
 
+export interface VllmNxdInferenceImageOptions {
+  readonly vllmGitBranch?: string;
+  readonly vllmGitCommitHash?: string;
+}
 /**
  * Base class for VllmNxdInferenceImage.
  */
@@ -29,18 +33,26 @@ export abstract class VllmNxdInferenceImageBase
    */
   abstract readonly image: ecs.ContainerImage;
   /**
+   * The Git branch name of aws-neuron/upstreaming-to-vllm.
+   * @see https://github.com/aws-neuron/upstreaming-to-vllm
+   */
+  readonly vllmGitBranch: string;
+  /**
+   * The Git commit fosh of aws-neuron/upstreaming-to-vllm.
+   * @see https://github.com/aws-neuron/upstreaming-to-vllm
+   */
+  readonly vllmGitCommitHash: string;
+  /**
    * The neuronx SDK version.
    */
   readonly sdkVersion: string;
-  constructor(neruonxImage: INeuronxImage) {
+  constructor(
+    neruonxImage: INeuronxImage,
+    options: VllmNxdInferenceImageOptions = {},
+  ) {
     this.sdkVersion = neruonxImage.sdkVersion;
-  }
-  /**
-   * The Git branch name for aws-neuron/upstreaming-to-vllm.
-   * @see https://github.com/aws-neuron/upstreaming-to-vllm
-   */
-  get vllmGitBranch(): string {
-    return "main";
+    this.vllmGitBranch = options.vllmGitBranch ?? "main";
+    this.vllmGitCommitHash = options.vllmGitCommitHash ?? "";
   }
 }
 
@@ -50,8 +62,11 @@ export abstract class VllmNxdInferenceImageBase
  */
 export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
   readonly image: ecs.ContainerImage;
-  constructor(neruonxImage: INeuronxImage) {
-    super(neruonxImage);
+  constructor(
+    neruonxImage: INeuronxImage,
+    options?: VllmNxdInferenceImageOptions,
+  ) {
+    super(neruonxImage, options);
     this.image = ecs.ContainerImage.fromAsset(
       join(__dirname, "../../scripts/inference/vllm-nxd-inference"),
       {
@@ -59,6 +74,7 @@ export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
           IMAGE_NAME: neruonxImage.imageName,
           IMAGE_TAG: neruonxImage.imageTag,
           VLLM_GIT_BRANCH: this.vllmGitBranch,
+          VLLM_GIT_COMMIT_HASH: this.vllmGitCommitHash,
         },
       },
     );

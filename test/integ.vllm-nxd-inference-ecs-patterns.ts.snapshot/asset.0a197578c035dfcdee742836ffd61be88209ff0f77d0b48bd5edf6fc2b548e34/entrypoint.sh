@@ -33,3 +33,5 @@ wait_for_log_to_be_detected "Application startup complete" || exit 1
 aws s3 cp --no-progress --recursive ./ $COMPILED_ARTIFACTS_S3_URI \
     --exclude "**/.cache/*" \
     --exclude global_metric_store.json
+
+echo 'Compile completed.'

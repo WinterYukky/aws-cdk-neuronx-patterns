@@ -57,16 +57,16 @@
         }
       }
     },
-    "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732": {
+    "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48": {
       "displayName": "SingletonLambda1361f4695c924c469e115d1dbf925bac/Code",
       "source": {
-        "path": "asset.e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732",
+        "path": "asset.fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48",
         "packaging": "zip"
       },
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip",
+          "objectKey": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
@@ -85,7 +85,7 @@
         }
       }
     },
-    "238a98294c5c8ddcd11523ef156ad47e78565202ac49b6cf966e5a9141ee250c": {
+    "975a6d67ceb3381889b34318115041bb60c491d32e6ad6c312ba683688ebbecc": {
       "displayName": "VllmNxDInferenceIntegTestStack Template",
       "source": {
         "path": "VllmNxDInferenceIntegTestStack.template.json",
@@ -94,43 +94,45 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "238a98294c5c8ddcd11523ef156ad47e78565202ac49b6cf966e5a9141ee250c.json",
+          "objectKey": "975a6d67ceb3381889b34318115041bb60c491d32e6ad6c312ba683688ebbecc.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     }
   },
   "dockerImages": {
-    "95fc71bba74242771675d18068a88f988a57c0dab4d4bd0b96bdfc57fb070fb1": {
+    "0a197578c035dfcdee742836ffd61be88209ff0f77d0b48bd5edf6fc2b548e34": {
       "displayName": "Compiler/Resource/JobDefinition/ContainerDefinition/AssetImage",
       "source": {
-        "directory": "asset.95fc71bba74242771675d18068a88f988a57c0dab4d4bd0b96bdfc57fb070fb1",
+        "directory": "asset.0a197578c035dfcdee742836ffd61be88209ff0f77d0b48bd5edf6fc2b548e34",
         "dockerBuildArgs": {
           "IMAGE_TAG": "2.6.0-neuronx-py310-sdk2.23.0-ubuntu22.04",
-          "VLLM_GIT_BRANCH": "main"
+          "VLLM_GIT_BRANCH": "main",
+          "VLLM_GIT_COMMIT_HASH": ""
         }
       },
       "destinations": {
         "current_account-current_region": {
           "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "95fc71bba74242771675d18068a88f988a57c0dab4d4bd0b96bdfc57fb070fb1",
+          "imageTag": "0a197578c035dfcdee742836ffd61be88209ff0f77d0b48bd5edf6fc2b548e34",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
-    "0933d7e60efa1d690a769cd8d8a152d9096bce21ac896a36dfd1a2a2b778e16f": {
+    "7f4f5655e82a539bc4d4ddc8d3055c8333137b11572b52cccd9d03e1822ba091": {
       "displayName": "TaskDefinition/vLLM/AssetImage",
       "source": {
-        "directory": "asset.0933d7e60efa1d690a769cd8d8a152d9096bce21ac896a36dfd1a2a2b778e16f",
+        "directory": "asset.7f4f5655e82a539bc4d4ddc8d3055c8333137b11572b52cccd9d03e1822ba091",
         "dockerBuildArgs": {
           "IMAGE_TAG": "2.6.0-neuronx-py310-sdk2.23.0-ubuntu22.04",
-          "VLLM_GIT_BRANCH": "main"
+          "VLLM_GIT_BRANCH": "main",
+          "VLLM_GIT_COMMIT_HASH": ""
         }
       },
       "destinations": {
         "current_account-current_region": {
           "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "0933d7e60efa1d690a769cd8d8a152d9096bce21ac896a36dfd1a2a2b778e16f",
+          "imageTag": "7f4f5655e82a539bc4d4ddc8d3055c8333137b11572b52cccd9d03e1822ba091",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

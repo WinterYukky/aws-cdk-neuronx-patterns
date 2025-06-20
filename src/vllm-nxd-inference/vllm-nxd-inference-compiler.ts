@@ -27,7 +27,10 @@ import {
   VllmEngineArguments,
   VllmEngineArgumentsParser,
 } from "../base/server-engine/vllm-engine";
-import { VllmNxdInferenceImageBase } from "./vllm-nxd-inference-ecs-patterns";
+import {
+  VllmNxdInferenceImageBase,
+  VllmNxdInferenceImageOptions,
+} from "./vllm-nxd-inference-ecs-patterns";
 
 /**
  * Compile runtime container image for vLLM NxD Inference
@@ -37,8 +40,11 @@ export class VllmNxdInferenceCompileImage extends VllmNxdInferenceImageBase {
    * The container image.
    */
   readonly image: ContainerImage;
-  constructor(neruonxImage: INeuronxImage) {
-    super(neruonxImage);
+  constructor(
+    neruonxImage: INeuronxImage,
+    options?: VllmNxdInferenceImageOptions,
+  ) {
+    super(neruonxImage, options);
     this.image = ContainerImage.fromAsset(
       join(__dirname, "../../scripts/compile/vllm-nxd-inference"),
       {
@@ -46,6 +52,7 @@ export class VllmNxdInferenceCompileImage extends VllmNxdInferenceImageBase {
           IMAGE_NAME: neruonxImage.imageName,
           IMAGE_TAG: neruonxImage.imageTag,
           VLLM_GIT_BRANCH: this.vllmGitBranch,
+          VLLM_GIT_COMMIT_HASH: this.vllmGitCommitHash,
         },
       },
     );

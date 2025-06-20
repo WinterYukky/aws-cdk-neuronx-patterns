@@ -1018,7 +1018,7 @@
       ]
      },
      "InstanceTypes": [
-      "inf2.8xlarge"
+      "inf2.xlarge"
      ],
      "LaunchTemplate": {
       "LaunchTemplateId": {
@@ -1202,6 +1202,21 @@
      ],
      "Environment": [
       {
+       "Name": "NEURON_COMPILE_CACHE_URL",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "Bucket83908E77"
+          },
+          "/neuron-compile-cache"
+         ]
+        ]
+       }
+      },
+      {
        "Name": "VLLM_NEURON_FRAMEWORK",
        "Value": "neuronx-distributed-inference"
       },
@@ -1252,7 +1267,7 @@
       ]
      },
      "Image": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:95fc71bba74242771675d18068a88f988a57c0dab4d4bd0b96bdfc57fb070fb1"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:0a197578c035dfcdee742836ffd61be88209ff0f77d0b48bd5edf6fc2b548e34"
      },
      "LinuxParameters": {
       "Devices": [
@@ -1270,11 +1285,11 @@
      "ResourceRequirements": [
       {
        "Type": "MEMORY",
-       "Value": "124519"
+       "Value": "15565"
       },
       {
        "Type": "VCPU",
-       "Value": "32"
+       "Value": "4"
       }
      ],
      "Secrets": []
@@ -2151,7 +2166,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
@@ -2258,7 +2273,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
@@ -2378,7 +2393,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e677d536ef97c13a878dc6e672f20a267e8a7d55e3dd0eecae726bb75cecd732.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
@@ -2587,7 +2602,7 @@
        "Timeout": 5
       },
       "Image": {
-       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:0933d7e60efa1d690a769cd8d8a152d9096bce21ac896a36dfd1a2a2b778e16f"
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:7f4f5655e82a539bc4d4ddc8d3055c8333137b11572b52cccd9d03e1822ba091"
       },
       "LinuxParameters": {
        "Capabilities": {},

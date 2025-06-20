@@ -5,6 +5,7 @@ ARG USERNAME=neuronx
 ARG USER_UID=1000
 ARG USER_GID=1000
 ARG VLLM_GIT_BRANCH=main
+ARG VLLM_GIT_COMMIT_HASH=""
 
 RUN apt-get update && \
     apt-get install -y sudo git && \
@@ -19,9 +20,13 @@ RUN pip install -U pip && \
 
 WORKDIR /usr/src
 
-RUN git clone -b ${VLLM_GIT_BRANCH} https://github.com/aws-neuron/upstreaming-to-vllm.git && \
+RUN git clone -b ${VLLM_GIT_BRANCH} --depth 1 https://github.com/aws-neuron/upstreaming-to-vllm.git && \
+    if [ -n "$VLLM_GIT_COMMIT_HASH" ]; then \
+        git checkout $VLLM_GIT_COMMIT_HASH; \
+    fi && \
     pip install -r ./upstreaming-to-vllm/requirements/neuron.txt && \
-    SETUPTOOLS_SCM_PRETEND_VERSION="0.9.0" VLLM_TARGET_DEVICE="neuron" pip install -e ./upstreaming-to-vllm
+    SETUPTOOLS_SCM_PRETEND_VERSION="0.9.0" VLLM_TARGET_DEVICE="neuron" pip install -e ./upstreaming-to-vllm && \
+    rm -rf .git
 
 WORKDIR /home/$USERNAME/vllm
 
