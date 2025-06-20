@@ -10293,6 +10293,45 @@ The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
+### VllmNxdInferenceImageOptions <a name="VllmNxdInferenceImageOptions" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions"></a>
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions.Initializer"></a>
+
+```typescript
+import { VllmNxdInferenceImageOptions } from 'aws-cdk-neuronx-patterns'
+
+const vllmNxdInferenceImageOptions: VllmNxdInferenceImageOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `vllmGitBranch`<sup>Optional</sup> <a name="vllmGitBranch" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions.property.vllmGitBranch"></a>
+
+```typescript
+public readonly vllmGitBranch: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vllmGitCommitHash`<sup>Optional</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions.property.vllmGitCommitHash"></a>
+
+```typescript
+public readonly vllmGitCommitHash: string;
+```
+
+- *Type:* string
+
+---
+
 ### VllmNxdInferenceTaskDefinitionProps <a name="VllmNxdInferenceTaskDefinitionProps" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps"></a>
 
 Task definition for VllmNxdInference.
@@ -11790,18 +11829,25 @@ Compile runtime container image for vLLM NxD Inference.
 ```typescript
 import { VllmNxdInferenceCompileImage } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceCompileImage(neruonxImage: INeuronxImage)
+new VllmNxdInferenceCompileImage(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
 
 ---
 
 ##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.neruonxImage"></a>
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+---
+
+##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
 
 ---
 
@@ -11813,7 +11859,8 @@ new VllmNxdInferenceCompileImage(neruonxImage: INeuronxImage)
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name for aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
 
 ---
 
@@ -11849,7 +11896,21 @@ public readonly vllmGitBranch: string;
 
 - *Type:* string
 
-The Git branch name for aws-neuron/upstreaming-to-vllm.
+The Git branch name of aws-neuron/upstreaming-to-vllm.
+
+> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
+
+---
+
+##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitCommitHash"></a>
+
+```typescript
+public readonly vllmGitCommitHash: string;
+```
+
+- *Type:* string
+
+The Git commit fosh of aws-neuron/upstreaming-to-vllm.
 
 > [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
 
@@ -11872,18 +11933,25 @@ new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST)
 ```typescript
 import { VllmNxdInferenceImage } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceImage(neruonxImage: INeuronxImage)
+new VllmNxdInferenceImage(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
 
 ---
 
 ##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.neruonxImage"></a>
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+---
+
+##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
 
 ---
 
@@ -11895,7 +11963,8 @@ new VllmNxdInferenceImage(neruonxImage: INeuronxImage)
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name for aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
 
 ---
 
@@ -11931,7 +12000,21 @@ public readonly vllmGitBranch: string;
 
 - *Type:* string
 
-The Git branch name for aws-neuron/upstreaming-to-vllm.
+The Git branch name of aws-neuron/upstreaming-to-vllm.
+
+> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
+
+---
+
+##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitCommitHash"></a>
+
+```typescript
+public readonly vllmGitCommitHash: string;
+```
+
+- *Type:* string
+
+The Git commit fosh of aws-neuron/upstreaming-to-vllm.
 
 > [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
 
@@ -11949,18 +12032,25 @@ Base class for VllmNxdInferenceImage.
 ```typescript
 import { VllmNxdInferenceImageBase } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceImageBase(neruonxImage: INeuronxImage)
+new VllmNxdInferenceImageBase(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
 
 ---
 
 ##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.neruonxImage"></a>
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+---
+
+##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
 
 ---
 
@@ -11972,7 +12062,8 @@ new VllmNxdInferenceImageBase(neruonxImage: INeuronxImage)
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name for aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
 
 ---
 
@@ -12008,7 +12099,21 @@ public readonly vllmGitBranch: string;
 
 - *Type:* string
 
-The Git branch name for aws-neuron/upstreaming-to-vllm.
+The Git branch name of aws-neuron/upstreaming-to-vllm.
+
+> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
+
+---
+
+##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitCommitHash"></a>
+
+```typescript
+public readonly vllmGitCommitHash: string;
+```
+
+- *Type:* string
+
+The Git commit fosh of aws-neuron/upstreaming-to-vllm.
 
 > [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
 

@@ -50,6 +50,7 @@ class VllmNxDInferenceIntegTestStack extends Stack {
           layers: 30,
         },
       }),
+      neuronxInstanceType: NeuronxInstanceType.INF2_XLARGE,
     });
     const compiledModel = compiler.compile();
     const taskDefinition = new VllmNxdInferenceTaskDefinition(
@@ -57,7 +58,6 @@ class VllmNxDInferenceIntegTestStack extends Stack {
       "TaskDefinition",
       {
         compiledModel,
-        neuronxInstanceType: NeuronxInstanceType.INF2_XLARGE,
       },
     );
     this.service = new ApplicationLoadBalancedVllmNxDInferenceService(

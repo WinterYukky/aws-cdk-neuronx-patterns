@@ -13,7 +13,7 @@ import {
   type CdkCustomResourceHandler,
   type CdkCustomResourceIsCompleteHandler,
 } from "aws-lambda";
-import * as cfnresponse from "cfn-response";
+import { cfnRespond } from "./cfn-response";
 
 const region = process.env.AWS_DEFAULT_REGION ?? "us-east-1";
 const batch = new BatchClient({
@@ -94,7 +94,7 @@ const isJobComplete = async (event: CdkCustomResourceIsCompleteEvent) => {
 };
 
 export const isComplete: CdkCustomResourceIsCompleteHandler = async (event) => {
-  const respond = async (body: WaitConditionRequestBody) =>
+  const waitConditionRespond = async (body: WaitConditionRequestBody) =>
     fetch(event.waitConditionCallbackURL, {
       method: "PUT",
       headers: {
@@ -110,7 +110,7 @@ export const isComplete: CdkCustomResourceIsCompleteHandler = async (event) => {
         IsComplete: false,
       };
     }
-    const response = await respond({
+    const response = await waitConditionRespond({
       Status: "SUCCESS",
       Reason: "Compile Success",
       UniqueId: event.jobId,
@@ -119,7 +119,7 @@ export const isComplete: CdkCustomResourceIsCompleteHandler = async (event) => {
     console.log("response", await response.text());
     return result;
   } catch (error) {
-    const response = await respond({
+    const response = await waitConditionRespond({
       Status: "FAILURE",
       Reason: (error as Error).message,
       UniqueId: event.jobId,
@@ -146,51 +146,23 @@ export const entrypoint: CloudFormationCustomResourceHandler = async (
         }),
       }),
     );
-    const response = {
-      PhysicalResourceId: event.LogicalResourceId
-        ? event.LogicalResourceId
-        : undefined,
-      Data: {},
-      Status: cfnresponse.SUCCESS,
-    };
-    await sendResponse(event, context, response);
-  } catch (error) {
-    console.log(error);
-    const response = {
-      PhysicalResourceId: event.LogicalResourceId
-        ? event.LogicalResourceId
-        : undefined,
-      Data: {},
-      Status: cfnresponse.FAILED,
-    };
-    await sendResponse(event, context, response);
-  }
-};
-
-/**
- * Send response back to cloudformation
- * @param event
- * @param context
- * @param response
- */
-async function sendResponse(
-  event: any,
-  context: any,
-  response: {
-    Status: "SUCCESS" | "FAILED";
-    Data: any;
-    PhysicalResourceId?: string;
-  },
-) {
-  await new Promise(() =>
-    cfnresponse.send(
+    await cfnRespond(
       event,
       context,
-      response.Status,
-      response.Data,
-      response.PhysicalResourceId,
+      "SUCCESS",
+      {},
+      event.LogicalResourceId,
       false,
-    ),
-  );
-  return;
-}
+    );
+  } catch (error) {
+    console.log(error);
+    await cfnRespond(
+      event,
+      context,
+      "FAILED",
+      {},
+      event.LogicalResourceId,
+      false,
+    );
+  }
+};
