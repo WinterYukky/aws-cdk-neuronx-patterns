@@ -217,7 +217,10 @@ export class NeuronxCompiler extends Construct {
           Math.ceil(neuronxInstanceType.memory.toMebibytes() * 0.95),
         ),
         cpu: neuronxInstanceType.vCpu,
-        environment: props.environment,
+        environment: {
+          NEURON_COMPILE_CACHE_URL: `${props.bucket.s3UrlForObject("neuron-compile-cache")}`,
+          ...props.environment,
+        },
         command: props.command,
         secrets: props.secrets,
       },
