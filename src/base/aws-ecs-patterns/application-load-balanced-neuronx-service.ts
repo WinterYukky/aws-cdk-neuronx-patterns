@@ -65,7 +65,7 @@ export class NeuronxTaskDefinition
       placementConstraints: [
         ...(props.placementConstraints ?? []),
         ecs.PlacementConstraint.memberOf(
-          `runningTasksCount<${tasksPerInstance}`,
+          `runningTasksCount<${Math.floor(tasksPerInstance)}`,
         ),
       ],
     });
