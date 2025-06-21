@@ -61,13 +61,19 @@ export class NeuronxTaskDefinition
     const tasksPerInstance = Math.floor(
       neuronxInstanceType.acceleratorChips.neuronxCores / tensorParallelSize,
     );
+    const placementConstraints =
+      tasksPerInstance >= 2
+        ? [
+            ecs.PlacementConstraint.memberOf(
+              `runningTasksCount<${tasksPerInstance}`,
+            ),
+          ]
+        : [];
     super(scope, id, {
       ...props,
       placementConstraints: [
         ...(props.placementConstraints ?? []),
-        ecs.PlacementConstraint.memberOf(
-          `runningTasksCount<${tasksPerInstance}`,
-        ),
+        ...placementConstraints,
       ],
     });
     this.linuxParameters = new ecs.LinuxParameters(this, "LinuxParameters");
