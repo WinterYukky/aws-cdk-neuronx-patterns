@@ -58,14 +58,15 @@ export class NeuronxTaskDefinition
     const neuronxInstanceType =
       props.neuronxInstanceType ?? props.compiledModel.compileTimeInstanceType;
     const tensorParallelSize = props.tensorParallelSize ?? 1;
-    const tasksPerInstance =
-      neuronxInstanceType.acceleratorChips.neuronxCores / tensorParallelSize;
+    const tasksPerInstance = Math.floor(
+      neuronxInstanceType.acceleratorChips.neuronxCores / tensorParallelSize,
+    );
     super(scope, id, {
       ...props,
       placementConstraints: [
         ...(props.placementConstraints ?? []),
         ecs.PlacementConstraint.memberOf(
-          `runningTasksCount<${Math.floor(tasksPerInstance)}`,
+          `runningTasksCount<${tasksPerInstance}`,
         ),
       ],
     });
@@ -175,6 +176,9 @@ mount-s3 ${neuronxTaskDefinition.compiledModel.bucket.bucketName} /mnt/${neuronx
       PytorchTrainingNeuronxImage.size.toGibibytes() +
         NeuronOptimizedMachineImage.size.toGibibytes(),
     );
+    const desiredCapacity = Math.ceil(
+      (props.desiredCount ?? 1) / neuronxTaskDefinition.tasksPerInstance,
+    );
     const autoScalingGroup = new AutoScalingGroup(this, "AutoScalingGroup", {
       vpc: cluster.vpc,
       instanceType: neuronxTaskDefinition.neuronxInstanceType.instanceType,
@@ -192,9 +196,11 @@ mount-s3 ${neuronxTaskDefinition.compiledModel.bucket.bucketName} /mnt/${neuronx
         },
       ],
       userData,
-      desiredCapacity: Math.ceil(
-        (props.desiredCount ?? 1) / neuronxTaskDefinition.tasksPerInstance,
-      ),
+      desiredCapacity,
+      maxCapacity:
+        neuronxTaskDefinition.tasksPerInstance === 1
+          ? desiredCapacity + 1
+          : undefined,
     });
     autoScalingGroup.connections.allowFrom(
       this.loadBalancer,
