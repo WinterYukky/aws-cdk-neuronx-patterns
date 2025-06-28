@@ -26,7 +26,29 @@ pnpm i aws-cdk-neuronx-patterns
 > [!WARNING]
 > This construct uses an Inferentia2 instance on ECS. You may need to increase your request limit for your AWS account.
 
-By using the `VllmNxdInferenceCompiler` construct included in this construct library, models published on HuggingFace can be easily deployed to ECS with Application Load Balancer. To define using the `VllmNxdInferenceCompiler` construct:
+By using the `VllmNxdInferenceCompiler` construct included in this construct library, models published on HuggingFace can be easily deployed to ECS with Application Load Balancer. 
+
+### Using Official AWS Neuron vLLM Images
+
+This library supports the official AWS Neuron Deep Learning Containers for vLLM inference. You can use the `VllmInferenceNeuronxImage` class to reference these images and `VllmNxdInferenceImage.fromImage` to create a compatible image object:
+
+```typescript
+// Use the official vLLM Neuron Image
+const vllmImage = VllmNxdInferenceImage.fromImage(
+  VllmInferenceNeuronxImage.LATEST
+);
+
+// Use with task definition
+const taskDefinition = new VllmNxdInferenceTaskDefinition(this, 'TaskDefinition', {
+  vpc,
+  compiledModel,
+  image: vllmImage,
+});
+```
+
+### Basic Usage
+
+To define using the `VllmNxdInferenceCompiler` construct:
 
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";

@@ -13,7 +13,11 @@ import {
   NeuronxTaskDefinition,
   NeuronxTaskDefinitionPropsBase,
 } from "../base/aws-ecs-patterns";
-import { INeuronxImage, PytorchTrainingNeuronxImage } from "../base/neuronx";
+import { 
+  INeuronxImage, 
+  PytorchTrainingNeuronxImage,
+  VllmInferenceNeuronxImage 
+} from "../base/neuronx";
 import { INeuronxContainerImage } from "../base/neuronx-compiler";
 import { VllmEngineArgumentsParser } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceCompiledModel } from "./vllm-nxd-inference-compiler";
@@ -58,10 +62,25 @@ export abstract class VllmNxdInferenceImageBase
 
 /**
  * Inference container image for vLLM on NxD Inference.
+ * This image builds a custom container that installs vLLM from source.
+ * 
+ * Consider using {@link VllmNxdInferenceImage.fromImage} with {@link PytorchInferenceVllmNeuronxImage}
+ * to use the official AWS Neuron Deep Learning Containers which come with vLLM pre-installed.
+ * 
  * @example new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST)
  */
 export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
   readonly image: ecs.ContainerImage;
+
+  /**
+   * Create a VllmNxdInferenceImage from a custom neuronx image.
+   * This will build a container image using a Dockerfile that installs vLLM from source.
+   * 
+   * @example
+   * ```ts
+   * new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST)
+   * ```
+   */
   constructor(
     neruonxImage: INeuronxImage,
     options?: VllmNxdInferenceImageOptions,
@@ -79,6 +98,28 @@ export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
       },
     );
   }
+  
+  /**
+   * Create a VllmNxdInferenceImage from an existing neuronx image.
+   * This is useful for using the official AWS Neuron Deep Learning Containers.
+   * 
+   * @example
+   * ```ts
+   * VllmNxdInferenceImage.fromImage(PytorchInferenceVllmNeuronxImage.LATEST)
+   * ```
+   */
+  static fromImage(neuronxImage: INeuronxImage): VllmNxdInferenceImage {
+    class FromImageVllmNxdInferenceImage extends VllmNxdInferenceImage {
+      constructor() {
+        super(neuronxImage);
+        this.image = ecs.ContainerImage.fromRegistry(
+          `${neuronxImage.imageName}:${neuronxImage.imageTag}`
+        );
+      }
+    }
+    
+    return new FromImageVllmNxdInferenceImage();
+  }
 }
 
 /**
@@ -94,7 +135,7 @@ export interface VllmNxdInferenceTaskDefinitionProps
    * The image to be used for the container.
    * @default - latest VllmNxdInferenceImage
    */
-  readonly image?: VllmNxdInferenceImage;
+  readonly image?: VllmNxdInferenceImageBase;
   /**
    * The environment variables to pass to the container.
    * This is only applicable when using container runtime.

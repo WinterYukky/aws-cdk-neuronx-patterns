@@ -7,6 +7,13 @@ export interface INeuronxImage {
 }
 abstract class NeuronxImage {
   static readonly size = Size.gibibytes(30);
+  /** Neuron SDK 2.24.0 */
+  static readonly SDK_2_24_0 = NeuronxImage.fromSdkVersion(
+    "2.24.0",
+    "3.10",
+    "2.7.0",
+    "22.04",
+  );
   /** Neuron SDK 2.23.0 */
   static readonly SDK_2_23_0 = NeuronxImage.fromSdkVersion(
     "2.23.0",
@@ -114,4 +121,51 @@ abstract class NeuronxImage {
 
 export class PytorchTrainingNeuronxImage extends NeuronxImage {
   static readonly imageName = "public.ecr.aws/neuron/pytorch-training-neuronx";
+}
+
+export class VllmInferenceNeuronxImage {
+  /**
+   * Neuron SDK 2.24.0 with vLLM 0.7.2
+   * Supported on trn1, trn2, inf2
+   */
+  static readonly SDK_2_24_0 = VllmInferenceNeuronxImage.fromSdkVersion(
+    "2.24.0",
+    "0.7.2",
+    "3.10",
+    "22.04",
+  );
+  
+  /** Latest Neuron SDK */
+  static readonly LATEST = VllmInferenceNeuronxImage.SDK_2_24_0;
+  
+  readonly imageName: string;
+  readonly imageTag: string;
+  readonly sdkVersion: string;
+  readonly vllmVersion: string;
+  
+  private constructor(props: {
+    readonly imageName: string;
+    readonly imageTag: string;
+    readonly sdkVersion: string;
+    readonly vllmVersion: string;
+  }) {
+    this.imageName = props.imageName;
+    this.imageTag = props.imageTag;
+    this.sdkVersion = props.sdkVersion;
+    this.vllmVersion = props.vllmVersion;
+  }
+  
+  static fromSdkVersion(
+    sdkVersion: string,
+    vllmVersion: string,
+    pythonVersion: string,
+    ubuntuVersion: string,
+  ): VllmInferenceNeuronxImage {
+    return new VllmInferenceNeuronxImage({
+      sdkVersion,
+      vllmVersion,
+      imageName: "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx",
+      imageTag: `${vllmVersion}-neuronx-py${pythonVersion.replace(".", "")}-sdk${sdkVersion}-ubuntu${ubuntuVersion}`,
+    });
+  }
 }
