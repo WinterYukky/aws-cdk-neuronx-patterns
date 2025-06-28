@@ -3,4 +3,3 @@ export * from "./deep-learning-containers";
 export * from "./model";
 export * from "./neuron-optimized-machine-image";
 export * from "./neuronx-instance-type";
-export * from "./vllm-inference";
