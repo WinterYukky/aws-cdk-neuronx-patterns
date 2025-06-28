@@ -130,7 +130,6 @@ export class PytorchTrainingNeuronxImage extends PytorchNeuronxImage {
 export class VllmInferenceNeuronxImage extends NeuronxImage {
   /**
    * Neuron SDK 2.24.0 with vLLM 0.7.2
-   * Supported on trn1, trn2, inf2
    */
   static readonly SDK_2_24_0 = VllmInferenceNeuronxImage.fromSdkVersion(
     "2.24.0",
