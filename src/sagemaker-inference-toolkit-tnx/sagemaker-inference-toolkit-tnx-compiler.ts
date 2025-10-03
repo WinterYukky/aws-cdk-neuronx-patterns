@@ -71,7 +71,7 @@ export class SageMakerInferenceToolkitTnxCompileImage
   implements INeuronxContainerImage
 {
   readonly image: ContainerImage;
-  readonly sdkVersion: string;
+  readonly neuronSdkVersion: string;
   constructor(neruonxImage: INeuronxImage) {
     this.image = ContainerImage.fromAsset(
       join(__dirname, "../../scripts/compile/sagemaker-inference-toolkit-tnx"),
@@ -82,7 +82,7 @@ export class SageMakerInferenceToolkitTnxCompileImage
         },
       },
     );
-    this.sdkVersion = neruonxImage.sdkVersion;
+    this.neuronSdkVersion = neruonxImage.neuronSdkVersion;
   }
 }
 
@@ -202,7 +202,7 @@ export class SageMakerInferenceToolkitTnxCompiler extends Construct {
       new SageMakerInferenceToolkitTnxCompileImage(
         PytorchTrainingNeuronxImage.LATEST,
       );
-    let compiledArtifactPathPrefix = `${props.model.modelId}/neuronx-${image.sdkVersion}/tp${tpDegree}-np${nPositions}-opt${optLevel}`;
+    let compiledArtifactPathPrefix = `${props.model.modelId}/neuronx-${image.neuronSdkVersion}/tp${tpDegree}-np${nPositions}-opt${optLevel}`;
     if (quantDtype!!) {
       compiledArtifactPathPrefix = `${compiledArtifactPathPrefix}-quant${quantDtype}`;
     }

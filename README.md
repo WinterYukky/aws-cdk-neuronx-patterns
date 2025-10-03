@@ -24,27 +24,9 @@ pnpm i aws-cdk-neuronx-patterns
 ## vLLM NxD Inference on ALB & ECS on EC2
 
 > [!WARNING]
-> This construct uses an Inferentia2 instance on ECS. You may need to increase your request limit for your AWS account.
+> This construct uses an Inferentia2 instance on EC2. You may need to increase your request limit for your AWS account.
 
-By using the `VllmNxdInferenceCompiler` construct included in this construct library, models published on HuggingFace can be easily deployed to ECS with Application Load Balancer. 
-
-### Using Official AWS Neuron vLLM Images
-
-This library supports the official AWS Neuron Deep Learning Containers for vLLM inference. You can use the `VllmInferenceNeuronxImage` class to reference these images and `VllmNxdInferenceImage.fromImage` to create a compatible image object:
-
-```typescript
-// Use the official vLLM Neuron Image
-const vllmImage = VllmNxdInferenceImage.fromImage(
-  VllmInferenceNeuronxImage.LATEST
-);
-
-// Use with task definition
-const taskDefinition = new VllmNxdInferenceTaskDefinition(this, 'TaskDefinition', {
-  vpc,
-  compiledModel,
-  image: vllmImage,
-});
-```
+By using the `VllmNxdInferenceCompiler` construct included in this construct library, models published on HuggingFace can be easily deployed to ECS with Application Load Balancer.
 
 ### Basic Usage
 
@@ -91,6 +73,28 @@ The construct will automatically:
 - Configure health checks and auto-scaling
 
 The service exposes a REST API endpoint through the Application Load Balancer that can be used to perform inference with the deployed model.
+
+### Using specific Official AWS Neuron vLLM Image version
+
+This library supports the official AWS Neuron Deep Learning Containers for vLLM inference. You can use the `VllmInferenceNeuronxImage` class to reference these images and `VllmNxdInferenceImage.fromNeuronSdkVersion` to create a compatible image object:
+
+```typescript
+// Use the official vLLM Neuron Image
+const vllmImage = VllmNxdInferenceImage.fromNeuronSdkVersion(
+  VllmInferenceNeuronxImage.SDK_2_26_0,
+);
+
+// Use with task definition
+const taskDefinition = new VllmNxdInferenceTaskDefinition(
+  this,
+  "TaskDefinition",
+  {
+    vpc,
+    compiledModel,
+    image: vllmImage, // Default is using latest official vLLM Neuron Image
+  },
+);
+```
 
 ### Using HuggingFace Token with Secrets
 

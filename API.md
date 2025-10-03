@@ -10363,7 +10363,7 @@ const vllmNxdInferenceTaskDefinitionProps: VllmNxdInferenceTaskDefinitionProps =
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.tensorParallelSize">tensorParallelSize</a></code> | <code>number</code> | The number of tensor parallel size. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a></code> | The model to be compiled. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a></code> | The image to be used for the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase">VllmNxdInferenceEcsImageBase</a></code> | The image to be used for the container. |
 
 ---
 
@@ -10586,10 +10586,10 @@ This is only applicable when using container runtime.
 ##### `image`<sup>Optional</sup> <a name="image" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinitionProps.property.image"></a>
 
 ```typescript
-public readonly image: VllmNxdInferenceImage;
+public readonly image: VllmNxdInferenceEcsImageBase;
 ```
 
-- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a>
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase">VllmNxdInferenceEcsImageBase</a>
 - *Default:* latest VllmNxdInferenceImage
 
 The image to be used for the container.
@@ -11457,37 +11457,37 @@ new PytorchTrainingNeuronxImage()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion">fromSdkVersion</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion">fromNeuronSdkVersion</a></code> | *No description.* |
 
 ---
 
-##### `fromSdkVersion` <a name="fromSdkVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion"></a>
+##### `fromNeuronSdkVersion` <a name="fromNeuronSdkVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion"></a>
 
 ```typescript
 import { PytorchTrainingNeuronxImage } from 'aws-cdk-neuronx-patterns'
 
-PytorchTrainingNeuronxImage.fromSdkVersion(neuronxVersion: string, pythonVersion: string, pytorchVersion: string, ubuntuVersion: string)
+PytorchTrainingNeuronxImage.fromNeuronSdkVersion(neuronSdkVersion: string, pythonVersion: string, pytorchVersion: string, ubuntuVersion: string)
 ```
 
-###### `neuronxVersion`<sup>Required</sup> <a name="neuronxVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion.parameter.neuronxVersion"></a>
+###### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion.parameter.neuronSdkVersion"></a>
 
 - *Type:* string
 
 ---
 
-###### `pythonVersion`<sup>Required</sup> <a name="pythonVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion.parameter.pythonVersion"></a>
+###### `pythonVersion`<sup>Required</sup> <a name="pythonVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion.parameter.pythonVersion"></a>
 
 - *Type:* string
 
 ---
 
-###### `pytorchVersion`<sup>Required</sup> <a name="pytorchVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion.parameter.pytorchVersion"></a>
+###### `pytorchVersion`<sup>Required</sup> <a name="pytorchVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion.parameter.pytorchVersion"></a>
 
 - *Type:* string
 
 ---
 
-###### `ubuntuVersion`<sup>Required</sup> <a name="ubuntuVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromSdkVersion.parameter.ubuntuVersion"></a>
+###### `ubuntuVersion`<sup>Required</sup> <a name="ubuntuVersion" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.fromNeuronSdkVersion.parameter.ubuntuVersion"></a>
 
 - *Type:* string
 
@@ -11512,6 +11512,7 @@ PytorchTrainingNeuronxImage.fromSdkVersion(neuronxVersion: string, pythonVersion
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_21_1">SDK_2_21_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.21.1. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_22_0">SDK_2_22_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.22.0. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_23_0">SDK_2_23_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.23.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_24_0">SDK_2_24_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.24.0. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.size">size</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
 
 ---
@@ -11682,6 +11683,18 @@ Neuron SDK 2.23.0.
 
 ---
 
+##### `SDK_2_24_0`<sup>Required</sup> <a name="SDK_2_24_0" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_24_0"></a>
+
+```typescript
+public readonly SDK_2_24_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.24.0.
+
+---
+
 ##### `size`<sup>Required</sup> <a name="size" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.size"></a>
 
 ```typescript
@@ -11820,6 +11833,96 @@ vLLM engine arguments.
 
 
 
+### VllmInferenceNeuronxImage <a name="VllmInferenceNeuronxImage" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage"></a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.Initializer"></a>
+
+```typescript
+import { VllmInferenceNeuronxImage } from 'aws-cdk-neuronx-patterns'
+
+new VllmInferenceNeuronxImage()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion">fromNeuronSdkVersion</a></code> | *No description.* |
+
+---
+
+##### `fromNeuronSdkVersion` <a name="fromNeuronSdkVersion" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion"></a>
+
+```typescript
+import { VllmInferenceNeuronxImage } from 'aws-cdk-neuronx-patterns'
+
+VllmInferenceNeuronxImage.fromNeuronSdkVersion(neuronSdkVersion: string, vllmVersion: string, pythonVersion: string, ubuntuVersion: string)
+```
+
+###### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion.parameter.neuronSdkVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `vllmVersion`<sup>Required</sup> <a name="vllmVersion" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion.parameter.vllmVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `pythonVersion`<sup>Required</sup> <a name="pythonVersion" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion.parameter.pythonVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `ubuntuVersion`<sup>Required</sup> <a name="ubuntuVersion" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.fromNeuronSdkVersion.parameter.ubuntuVersion"></a>
+
+- *Type:* string
+
+---
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.LATEST">LATEST</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Latest Neuron SDK. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_0">SDK_2_26_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.26.0 with vLLM 0.9.1. |
+
+---
+
+##### `LATEST`<sup>Required</sup> <a name="LATEST" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.LATEST"></a>
+
+```typescript
+public readonly LATEST: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Latest Neuron SDK.
+
+---
+
+##### `SDK_2_26_0`<sup>Required</sup> <a name="SDK_2_26_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_0"></a>
+
+```typescript
+public readonly SDK_2_26_0: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.26.0 with vLLM 0.9.1.
+
+---
+
 ### VllmNxdInferenceCompileImage <a name="VllmNxdInferenceCompileImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage"></a>
 
 Compile runtime container image for vLLM NxD Inference.
@@ -11829,25 +11932,18 @@ Compile runtime container image for vLLM NxD Inference.
 ```typescript
 import { VllmNxdInferenceCompileImage } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceCompileImage(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
+new VllmNxdInferenceCompileImage(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.vllmInferenceNeuronxImage">vllmInferenceNeuronxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | *No description.* |
 
 ---
 
-##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.neruonxImage"></a>
+##### `vllmInferenceNeuronxImage`<sup>Optional</sup> <a name="vllmInferenceNeuronxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.vllmInferenceNeuronxImage"></a>
 
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
-
----
-
-##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.options"></a>
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
 
 ---
 
@@ -11858,9 +11954,7 @@ new VllmNxdInferenceCompileImage(neruonxImage: INeuronxImage, options?: VllmNxdI
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
 
 ---
 
@@ -11876,10 +11970,10 @@ The container image.
 
 ---
 
-##### `sdkVersion`<sup>Required</sup> <a name="sdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.sdkVersion"></a>
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.neuronSdkVersion"></a>
 
 ```typescript
-public readonly sdkVersion: string;
+public readonly neuronSdkVersion: string;
 ```
 
 - *Type:* string
@@ -11888,70 +11982,37 @@ The neuronx SDK version.
 
 ---
 
-##### `vllmGitBranch`<sup>Required</sup> <a name="vllmGitBranch" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitBranch"></a>
 
-```typescript
-public readonly vllmGitBranch: string;
-```
+### VllmNxdInferenceEcsImage <a name="VllmNxdInferenceEcsImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage"></a>
 
-- *Type:* string
+Inference ECS container image for vLLM on NxD Inference.
 
-The Git branch name of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
-
----
-
-##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.property.vllmGitCommitHash"></a>
-
-```typescript
-public readonly vllmGitCommitHash: string;
-```
-
-- *Type:* string
-
-The Git commit fosh of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
-
----
-
-
-### VllmNxdInferenceImage <a name="VllmNxdInferenceImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage"></a>
-
-Inference container image for vLLM on NxD Inference.
+This image uses the official AWS Neuron Deep Learning Containers which come with vLLM pre-installed.
 
 *Example*
 
 ```typescript
-new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST)
+new VllmNxdInferenceEcsImage(VllmInferenceNeuronxImage.LATEST)
 ```
 
 
-#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.Initializer"></a>
 
 ```typescript
-import { VllmNxdInferenceImage } from 'aws-cdk-neuronx-patterns'
+import { VllmNxdInferenceEcsImage } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceImage(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
+new VllmNxdInferenceEcsImage(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.Initializer.parameter.vllmInferenceNeuronxImage">vllmInferenceNeuronxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | *No description.* |
 
 ---
 
-##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.neruonxImage"></a>
+##### `vllmInferenceNeuronxImage`<sup>Optional</sup> <a name="vllmInferenceNeuronxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.Initializer.parameter.vllmInferenceNeuronxImage"></a>
 
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
-
----
-
-##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.Initializer.parameter.options"></a>
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
 
 ---
 
@@ -11961,14 +12022,12 @@ new VllmNxdInferenceImage(neruonxImage: INeuronxImage, options?: VllmNxdInferenc
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
 
 ---
 
-##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.image"></a>
+##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.property.image"></a>
 
 ```typescript
 public readonly image: ContainerImage;
@@ -11980,10 +12039,10 @@ The container image.
 
 ---
 
-##### `sdkVersion`<sup>Required</sup> <a name="sdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.sdkVersion"></a>
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage.property.neuronSdkVersion"></a>
 
 ```typescript
-public readonly sdkVersion: string;
+public readonly neuronSdkVersion: string;
 ```
 
 - *Type:* string
@@ -11992,65 +12051,30 @@ The neuronx SDK version.
 
 ---
 
-##### `vllmGitBranch`<sup>Required</sup> <a name="vllmGitBranch" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitBranch"></a>
 
-```typescript
-public readonly vllmGitBranch: string;
-```
-
-- *Type:* string
-
-The Git branch name of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
-
----
-
-##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImage.property.vllmGitCommitHash"></a>
-
-```typescript
-public readonly vllmGitCommitHash: string;
-```
-
-- *Type:* string
-
-The Git commit fosh of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
-
----
-
-
-### VllmNxdInferenceImageBase <a name="VllmNxdInferenceImageBase" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase"></a>
+### VllmNxdInferenceEcsImageBase <a name="VllmNxdInferenceEcsImageBase" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase"></a>
 
 - *Implements:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
 Base class for VllmNxdInferenceImage.
 
-#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer"></a>
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.Initializer"></a>
 
 ```typescript
-import { VllmNxdInferenceImageBase } from 'aws-cdk-neuronx-patterns'
+import { VllmNxdInferenceEcsImageBase } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceImageBase(neruonxImage: INeuronxImage, options?: VllmNxdInferenceImageOptions)
+new VllmNxdInferenceEcsImageBase(neuronxImage: IVllmInferenceNeuronxImage)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.neruonxImage">neruonxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.options">options</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.Initializer.parameter.neuronxImage">neuronxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | *No description.* |
 
 ---
 
-##### `neruonxImage`<sup>Required</sup> <a name="neruonxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.neruonxImage"></a>
+##### `neuronxImage`<sup>Required</sup> <a name="neuronxImage" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.Initializer.parameter.neuronxImage"></a>
 
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
-
----
-
-##### `options`<sup>Optional</sup> <a name="options" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.Initializer.parameter.options"></a>
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageOptions">VllmNxdInferenceImageOptions</a>
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
 
 ---
 
@@ -12060,14 +12084,12 @@ new VllmNxdInferenceImageBase(neruonxImage: INeuronxImage, options?: VllmNxdInfe
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitBranch">vllmGitBranch</a></code> | <code>string</code> | The Git branch name of aws-neuron/upstreaming-to-vllm. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitCommitHash">vllmGitCommitHash</a></code> | <code>string</code> | The Git commit fosh of aws-neuron/upstreaming-to-vllm. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The container image. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | The neuronx SDK version. |
 
 ---
 
-##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.image"></a>
+##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.property.image"></a>
 
 ```typescript
 public readonly image: ContainerImage;
@@ -12079,43 +12101,15 @@ The container image.
 
 ---
 
-##### `sdkVersion`<sup>Required</sup> <a name="sdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.sdkVersion"></a>
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase.property.neuronSdkVersion"></a>
 
 ```typescript
-public readonly sdkVersion: string;
+public readonly neuronSdkVersion: string;
 ```
 
 - *Type:* string
 
 The neuronx SDK version.
-
----
-
-##### `vllmGitBranch`<sup>Required</sup> <a name="vllmGitBranch" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitBranch"></a>
-
-```typescript
-public readonly vllmGitBranch: string;
-```
-
-- *Type:* string
-
-The Git branch name of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
-
----
-
-##### `vllmGitCommitHash`<sup>Required</sup> <a name="vllmGitCommitHash" id="aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase.property.vllmGitCommitHash"></a>
-
-```typescript
-public readonly vllmGitCommitHash: string;
-```
-
-- *Type:* string
-
-The Git commit fosh of aws-neuron/upstreaming-to-vllm.
-
-> [https://github.com/aws-neuron/upstreaming-to-vllm](https://github.com/aws-neuron/upstreaming-to-vllm)
 
 ---
 
@@ -12169,7 +12163,7 @@ public readonly neuronxCores: number;
 
 ### INeuronxContainerImage <a name="INeuronxContainerImage" id="aws-cdk-neuronx-patterns.INeuronxContainerImage"></a>
 
-- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage">VllmNxdInferenceCompileImage</a>, <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImage">VllmNxdInferenceImage</a>, <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceImageBase">VllmNxdInferenceImageBase</a>, <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage">VllmNxdInferenceCompileImage</a>, <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImage">VllmNxdInferenceEcsImage</a>, <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceEcsImageBase">VllmNxdInferenceEcsImageBase</a>, <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
 Compile runtime.
 
@@ -12179,7 +12173,7 @@ Compile runtime.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | An image of the container where the compile job is executed. |
-| <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | Neuronx version included in container image. |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | Neuronx version included in container image. |
 
 ---
 
@@ -12195,10 +12189,10 @@ An image of the container where the compile job is executed.
 
 ---
 
-##### `sdkVersion`<sup>Required</sup> <a name="sdkVersion" id="aws-cdk-neuronx-patterns.INeuronxContainerImage.property.sdkVersion"></a>
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.INeuronxContainerImage.property.neuronSdkVersion"></a>
 
 ```typescript
-public readonly sdkVersion: string;
+public readonly neuronSdkVersion: string;
 ```
 
 - *Type:* string
@@ -12209,7 +12203,7 @@ Neuronx version included in container image.
 
 ### INeuronxImage <a name="INeuronxImage" id="aws-cdk-neuronx-patterns.INeuronxImage"></a>
 
-- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>, <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
 
 
 #### Properties <a name="Properties" id="Properties"></a>
@@ -12218,7 +12212,7 @@ Neuronx version included in container image.
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage.property.imageName">imageName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage.property.imageTag">imageTag</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage.property.sdkVersion">sdkVersion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -12242,10 +12236,10 @@ public readonly imageTag: string;
 
 ---
 
-##### `sdkVersion`<sup>Required</sup> <a name="sdkVersion" id="aws-cdk-neuronx-patterns.INeuronxImage.property.sdkVersion"></a>
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.INeuronxImage.property.neuronSdkVersion"></a>
 
 ```typescript
-public readonly sdkVersion: string;
+public readonly neuronSdkVersion: string;
 ```
 
 - *Type:* string
@@ -12524,6 +12518,64 @@ public readonly tensorParallelSize: number;
 ```
 
 - *Type:* number
+
+---
+
+### IVllmInferenceNeuronxImage <a name="IVllmInferenceNeuronxImage" id="aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage"></a>
+
+- *Extends:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.imageName">imageName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.imageTag">imageTag</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.neuronSdkVersion">neuronSdkVersion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.vllmVersion">vllmVersion</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `imageName`<sup>Required</sup> <a name="imageName" id="aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.imageName"></a>
+
+```typescript
+public readonly imageName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `imageTag`<sup>Required</sup> <a name="imageTag" id="aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.imageTag"></a>
+
+```typescript
+public readonly imageTag: string;
+```
+
+- *Type:* string
+
+---
+
+##### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.neuronSdkVersion"></a>
+
+```typescript
+public readonly neuronSdkVersion: string;
+```
+
+- *Type:* string
+
+---
+
+##### `vllmVersion`<sup>Required</sup> <a name="vllmVersion" id="aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage.property.vllmVersion"></a>
+
+```typescript
+public readonly vllmVersion: string;
+```
+
+- *Type:* string
 
 ---
 
