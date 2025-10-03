@@ -10,13 +10,14 @@ import {
   calcMemoryFootprint,
   calcTensorParallel,
   DataTypeBits,
-  INeuronxImage,
   INeuronxInstanceType,
   inferMemoryFootprintFromParameters,
+  IVllmInferenceNeuronxImage,
   Model,
   NeuronOptimizedMachineImage,
   NeuronxInstanceType,
   PytorchTrainingNeuronxImage,
+  VllmInferenceNeuronxImage,
 } from "../base/neuronx";
 import {
   INeuronxContainerImage,
@@ -27,32 +28,25 @@ import {
   VllmEngineArguments,
   VllmEngineArgumentsParser,
 } from "../base/server-engine/vllm-engine";
-import {
-  VllmNxdInferenceImageBase,
-  VllmNxdInferenceImageOptions,
-} from "./vllm-nxd-inference-ecs-patterns";
+import { VllmNxdInferenceEcsImageBase } from "./vllm-nxd-inference-ecs-patterns";
 
 /**
  * Compile runtime container image for vLLM NxD Inference
  */
-export class VllmNxdInferenceCompileImage extends VllmNxdInferenceImageBase {
+export class VllmNxdInferenceCompileImage extends VllmNxdInferenceEcsImageBase {
   /**
    * The container image.
    */
   readonly image: ContainerImage;
-  constructor(
-    neruonxImage: INeuronxImage,
-    options?: VllmNxdInferenceImageOptions,
-  ) {
-    super(neruonxImage, options);
+  constructor(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage) {
+    vllmInferenceNeuronxImage ??= VllmInferenceNeuronxImage.LATEST;
+    super(vllmInferenceNeuronxImage);
     this.image = ContainerImage.fromAsset(
       join(__dirname, "../../scripts/compile/vllm-nxd-inference"),
       {
         buildArgs: {
-          IMAGE_NAME: neruonxImage.imageName,
-          IMAGE_TAG: neruonxImage.imageTag,
-          VLLM_GIT_BRANCH: this.vllmGitBranch,
-          VLLM_GIT_COMMIT_HASH: this.vllmGitCommitHash,
+          IMAGE_NAME: vllmInferenceNeuronxImage.imageName,
+          IMAGE_TAG: vllmInferenceNeuronxImage.imageTag,
         },
       },
     );
@@ -184,9 +178,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       );
     }
     const tensorParallelSize = availableInstancePatterns[0].tp;
-    const image =
-      props.image ??
-      new VllmNxdInferenceCompileImage(PytorchTrainingNeuronxImage.LATEST);
+    const image = props.image ?? new VllmNxdInferenceCompileImage();
     const vllmArgs = {
       ...props.vllmArgs,
       model: props.model.modelId,
@@ -199,7 +191,7 @@ export class VllmNxdInferenceCompiler extends Construct {
     // change dirname every engine args patterns
     const hash = (str: string) =>
       createHash("sha256").update(str).digest("hex");
-    const artifactS3Prefix = `sdk-${image.sdkVersion}/${hash(JSON.stringify(vllmArgs))}`;
+    const artifactS3Prefix = `sdk-${image.neuronSdkVersion}/${hash(JSON.stringify(vllmArgs))}`;
     const vllmCliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
     const environment: Record<string, string> = {
       ...props.environment,

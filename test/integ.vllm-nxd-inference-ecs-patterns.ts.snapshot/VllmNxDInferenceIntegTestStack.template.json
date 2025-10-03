@@ -1250,14 +1250,14 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+          "/sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
          ]
         ]
        }
       },
       {
        "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
-       "Value": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+       "Value": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
       }
      ],
      "ExecutionRoleArn": {
@@ -1267,7 +1267,7 @@
       ]
      },
      "Image": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:0a197578c035dfcdee742836ffd61be88209ff0f77d0b48bd5edf6fc2b548e34"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:f26485b913e3083b116a7ab66438a3980b3195361e27ebaef0d8e3441c9522f2"
      },
      "LinuxParameters": {
       "Devices": [
@@ -1993,7 +1993,7 @@
     "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
    ]
   },
-  "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9": {
+  "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": {
    "Type": "AWS::CloudFormation::WaitConditionHandle"
   },
   "CompilerNeuronxCompile8E2589B5": {
@@ -2006,18 +2006,18 @@
      ]
     },
     "waitConditionCallbackURL": {
-     "Ref": "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9"
+     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
     }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A": {
+  "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": {
    "Type": "AWS::CloudFormation::WaitCondition",
    "Properties": {
     "Count": 1,
     "Handle": {
-     "Ref": "CompilerWaitConditionHandlesdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed7598D5F9"
+     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
     },
     "Timeout": "43200"
    },
@@ -2277,7 +2277,7 @@
     },
     "Environment": {
      "Variables": {
-      "ARTIFACT_S3_PREFIX": "sdk-2.23.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+      "ARTIFACT_S3_PREFIX": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
      }
     },
     "Handler": "index.isComplete",
@@ -2518,6 +2518,10 @@
        "--tensor-parallel-size",
        "1"
       ],
+      "EntryPoint": [
+       "vllm",
+       "serve"
+      ],
       "Environment": [
        {
         "Name": "VLLM_NEURON_FRAMEWORK",
@@ -2538,56 +2542,6 @@
        {
         "Name": "MODEL_NAME",
         "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
-       },
-       {
-        "Name": "COMPILED_ARTIFACTS_S3_URI",
-        "Value": {
-         "Fn::Join": [
-          "",
-          [
-           "s3://",
-           {
-            "Ref": "Bucket83908E77"
-           },
-           "/",
-           {
-            "Fn::Select": [
-             3,
-             {
-              "Fn::Split": [
-               "\"",
-               {
-                "Fn::GetAtt": [
-                 "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
-                 "Data"
-                ]
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         ]
-        }
-       },
-       {
-        "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
-        "Value": {
-         "Fn::Select": [
-          3,
-          {
-           "Fn::Split": [
-            "\"",
-            {
-             "Fn::GetAtt": [
-              "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
-              "Data"
-             ]
-            }
-           ]
-          }
-         ]
-        }
        }
       ],
       "Essential": true,
@@ -2601,9 +2555,7 @@
        "StartPeriod": 300,
        "Timeout": 5
       },
-      "Image": {
-       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:7f4f5655e82a539bc4d4ddc8d3055c8333137b11572b52cccd9d03e1822ba091"
-      },
+      "Image": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04",
       "LinuxParameters": {
        "Capabilities": {},
        "Devices": [
@@ -2644,7 +2596,31 @@
         "HostPort": 0,
         "Protocol": "tcp"
        }
-      ]
+      ],
+      "WorkingDirectory": {
+       "Fn::Join": [
+        "",
+        [
+         "/opt/ml/model/",
+         {
+          "Fn::Select": [
+           3,
+           {
+            "Fn::Split": [
+             "\"",
+             {
+              "Fn::GetAtt": [
+               "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+               "Data"
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       ]
+      }
      }
     ],
     "ExecutionRoleArn": {
@@ -2717,42 +2693,6 @@
    "Properties": {
     "PolicyDocument": {
      "Statement": [
-      {
-       "Action": [
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:BatchGetImage",
-        "ecr:GetDownloadUrlForLayer"
-       ],
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::Join": [
-         "",
-         [
-          "arn:",
-          {
-           "Ref": "AWS::Partition"
-          },
-          ":ecr:",
-          {
-           "Ref": "AWS::Region"
-          },
-          ":",
-          {
-           "Ref": "AWS::AccountId"
-          },
-          ":repository/",
-          {
-           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
-          }
-         ]
-        ]
-       }
-      },
-      {
-       "Action": "ecr:GetAuthorizationToken",
-       "Effect": "Allow",
-       "Resource": "*"
-      },
       {
        "Action": [
         "logs:CreateLogStream",
@@ -3630,7 +3570,7 @@
           "\"",
           {
            "Fn::GetAtt": [
-            "CompilerWaitConditionsdk223062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed70A8C43A",
+            "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
             "Data"
            ]
           }

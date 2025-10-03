@@ -6,14 +6,16 @@ import {
   ApplicationTargetGroup,
 } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { Construct } from "constructs";
-import { join } from "path";
 import {
   ApplicationLoadBalancedNeuronxService,
   ApplicationLoadBalancedNeuronxServiceProps,
   NeuronxTaskDefinition,
   NeuronxTaskDefinitionPropsBase,
 } from "../base/aws-ecs-patterns";
-import { INeuronxImage, PytorchTrainingNeuronxImage } from "../base/neuronx";
+import {
+  IVllmInferenceNeuronxImage,
+  VllmInferenceNeuronxImage,
+} from "../base/neuronx";
 import { INeuronxContainerImage } from "../base/neuronx-compiler";
 import { VllmEngineArgumentsParser } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceCompiledModel } from "./vllm-nxd-inference-compiler";
@@ -25,7 +27,7 @@ export interface VllmNxdInferenceImageOptions {
 /**
  * Base class for VllmNxdInferenceImage.
  */
-export abstract class VllmNxdInferenceImageBase
+export abstract class VllmNxdInferenceEcsImageBase
   implements INeuronxContainerImage
 {
   /**
@@ -33,50 +35,35 @@ export abstract class VllmNxdInferenceImageBase
    */
   abstract readonly image: ecs.ContainerImage;
   /**
-   * The Git branch name of aws-neuron/upstreaming-to-vllm.
-   * @see https://github.com/aws-neuron/upstreaming-to-vllm
-   */
-  readonly vllmGitBranch: string;
-  /**
-   * The Git commit fosh of aws-neuron/upstreaming-to-vllm.
-   * @see https://github.com/aws-neuron/upstreaming-to-vllm
-   */
-  readonly vllmGitCommitHash: string;
-  /**
    * The neuronx SDK version.
    */
-  readonly sdkVersion: string;
-  constructor(
-    neruonxImage: INeuronxImage,
-    options: VllmNxdInferenceImageOptions = {},
-  ) {
-    this.sdkVersion = neruonxImage.sdkVersion;
-    this.vllmGitBranch = options.vllmGitBranch ?? "main";
-    this.vllmGitCommitHash = options.vllmGitCommitHash ?? "";
+  readonly neuronSdkVersion: string;
+  constructor(neuronxImage: IVllmInferenceNeuronxImage) {
+    this.neuronSdkVersion = neuronxImage.neuronSdkVersion;
   }
 }
 
 /**
- * Inference container image for vLLM on NxD Inference.
- * @example new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST)
+ * Inference ECS container image for vLLM on NxD Inference.
+ * This image uses the official AWS Neuron Deep Learning Containers which come with vLLM pre-installed.
+ *
+ * @example new VllmNxdInferenceEcsImage(VllmInferenceNeuronxImage.LATEST)
  */
-export class VllmNxdInferenceImage extends VllmNxdInferenceImageBase {
+export class VllmNxdInferenceEcsImage extends VllmNxdInferenceEcsImageBase {
   readonly image: ecs.ContainerImage;
-  constructor(
-    neruonxImage: INeuronxImage,
-    options?: VllmNxdInferenceImageOptions,
-  ) {
-    super(neruonxImage, options);
-    this.image = ecs.ContainerImage.fromAsset(
-      join(__dirname, "../../scripts/inference/vllm-nxd-inference"),
-      {
-        buildArgs: {
-          IMAGE_NAME: neruonxImage.imageName,
-          IMAGE_TAG: neruonxImage.imageTag,
-          VLLM_GIT_BRANCH: this.vllmGitBranch,
-          VLLM_GIT_COMMIT_HASH: this.vllmGitCommitHash,
-        },
-      },
+
+  /**
+   * Create a VllmNxdInferenceImage from a custom neuronx image.
+   * This will build a container image using a Dockerfile that installs vLLM from source.
+   *
+   * @example
+   * new VllmNxdInferenceEcsImage(VllmInferenceNeuronxImage.LATEST)
+   */
+  constructor(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage) {
+    vllmInferenceNeuronxImage ??= VllmInferenceNeuronxImage.LATEST;
+    super(vllmInferenceNeuronxImage);
+    this.image = ecs.ContainerImage.fromRegistry(
+      `${vllmInferenceNeuronxImage.imageName}:${vllmInferenceNeuronxImage.imageTag}`,
     );
   }
 }
@@ -94,7 +81,7 @@ export interface VllmNxdInferenceTaskDefinitionProps
    * The image to be used for the container.
    * @default - latest VllmNxdInferenceImage
    */
-  readonly image?: VllmNxdInferenceImage;
+  readonly image?: VllmNxdInferenceEcsImageBase;
   /**
    * The environment variables to pass to the container.
    * This is only applicable when using container runtime.
@@ -124,9 +111,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       neuronxInstanceType,
       tensorParallelSize,
     });
-    const image =
-      props.image ??
-      new VllmNxdInferenceImage(PytorchTrainingNeuronxImage.LATEST);
+    const image = props.image ?? new VllmNxdInferenceEcsImage();
     const port = props.compiledModel.vllmArgs.port ?? 8000;
     const vllmCliArgs = VllmEngineArgumentsParser.cli(
       props.compiledModel.vllmArgs,
@@ -139,8 +124,6 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
       NEURON_RT_NUM_CORES: tensorParallelSize.toString(),
       XLA_HANDLE_SPECIAL_SCALAR: "1",
       MODEL_NAME: props.compiledModel.modelName,
-      COMPILED_ARTIFACTS_S3_URI: props.compiledModel.s3Uri,
-      COMPILED_ARTIFACTS_S3_PREFIX: props.compiledModel.s3Prefix,
     };
 
     this.addContainerWithDefault("vLLM", {
@@ -157,6 +140,8 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
         ],
         startPeriod: Duration.minutes(5),
       },
+      workingDirectory: `/opt/ml/model/${props.compiledModel.s3Prefix}`,
+      entryPoint: ["vllm", "serve"],
       command: vllmCliArgs,
       environment,
     });

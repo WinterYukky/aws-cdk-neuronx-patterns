@@ -44,7 +44,7 @@ export interface INeuronxContainerImage {
   /**
    * Neuronx version included in container image.
    */
-  readonly sdkVersion: string;
+  readonly neuronSdkVersion: string;
 }
 
 /**
