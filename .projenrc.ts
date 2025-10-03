@@ -31,7 +31,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "esbuild",
   ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
-  gitignore: ["src/**/index.js"],
+  gitignore: ["src/**/index.js", ".amazonq"],
   githubOptions: {
     pullRequestLintOptions: {
       semanticTitleOptions: {
