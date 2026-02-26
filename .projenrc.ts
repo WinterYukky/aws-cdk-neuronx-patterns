@@ -6,7 +6,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: "49480575+WinterYukky@users.noreply.github.com",
   cdkVersion,
   defaultReleaseBranch: "main",
-  jsiiVersion: "~5.8.0",
+  jsiiVersion: "~5.9.0",
   name: "aws-cdk-neuronx-patterns",
   projenrcTs: true,
   repositoryUrl: "https://github.com/WinterYukky/aws-cdk-neuronx-patterns.git",
