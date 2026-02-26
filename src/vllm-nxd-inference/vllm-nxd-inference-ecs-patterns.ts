@@ -27,9 +27,7 @@ export interface VllmNxdInferenceImageOptions {
 /**
  * Base class for VllmNxdInferenceImage.
  */
-export abstract class VllmNxdInferenceEcsImageBase
-  implements INeuronxContainerImage
-{
+export abstract class VllmNxdInferenceEcsImageBase implements INeuronxContainerImage {
   /**
    * The container image.
    */
@@ -71,8 +69,7 @@ export class VllmNxdInferenceEcsImage extends VllmNxdInferenceEcsImageBase {
 /**
  * Task definition for VllmNxdInference.
  */
-export interface VllmNxdInferenceTaskDefinitionProps
-  extends NeuronxTaskDefinitionPropsBase {
+export interface VllmNxdInferenceTaskDefinitionProps extends NeuronxTaskDefinitionPropsBase {
   /**
    * The model to be compiled.
    */
@@ -151,8 +148,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
 /**
  * Props for ApplicationLoadBalancedVllmNxDInferenceService.
  */
-export interface ApplicationLoadBalancedVllmNxDInferenceServiceProps
-  extends ApplicationLoadBalancedNeuronxServiceProps {}
+export interface ApplicationLoadBalancedVllmNxDInferenceServiceProps extends ApplicationLoadBalancedNeuronxServiceProps {}
 
 /**
  * ApplicationLoadBalancedVllmNxDInferenceService is a wrapper of ApplicationLoadBalancedNeuronxServiceBase.

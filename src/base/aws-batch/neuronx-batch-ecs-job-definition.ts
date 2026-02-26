@@ -13,8 +13,7 @@ import { INeuronxInstanceType } from "../neuronx";
  * Props of NeuronxBatch.
  */
 export interface NeuronxBatchEcsJobDefinitionProps
-  extends batch.EcsEc2ContainerDefinitionProps,
-    batch.JobDefinitionProps {
+  extends batch.EcsEc2ContainerDefinitionProps, batch.JobDefinitionProps {
   readonly neuronxInstanceType: INeuronxInstanceType;
 }
 

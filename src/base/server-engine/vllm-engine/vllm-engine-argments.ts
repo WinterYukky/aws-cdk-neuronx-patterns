@@ -1231,7 +1231,8 @@ export interface VllmSchedulerConfig {
  * Interface for vLLM server command line arguments
  */
 export interface VllmEngineArguments
-  extends VllmNamedArguments,
+  extends
+    VllmNamedArguments,
     VllmLoadConfig,
     VllmDecodingConfig,
     VllmParallelConfig,
