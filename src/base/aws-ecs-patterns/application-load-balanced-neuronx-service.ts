@@ -31,8 +31,7 @@ export interface NeuronxTaskDefinitionPropsBase
   readonly tensorParallelSize?: number;
 }
 
-export interface NeuronxTaskDefinitionProps
-  extends NeuronxTaskDefinitionPropsBase {
+export interface NeuronxTaskDefinitionProps extends NeuronxTaskDefinitionPropsBase {
   /**
    * The model to be compiled.
    */
@@ -120,8 +119,7 @@ export class NeuronxTaskDefinition
   }
 }
 
-export interface ApplicationLoadBalancedNeuronxServiceProps
-  extends ApplicationLoadBalancedEc2ServiceProps {}
+export interface ApplicationLoadBalancedNeuronxServiceProps extends ApplicationLoadBalancedEc2ServiceProps {}
 export class ApplicationLoadBalancedNeuronxService extends ApplicationLoadBalancedEc2Service {
   constructor(
     scope: Construct,
