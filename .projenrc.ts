@@ -50,6 +50,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
       },
       contributorStatement:
         "_By submitting this pull request, I confirm that my contribution is made under the terms of the Apache-2.0 license_",
+      contributorStatementOptions: {
+        exemptLabels: ["auto-upgrade"],
+      },
+    },
+  },
+  depsUpgradeOptions: {
+    workflowOptions: {
+      labels: ["auto-upgrade"],
     },
   },
   releasableCommits: ReleasableCommits.ofType([
