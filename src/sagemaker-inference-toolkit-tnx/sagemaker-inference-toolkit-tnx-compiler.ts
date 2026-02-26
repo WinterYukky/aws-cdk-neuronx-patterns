@@ -54,8 +54,7 @@ export interface SageMakerInferenceToolkitTnxCompileOptions {
 /**
  * The model compiled by Neuronx compiler.
  */
-export interface SageMakerInferenceToolkitTnxCompiledModel
-  extends NeuronxCompiledModel {
+export interface SageMakerInferenceToolkitTnxCompiledModel extends NeuronxCompiledModel {
   readonly quantDtype?: QuantDtype;
   readonly optLevel?: OptLevel;
   readonly tpDegree: number;
@@ -67,9 +66,7 @@ export interface SageMakerInferenceToolkitTnxCompiledModel
  * @example
  * new SageMakerInferenceToolkitTnxCompileImage(PytorchTrainingNeuronxImage.LATEST);
  */
-export class SageMakerInferenceToolkitTnxCompileImage
-  implements INeuronxContainerImage
-{
+export class SageMakerInferenceToolkitTnxCompileImage implements INeuronxContainerImage {
   readonly image: ContainerImage;
   readonly neuronSdkVersion: string;
   constructor(neruonxImage: INeuronxImage) {

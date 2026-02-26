@@ -43,6 +43,7 @@ new ApplicationLoadBalancedNeuronxService(scope: Construct, id: string, props: A
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxService.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxService.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -53,6 +54,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxService.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedNeuronxService.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -303,6 +325,7 @@ new ApplicationLoadBalancedVllmNxDInferenceService(scope: Construct, id: string,
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceService.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceService.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -313,6 +336,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceService.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.ApplicationLoadBalancedVllmNxDInferenceService.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -466,6 +510,7 @@ new NeuronOptimizedMachineImage(scope: Construct, id: string)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.getImage">getImage</a></code> | Return the image to use in the given context. |
 
 ---
@@ -477,6 +522,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `getImage` <a name="getImage" id="aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage.getImage"></a>
 
@@ -624,6 +690,7 @@ new NeuronxBatch(scope: Construct, id: string, props: NeuronxBatchProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatch.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatch.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -634,6 +701,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxBatch.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxBatch.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -763,6 +851,7 @@ new NeuronxBatchComputeEnvironment(scope: Construct, id: string, props: NeuronxB
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -774,6 +863,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.applyRemovalPolicy"></a>
 
@@ -1010,6 +1120,7 @@ new NeuronxBatchEcsJobDefinition(scope: Construct, id: string, props: NeuronxBat
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.addRetryStrategy">addRetryStrategy</a></code> | Add a RetryStrategy to this JobDefinition. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.grantSubmitJob">grantSubmitJob</a></code> | Grants the `batch:submitJob` permission to the identity on both this job definition and the `queue`. |
@@ -1023,6 +1134,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addRetryStrategy` <a name="addRetryStrategy" id="aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.addRetryStrategy"></a>
 
@@ -1319,6 +1451,7 @@ new NeuronxCompiler(scope: Construct, id: string, props: NeuronxCompilerProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiler.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiler.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiler.compile">compile</a></code> | *No description.* |
 
 ---
@@ -1330,6 +1463,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxCompiler.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxCompiler.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `compile` <a name="compile" id="aws-cdk-neuronx-patterns.NeuronxCompiler.compile"></a>
 
@@ -1441,6 +1595,7 @@ new NeuronxTaskDefinition(scope: Construct, id: string, props: NeuronxTaskDefini
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.addContainer">addContainer</a></code> | Tasks running in AWSVPC networking mode requires an additional environment variable for the region to be sourced. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.addExtension">addExtension</a></code> | Adds the specified extension to the task definition. |
@@ -1465,6 +1620,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.applyRemovalPolicy"></a>
 
@@ -2244,6 +2420,7 @@ new VllmNxdInferenceCompiler(scope: Construct, id: string, props: VllmNxdInferen
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.compile">compile</a></code> | Compile the model and return the compiled model. |
 
 ---
@@ -2255,6 +2432,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `compile` <a name="compile" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiler.compile"></a>
 
@@ -2368,6 +2566,7 @@ new VllmNxdInferenceTaskDefinition(scope: Construct, id: string, props: VllmNxdI
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addContainer">addContainer</a></code> | Tasks running in AWSVPC networking mode requires an additional environment variable for the region to be sourced. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.addExtension">addExtension</a></code> | Adds the specified extension to the task definition. |
@@ -2392,6 +2591,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.applyRemovalPolicy"></a>
 
