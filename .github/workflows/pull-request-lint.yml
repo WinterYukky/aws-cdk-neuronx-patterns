@@ -44,7 +44,7 @@ jobs:
       PR_BODY: ${{ github.event.pull_request.body }}
       EXPECTED: _By submitting this pull request, I confirm that my contribution is made under the terms of the Apache-2.0 license_
       HELP: Contributor statement missing from PR description. Please include the following text in the PR description
-    if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+    if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && !(contains(github.event.pull_request.labels.*.name, 'auto-upgrade'))
     steps:
       - uses: actions/github-script@v8
         with:
