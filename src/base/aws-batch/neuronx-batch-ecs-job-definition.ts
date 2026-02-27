@@ -33,6 +33,9 @@ export class NeuronxBatchEcsJobDefinition
   readonly timeout?: Duration;
   readonly stack: Stack;
   readonly env: ResourceEnvironment;
+  get jobDefinitionRef(): batch.JobDefinitionReference {
+    return { jobDefinitionArn: this.jobDefinitionArn };
+  }
   private readonly resource: batch.EcsJobDefinition;
   constructor(
     scope: Construct,
