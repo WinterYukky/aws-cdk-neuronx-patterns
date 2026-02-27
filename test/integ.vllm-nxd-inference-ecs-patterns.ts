@@ -1,10 +1,11 @@
 import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
 import {
   App,
-  Aspects,
   CfnOutput,
   Duration,
-  IAspect,
+  InjectionContext,
+  IPropertyInjector,
+  PropertyInjectors,
   RemovalPolicy,
   Stack,
 } from "aws-cdk-lib";
@@ -15,7 +16,6 @@ import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import * as cxapi from "aws-cdk-lib/cx-api";
-import { IConstruct } from "constructs";
 import { join } from "path";
 import {
   ApplicationLoadBalancedVllmNxDInferenceService,
@@ -98,22 +98,26 @@ class VllmNxDInferenceIntegTestStack extends Stack {
     );
   }
 }
+class DisableManagedTerminationProtection implements IPropertyInjector {
+  public readonly constructUniqueId =
+    ecs.AsgCapacityProvider.PROPERTY_INJECTION_ID;
+
+  public inject(
+    originalProps: ecs.AsgCapacityProviderProps,
+    _context: InjectionContext,
+  ): ecs.AsgCapacityProviderProps {
+    return {
+      ...originalProps,
+      enableManagedTerminationProtection: false,
+    };
+  }
+}
+PropertyInjectors.of(app).add(new DisableManagedTerminationProtection());
+
 const stack = new VllmNxDInferenceIntegTestStack(
   app,
   "VllmNxDInferenceIntegTestStack",
 );
-
-class DisableManagedTerminationProtection implements IAspect {
-  visit(node: IConstruct) {
-    if (node instanceof ecs.CfnCapacityProvider) {
-      node.addPropertyOverride(
-        "AutoScalingGroupProvider.ManagedTerminationProtection",
-        "DISABLED",
-      );
-    }
-  }
-}
-Aspects.of(stack).add(new DisableManagedTerminationProtection());
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
