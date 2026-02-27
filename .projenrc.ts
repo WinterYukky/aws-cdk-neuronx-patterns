@@ -1,4 +1,4 @@
-import { ReleasableCommits, awscdk } from "projen";
+import { DependencyType, ReleasableCommits, awscdk } from "projen";
 const cdkVersion = "2.200.1";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
@@ -20,7 +20,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
-    `@aws-cdk/integ-tests-alpha`,
+    `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
     `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@types/aws-lambda",
     "@types/cfn-response",
@@ -70,6 +70,22 @@ const project = new awscdk.AwsCdkConstructLibrary({
 project.eslint?.addRules({
   "import/order": "off",
 });
+
+// Override integ-runner and integ-tests-alpha versions added by experimentalIntegRunner
+// to match the cdkVersion, since latest versions may have incompatible decorators
+project.deps.removeDependency("@aws-cdk/integ-runner", DependencyType.DEVENV);
+project.deps.removeDependency(
+  "@aws-cdk/integ-tests-alpha",
+  DependencyType.DEVENV,
+);
+project.deps.addDependency(
+  `@aws-cdk/integ-runner@latest`,
+  DependencyType.DEVENV,
+);
+project.deps.addDependency(
+  `@aws-cdk/integ-tests-alpha@${cdkVersion}-alpha.0`,
+  DependencyType.DEVENV,
+);
 
 project.projectBuild.compileTask.prependExec(
   "esbuild index.ts --bundle --outdir=./ --platform=node --external:@aws-sdk/*",
