@@ -95,7 +95,7 @@ project.addTask("integ", {
 });
 
 project.addTask("integ:update", {
-  exec: "integ-runner --update-on-failed --no-update-workflow",
+  exec: "integ-runner --update-on-failed",
   description: "Run integration tests and update on any failed tests",
   receiveArgs: true,
 });
