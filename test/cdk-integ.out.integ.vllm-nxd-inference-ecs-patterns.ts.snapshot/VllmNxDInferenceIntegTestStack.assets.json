@@ -4,7 +4,7 @@
     "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200": {
       "displayName": "VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
       "source": {
-        "path": "/tmp/cdk-custom-resourceXyZVQO",
+        "path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
         "packaging": "zip"
       },
       "destinations": {
@@ -18,7 +18,7 @@
     "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
       "displayName": "VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
       "source": {
-        "path": "/tmp/cdk-custom-resourcebBOsmP",
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
         "packaging": "zip"
       },
       "destinations": {
@@ -32,7 +32,7 @@
     "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74": {
       "displayName": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/Code",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/@cdklabs/deploy-time-build/lambda/trigger-codebuild/dist",
+        "path": "asset.b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74",
         "packaging": "zip"
       },
       "destinations": {
@@ -46,7 +46,7 @@
     "a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410": {
       "displayName": "Compiler/CompileImage/Source",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/scripts/compile/vllm-nxd-inference",
+        "path": "asset.a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410",
         "packaging": "zip"
       },
       "destinations": {
@@ -60,7 +60,7 @@
     "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee": {
       "displayName": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Code",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx/private/neuronx-ami",
+        "path": "asset.4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee",
         "packaging": "zip"
       },
       "destinations": {
@@ -74,7 +74,7 @@
     "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57": {
       "displayName": "Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Code",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
+        "path": "asset.07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57",
         "packaging": "zip"
       },
       "destinations": {
@@ -88,7 +88,7 @@
     "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48": {
       "displayName": "SingletonLambda1361f4695c924c469e115d1dbf925bac/Code",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx-compiler/private/await-compile-job",
+        "path": "asset.fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48",
         "packaging": "zip"
       },
       "destinations": {
@@ -102,7 +102,7 @@
     "d382f7751ce017fd6891c9140bfd0d4346e837d38ae77eebf6d0a4fba880f8d7": {
       "displayName": "HttpRequestFromVpcFunction/Code",
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts.snapshot/asset.d382f7751ce017fd6891c9140bfd0d4346e837d38ae77eebf6d0a4fba880f8d7",
+        "path": "asset.d382f7751ce017fd6891c9140bfd0d4346e837d38ae77eebf6d0a4fba880f8d7",
         "packaging": "zip"
       },
       "destinations": {
@@ -113,16 +113,16 @@
         }
       }
     },
-    "0622b2197d78e61b4e71c86e543e51866e032cc766d1de13344fd5505294c077": {
+    "48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138": {
       "displayName": "VllmNxDInferenceIntegTestStack Template",
       "source": {
         "path": "VllmNxDInferenceIntegTestStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-d94b11b7": {
+        "current_account-current_region-4b0a9aae": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "0622b2197d78e61b4e71c86e543e51866e032cc766d1de13344fd5505294c077.json",
+          "objectKey": "48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

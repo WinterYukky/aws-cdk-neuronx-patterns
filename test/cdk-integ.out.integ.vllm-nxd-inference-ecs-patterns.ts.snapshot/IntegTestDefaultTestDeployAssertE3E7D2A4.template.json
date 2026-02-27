@@ -42,13 +42,10 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1772178296764"
+    "salt": "1772178170023"
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/Default/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cInvoke4ABEFCDF": {
    "Type": "AWS::Lambda::Permission",
@@ -63,9 +60,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/Invoke"
    }
   },
   "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForIsCompleteProviderInvokeD336993F": {
@@ -84,9 +78,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/IsCompleteProvider/Invoke"
    }
   },
   "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForTimeoutProviderInvokeADBDB95C": {
@@ -105,9 +96,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/TimeoutProvider/Invoke"
    }
   },
   "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForRoleDD4582B8": {
@@ -153,9 +141,6 @@
       }
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/Role"
    }
   },
   "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitFor6E9BA117": {
@@ -192,10 +177,7 @@
    },
    "DependsOn": [
     "LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8cWaitForRoleDD4582B8"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/LambdaInvoke4e8f586ca24eba9c3d8c47808e9a2f8c/WaitFor/Resource"
-   }
+   ]
   },
   "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73": {
    "Type": "AWS::IAM::Role",
@@ -276,9 +258,6 @@
       }
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role"
    }
   },
   "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F": {
@@ -299,9 +278,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler"
    }
   },
   "SingletonFunction76b3e830a873425f8453eddd85c86925Role918961BB": {
@@ -374,9 +350,6 @@
       }
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Role"
    }
   },
   "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE": {
@@ -397,9 +370,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Handler"
    }
   },
   "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aRoleB84BD8CE": {
@@ -422,9 +392,6 @@
       "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Role"
    }
   },
   "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA": {
@@ -445,20 +412,7 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Handler"
    }
-  },
-  "CDKMetadata": {
-   "Type": "AWS::CDK::Metadata",
-   "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWMQWvCQBBGf0s8lt11DR48tgiC0KKYg4fSw7gZ4xgzKzuz8RDy34s2PXx8Dx680pVL7wZfwENsqFt7o5MbKoXQmnUWjd0BJeYU8Hv2NjPTfsz6zP/iybus96zmQwS1UmiIm9F4C7f7BZwv3qf6nFixsYqiMsnhE7pTDVvuY4ubzEEp8iuUniT7FHuqMZkjkGKqFBS/IFyIcRwNxxrdVeZ9WbrFyvniKkQ2ZVbq0B3+/he9q1vq5AAAAA=="
-   },
-   "Metadata": {
-    "aws:cdk:path": "IntegTest/DefaultTest/DeployAssert/CDKMetadata/Default"
-   },
-   "Condition": "CDKMetadataAvailable"
   }
  },
  "Outputs": {
@@ -469,272 +423,6 @@
      "assertion"
     ]
    }
-  }
- },
- "Conditions": {
-  "CDKMetadataAvailable": {
-   "Fn::Or": [
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "af-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-3"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-4"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-northwest-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-2"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "il-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "sa-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-west-1"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Equals": [
-      {
-       "Ref": "AWS::Region"
-      },
-      "us-west-2"
-     ]
-    }
-   ]
   }
  },
  "Parameters": {

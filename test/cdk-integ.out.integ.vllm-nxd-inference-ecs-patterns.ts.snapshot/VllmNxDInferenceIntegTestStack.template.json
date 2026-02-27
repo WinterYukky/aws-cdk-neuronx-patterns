@@ -13,9 +13,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Vpc"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/Resource"
    }
   },
   "VpcPublicSubnet1Subnet5C2D37C4": {
@@ -48,9 +45,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/Subnet"
    }
   },
   "VpcPublicSubnet1RouteTable6C95E38E": {
@@ -65,9 +59,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/RouteTable"
    }
   },
   "VpcPublicSubnet1RouteTableAssociation97140677": {
@@ -79,9 +70,6 @@
     "SubnetId": {
      "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/RouteTableAssociation"
    }
   },
   "VpcPublicSubnet1DefaultRoute3DA9E72A": {
@@ -97,10 +85,7 @@
    },
    "DependsOn": [
     "VpcVPCGWBF912B6E"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/DefaultRoute"
-   }
+   ]
   },
   "VpcPublicSubnet1EIPD7E02669": {
    "Type": "AWS::EC2::EIP",
@@ -112,9 +97,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/EIP"
    }
   },
   "VpcPublicSubnet1NATGateway4D7517AA": {
@@ -139,10 +121,7 @@
    "DependsOn": [
     "VpcPublicSubnet1DefaultRoute3DA9E72A",
     "VpcPublicSubnet1RouteTableAssociation97140677"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet1/NATGateway"
-   }
+   ]
   },
   "VpcPublicSubnet2Subnet691E08A3": {
    "Type": "AWS::EC2::Subnet",
@@ -174,9 +153,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/Subnet"
    }
   },
   "VpcPublicSubnet2RouteTable94F7E489": {
@@ -191,9 +167,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/RouteTable"
    }
   },
   "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
@@ -205,9 +178,6 @@
     "SubnetId": {
      "Ref": "VpcPublicSubnet2Subnet691E08A3"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/RouteTableAssociation"
    }
   },
   "VpcPublicSubnet2DefaultRoute97F91067": {
@@ -223,10 +193,7 @@
    },
    "DependsOn": [
     "VpcVPCGWBF912B6E"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PublicSubnet2/DefaultRoute"
-   }
+   ]
   },
   "VpcPrivateSubnet1Subnet536B997A": {
    "Type": "AWS::EC2::Subnet",
@@ -258,9 +225,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/Subnet"
    }
   },
   "VpcPrivateSubnet1RouteTableB2C5B500": {
@@ -275,9 +239,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/RouteTable"
    }
   },
   "VpcPrivateSubnet1RouteTableAssociation70C59FA6": {
@@ -289,9 +250,6 @@
     "SubnetId": {
      "Ref": "VpcPrivateSubnet1Subnet536B997A"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/RouteTableAssociation"
    }
   },
   "VpcPrivateSubnet1DefaultRouteBE02A9ED": {
@@ -304,9 +262,6 @@
     "RouteTableId": {
      "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet1/DefaultRoute"
    }
   },
   "VpcPrivateSubnet2Subnet3788AAA1": {
@@ -339,9 +294,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/Subnet"
    }
   },
   "VpcPrivateSubnet2RouteTableA678073B": {
@@ -356,9 +308,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/RouteTable"
    }
   },
   "VpcPrivateSubnet2RouteTableAssociationA89CAD56": {
@@ -370,9 +319,6 @@
     "SubnetId": {
      "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/RouteTableAssociation"
    }
   },
   "VpcPrivateSubnet2DefaultRoute060D2087": {
@@ -385,9 +331,6 @@
     "RouteTableId": {
      "Ref": "VpcPrivateSubnet2RouteTableA678073B"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/PrivateSubnet2/DefaultRoute"
    }
   },
   "VpcIGWD7BA715C": {
@@ -399,9 +342,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Vpc"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/IGW"
    }
   },
   "VpcVPCGWBF912B6E": {
@@ -413,9 +353,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/VPCGW"
    }
   },
   "VpcS3A5408339": {
@@ -457,9 +394,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/S3/Resource"
    }
   },
   "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
@@ -482,10 +416,7 @@
     }
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Vpc/RestrictDefaultSecurityGroupCustomResource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
    "Type": "AWS::IAM::Role",
@@ -554,9 +485,6 @@
       }
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
    }
   },
   "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
@@ -582,12 +510,7 @@
    },
    "DependsOn": [
     "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
-    "aws:asset:path": "/tmp/cdk-custom-resourceXyZVQO",
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "Bucket83908E77": {
    "Type": "AWS::S3::Bucket",
@@ -600,10 +523,7 @@
     ]
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Bucket/Resource"
-   }
+   "DeletionPolicy": "Delete"
   },
   "BucketPolicyE9A3008A": {
    "Type": "AWS::S3::BucketPolicy",
@@ -655,9 +575,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Bucket/Policy/Resource"
    }
   },
   "BucketAutoDeleteObjectsCustomResourceBAFD23C2": {
@@ -677,10 +594,7 @@
     "BucketPolicyE9A3008A"
    ],
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Bucket/AutoDeleteObjectsCustomResource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
    "Type": "AWS::IAM::Role",
@@ -702,9 +616,6 @@
       "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
    }
   },
   "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
@@ -741,20 +652,12 @@
    },
    "DependsOn": [
     "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
-    "aws:asset:path": "/tmp/cdk-custom-resourcebBOsmP",
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CompilerCompileImageRepository8D221D1D": {
    "Type": "AWS::ECR::Repository",
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/CompileImage/Repository/Resource"
-   },
    "Properties": {
     "EmptyOnDelete": true,
     "ImageScanningConfiguration": {
@@ -834,10 +737,7 @@
     "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9"
    ],
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/CompileImage/Resource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CompilerLaunchTemplate4C63C08A": {
    "Type": "AWS::EC2::LaunchTemplate",
@@ -885,9 +785,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/LaunchTemplate/Resource"
    }
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2": {
@@ -925,9 +822,6 @@
       "Value": "neuronx-compile-worker"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource"
    }
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC": {
@@ -980,9 +874,6 @@
       "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF": {
@@ -1028,13 +919,7 @@
    "DependsOn": [
     "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
     "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099": {
    "Type": "AWS::Logs::LogGroup",
@@ -1059,10 +944,7 @@
     ]
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": {
    "Type": "Custom::NeuronxAmi",
@@ -1078,10 +960,7 @@
     }
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmi/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CompilerComputeEnvironmentSecurityGroup3ADC0F04": {
    "Type": "AWS::EC2::SecurityGroup",
@@ -1103,9 +982,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup/Resource"
    }
   },
   "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B": {
@@ -1143,9 +1019,6 @@
       "Value": "neuronx-compile-worker"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/Resource"
    }
   },
   "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B": {
@@ -1199,9 +1072,6 @@
       "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/DefaultPolicy/Resource"
    }
   },
   "CompilerComputeEnvironmentInstanceProfileA05F57F0": {
@@ -1212,9 +1082,6 @@
       "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfile"
    }
   },
   "CompilerComputeEnvironment83CAC2B9": {
@@ -1283,9 +1150,6 @@
     },
     "Type": "managed",
     "UpdatePolicy": {}
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/Resource"
    }
   },
   "CompilerJobQueue59AB0D38": {
@@ -1312,9 +1176,6 @@
     ],
     "Priority": 1,
     "State": "ENABLED"
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue/Resource"
    }
   },
   "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A": {
@@ -1332,9 +1193,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/Resource"
    }
   },
   "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993": {
@@ -1397,9 +1255,6 @@
       "Ref": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource"
    }
   },
   "CompilerJobDefinitionE25875BC": {
@@ -1569,9 +1424,6 @@
     "RetryStrategy": {},
     "Timeout": {},
     "Type": "container"
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421": {
@@ -1603,9 +1455,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2": {
@@ -1693,9 +1542,6 @@
       "Ref": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkonEvent782775F0": {
@@ -1744,13 +1590,7 @@
    "DependsOn": [
     "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2",
     "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CompilerCompileJobProviderframeworkonEventLogGroup7DA40C11": {
    "Type": "AWS::Logs::LogGroup",
@@ -1769,10 +1609,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onEvent/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF": {
    "Type": "AWS::IAM::Role",
@@ -1803,9 +1640,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA": {
@@ -1886,9 +1720,6 @@
       "Ref": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkisComplete3CEC6FB9": {
@@ -1934,13 +1765,7 @@
    "DependsOn": [
     "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA",
     "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CompilerCompileJobProviderframeworkisCompleteLogGroup4D3BBE69": {
    "Type": "AWS::Logs::LogGroup",
@@ -1959,10 +1784,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-isComplete/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6": {
    "Type": "AWS::IAM::Role",
@@ -1993,9 +1815,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50": {
@@ -2076,9 +1895,6 @@
       "Ref": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "CompilerCompileJobProviderframeworkonTimeout00B040EB": {
@@ -2124,13 +1940,7 @@
    "DependsOn": [
     "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50",
     "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CompilerCompileJobProviderframeworkonTimeoutLogGroup756C2566": {
    "Type": "AWS::Logs::LogGroup",
@@ -2149,10 +1959,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/framework-onTimeout/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D": {
    "Type": "AWS::IAM::Role",
@@ -2169,9 +1976,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/Resource"
    }
   },
   "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE": {
@@ -2234,9 +2038,6 @@
       "Ref": "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Role/DefaultPolicy/Resource"
    }
   },
   "CompilerCompileJobProviderwaiterstatemachine094C7791": {
@@ -2274,16 +2075,10 @@
    "DependsOn": [
     "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE",
     "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider/waiter-state-machine/Resource"
-   }
+   ]
   },
   "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": {
-   "Type": "AWS::CloudFormation::WaitConditionHandle",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionHandlesdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
-   }
+   "Type": "AWS::CloudFormation::WaitConditionHandle"
   },
   "CompilerNeuronxCompile8E2589B5": {
    "Type": "Custom::NeuronxCompile",
@@ -2299,10 +2094,7 @@
     }
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/NeuronxCompile/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": {
    "Type": "AWS::CloudFormation::WaitCondition",
@@ -2315,10 +2107,7 @@
    },
    "DependsOn": [
     "CompilerNeuronxCompile8E2589B5"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
-   }
+   ]
   },
   "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4": {
    "Type": "AWS::IAM::Role",
@@ -2349,9 +2138,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole/Resource"
    }
   },
   "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC": {
@@ -2378,9 +2164,6 @@
       "Ref": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f306AEFF37": {
@@ -2405,13 +2188,7 @@
    "DependsOn": [
     "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC",
     "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/@cdklabs/deploy-time-build/lambda/trigger-codebuild/dist",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3LogGroupD6190314": {
    "Type": "AWS::Logs::LogGroup",
@@ -2430,10 +2207,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9": {
    "Type": "AWS::IAM::Role",
@@ -2464,9 +2238,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role/Resource"
    }
   },
   "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleDefaultPolicyBD233B55": {
@@ -2639,9 +2410,6 @@
       "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role/DefaultPolicy/Resource"
    }
   },
   "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2": {
@@ -2671,9 +2439,6 @@
      "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"echo \\\"$input\\\"\",\n        \"mkdir workdir\",\n        \"cd workdir\",\n        \"aws s3 cp \\\"$sourceS3Url\\\" temp.zip\",\n        \"unzip temp.zip\",\n        \"ls -la\",\n        \"aws ecr get-login-password --region $repositoryRegion | docker login --username AWS --password-stdin $repositoryAuthUri\",\n        \"aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws\",\n        \"docker buildx ls\",\n        \"echo \\\"$buildCommand\\\"\",\n        \"eval \\\"$buildCommand\\\"\",\n        \"docker images\",\n        \"docker tag artifact:$imageTag $repositoryUri:$imageTag\",\n        \"docker push $repositoryUri:$imageTag\"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"ContainerImageBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$imageTag\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"ImageTag\\\": \\\"$imageTag\\\"\\n  }\\n}\\nEOF\\ncurl -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}",
      "Type": "NO_SOURCE"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Resource"
    }
   },
   "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": {
@@ -2705,9 +2470,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource"
    }
   },
   "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9": {
@@ -2730,13 +2492,7 @@
    },
    "DependsOn": [
     "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx/private/neuronx-ami",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6": {
    "Type": "AWS::Logs::LogGroup",
@@ -2755,10 +2511,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678": {
    "Type": "AWS::IAM::Role",
@@ -2789,9 +2542,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/Resource"
    }
   },
   "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D": {
@@ -2823,9 +2573,6 @@
       "Ref": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23": {
@@ -2862,13 +2609,7 @@
    "DependsOn": [
     "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D",
     "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx-compiler/private/await-compile-job",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "SingletonLambda1361f4695c924c469e115d1dbf925bacLogGroup0B81A182": {
    "Type": "AWS::Logs::LogGroup",
@@ -2887,10 +2628,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451": {
    "Type": "AWS::IAM::Role",
@@ -2921,9 +2659,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/Resource"
    }
   },
   "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A": {
@@ -2945,9 +2680,6 @@
       "Ref": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86": {
@@ -2976,13 +2708,7 @@
    "DependsOn": [
     "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
     "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx-compiler/private/await-compile-job",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62LogGroup25096071": {
    "Type": "AWS::Logs::LogGroup",
@@ -3001,10 +2727,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdadf16dba85f77480ca6adcfdf74c3de62/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9": {
    "Type": "AWS::IAM::Role",
@@ -3035,9 +2758,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdaf6e6699750424df18781bd68b3ac5313/ServiceRole/Resource"
    }
   },
   "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4": {
@@ -3080,9 +2800,6 @@
       "Ref": "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdaf6e6699750424df18781bd68b3ac5313/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0": {
@@ -3117,13 +2834,7 @@
    "DependsOn": [
     "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4",
     "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdaf6e6699750424df18781bd68b3ac5313/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/neuronx-compiler/private/await-compile-job",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "SingletonLambdaf6e6699750424df18781bd68b3ac5313LogGroupFB3C121A": {
    "Type": "AWS::Logs::LogGroup",
@@ -3142,10 +2853,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/SingletonLambdaf6e6699750424df18781bd68b3ac5313/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "TaskDefinitionTaskRoleFD40A61D": {
    "Type": "AWS::IAM::Role",
@@ -3162,9 +2870,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/Resource"
    }
   },
   "TaskDefinitionTaskRoleDefaultPolicy282E8624": {
@@ -3211,9 +2916,6 @@
       "Ref": "TaskDefinitionTaskRoleFD40A61D"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/TaskRole/DefaultPolicy/Resource"
    }
   },
   "TaskDefinitionB36D86D9": {
@@ -3378,18 +3080,12 @@
       "Name": "model"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/Resource"
    }
   },
   "TaskDefinitionvLLMLogGroupF04E471E": {
    "Type": "AWS::Logs::LogGroup",
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "TaskDefinitionExecutionRole8D61C2FB": {
    "Type": "AWS::IAM::Role",
@@ -3406,9 +3102,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/Resource"
    }
   },
   "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5": {
@@ -3438,9 +3131,6 @@
       "Ref": "TaskDefinitionExecutionRole8D61C2FB"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/TaskDefinition/ExecutionRole/DefaultPolicy/Resource"
    }
   },
   "ServiceLB4B41E788": {
@@ -3470,9 +3160,6 @@
      }
     ],
     "Type": "application"
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/Resource"
    }
   },
   "ServiceLBSecurityGroup45E2FC86": {
@@ -3491,9 +3178,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/Resource"
    }
   },
   "ServiceLBSecurityGrouptoVllmNxDInferenceIntegTestStackServiceAutoScalingGroupInstanceSecurityGroupD0B1DCE33276860999072EDFA2": {
@@ -3515,9 +3199,6 @@
     },
     "IpProtocol": "tcp",
     "ToPort": 60999
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/to VllmNxDInferenceIntegTestStackServiceAutoScalingGroupInstanceSecurityGroupD0B1DCE3:32768-60999"
    }
   },
   "ServiceLBSecurityGroupfromVllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D8653780C8F7E958": {
@@ -3539,9 +3220,6 @@
      ]
     },
     "ToPort": 80
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/SecurityGroup/from VllmNxDInferenceIntegTestStackHttpRequestFromVpcFunctionSecurityGroup84D86537:80"
    }
   },
   "ServiceLBPublicListener78E1CF05": {
@@ -3560,9 +3238,6 @@
     },
     "Port": 80,
     "Protocol": "HTTP"
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/PublicListener/Resource"
    }
   },
   "ServiceLBPublicListenerECSPrivateGroupB34D5719": {
@@ -3581,9 +3256,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/LB/PublicListener/ECSPrivateGroup/Resource"
    }
   },
   "ServiceService775D3AE5": {
@@ -3619,10 +3291,7 @@
     "ServiceLBPublicListener78E1CF05",
     "TaskDefinitionTaskRoleDefaultPolicy282E8624",
     "TaskDefinitionTaskRoleFD40A61D"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/Service/Service"
-   }
+   ]
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B": {
    "Type": "AWS::IAM::Role",
@@ -3653,9 +3322,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource"
    }
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2": {
@@ -3708,9 +3374,6 @@
       "Ref": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C": {
@@ -3750,13 +3413,7 @@
    "DependsOn": [
     "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2",
     "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/custom-resources/lib/provider-framework/runtime",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroup8981F636": {
    "Type": "AWS::Logs::LogGroup",
@@ -3775,10 +3432,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A": {
    "Type": "Custom::NeuronxAmi",
@@ -3794,10 +3448,7 @@
     }
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmi/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "ServiceAutoScalingGroupInstanceSecurityGroup113C6E6E": {
    "Type": "AWS::EC2::SecurityGroup",
@@ -3819,9 +3470,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceSecurityGroup/Resource"
    }
   },
   "ServiceAutoScalingGroupInstanceSecurityGroupfromVllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B3276860999051CD2D7": {
@@ -3843,9 +3491,6 @@
      ]
     },
     "ToPort": 60999
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceSecurityGroup/from VllmNxDInferenceIntegTestStackServiceLBSecurityGroupA852454B:32768-60999"
    }
   },
   "ServiceAutoScalingGroupInstanceRole02DE3C6C": {
@@ -3869,9 +3514,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/Resource"
    }
   },
   "ServiceAutoScalingGroupInstanceRoleDefaultPolicy66CAC56B": {
@@ -3960,9 +3602,6 @@
       "Ref": "ServiceAutoScalingGroupInstanceRole02DE3C6C"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceRole/DefaultPolicy/Resource"
    }
   },
   "ServiceAutoScalingGroupInstanceProfileB8BA9494": {
@@ -3973,9 +3612,6 @@
       "Ref": "ServiceAutoScalingGroupInstanceRole02DE3C6C"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/InstanceProfile"
    }
   },
   "ServiceAutoScalingGroupLaunchTemplateCF787618": {
@@ -4080,10 +3716,7 @@
    "DependsOn": [
     "ServiceAutoScalingGroupInstanceRoleDefaultPolicy66CAC56B",
     "ServiceAutoScalingGroupInstanceRole02DE3C6C"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LaunchTemplate/Resource"
-   }
+   ]
   },
   "ServiceAutoScalingGroupASGFA49D7FB": {
    "Type": "AWS::AutoScaling::AutoScalingGroup",
@@ -4122,9 +3755,6 @@
     "AutoScalingScheduledAction": {
      "IgnoreUnmodifiedGroupSizeProperties": true
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/ASG"
    }
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C": {
@@ -4162,9 +3792,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole/Resource"
    }
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicyEB5C20B9": {
@@ -4252,9 +3879,6 @@
       "Ref": "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionBAAAD32E": {
@@ -4289,10 +3913,7 @@
    "DependsOn": [
     "ServiceAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicyEB5C20B9",
     "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/Resource"
-   }
+   ]
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionLogGroup21D8C714": {
    "Type": "AWS::Logs::LogGroup",
@@ -4317,10 +3938,7 @@
     ]
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A903140BA0E": {
    "Type": "AWS::Lambda::Permission",
@@ -4336,9 +3954,6 @@
     "SourceArn": {
      "Ref": "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/AllowInvoke:VllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A90"
    }
   },
   "ServiceAutoScalingGroupDrainECSHookFunctionTopic854AD61C": {
@@ -4354,9 +3969,6 @@
     "TopicArn": {
      "Ref": "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/Topic/Resource"
    }
   },
   "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85": {
@@ -4368,9 +3980,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Topic/Resource"
    }
   },
   "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093": {
@@ -4394,9 +4003,6 @@
       "Value": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role/Resource"
    }
   },
   "ServiceAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicy9848EF2F": {
@@ -4420,9 +4026,6 @@
       "Ref": "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role/DefaultPolicy/Resource"
    }
   },
   "ServiceAutoScalingGroupLifecycleHookDrainHookD1D06041": {
@@ -4447,10 +4050,7 @@
    "DependsOn": [
     "ServiceAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicy9848EF2F",
     "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Resource"
-   }
+   ]
   },
   "ServiceAsgCapacityProviderC55593FF": {
    "Type": "AWS::ECS::CapacityProvider",
@@ -4465,16 +4065,10 @@
      },
      "ManagedTerminationProtection": "DISABLED"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/Service/Resource/AsgCapacityProvider/AsgCapacityProvider"
    }
   },
   "EcsDefaultClusterMnL3mNNYNVpc18E0451A": {
-   "Type": "AWS::ECS::Cluster",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/Resource"
-   }
+   "Type": "AWS::ECS::Cluster"
   },
   "EcsDefaultClusterMnL3mNNYNVpcF07F0074": {
    "Type": "AWS::ECS::ClusterCapacityProviderAssociations",
@@ -4488,9 +4082,6 @@
      "Ref": "EcsDefaultClusterMnL3mNNYNVpc18E0451A"
     },
     "DefaultCapacityProviderStrategy": []
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/EcsDefaultClusterMnL3mNNYNVpc/EcsDefaultClusterMnL3mNNYNVpc"
    }
   },
   "HttpRequestFromVpcFunctionServiceRoleA142BB7F": {
@@ -4540,10 +4131,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/ServiceRole/Resource"
-   }
+   ]
   },
   "HttpRequestFromVpcFunctionSecurityGroup5EFA4275": {
    "Type": "AWS::EC2::SecurityGroup",
@@ -4565,10 +4153,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/SecurityGroup/Resource"
-   }
+   ]
   },
   "HttpRequestFromVpcFunctionB264F32C": {
    "Type": "AWS::Lambda::Function",
@@ -4613,13 +4198,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/Resource",
-    "aws:asset:path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts.snapshot/asset.d382f7751ce017fd6891c9140bfd0d4346e837d38ae77eebf6d0a4fba880f8d7",
-    "aws:asset:is-bundled": true,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "HttpRequestFromVpcFunctionLogGroup1EA954C2": {
    "Type": "AWS::Logs::LogGroup",
@@ -4644,20 +4223,7 @@
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ],
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/HttpRequestFromVpcFunction/LogGroup/Resource"
-   }
-  },
-  "CDKMetadata": {
-   "Type": "AWS::CDK::Metadata",
-   "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1ab2/bNhP/LNXLgtEy70Ex5NUcx+3cx3E82+2AGYFBkxeFDU1qJOXOEPzdB1KkTMVOljRpZ3d5EVg8Hk/3j0cq92ulrf8dp8ev8Gd9ROjNEWfztBwbTG4Q/qxnJZBWWn7MybRMBDbvsIHPeKWTk+R1gpKsGnYFzSUTpiKvL1HnSnwcdtCwmHNGxsVcgJmWCV5ixvGccWZWf0gBXsgyJz3qnwmj6pRLcuPHC5xXQnr5hejjQpDr5MSoAlDC8uWbzi12rDXLRC9fvmlTqkDrC9FRgA2TolIN7YkWThFKB7VHk5Np8jq53BsF90OLKpWqBLJPI1kYmOA5hw19Q2trLQlzAmpm+9DtDe3PxtloqNgSG3j2zLzCXO+Bz5+mxv5osidqVFnYEwaUgDqHqhrnR21jMLlegDDIUz7mJJTFaWk19u/ToJaMQHJi6+mismhdl8ywBFWaT2CRc2xgWiZzq/MZ2LU6OZmWCXXPgyADJUvJiyDQFZIFJtdMQG+Bs8DDhDZYEJis8kCiYDDjQM+lYEYqJrLaXxpIoZhZvVOyyD17oUGdYYM37nN7DoLTvReDtbk0F7l1ZqA80o6NykMlrxgPTDewGmKmogOn6TE0jnWPImAds4kGBU0Uy+toowRzLj+3Ob8ozFwWgnpn+ILdE5m1blRYRaZlQrDoCc4EVJSq2BEpBJDY6EKwPwvwOeu2mCU7wZdecjcWbGc9kxV5ufPtEdNG0sa0bUOsqC+R9BAnNch2NzWmHmRjVevjsG0RKgFbZG/NGumf0vK0IDeuqCtYyCXmQ8kZWSUn1gyj5MrqWRh5BhwMXMw/AbH3Fucbp0G1HlU/1WK7/dwwSrd43jOfYpsnHC/mFKflmImMg5HibSFcMliVCmFYnehE0vB4jQXloEK6FCy4tJI2LFQudWC2ImRhas/eKaf5ulrql6xBCYglU1LYGvetpNxmbpr+rPatL1EUp2j1dvI3JTSlN/XjMsuYyN5KtcCW9n58MbDpl+ecEXfE9GXWhyXwj63kJHnbnrT71bK44m424jL3l+m6vMa7IBCVrKvklTcpqq6RT7uCqFXePHAp7cZOd7s0XExfvLLLK18++eLPF5d9fZc98Mz5okPlEZV2V+F/ljx41pc+y1H0ksVPPV7ui2nTB4+LsLu5hXO+PvDtvc1ODEEtmNZMijUCotJyBLnU9qNodc91shK6YbW30BnWGoxO2/YHMbxIy5Hk9jMOa10sgJ6u7AdgrpggLMe8TYgs6syqeOyCNonclyywwBlQpwHzX08xbdVWnjdsoIkchlcEvaeln3VfrNXHSz1X7717J++X+x0Y+AQT7O6ot8O/GIXvPkZPMf/FdS/OOSDnvBTzJxjYKMjoMKNA6XnsuCe6cg8z/PHZcviJ+WLCYZuwn1p9yxvodxD9e+V+H0fHQZTzw3POId71vklA0d2Rrv5TIjkg31ezrwxKT+RIhsZgZMs2mdKxwQbs/3Z0IyDb5GeT/7UV3a/XHrKS/y1tDj3B98vJL4L+/UTZr0TcL22+spLuePaIFgd4awCv1ojLTKdl37ePpmXdSWp8bhwKUYEB0ehOPUVgBUHz5DWaY0Ou09L/26ZLWl2iO3KRFwai1lQDGLjVfYuxejWQTIOF0y0wD9HpcNtr0jVmjzdgcKGRl8twwWMWDVjd31gMDLTPHhXY7Yxn7X7ruPVTfWnb1h29l/PfCihg6vGRYYz6TBR/DbHCCzCgNOoS3SWtjhQGMwHqDK6YYK4B1yX6vZxvCA5549lqX2cKCzMu5gtm3sv5VjevIWCNtIE8tCV1aoFiNsvPKyQksi3GecE4Tcuhkhb6NS2bLUSrgTPV++L0Q69/NnvXHXRH7f6Ps/F5u297qE6IB1aWiYnRlFe44KbzECHO5zWQ1Y2GBef1zd+v7lycdZ2EqiOrwOgqr1RHAbU5jHndnK3bkOHiniu2ZBwyqAGAUc45M8Y5kCiJvWNsC1SnZZe0JljfRDHy7t/159Y32beyYXcetMYVLHYapPgxauusg3NMmFkNlVwyCsrl4xaNF9qAugX0xJTuEBDKYJXZ1cLo8TZ7BCvXziuzHBuLBdZpO261Y3qKud2SdGMPAo61YYRLTOdulols2UrL3SvVNPZkPIHiBUwbEBvmhvvDZLxgglUGpoZURsM1slhITTBnIkvLdmHkuBrcxs3uxA7vQBg/Gt97C1BMQTMFNAShftFfDYoP7od6bfOT3x52O7/YHz7hnHnbH6jProCsCIdfpbyx7fxbDAGZEdgmCgvN/CkTufqk22nNeoPxpD3odGeT7ui8N2hPeoN3mxIyAl1w4/b/YNIbfOgmKBHSsKtGUANgArAyc8BmEsN4fEJEKq+RFjotx8W8hp1My8TInIUog0eg+2GupJFE8uTEQ1Et7INxA6oGQry+Rfqdmetz0BpncCrpqq5M2QbjQgHTPthN5I6MSNtYMzSxerl/NNh9+X9YRYxuLqBtZ0JS+KTTgfuJgJwgjFptDth/hO7cCZCyifLPwmxCjUDLQhFAnUIbuQjD++rmnbX0DlmhMjngisOYjA22UCBEHN9MeUbtzrmqQv6OmQEVH4drV+5DabYDy9ORgrqM/dWZv0W2hIvC5IVZo+P0OH3z6hdCbzie6x8o5FyujqxHjqpjtq72rkScWhqysUo/6R+WrVb648/p8atPmrEjH4V0VP3+DdgUS8qXNgAA"
-   },
-   "Metadata": {
-    "aws:cdk:path": "VllmNxDInferenceIntegTestStack/CDKMetadata/Default"
-   },
-   "Condition": "CDKMetadataAvailable"
+   "DeletionPolicy": "Retain"
   }
  },
  "Parameters": {
@@ -4748,272 +4314,6 @@
    "Export": {
     "Name": "VllmNxDInferenceIntegTestStack:ExportsOutputFnGetAttServiceLB4B41E788DNSName4B4235FA"
    }
-  }
- },
- "Conditions": {
-  "CDKMetadataAvailable": {
-   "Fn::Or": [
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "af-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-3"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-4"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-northwest-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-2"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "il-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "sa-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-west-1"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Equals": [
-      {
-       "Ref": "AWS::Region"
-      },
-      "us-west-2"
-     ]
-    }
-   ]
   }
  },
  "Rules": {

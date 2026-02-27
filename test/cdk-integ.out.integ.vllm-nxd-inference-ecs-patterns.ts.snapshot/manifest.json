@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0622b2197d78e61b4e71c86e543e51866e032cc766d1de13344fd5505294c077.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2758,17 +2758,6 @@
               "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
               "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)",
-              "phase4 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:649:14)",
-              "bootstrap (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:95:10)",
-              "main (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:55:10)",
-              "Object.<anonymous> (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:800:3)",
-              "Module._compile (node:internal/modules/cjs/loader:1688:14)",
-              "Object.<anonymous> (node:internal/modules/cjs/loader:1820:10)",
-              "Module.load (node:internal/modules/cjs/loader:1423:32)",
-              "Function._load (node:internal/modules/cjs/loader:1246:12)",
-              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
-              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
-              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)",
               "node:internal/main/run_main_module:36:49"
             ]
           },
@@ -3002,17 +2991,6 @@
               "Module.m._compile (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1618:23)",
               "node:internal/modules/cjs/loader:1820:10",
               "Object.require.extensions.<computed> [as .ts] (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1621:12)",
-              "Module.load (node:internal/modules/cjs/loader:1423:32)",
-              "Function._load (node:internal/modules/cjs/loader:1246:12)",
-              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
-              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
-              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)",
-              "phase4 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:649:14)",
-              "bootstrap (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:95:10)",
-              "main (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:55:10)",
-              "Object.<anonymous> (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/bin.ts:800:3)",
-              "Module._compile (node:internal/modules/cjs/loader:1688:14)",
-              "Object.<anonymous> (node:internal/modules/cjs/loader:1820:10)",
               "Module.load (node:internal/modules/cjs/loader:1423:32)",
               "Function._load (node:internal/modules/cjs/loader:1246:12)",
               "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
@@ -3708,18 +3686,6 @@
             "data": "HttpRequestFromVpcFunctionLogGroup1EA954C2"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/CDKMetadata/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadata"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/CDKMetadata/Condition": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadataAvailable"
-          }
-        ],
         "/VllmNxDInferenceIntegTestStack/Exports/Output{\"Ref\":\"HttpRequestFromVpcFunctionB264F32C\"}": [
           {
             "type": "aws:cdk:logicalId",
@@ -3764,7 +3730,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2c45245b8549b7e969495b266702385cdd5b4ba2fd250bfefcdf7862b0f144eb.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/065b2a45ab1bd31eabea7f19000d34ccef4e06f3ec8c7225cd6f44bfc21c53bb.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -3871,18 +3837,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
-          }
-        ],
-        "/IntegTest/DefaultTest/DeployAssert/CDKMetadata/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadata"
-          }
-        ],
-        "/IntegTest/DefaultTest/DeployAssert/CDKMetadata/Condition": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadataAvailable"
           }
         ],
         "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
