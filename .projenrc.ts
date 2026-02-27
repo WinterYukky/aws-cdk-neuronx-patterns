@@ -118,7 +118,7 @@ integWorkflow?.addJob("integ-test", {
       name: "Setup Node.js",
       uses: "actions/setup-node@v5",
       with: {
-        "node-version": "20",
+        "node-version": "18",
       },
     },
     {
