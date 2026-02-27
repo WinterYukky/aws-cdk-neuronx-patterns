@@ -36,9 +36,9 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/aws-sagemaker-alpha": "2.200.1-alpha.0",
-    "@aws-cdk/integ-runner": "2.197.0",
-    "@aws-cdk/integ-tests-alpha": "2.240.0-alpha.0",
+    "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
+    "@aws-cdk/integ-runner": "latest",
+    "@aws-cdk/integ-tests-alpha": "latest",
     "@aws-sdk/client-batch": "^3.998.0",
     "@aws-sdk/client-lambda": "^3.998.0",
     "@types/aws-lambda": "^8.10.160",
@@ -47,7 +47,7 @@
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.200.1",
+    "aws-cdk-lib": "2.240.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.5.1",
     "esbuild": "^0.27.3",
@@ -70,14 +70,12 @@
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-sagemaker-alpha": "2.200.1-alpha.0",
-    "@cdklabs/deploy-time-build": "^0.0.6",
-    "aws-cdk-lib": "^2.200.1",
+    "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
+    "aws-cdk-lib": "^2.240.0",
     "constructs": "^10.5.1"
   },
   "dependencies": {
-    "@aws-cdk/aws-sagemaker-alpha": "2.200.1-alpha.0",
-    "@cdklabs/deploy-time-build": "^0.0.6"
+    "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0"
   },
   "keywords": [
     "cdk",

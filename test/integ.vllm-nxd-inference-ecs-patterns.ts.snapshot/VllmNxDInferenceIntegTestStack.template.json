@@ -798,7 +798,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
     "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider)",
     "Environment": {
@@ -812,6 +812,10 @@
      }
     },
     "Handler": "framework.onEvent",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
     "Role": {
      "Fn::GetAtt": [
       "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2",
@@ -1427,7 +1431,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
     "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
     "Environment": {
@@ -1450,6 +1454,10 @@
      }
     },
     "Handler": "framework.onEvent",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
     "Role": {
      "Fn::GetAtt": [
       "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421",
@@ -1601,7 +1609,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
     "Description": "AWS CDK resource provider framework - isComplete (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
     "Environment": {
@@ -1621,6 +1629,10 @@
      }
     },
     "Handler": "framework.isComplete",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
     "Role": {
      "Fn::GetAtt": [
       "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF",
@@ -1772,7 +1784,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
     "Description": "AWS CDK resource provider framework - onTimeout (VllmNxDInferenceIntegTestStack/Compiler/Resource/CompileJobProvider)",
     "Environment": {
@@ -1792,6 +1804,10 @@
      }
     },
     "Handler": "framework.onTimeout",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
     "Role": {
      "Fn::GetAtt": [
       "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6",
@@ -1892,22 +1908,6 @@
          ]
         }
        ]
-      },
-      {
-       "Action": [
-        "logs:CreateLogDelivery",
-        "logs:CreateLogStream",
-        "logs:DeleteLogDelivery",
-        "logs:DescribeLogGroups",
-        "logs:DescribeResourcePolicies",
-        "logs:GetLogDelivery",
-        "logs:ListLogDeliveries",
-        "logs:PutLogEvents",
-        "logs:PutResourcePolicy",
-        "logs:UpdateLogDelivery"
-       ],
-       "Effect": "Allow",
-       "Resource": "*"
       }
      ],
      "Version": "2012-10-17"
@@ -1919,26 +1919,6 @@
      }
     ]
    }
-  },
-  "CompilerCompileJobProviderwaiterstatemachineLogGroupA99CC327": {
-   "Type": "AWS::Logs::LogGroup",
-   "Properties": {
-    "LogGroupName": {
-     "Fn::Join": [
-      "",
-      [
-       "/aws/vendedlogs/states/waiter-state-machine-",
-       {
-        "Ref": "CompilerCompileJobProviderframeworkisComplete3CEC6FB9"
-       },
-       "-c84a9ff97768eeff3940a722442fac9a0b733490b9"
-      ]
-     ]
-    },
-    "RetentionInDays": 731
-   },
-   "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain"
   },
   "CompilerCompileJobProviderwaiterstatemachine094C7791": {
    "Type": "AWS::StepFunctions::StateMachine",
@@ -1964,22 +1944,6 @@
        "\"}}}"
       ]
      ]
-    },
-    "LoggingConfiguration": {
-     "Destinations": [
-      {
-       "CloudWatchLogsLogGroup": {
-        "LogGroupArn": {
-         "Fn::GetAtt": [
-          "CompilerCompileJobProviderwaiterstatemachineLogGroupA99CC327",
-          "Arn"
-         ]
-        }
-       }
-      }
-     ],
-     "IncludeExecutionData": false,
-     "Level": "ERROR"
     },
     "RoleArn": {
      "Fn::GetAtt": [
@@ -2063,7 +2027,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip"
+     "S3Key": "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d.zip"
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2072,7 +2036,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
@@ -2166,7 +2130,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
@@ -2188,7 +2152,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D",
@@ -2273,7 +2237,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
@@ -2287,7 +2251,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
@@ -2393,7 +2357,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
@@ -2412,7 +2376,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 900
    },
    "DependsOn": [
@@ -2812,7 +2776,7 @@
     "DefaultActions": [
      {
       "TargetGroupArn": {
-       "Ref": "ServiceLBPublicListenerECSGroup03C812D2"
+       "Ref": "ServiceLBPublicListenerECSPrivateGroupB34D5719"
       },
       "Type": "forward"
      }
@@ -2824,7 +2788,7 @@
     "Protocol": "HTTP"
    }
   },
-  "ServiceLBPublicListenerECSGroup03C812D2": {
+  "ServiceLBPublicListenerECSPrivateGroupB34D5719": {
    "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
    "Properties": {
     "HealthCheckPath": "/health",
@@ -2861,7 +2825,7 @@
       "ContainerName": "vLLM",
       "ContainerPort": 8000,
       "TargetGroupArn": {
-       "Ref": "ServiceLBPublicListenerECSGroup03C812D2"
+       "Ref": "ServiceLBPublicListenerECSPrivateGroupB34D5719"
       }
      }
     ],
@@ -2871,7 +2835,7 @@
     }
    },
    "DependsOn": [
-    "ServiceLBPublicListenerECSGroup03C812D2",
+    "ServiceLBPublicListenerECSPrivateGroupB34D5719",
     "ServiceLBPublicListener78E1CF05",
     "TaskDefinitionTaskRoleDefaultPolicy282E8624",
     "TaskDefinitionTaskRoleFD40A61D"
@@ -2967,7 +2931,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip"
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
     "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Service/Resource/NeuronOptimizedMachineImage/NeuronxAmiProvider)",
     "Environment": {
@@ -2981,6 +2945,10 @@
      }
     },
     "Handler": "framework.onEvent",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
     "Role": {
      "Fn::GetAtt": [
       "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B",
@@ -3457,7 +3425,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 30,
     "VpcConfig": {
      "SecurityGroupIds": [

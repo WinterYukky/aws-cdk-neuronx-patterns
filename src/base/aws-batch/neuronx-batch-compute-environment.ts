@@ -25,6 +25,9 @@ export class NeuronxBatchComputeEnvironment
   readonly stack: Stack;
   readonly env: ResourceEnvironment;
   readonly instanceRole: IRole;
+  get computeEnvironmentRef(): batch.ComputeEnvironmentReference {
+    return { computeEnvironmentArn: this.computeEnvironmentArn };
+  }
   private readonly resource: batch.ManagedEc2EcsComputeEnvironment;
   constructor(
     scope: Construct,

@@ -954,8 +954,9 @@ Any object.
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.computeEnvironmentArn">computeEnvironmentArn</a></code> | <code>string</code> | The ARN of this compute environment. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.computeEnvironmentName">computeEnvironmentName</a></code> | <code>string</code> | The name of the ComputeEnvironment. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.computeEnvironmentRef">computeEnvironmentRef</a></code> | <code>aws-cdk-lib.interfaces.aws_batch.ComputeEnvironmentReference</code> | A reference to a ComputeEnvironment resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.enabled">enabled</a></code> | <code>boolean</code> | Whether or not this ComputeEnvironment can accept jobs from a Queue. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.instanceRole">instanceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.serviceRole">serviceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role Batch uses to perform actions on your behalf in your account, such as provision instances to run your jobs. |
@@ -998,6 +999,18 @@ The name of the ComputeEnvironment.
 
 ---
 
+##### `computeEnvironmentRef`<sup>Required</sup> <a name="computeEnvironmentRef" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.computeEnvironmentRef"></a>
+
+```typescript
+public readonly computeEnvironmentRef: ComputeEnvironmentReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_batch.ComputeEnvironmentReference
+
+A reference to a ComputeEnvironment resource.
+
+---
+
 ##### `enabled`<sup>Required</sup> <a name="enabled" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironment.property.enabled"></a>
 
 ```typescript
@@ -1027,16 +1040,17 @@ To ensure you aren't billed for unused capacity, set `minvCpus` to `0`.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1257,9 +1271,10 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.jobDefinitionArn">jobDefinitionArn</a></code> | <code>string</code> | The ARN of this job definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.jobDefinitionName">jobDefinitionName</a></code> | <code>string</code> | The name of this job definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.jobDefinitionRef">jobDefinitionRef</a></code> | <code>aws-cdk-lib.interfaces.aws_batch.JobDefinitionReference</code> | A reference to a JobDefinition resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.retryStrategies">retryStrategies</a></code> | <code>aws-cdk-lib.aws_batch.RetryStrategy[]</code> | Defines the retry behavior for this job. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.parameters">parameters</a></code> | <code>{[ key: string ]: any}</code> | The default parameters passed to the container These parameters can be referenced in the `command` that you give to the container. |
@@ -1287,16 +1302,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1321,6 +1337,18 @@ public readonly jobDefinitionName: string;
 - *Type:* string
 
 The name of this job definition.
+
+---
+
+##### `jobDefinitionRef`<sup>Required</sup> <a name="jobDefinitionRef" id="aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinition.property.jobDefinitionRef"></a>
+
+```typescript
+public readonly jobDefinitionRef: JobDefinitionReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_batch.JobDefinitionReference
+
+A reference to a JobDefinition resource.
 
 ---
 
@@ -1836,6 +1864,8 @@ This will grant the following permissions:
   - ecs:RunTask
   - iam:PassRole
 
+[disable-awslint:no-grants]
+
 ###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.grantRun.parameter.grantee"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
@@ -2067,7 +2097,7 @@ Imports an existing Ec2 task definition from its attributes.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.compatibility">compatibility</a></code> | <code>aws-cdk-lib.aws_ecs.Compatibility</code> | The task launch type compatibility requirement. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
@@ -2075,8 +2105,10 @@ Imports an existing Ec2 task definition from its attributes.
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.isEc2Compatible">isEc2Compatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on an EC2 cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.isExternalCompatible">isExternalCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a ECS anywhere cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.isFargateCompatible">isFargateCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a Fargate cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.isManagedInstancesCompatible">isManagedInstancesCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on Managed Instances. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The networking mode to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.taskDefinitionArn">taskDefinitionArn</a></code> | <code>string</code> | The full Amazon Resource Name (ARN) of the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.taskDefinitionRef">taskDefinitionRef</a></code> | <code>aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference</code> | A reference to this task definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.taskRole">taskRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.ephemeralStorageGiB">ephemeralStorageGiB</a></code> | <code>number</code> | The amount (in GiB) of ephemeral storage to be allocated to the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Execution role for this task definition. |
@@ -2108,16 +2140,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -2207,6 +2240,18 @@ Return true if the task definition can be run on a Fargate cluster.
 
 ---
 
+##### `isManagedInstancesCompatible`<sup>Required</sup> <a name="isManagedInstancesCompatible" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.isManagedInstancesCompatible"></a>
+
+```typescript
+public readonly isManagedInstancesCompatible: boolean;
+```
+
+- *Type:* boolean
+
+Return true if the task definition can be run on Managed Instances.
+
+---
+
 ##### `networkMode`<sup>Required</sup> <a name="networkMode" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.networkMode"></a>
 
 ```typescript
@@ -2228,6 +2273,18 @@ public readonly taskDefinitionArn: string;
 - *Type:* string
 
 The full Amazon Resource Name (ARN) of the task definition.
+
+---
+
+##### `taskDefinitionRef`<sup>Required</sup> <a name="taskDefinitionRef" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition.property.taskDefinitionRef"></a>
+
+```typescript
+public readonly taskDefinitionRef: TaskDefinitionReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference
+
+A reference to this task definition.
 
 ---
 
@@ -2807,6 +2864,8 @@ This will grant the following permissions:
   - ecs:RunTask
   - iam:PassRole
 
+[disable-awslint:no-grants]
+
 ###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.grantRun.parameter.grantee"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
@@ -3038,7 +3097,7 @@ Imports an existing Ec2 task definition from its attributes.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.compatibility">compatibility</a></code> | <code>aws-cdk-lib.aws_ecs.Compatibility</code> | The task launch type compatibility requirement. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.family">family</a></code> | <code>string</code> | The name of a family that this task definition is registered to. |
@@ -3046,8 +3105,10 @@ Imports an existing Ec2 task definition from its attributes.
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isEc2Compatible">isEc2Compatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on an EC2 cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isExternalCompatible">isExternalCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a ECS anywhere cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isFargateCompatible">isFargateCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a Fargate cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isManagedInstancesCompatible">isManagedInstancesCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on Managed Instances. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The networking mode to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionArn">taskDefinitionArn</a></code> | <code>string</code> | The full Amazon Resource Name (ARN) of the task definition. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionRef">taskDefinitionRef</a></code> | <code>aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference</code> | A reference to this task definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskRole">taskRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.ephemeralStorageGiB">ephemeralStorageGiB</a></code> | <code>number</code> | The amount (in GiB) of ephemeral storage to be allocated to the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Execution role for this task definition. |
@@ -3079,16 +3140,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -3178,6 +3240,18 @@ Return true if the task definition can be run on a Fargate cluster.
 
 ---
 
+##### `isManagedInstancesCompatible`<sup>Required</sup> <a name="isManagedInstancesCompatible" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.isManagedInstancesCompatible"></a>
+
+```typescript
+public readonly isManagedInstancesCompatible: boolean;
+```
+
+- *Type:* boolean
+
+Return true if the task definition can be run on Managed Instances.
+
+---
+
 ##### `networkMode`<sup>Required</sup> <a name="networkMode" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.networkMode"></a>
 
 ```typescript
@@ -3199,6 +3273,18 @@ public readonly taskDefinitionArn: string;
 - *Type:* string
 
 The full Amazon Resource Name (ARN) of the task definition.
+
+---
+
+##### `taskDefinitionRef`<sup>Required</sup> <a name="taskDefinitionRef" id="aws-cdk-neuronx-patterns.VllmNxdInferenceTaskDefinition.property.taskDefinitionRef"></a>
+
+```typescript
+public readonly taskDefinitionRef: TaskDefinitionReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference
+
+A reference to this task definition.
 
 ---
 
@@ -4697,13 +4783,14 @@ const neuronxBatchComputeEnvironmentProps: NeuronxBatchComputeEnvironmentProps =
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.updateToLatestImageVersion">updateToLatestImageVersion</a></code> | <code>boolean</code> | Whether or not the AMI is updated to the latest one supported by Batch when an infrastructure update occurs. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.allocationStrategy">allocationStrategy</a></code> | <code>aws-cdk-lib.aws_batch.AllocationStrategy</code> | The allocation strategy to use if not enough instances of the best fitting instance type can be allocated. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.defaultInstanceClasses">defaultInstanceClasses</a></code> | <code>aws-cdk-lib.aws_batch.DefaultInstanceClass[]</code> | Use batch's default instance types. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.images">images</a></code> | <code>aws-cdk-lib.aws_batch.EcsMachineImage[]</code> | Configure which AMIs this Compute Environment can launch. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.instanceClasses">instanceClasses</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceClass[]</code> | The instance classes that this Compute Environment can launch. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.instanceRole">instanceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The execution Role that instances launched by this Compute Environment will use. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.instanceTypes">instanceTypes</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType[]</code> | The instance types that this Compute Environment can launch. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.launchTemplate">launchTemplate</a></code> | <code>aws-cdk-lib.aws_ec2.ILaunchTemplate</code> | The Launch Template that this Compute Environment will use to provision EC2 Instances. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.minvCpus">minvCpus</a></code> | <code>number</code> | The minimum vCPUs that an environment should maintain, even if the compute environment is DISABLED. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.placementGroup">placementGroup</a></code> | <code>aws-cdk-lib.aws_ec2.IPlacementGroup</code> | The EC2 placement group to associate with your compute resources. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.placementGroup">placementGroup</a></code> | <code>aws-cdk-lib.interfaces.aws_ec2.IPlacementGroupRef</code> | The EC2 placement group to associate with your compute resources. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.spotBidPercentage">spotBidPercentage</a></code> | <code>number</code> | The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.spotFleetRole">spotFleetRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The service-linked role that Spot Fleet needs to launch instances on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.useOptimalInstanceClasses">useOptimalInstanceClasses</a></code> | <code>boolean</code> | Whether or not to use batch's optimal instance type. |
@@ -4924,9 +5011,27 @@ public readonly allocationStrategy: AllocationStrategy;
 ```
 
 - *Type:* aws-cdk-lib.aws_batch.AllocationStrategy
-- *Default:* `BEST_FIT_PROGRESSIVE` if not using Spot instances, `SPOT_CAPACITY_OPTIMIZED` if using Spot instances.
+- *Default:* `BEST_FIT_PROGRESSIVE` if not using Spot instances, `SPOT_PRICE_CAPACITY_OPTIMIZED` if using Spot instances.
 
 The allocation strategy to use if not enough instances of the best fitting instance type can be allocated.
+
+---
+
+##### `defaultInstanceClasses`<sup>Optional</sup> <a name="defaultInstanceClasses" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.defaultInstanceClasses"></a>
+
+```typescript
+public readonly defaultInstanceClasses: DefaultInstanceClass[];
+```
+
+- *Type:* aws-cdk-lib.aws_batch.DefaultInstanceClass[]
+- *Default:* choose from instanceTypes and instanceClasses
+
+Use batch's default instance types.
+
+A simpler way to choose up-to-date instance classes based on region
+instead of specifying exact instance classes.
+
+> [https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html](https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html)
 
 ---
 
@@ -5026,10 +5131,10 @@ The minimum vCPUs that an environment should maintain, even if the compute envir
 ##### `placementGroup`<sup>Optional</sup> <a name="placementGroup" id="aws-cdk-neuronx-patterns.NeuronxBatchComputeEnvironmentProps.property.placementGroup"></a>
 
 ```typescript
-public readonly placementGroup: IPlacementGroup;
+public readonly placementGroup: IPlacementGroupRef;
 ```
 
-- *Type:* aws-cdk-lib.aws_ec2.IPlacementGroup
+- *Type:* aws-cdk-lib.interfaces.aws_ec2.IPlacementGroupRef
 - *Default:* no placement group
 
 The EC2 placement group to associate with your compute resources.
@@ -5115,6 +5220,7 @@ const neuronxBatchEcsJobDefinitionProps: NeuronxBatchEcsJobDefinitionProps = { .
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The image that this container will run. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.memory">memory</a></code> | <code>aws-cdk-lib.Size</code> | The memory hard limit present to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.command">command</a></code> | <code>string[]</code> | The command that's passed to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.enableExecuteCommand">enableExecuteCommand</a></code> | <code>boolean</code> | Determines whether execute command functionality is turned on for this task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to a container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role used by Amazon ECS container and AWS Fargate agents to make AWS API calls on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.jobRole">jobRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role that the container can assume. |
@@ -5191,6 +5297,27 @@ public readonly command: string[];
 The command that's passed to the container.
 
 > [https://docs.docker.com/engine/reference/builder/#cmd](https://docs.docker.com/engine/reference/builder/#cmd)
+
+---
+
+##### `enableExecuteCommand`<sup>Optional</sup> <a name="enableExecuteCommand" id="aws-cdk-neuronx-patterns.NeuronxBatchEcsJobDefinitionProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined - AWS Batch default is false
+
+Determines whether execute command functionality is turned on for this task.
+
+If true, execute command functionality is turned on all the containers in the task.
+
+This allows you to use ECS Exec to access containers interactively.
+When enabled, a job role with required SSM permissions will be created automatically if no job role is provided.
+If a job role is alreadyprovided, the required permissions will be added to it.
+
+> [https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
 
 ---
 
@@ -5486,6 +5613,7 @@ const neuronxBatchProps: NeuronxBatchProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.image">image</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerImage</code> | The image that this container will run. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.memory">memory</a></code> | <code>aws-cdk-lib.Size</code> | The memory hard limit present to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.command">command</a></code> | <code>string[]</code> | The command that's passed to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.enableExecuteCommand">enableExecuteCommand</a></code> | <code>boolean</code> | Determines whether execute command functionality is turned on for this task. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to a container. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role used by Amazon ECS container and AWS Fargate agents to make AWS API calls on your behalf. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxBatchProps.property.jobRole">jobRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role that the container can assume. |
@@ -5560,6 +5688,27 @@ public readonly command: string[];
 The command that's passed to the container.
 
 > [https://docs.docker.com/engine/reference/builder/#cmd](https://docs.docker.com/engine/reference/builder/#cmd)
+
+---
+
+##### `enableExecuteCommand`<sup>Optional</sup> <a name="enableExecuteCommand" id="aws-cdk-neuronx-patterns.NeuronxBatchProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined - AWS Batch default is false
+
+Determines whether execute command functionality is turned on for this task.
+
+If true, execute command functionality is turned on all the containers in the task.
+
+This allows you to use ECS Exec to access containers interactively.
+When enabled, a job role with required SSM permissions will be created automatically if no job role is provided.
+If a job role is alreadyprovided, the required permissions will be added to it.
+
+> [https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
 
 ---
 
@@ -12685,12 +12834,14 @@ public readonly vCpu: number;
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.taskDefinitionRef">taskDefinitionRef</a></code> | <code>aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference</code> | A reference to a TaskDefinition resource. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.compatibility">compatibility</a></code> | <code>aws-cdk-lib.aws_ecs.Compatibility</code> | What launch types this task definition should be compatible with. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.isEc2Compatible">isEc2Compatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on an EC2 cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.isExternalCompatible">isExternalCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a ECS Anywhere cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.isFargateCompatible">isFargateCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on a Fargate cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.isManagedInstancesCompatible">isManagedInstancesCompatible</a></code> | <code>boolean</code> | Return true if the task definition can be run on Managed Instances. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.networkMode">networkMode</a></code> | <code>aws-cdk-lib.aws_ecs.NetworkMode</code> | The networking mode to use for the containers in the task. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.taskDefinitionArn">taskDefinitionArn</a></code> | <code>string</code> | ARN of this task definition. |
 | <code><a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.taskRole">taskRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The name of the IAM role that grants containers in the task permission to call AWS APIs on your behalf. |
@@ -12720,16 +12871,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -12742,6 +12894,18 @@ public readonly stack: Stack;
 - *Type:* aws-cdk-lib.Stack
 
 The stack in which this resource is defined.
+
+---
+
+##### `taskDefinitionRef`<sup>Required</sup> <a name="taskDefinitionRef" id="aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.taskDefinitionRef"></a>
+
+```typescript
+public readonly taskDefinitionRef: TaskDefinitionReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_ecs.TaskDefinitionReference
+
+A reference to a TaskDefinition resource.
 
 ---
 
@@ -12790,6 +12954,18 @@ public readonly isFargateCompatible: boolean;
 - *Type:* boolean
 
 Return true if the task definition can be run on a Fargate cluster.
+
+---
+
+##### `isManagedInstancesCompatible`<sup>Required</sup> <a name="isManagedInstancesCompatible" id="aws-cdk-neuronx-patterns.INeuronxTaskDefinition.property.isManagedInstancesCompatible"></a>
+
+```typescript
+public readonly isManagedInstancesCompatible: boolean;
+```
+
+- *Type:* boolean
+
+Return true if the task definition can be run on Managed Instances.
 
 ---
 
