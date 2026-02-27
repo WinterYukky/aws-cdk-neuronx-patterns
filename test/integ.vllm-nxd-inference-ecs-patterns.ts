@@ -24,7 +24,7 @@ import {
   Parameters,
   VllmNxdInferenceCompiler,
   VllmNxdInferenceTaskDefinition,
-} from "../src";
+} from "../src/index";
 import { HttpRequestFromVpcFunctionPayload } from "./private/http-request-from-vpc";
 
 const app = new App();

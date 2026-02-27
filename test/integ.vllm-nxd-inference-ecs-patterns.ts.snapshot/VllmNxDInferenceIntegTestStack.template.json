@@ -3349,7 +3349,7 @@
       "Status": "ENABLED",
       "TargetCapacity": 100
      },
-     "ManagedTerminationProtection": "ENABLED"
+     "ManagedTerminationProtection": "DISABLED"
     }
    }
   },
