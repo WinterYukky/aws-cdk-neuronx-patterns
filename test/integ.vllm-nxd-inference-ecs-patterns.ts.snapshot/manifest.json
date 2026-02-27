@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/459aaefe4cd25020aca1739503e6d5a9b3d024fd7af0b8ee8bfcb5d5a5a112a6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2960,6 +2960,12 @@
           {
             "type": "aws:cdk:analytics:method",
             "data": {
+              "protectNewInstancesFromScaleIn": []
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
               "addUserData": [
                 "*"
               ]
@@ -3188,328 +3194,6 @@
             "data": "ServiceAutoScalingGroupASGFA49D7FB"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "code": "*",
-              "handler": "*",
-              "runtime": "*",
-              "timeout": "*",
-              "environment": "*"
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addEnvironment": [
-                "*",
-                "*"
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              },
-              "managedPolicies": [
-                {
-                  "managedPolicyArn": "*"
-                }
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole/DefaultPolicy": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/ServiceRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicyEB5C20B9"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionBAAAD32E"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/LogGroup": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "logGroupName": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/LogGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionLogGroup21D8C714"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/AllowInvoke:VllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A90": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A903140BA0E"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/Topic": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "topic": "*",
-              "endpoint": "*",
-              "protocol": "lambda",
-              "filterPolicy": "*",
-              "filterPolicyWithMessageBody": "*",
-              "region": "*",
-              "deadLetterQueue": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/DrainECSHook/Function/Topic/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupDrainECSHookFunctionTopic854AD61C"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "autoScalingGroup": "*",
-              "lifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
-              "defaultResult": "CONTINUE",
-              "notificationTarget": "*",
-              "heartbeatTimeout": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Topic": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "masterKey": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Topic/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              }
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role/DefaultPolicy": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Role/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicy9848EF2F"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Service/Resource/AutoScalingGroup/LifecycleHookDrainHook/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookD1D06041"
-          }
-        ],
         "/VllmNxDInferenceIntegTestStack/Service/Resource/AsgCapacityProvider/AsgCapacityProvider": [
           {
             "type": "aws:cdk:logicalId",
@@ -3667,6 +3351,96 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionServiceRole04F95E0C",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicyEB5C20B9": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicyEB5C20B9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionBAAAD32E": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionBAAAD32E",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionLogGroup21D8C714": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionLogGroup21D8C714",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A903140BA0E": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionAllowInvokeVllmNxDInferenceIntegTestStackServiceAutoScalingGroupLifecycleHookDrainHookTopic5F161A903140BA0E",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupDrainECSHookFunctionTopic854AD61C": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupDrainECSHookFunctionTopic854AD61C",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookTopicB068ED85",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookRole1AF8B093",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicy9848EF2F": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicy9848EF2F",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "ServiceAutoScalingGroupLifecycleHookDrainHookD1D06041": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceAutoScalingGroupLifecycleHookDrainHookD1D06041",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
         ]
       },
       "displayName": "VllmNxDInferenceIntegTestStack"
@@ -3688,7 +3462,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/50f0429d1259d4b541efaeeb33414d79870a2ffd1b19585449e3a636d3f98367.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4f4766c54c229d4b4a14f0d68b90eac8af7fc0bda73ded78ff46517c11af840.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

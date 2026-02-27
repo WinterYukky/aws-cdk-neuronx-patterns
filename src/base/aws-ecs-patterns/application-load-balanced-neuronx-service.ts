@@ -213,7 +213,6 @@ mount-s3 ${neuronxTaskDefinition.compiledModel.bucket.bucketName} /mnt/${neuronx
     neuronxTaskDefinition.compiledModel.bucket.grantRead(autoScalingGroup);
     const provider = new ecs.AsgCapacityProvider(this, "AsgCapacityProvider", {
       autoScalingGroup,
-      enableManagedTerminationProtection: false,
     });
     cluster.addAsgCapacityProvider(provider);
   }

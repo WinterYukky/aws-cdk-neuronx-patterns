@@ -39,7 +39,11 @@ export class VllmNxdInferenceCompileImage extends VllmNxdInferenceEcsImageBase {
    * The container image.
    */
   readonly image: ContainerImage;
-  constructor(scope: Construct, id: string, vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage) {
+  constructor(
+    scope: Construct,
+    id: string,
+    vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage,
+  ) {
     vllmInferenceNeuronxImage ??= VllmInferenceNeuronxImage.LATEST;
     super(vllmInferenceNeuronxImage);
     const build = new ContainerImageBuild(scope, id, {
@@ -178,7 +182,8 @@ export class VllmNxdInferenceCompiler extends Construct {
       );
     }
     const tensorParallelSize = availableInstancePatterns[0].tp;
-    const image = props.image ?? new VllmNxdInferenceCompileImage(this, "CompileImage");
+    const image =
+      props.image ?? new VllmNxdInferenceCompileImage(this, "CompileImage");
     const vllmArgs = {
       ...props.vllmArgs,
       model: props.model.modelId,

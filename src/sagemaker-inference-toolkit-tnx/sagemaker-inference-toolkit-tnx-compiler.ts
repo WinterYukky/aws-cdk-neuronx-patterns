@@ -72,7 +72,10 @@ export class SageMakerInferenceToolkitTnxCompileImage implements INeuronxContain
   readonly neuronSdkVersion: string;
   constructor(scope: Construct, id: string, neruonxImage: INeuronxImage) {
     const build = new ContainerImageBuild(scope, id, {
-      directory: join(__dirname, "../../scripts/compile/sagemaker-inference-toolkit-tnx"),
+      directory: join(
+        __dirname,
+        "../../scripts/compile/sagemaker-inference-toolkit-tnx",
+      ),
       buildArgs: {
         IMAGE_NAME: neruonxImage.imageName,
         IMAGE_TAG: neruonxImage.imageTag,
