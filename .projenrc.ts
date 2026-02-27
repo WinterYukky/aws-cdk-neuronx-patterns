@@ -1,4 +1,5 @@
 import { ReleasableCommits, awscdk } from "projen";
+import { GithubCredentials } from "projen/lib/github";
 const cdkVersion = "2.240.0";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
@@ -9,6 +10,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: "aws-cdk-neuronx-patterns",
   projenrcTs: true,
   repositoryUrl: "https://github.com/WinterYukky/aws-cdk-neuronx-patterns.git",
+  projenCredentials: GithubCredentials.fromApp(),
+  npmProvenance: true,
+  npmTrustedPublishing: true,
   keywords: ["neuronx"],
   prettier: true,
   eslintOptions: {
