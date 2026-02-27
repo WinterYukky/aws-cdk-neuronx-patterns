@@ -105,6 +105,7 @@ integWorkflow?.on({
   },
 });
 integWorkflow?.addJob("integ-test", {
+  runsOn: ["ubuntu-latest"],
   permissions: {
     contents: JobPermission.READ,
   },
