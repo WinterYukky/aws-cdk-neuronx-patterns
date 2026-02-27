@@ -26,6 +26,7 @@ import {
   NeuronxCompiler,
 } from "../base/neuronx-compiler";
 import {
+  BlockSize,
   VllmEngineArguments,
   VllmEngineArgumentsParser,
 } from "../base/server-engine/vllm-engine";
@@ -184,6 +185,7 @@ export class VllmNxdInferenceCompiler extends Construct {
     const tensorParallelSize = availableInstancePatterns[0].tp;
     const image =
       props.image ?? new VllmNxdInferenceCompileImage(this, "CompileImage");
+    const blockSize = props.vllmArgs?.blockSize ?? BlockSize.SIZE_32;
     const vllmArgs = {
       ...props.vllmArgs,
       model: props.model.modelId,
@@ -191,6 +193,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       maxModelLen,
       maxNumSeqs,
       tensorParallelSize,
+      blockSize,
     } satisfies VllmEngineArguments;
 
     // change dirname every engine args patterns
