@@ -19,6 +19,34 @@ function getLatestVersion<T extends INeuronxImage = INeuronxImage>(
 
 abstract class PytorchNeuronxImage extends NeuronxImage {
   static readonly size = Size.gibibytes(30);
+  /** Neuron SDK 2.28.0 */
+  static readonly SDK_2_28_0 = PytorchNeuronxImage.fromNeuronSdkVersion(
+    "2.28.0",
+    "3.12",
+    "2.9.0",
+    "24.04",
+  );
+  /** Neuron SDK 2.27.1 */
+  static readonly SDK_2_27_1 = PytorchNeuronxImage.fromNeuronSdkVersion(
+    "2.27.1",
+    "3.12",
+    "2.9.0",
+    "24.04",
+  );
+  /** Neuron SDK 2.26.1 */
+  static readonly SDK_2_26_1 = PytorchNeuronxImage.fromNeuronSdkVersion(
+    "2.26.1",
+    "3.11",
+    "2.8.0",
+    "22.04",
+  );
+  /** Neuron SDK 2.25.0 */
+  static readonly SDK_2_25_0 = PytorchNeuronxImage.fromNeuronSdkVersion(
+    "2.25.0",
+    "3.10",
+    "2.7.0",
+    "22.04",
+  );
   /** Neuron SDK 2.24.0 */
   static readonly SDK_2_24_0 = PytorchNeuronxImage.fromNeuronSdkVersion(
     "2.24.0",
@@ -136,13 +164,55 @@ export interface IVllmInferenceNeuronxImage extends INeuronxImage {
   readonly vllmVersion: string;
 }
 export class VllmInferenceNeuronxImage extends NeuronxImage {
-  /**
-   * Neuron SDK 2.26.0 with vLLM 0.9.1
-   */
+  /** Neuron SDK 2.28.0 with vLLM 0.13.0 */
+  static readonly SDK_2_28_0 = VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+    "2.28.0",
+    "0.13.0",
+    "3.12",
+    "24.04",
+  );
+  /** Neuron SDK 2.27.1 with vLLM 0.13.0 */
+  static readonly SDK_2_27_1_VLLM_0_13_0 =
+    VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+      "2.27.1",
+      "0.13.0",
+      "3.12",
+      "24.04",
+    );
+  /** Neuron SDK 2.27.1 with vLLM 0.11.0 */
+  static readonly SDK_2_27_1_VLLM_0_11_0 =
+    VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+      "2.27.1",
+      "0.11.0",
+      "3.12",
+      "24.04",
+    );
+  /** Neuron SDK 2.26.1 with vLLM 0.9.1 */
+  static readonly SDK_2_26_1 = VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+    "2.26.1",
+    "0.9.1",
+    "3.11",
+    "22.04",
+  );
+  /** Neuron SDK 2.26.0 with vLLM 0.9.1 */
   static readonly SDK_2_26_0 = VllmInferenceNeuronxImage.fromNeuronSdkVersion(
     "2.26.0",
     "0.9.1",
     "3.11",
+    "22.04",
+  );
+  /** Neuron SDK 2.25.0 with vLLM 0.9.1 */
+  static readonly SDK_2_25_0 = VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+    "2.25.0",
+    "0.9.1",
+    "3.10",
+    "22.04",
+  );
+  /** Neuron SDK 2.24.1 with vLLM 0.7.2 */
+  static readonly SDK_2_24_1 = VllmInferenceNeuronxImage.fromNeuronSdkVersion(
+    "2.24.1",
+    "0.7.2",
+    "3.10",
     "22.04",
   );
   /** Latest Neuron SDK */

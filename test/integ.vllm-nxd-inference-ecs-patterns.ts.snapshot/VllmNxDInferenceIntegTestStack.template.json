@@ -675,7 +675,7 @@
      ]
     },
     "type": "ContainerImageBuild",
-    "buildCommand": "docker buildx build --build-arg IMAGE_NAME=public.ecr.aws/neuron/pytorch-inference-vllm-neuronx --build-arg IMAGE_TAG=0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04 --output type=docker,name=artifact:$imageTag --provenance=false .",
+    "buildCommand": "docker buildx build --build-arg IMAGE_NAME=public.ecr.aws/neuron/pytorch-inference-vllm-neuronx --build-arg IMAGE_TAG=0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04 --output type=docker,name=artifact:$imageTag --provenance=false .",
     "repositoryUri": {
      "Fn::Join": [
       "",
@@ -1322,14 +1322,14 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+          "/sdk-2.28.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
          ]
         ]
        }
       },
       {
        "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
-       "Value": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+       "Value": "sdk-2.28.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
       }
      ],
      "ExecutionRoleArn": {
@@ -2077,7 +2077,7 @@
     "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
    ]
   },
-  "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": {
+  "CompilerWaitConditionHandlesdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE6ADE425": {
    "Type": "AWS::CloudFormation::WaitConditionHandle"
   },
   "CompilerNeuronxCompile8E2589B5": {
@@ -2090,18 +2090,18 @@
      ]
     },
     "waitConditionCallbackURL": {
-     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+     "Ref": "CompilerWaitConditionHandlesdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE6ADE425"
     }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": {
+  "CompilerWaitConditionsdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE9C1E981": {
    "Type": "AWS::CloudFormation::WaitCondition",
    "Properties": {
     "Count": 1,
     "Handle": {
-     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+     "Ref": "CompilerWaitConditionHandlesdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE6ADE425"
     },
     "Timeout": "43200"
    },
@@ -2693,7 +2693,7 @@
     },
     "Environment": {
      "Variables": {
-      "ARTIFACT_S3_PREFIX": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+      "ARTIFACT_S3_PREFIX": "sdk-2.28.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
      }
     },
     "Handler": "index.isComplete",
@@ -2971,7 +2971,7 @@
        "StartPeriod": 300,
        "Timeout": 5
       },
-      "Image": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04",
+      "Image": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04",
       "LinuxParameters": {
        "Capabilities": {},
        "Devices": [
@@ -3026,7 +3026,7 @@
              "\"",
              {
               "Fn::GetAtt": [
-               "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+               "CompilerWaitConditionsdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE9C1E981",
                "Data"
               ]
              }
@@ -4284,7 +4284,7 @@
           "\"",
           {
            "Fn::GetAtt": [
-            "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+            "CompilerWaitConditionsdk228062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedE9C1E981",
             "Data"
            ]
           }
