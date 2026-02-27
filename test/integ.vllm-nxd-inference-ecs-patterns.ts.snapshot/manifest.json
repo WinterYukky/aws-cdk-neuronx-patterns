@@ -1,5 +1,5 @@
 {
-  "version": "53.0.0",
+  "version": "50.0.0",
   "artifacts": {
     "VllmNxDInferenceIntegTestStack.assets": {
       "type": "cdk:asset-manifest",
@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2d662c565fa44c63d99009630e9411e708028ac3663ecb333a68de547459e932.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1646,10 +1646,10 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionHandlesdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionHandlesdk-2.26.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+            "data": "CompilerWaitConditionHandlesdk2260f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace914D8F7A48"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/NeuronxCompile": [
@@ -1664,10 +1664,10 @@
             "data": "CompilerNeuronxCompile8E2589B5"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.26.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975"
+            "data": "CompilerWaitConditionsdk2260f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9169D058FA"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3": [
@@ -2737,7 +2737,29 @@
         "/VllmNxDInferenceIntegTestStack/Service/Resource/Service": [
           {
             "type": "aws:cdk:warning",
-            "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]"
+            "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]",
+            "trace": [
+              "Annotations.addMessage (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "new BaseService2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:12364)",
+              "new Ec2Service2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/aws-ecs/lib/ec2/ec2-service.js:1:7061)",
+              "new Ec2Service2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ApplicationLoadBalancedEc2Service (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/ecs/application-load-balanced-ecs-service.js:1:2674)",
+              "new ApplicationLoadBalancedNeuronxService (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/aws-ecs-patterns/application-load-balanced-neuronx-service.ts:136:5)",
+              "new ApplicationLoadBalancedVllmNxDInferenceService (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/vllm-nxd-inference/vllm-nxd-inference-ecs-patterns.ts:187:22)",
+              "new VllmNxDInferenceIntegTestStack (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts:73:20)",
+              "Object.<anonymous> (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts:117:15)",
+              "Module._compile (node:internal/modules/cjs/loader:1688:14)",
+              "Module.m._compile (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1618:23)",
+              "node:internal/modules/cjs/loader:1820:10",
+              "Object.require.extensions.<computed> [as .ts] (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1423:32)",
+              "Function._load (node:internal/modules/cjs/loader:1246:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)",
+              "node:internal/main/run_main_module:36:49"
+            ]
           },
           {
             "type": "aws:cdk:analytics:construct",
@@ -2955,7 +2977,27 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "desiredCapacity has been configured. Be aware this will reset the size of your AutoScalingGroup on every deployment. See https://github.com/aws/aws-cdk/issues/5215 [ack: @aws-cdk/aws-autoscaling:desiredCapacitySet]"
+            "data": "desiredCapacity has been configured. Be aware this will reset the size of your AutoScalingGroup on every deployment. See https://github.com/aws/aws-cdk/issues/5215 [ack: @aws-cdk/aws-autoscaling:desiredCapacitySet]",
+            "trace": [
+              "Annotations.addMessage (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2066)",
+              "Annotations.addWarningV2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/annotations.js:1:984)",
+              "new AutoScalingGroup2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/aws-autoscaling/lib/auto-scaling-group.js:1:24761)",
+              "new AutoScalingGroup2 (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:681)",
+              "new ApplicationLoadBalancedNeuronxService (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/base/aws-ecs-patterns/application-load-balanced-neuronx-service.ts:186:30)",
+              "new ApplicationLoadBalancedVllmNxDInferenceService (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/src/vllm-nxd-inference/vllm-nxd-inference-ecs-patterns.ts:187:22)",
+              "new VllmNxDInferenceIntegTestStack (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts:73:20)",
+              "Object.<anonymous> (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/test/integ.vllm-nxd-inference-ecs-patterns.ts:117:15)",
+              "Module._compile (node:internal/modules/cjs/loader:1688:14)",
+              "Module.m._compile (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1618:23)",
+              "node:internal/modules/cjs/loader:1820:10",
+              "Object.require.extensions.<computed> [as .ts] (/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1423:32)",
+              "Function._load (node:internal/modules/cjs/loader:1246:12)",
+              "TracingChannel.traceSync (node:diagnostics_channel:322:14)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:235:24)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)",
+              "node:internal/main/run_main_module:36:49"
+            ]
           },
           {
             "type": "aws:cdk:analytics:method",
@@ -3688,7 +3730,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4a5d6f4bae17ae178cfc4a39ae39b4db743001234d31e8f6b57b6a3d563dc5f8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ec32f9b9836a25c0ff8d396fe2cc85608537794e6ac7aba17d703033a3971344.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -4327,5 +4369,5 @@
       }
     }
   },
-  "minimumCliVersion": "2.1108.0"
+  "minimumCliVersion": "2.1105.0"
 }
