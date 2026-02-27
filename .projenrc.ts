@@ -18,6 +18,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   deps: [
     `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    "@cdklabs/deploy-time-build",
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
@@ -30,7 +31,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "@aws-sdk/client-lambda",
     "esbuild",
   ],
-  peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
+  peerDeps: [
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    "@cdklabs/deploy-time-build",
+  ],
   gitignore: ["src/**/index.js", ".amazonq"],
   githubOptions: {
     pullRequestLintOptions: {
@@ -91,7 +95,7 @@ project.addTask("integ", {
 });
 
 project.addTask("integ:update", {
-  exec: "integ-runner --update-on-failed",
+  exec: "integ-runner --update-on-failed --no-update-workflow",
   description: "Run integration tests and update on any failed tests",
   receiveArgs: true,
 });
@@ -105,6 +109,7 @@ integWorkflow?.on({
   },
 });
 integWorkflow?.addJob("integ-test", {
+  runsOn: ["ubuntu-latest"],
   permissions: {
     contents: JobPermission.READ,
   },

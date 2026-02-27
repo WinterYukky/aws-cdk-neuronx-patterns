@@ -1,11 +1,21 @@
 import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
-import { App, CfnOutput, Duration, RemovalPolicy, Stack } from "aws-cdk-lib";
+import {
+  App,
+  Aspects,
+  CfnOutput,
+  Duration,
+  IAspect,
+  RemovalPolicy,
+  Stack,
+} from "aws-cdk-lib";
 import { GatewayVpcEndpointAwsService, Vpc } from "aws-cdk-lib/aws-ec2";
+import * as ecs from "aws-cdk-lib/aws-ecs";
 import { ApplicationLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import * as cxapi from "aws-cdk-lib/cx-api";
+import { IConstruct } from "constructs";
 import { join } from "path";
 import {
   ApplicationLoadBalancedVllmNxDInferenceService,
@@ -92,6 +102,18 @@ const stack = new VllmNxDInferenceIntegTestStack(
   app,
   "VllmNxDInferenceIntegTestStack",
 );
+
+class DisableManagedTerminationProtection implements IAspect {
+  visit(node: IConstruct) {
+    if (node instanceof ecs.CfnCapacityProvider) {
+      node.addPropertyOverride(
+        "AutoScalingGroupProvider.ManagedTerminationProtection",
+        "DISABLED",
+      );
+    }
+  }
+}
+Aspects.of(stack).add(new DisableManagedTerminationProtection());
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],

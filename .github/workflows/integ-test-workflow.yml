@@ -11,6 +11,7 @@ on:
       - main
 jobs:
   integ-test:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
