@@ -1,6 +1,16 @@
 import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
-import { App, CfnOutput, Duration, RemovalPolicy, Stack } from "aws-cdk-lib";
+import {
+  App,
+  CfnOutput,
+  Duration,
+  InjectionContext,
+  IPropertyInjector,
+  PropertyInjectors,
+  RemovalPolicy,
+  Stack,
+} from "aws-cdk-lib";
 import { GatewayVpcEndpointAwsService, Vpc } from "aws-cdk-lib/aws-ec2";
+import * as ecs from "aws-cdk-lib/aws-ecs";
 import { ApplicationLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
@@ -14,7 +24,7 @@ import {
   Parameters,
   VllmNxdInferenceCompiler,
   VllmNxdInferenceTaskDefinition,
-} from "../src";
+} from "../src/index";
 import { HttpRequestFromVpcFunctionPayload } from "./private/http-request-from-vpc";
 
 const app = new App();
@@ -88,6 +98,22 @@ class VllmNxDInferenceIntegTestStack extends Stack {
     );
   }
 }
+class DisableManagedTerminationProtection implements IPropertyInjector {
+  public readonly constructUniqueId =
+    ecs.AsgCapacityProvider.PROPERTY_INJECTION_ID;
+
+  public inject(
+    originalProps: ecs.AsgCapacityProviderProps,
+    _context: InjectionContext,
+  ): ecs.AsgCapacityProviderProps {
+    return {
+      ...originalProps,
+      enableManagedTerminationProtection: false,
+    };
+  }
+}
+PropertyInjectors.of(app).add(new DisableManagedTerminationProtection());
+
 const stack = new VllmNxDInferenceIntegTestStack(
   app,
   "VllmNxDInferenceIntegTestStack",

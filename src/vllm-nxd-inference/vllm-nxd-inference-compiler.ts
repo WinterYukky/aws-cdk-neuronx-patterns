@@ -1,3 +1,4 @@
+import { ContainerImageBuild } from "@cdklabs/deploy-time-build";
 import { Size } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
@@ -38,18 +39,21 @@ export class VllmNxdInferenceCompileImage extends VllmNxdInferenceEcsImageBase {
    * The container image.
    */
   readonly image: ContainerImage;
-  constructor(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage) {
+  constructor(
+    scope: Construct,
+    id: string,
+    vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage,
+  ) {
     vllmInferenceNeuronxImage ??= VllmInferenceNeuronxImage.LATEST;
     super(vllmInferenceNeuronxImage);
-    this.image = ContainerImage.fromAsset(
-      join(__dirname, "../../scripts/compile/vllm-nxd-inference"),
-      {
-        buildArgs: {
-          IMAGE_NAME: vllmInferenceNeuronxImage.imageName,
-          IMAGE_TAG: vllmInferenceNeuronxImage.imageTag,
-        },
+    const build = new ContainerImageBuild(scope, id, {
+      directory: join(__dirname, "../../scripts/compile/vllm-nxd-inference"),
+      buildArgs: {
+        IMAGE_NAME: vllmInferenceNeuronxImage.imageName,
+        IMAGE_TAG: vllmInferenceNeuronxImage.imageTag,
       },
-    );
+    });
+    this.image = build.toEcsDockerImageCode();
   }
 }
 
@@ -178,7 +182,8 @@ export class VllmNxdInferenceCompiler extends Construct {
       );
     }
     const tensorParallelSize = availableInstancePatterns[0].tp;
-    const image = props.image ?? new VllmNxdInferenceCompileImage();
+    const image =
+      props.image ?? new VllmNxdInferenceCompileImage(this, "CompileImage");
     const vllmArgs = {
       ...props.vllmArgs,
       model: props.model.modelId,

@@ -1,3 +1,4 @@
+import { ContainerImageBuild } from "@cdklabs/deploy-time-build";
 import * as sagemaker from "@aws-cdk/aws-sagemaker-alpha";
 import { Duration, Size, Token } from "aws-cdk-lib";
 import { Grant, IGrantable } from "aws-cdk-lib/aws-iam";
@@ -259,14 +260,21 @@ export class SageMakerInferenceToolkitTnxSageMakerRealtimeInferenceEndpoint exte
     props: SageMakerInferenceToolkitTnxSageMakerRealtimeInferenceEndpointProps,
   ) {
     super(scope, id);
-    const image =
-      props.image ??
-      sagemaker.ContainerImage.fromAsset(
-        join(
+    let image: sagemaker.ContainerImage;
+    if (props.image) {
+      image = props.image;
+    } else {
+      const build = new ContainerImageBuild(this, "InferenceImageBuild", {
+        directory: join(
           __dirname,
           "../../scripts/inference/sagemaker-inference-toolkit-tnx",
         ),
+      });
+      image = sagemaker.ContainerImage.fromEcrRepository(
+        build.repository,
+        build.imageTag,
       );
+    }
     const instanceType =
       props.instanceType ??
       this.selectInstanceTypeByTpDegree(props.modelData.tpDegree);

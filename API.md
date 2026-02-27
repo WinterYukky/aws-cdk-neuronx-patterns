@@ -12441,12 +12441,26 @@ Compile runtime container image for vLLM NxD Inference.
 ```typescript
 import { VllmNxdInferenceCompileImage } from 'aws-cdk-neuronx-patterns'
 
-new VllmNxdInferenceCompileImage(vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage)
+new VllmNxdInferenceCompileImage(scope: Construct, id: string, vllmInferenceNeuronxImage?: IVllmInferenceNeuronxImage)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.vllmInferenceNeuronxImage">vllmInferenceNeuronxImage</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileImage.Initializer.parameter.id"></a>
+
+- *Type:* string
 
 ---
 

@@ -29,16 +29,44 @@
         }
       }
     },
-    "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d": {
-      "displayName": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Code",
+    "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74": {
+      "displayName": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/Code",
       "source": {
-        "path": "asset.5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d",
+        "path": "asset.b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74",
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-current_region-06b8e1ef": {
+        "current_account-current_region-745b40df": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d.zip",
+          "objectKey": "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410": {
+      "displayName": "Compiler/CompileImage/Source",
+      "source": {
+        "path": "asset.a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-aec36cf7": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee": {
+      "displayName": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Code",
+      "source": {
+        "path": "asset.4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-c40c204e": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
@@ -57,16 +85,16 @@
         }
       }
     },
-    "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9": {
+    "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48": {
       "displayName": "SingletonLambda1361f4695c924c469e115d1dbf925bac/Code",
       "source": {
-        "path": "asset.654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9",
+        "path": "asset.fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48",
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-current_region-2bf9a72d": {
+        "current_account-current_region-1dc6e40c": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip",
+          "objectKey": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
@@ -85,38 +113,20 @@
         }
       }
     },
-    "2f745e35626f4248adc02819b0c3b62bb87cafc8e796ca25360d899fc7aa23d8": {
+    "48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138": {
       "displayName": "VllmNxDInferenceIntegTestStack Template",
       "source": {
         "path": "VllmNxDInferenceIntegTestStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-d4ad9f2a": {
+        "current_account-current_region-4b0a9aae": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "2f745e35626f4248adc02819b0c3b62bb87cafc8e796ca25360d899fc7aa23d8.json",
+          "objectKey": "48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     }
   },
-  "dockerImages": {
-    "f26485b913e3083b116a7ab66438a3980b3195361e27ebaef0d8e3441c9522f2": {
-      "displayName": "Compiler/Resource/JobDefinition/ContainerDefinition/AssetImage",
-      "source": {
-        "directory": "asset.f26485b913e3083b116a7ab66438a3980b3195361e27ebaef0d8e3441c9522f2",
-        "dockerBuildArgs": {
-          "IMAGE_NAME": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx",
-          "IMAGE_TAG": "0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04"
-        }
-      },
-      "destinations": {
-        "current_account-current_region-581f46d4": {
-          "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "f26485b913e3083b116a7ab66438a3980b3195361e27ebaef0d8e3441c9522f2",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
-        }
-      }
-    }
-  }
+  "dockerImages": {}
 }

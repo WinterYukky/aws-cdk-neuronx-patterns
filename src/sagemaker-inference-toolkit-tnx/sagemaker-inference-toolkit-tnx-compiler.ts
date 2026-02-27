@@ -1,3 +1,4 @@
+import { ContainerImageBuild } from "@cdklabs/deploy-time-build";
 import { Size } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
@@ -64,21 +65,23 @@ export interface SageMakerInferenceToolkitTnxCompiledModel extends NeuronxCompil
 /**
  * Compile image for SageMakerInferenceToolkitTnxCompile.
  * @example
- * new SageMakerInferenceToolkitTnxCompileImage(PytorchTrainingNeuronxImage.LATEST);
+ * new SageMakerInferenceToolkitTnxCompileImage(scope, 'CompileImage', PytorchTrainingNeuronxImage.LATEST);
  */
 export class SageMakerInferenceToolkitTnxCompileImage implements INeuronxContainerImage {
   readonly image: ContainerImage;
   readonly neuronSdkVersion: string;
-  constructor(neruonxImage: INeuronxImage) {
-    this.image = ContainerImage.fromAsset(
-      join(__dirname, "../../scripts/compile/sagemaker-inference-toolkit-tnx"),
-      {
-        buildArgs: {
-          IMAGE_NAME: neruonxImage.imageName,
-          IMAGE_TAG: neruonxImage.imageTag,
-        },
+  constructor(scope: Construct, id: string, neruonxImage: INeuronxImage) {
+    const build = new ContainerImageBuild(scope, id, {
+      directory: join(
+        __dirname,
+        "../../scripts/compile/sagemaker-inference-toolkit-tnx",
+      ),
+      buildArgs: {
+        IMAGE_NAME: neruonxImage.imageName,
+        IMAGE_TAG: neruonxImage.imageTag,
       },
-    );
+    });
+    this.image = build.toEcsDockerImageCode();
     this.neuronSdkVersion = neruonxImage.neuronSdkVersion;
   }
 }
@@ -197,6 +200,8 @@ export class SageMakerInferenceToolkitTnxCompiler extends Construct {
     const image =
       props.image ??
       new SageMakerInferenceToolkitTnxCompileImage(
+        this,
+        "CompileImage",
         PytorchTrainingNeuronxImage.LATEST,
       );
     let compiledArtifactPathPrefix = `${props.model.modelId}/neuronx-${image.neuronSdkVersion}/tp${tpDegree}-np${nPositions}-opt${optLevel}`;

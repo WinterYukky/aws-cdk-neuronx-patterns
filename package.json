@@ -75,7 +75,8 @@
     "constructs": "^10.5.1"
   },
   "dependencies": {
-    "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0"
+    "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
+    "@cdklabs/deploy-time-build": "^0.0.6"
   },
   "keywords": [
     "cdk",
