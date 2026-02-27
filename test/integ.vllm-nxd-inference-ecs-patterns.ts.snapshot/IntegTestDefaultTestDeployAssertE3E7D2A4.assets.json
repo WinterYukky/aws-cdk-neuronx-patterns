@@ -3,7 +3,7 @@
   "files": {
     "4dc53751ed80274daf175efeff9265dbc5cca7f749c3bdceaf70bc630eaec6d1": {
       "source": {
-        "path": "/root/.remote-swe-workspace/aws-cdk-neuronx-patterns/node_modules/@aws-cdk/integ-tests-alpha/lib/assertions/providers/lambda-handler.bundle",
+        "path": "asset.4dc53751ed80274daf175efeff9265dbc5cca7f749c3bdceaf70bc630eaec6d1.bundle",
         "packaging": "zip"
       },
       "destinations": {
@@ -14,16 +14,16 @@
         }
       }
     },
-    "2c45245b8549b7e969495b266702385cdd5b4ba2fd250bfefcdf7862b0f144eb": {
+    "50f0429d1259d4b541efaeeb33414d79870a2ffd1b19585449e3a636d3f98367": {
       "displayName": "IntegTestDefaultTestDeployAssertE3E7D2A4 Template",
       "source": {
         "path": "IntegTestDefaultTestDeployAssertE3E7D2A4.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-df1d44d9": {
+        "current_account-current_region-fe866976": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "2c45245b8549b7e969495b266702385cdd5b4ba2fd250bfefcdf7862b0f144eb.json",
+          "objectKey": "50f0429d1259d4b541efaeeb33414d79870a2ffd1b19585449e3a636d3f98367.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
