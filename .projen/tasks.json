@@ -165,20 +165,20 @@
     },
     "integ": {
       "name": "integ",
-      "description": "Run integration tests",
+      "description": "Run integration snapshot tests",
       "steps": [
         {
-          "exec": "integ-runner",
+          "exec": "integ-runner $@ --language typescript",
           "receiveArgs": true
         }
       ]
     },
     "integ:update": {
       "name": "integ:update",
-      "description": "Run integration tests and update on any failed tests",
+      "description": "Run and update integration snapshot tests",
       "steps": [
         {
-          "exec": "integ-runner --update-on-failed",
+          "exec": "integ-runner $@ --language typescript --update-on-failed",
           "receiveArgs": true
         }
       ]
@@ -266,6 +266,9 @@
         },
         {
           "spawn": "eslint"
+        },
+        {
+          "spawn": "integ"
         }
       ]
     },
@@ -304,13 +307,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha,@aws-sdk/client-batch,@aws-sdk/client-lambda,@types/aws-lambda,@types/cfn-response,@types/jest,@types/node,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,prettier,projen,ts-jest,ts-node,typescript"
+          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-sdk/client-batch,@aws-sdk/client-lambda,@types/aws-lambda,@types/cfn-response,@types/jest,@types/node,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,prettier,projen,ts-jest,ts-node,typescript"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-cdk/aws-sagemaker-alpha @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha @aws-sdk/client-batch @aws-sdk/client-lambda @types/aws-lambda @types/cfn-response @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-jest ts-node typescript aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-cdk/aws-sagemaker-alpha @aws-sdk/client-batch @aws-sdk/client-lambda @types/aws-lambda @types/cfn-response @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
