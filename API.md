@@ -11946,6 +11946,352 @@ number of parameters millionX.
 
 
 
+### PytorchInferenceNeuronxImage <a name="PytorchInferenceNeuronxImage" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage"></a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.Initializer"></a>
+
+```typescript
+import { PytorchInferenceNeuronxImage } from 'aws-cdk-neuronx-patterns'
+
+new PytorchInferenceNeuronxImage()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion">fromNeuronSdkVersion</a></code> | *No description.* |
+
+---
+
+##### `fromNeuronSdkVersion` <a name="fromNeuronSdkVersion" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion"></a>
+
+```typescript
+import { PytorchInferenceNeuronxImage } from 'aws-cdk-neuronx-patterns'
+
+PytorchInferenceNeuronxImage.fromNeuronSdkVersion(neuronSdkVersion: string, pythonVersion: string, pytorchVersion: string, ubuntuVersion: string)
+```
+
+###### `neuronSdkVersion`<sup>Required</sup> <a name="neuronSdkVersion" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion.parameter.neuronSdkVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `pythonVersion`<sup>Required</sup> <a name="pythonVersion" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion.parameter.pythonVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `pytorchVersion`<sup>Required</sup> <a name="pytorchVersion" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion.parameter.pytorchVersion"></a>
+
+- *Type:* string
+
+---
+
+###### `ubuntuVersion`<sup>Required</sup> <a name="ubuntuVersion" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.fromNeuronSdkVersion.parameter.ubuntuVersion"></a>
+
+- *Type:* string
+
+---
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.imageName">imageName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.LATEST">LATEST</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Latest Neuron SDK. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_0">SDK_2_18_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.18.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_1">SDK_2_18_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.18.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_2">SDK_2_18_2</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.18.2. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_19_0">SDK_2_19_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.19.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_19_1">SDK_2_19_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.19.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_0">SDK_2_20_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.20.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_1">SDK_2_20_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.20.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2">SDK_2_20_2</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.20.2. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2_PYTORCH_1_13_1">SDK_2_20_2_PYTORCH_1_13_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.20.2 (PyTorch 1.13.1). |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2_PYTORCH_2_1_2">SDK_2_20_2_PYTORCH_2_1_2</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.20.2 (PyTorch 2.1.2). |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_21_0">SDK_2_21_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.21.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_21_1">SDK_2_21_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.21.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_22_0">SDK_2_22_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.22.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_23_0">SDK_2_23_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.23.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_24_0">SDK_2_24_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.24.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_25_0">SDK_2_25_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.25.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_26_1">SDK_2_26_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.26.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_27_1">SDK_2_27_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.27.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_28_0">SDK_2_28_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.28.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.size">size</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+
+---
+
+##### `imageName`<sup>Required</sup> <a name="imageName" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.imageName"></a>
+
+```typescript
+public readonly imageName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `LATEST`<sup>Required</sup> <a name="LATEST" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.LATEST"></a>
+
+```typescript
+public readonly LATEST: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Latest Neuron SDK.
+
+---
+
+##### `SDK_2_18_0`<sup>Required</sup> <a name="SDK_2_18_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_0"></a>
+
+```typescript
+public readonly SDK_2_18_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.18.0.
+
+---
+
+##### `SDK_2_18_1`<sup>Required</sup> <a name="SDK_2_18_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_1"></a>
+
+```typescript
+public readonly SDK_2_18_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.18.1.
+
+---
+
+##### `SDK_2_18_2`<sup>Required</sup> <a name="SDK_2_18_2" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_18_2"></a>
+
+```typescript
+public readonly SDK_2_18_2: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.18.2.
+
+---
+
+##### `SDK_2_19_0`<sup>Required</sup> <a name="SDK_2_19_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_19_0"></a>
+
+```typescript
+public readonly SDK_2_19_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.19.0.
+
+---
+
+##### `SDK_2_19_1`<sup>Required</sup> <a name="SDK_2_19_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_19_1"></a>
+
+```typescript
+public readonly SDK_2_19_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.19.1.
+
+---
+
+##### `SDK_2_20_0`<sup>Required</sup> <a name="SDK_2_20_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_0"></a>
+
+```typescript
+public readonly SDK_2_20_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.20.0.
+
+---
+
+##### `SDK_2_20_1`<sup>Required</sup> <a name="SDK_2_20_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_1"></a>
+
+```typescript
+public readonly SDK_2_20_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.20.1.
+
+---
+
+##### `SDK_2_20_2`<sup>Required</sup> <a name="SDK_2_20_2" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2"></a>
+
+```typescript
+public readonly SDK_2_20_2: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.20.2.
+
+---
+
+##### `SDK_2_20_2_PYTORCH_1_13_1`<sup>Required</sup> <a name="SDK_2_20_2_PYTORCH_1_13_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2_PYTORCH_1_13_1"></a>
+
+```typescript
+public readonly SDK_2_20_2_PYTORCH_1_13_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.20.2 (PyTorch 1.13.1).
+
+---
+
+##### `SDK_2_20_2_PYTORCH_2_1_2`<sup>Required</sup> <a name="SDK_2_20_2_PYTORCH_2_1_2" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_20_2_PYTORCH_2_1_2"></a>
+
+```typescript
+public readonly SDK_2_20_2_PYTORCH_2_1_2: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.20.2 (PyTorch 2.1.2).
+
+---
+
+##### `SDK_2_21_0`<sup>Required</sup> <a name="SDK_2_21_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_21_0"></a>
+
+```typescript
+public readonly SDK_2_21_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.21.0.
+
+---
+
+##### `SDK_2_21_1`<sup>Required</sup> <a name="SDK_2_21_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_21_1"></a>
+
+```typescript
+public readonly SDK_2_21_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.21.1.
+
+---
+
+##### `SDK_2_22_0`<sup>Required</sup> <a name="SDK_2_22_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_22_0"></a>
+
+```typescript
+public readonly SDK_2_22_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.22.0.
+
+---
+
+##### `SDK_2_23_0`<sup>Required</sup> <a name="SDK_2_23_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_23_0"></a>
+
+```typescript
+public readonly SDK_2_23_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.23.0.
+
+---
+
+##### `SDK_2_24_0`<sup>Required</sup> <a name="SDK_2_24_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_24_0"></a>
+
+```typescript
+public readonly SDK_2_24_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.24.0.
+
+---
+
+##### `SDK_2_25_0`<sup>Required</sup> <a name="SDK_2_25_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_25_0"></a>
+
+```typescript
+public readonly SDK_2_25_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.25.0.
+
+---
+
+##### `SDK_2_26_1`<sup>Required</sup> <a name="SDK_2_26_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_26_1"></a>
+
+```typescript
+public readonly SDK_2_26_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.26.1.
+
+---
+
+##### `SDK_2_27_1`<sup>Required</sup> <a name="SDK_2_27_1" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_27_1"></a>
+
+```typescript
+public readonly SDK_2_27_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.27.1.
+
+---
+
+##### `SDK_2_28_0`<sup>Required</sup> <a name="SDK_2_28_0" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.SDK_2_28_0"></a>
+
+```typescript
+public readonly SDK_2_28_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.28.0.
+
+---
+
+##### `size`<sup>Required</sup> <a name="size" id="aws-cdk-neuronx-patterns.PytorchInferenceNeuronxImage.property.size"></a>
+
+```typescript
+public readonly size: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+
+---
+
 ### PytorchTrainingNeuronxImage <a name="PytorchTrainingNeuronxImage" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage"></a>
 
 #### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.Initializer"></a>
