@@ -1,7 +1,11 @@
 # Agent Instructions
 
+## Pull Requests
+
+- **All PR titles, descriptions, comments, and commit messages must be written in English.**
+
 ## Integration Test
 
-- **integ test は必ず実際にデプロイして実行すること。dry run（スナップショット更新のみ）は禁止。**
-- `npx integ-runner --update-on-failed --no-clean` のように `--update-on-failed` フラグを使い、実際に AWS 環境にデプロイして検証する。
-- スナップショットの差分確認だけで済ませてはいけない。
+- **Integration tests must always be deployed and executed against a real AWS environment. Dry runs (snapshot-only updates) are NOT allowed.**
+- Use `npx integ-runner --update-on-failed --no-clean` with the `--update-on-failed` flag to deploy and verify in an actual AWS environment.
+- Never settle for just verifying snapshot diffs.
