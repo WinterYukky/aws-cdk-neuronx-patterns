@@ -675,7 +675,7 @@
      ]
     },
     "type": "ContainerImageBuild",
-    "buildCommand": "docker buildx build --build-arg IMAGE_NAME=public.ecr.aws/neuron/pytorch-inference-vllm-neuronx --build-arg IMAGE_TAG=0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04 --output type=docker,name=artifact:$imageTag --provenance=false .",
+    "buildCommand": "docker buildx build --build-arg IMAGE_NAME=public.ecr.aws/neuron/pytorch-inference-vllm-neuronx --build-arg IMAGE_TAG=0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04 --output type=docker,name=artifact:$imageTag --provenance=false .",
     "repositoryUri": {
      "Fn::Join": [
       "",
@@ -1270,7 +1270,9 @@
       "--max-num-seqs",
       "1",
       "--tensor-parallel-size",
-      "1"
+      "1",
+      "--block-size",
+      "32"
      ],
      "Environment": [
       {
@@ -1322,14 +1324,14 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+          "/sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91"
          ]
         ]
        }
       },
       {
        "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
-       "Value": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+       "Value": "sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91"
       }
      ],
      "ExecutionRoleArn": {
@@ -2077,7 +2079,7 @@
     "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D"
    ]
   },
-  "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": {
+  "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774": {
    "Type": "AWS::CloudFormation::WaitConditionHandle"
   },
   "CompilerNeuronxCompile8E2589B5": {
@@ -2090,18 +2092,18 @@
      ]
     },
     "waitConditionCallbackURL": {
-     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+     "Ref": "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774"
     }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": {
+  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0": {
    "Type": "AWS::CloudFormation::WaitCondition",
    "Properties": {
     "Count": 1,
     "Handle": {
-     "Ref": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+     "Ref": "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774"
     },
     "Timeout": "43200"
    },
@@ -2479,7 +2481,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip"
+     "S3Key": "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d.zip"
     },
     "Handler": "index.onEvent",
     "Role": {
@@ -2582,7 +2584,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
@@ -2689,11 +2691,11 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
-      "ARTIFACT_S3_PREFIX": "sdk-2.26.0/62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed"
+      "ARTIFACT_S3_PREFIX": "sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91"
      }
     },
     "Handler": "index.isComplete",
@@ -2809,7 +2811,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
+     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
     },
     "Environment": {
      "Variables": {
@@ -2932,7 +2934,9 @@
        "--max-num-seqs",
        "1",
        "--tensor-parallel-size",
-       "1"
+       "1",
+       "--block-size",
+       "32"
       ],
       "EntryPoint": [
        "vllm",
@@ -2971,7 +2975,7 @@
        "StartPeriod": 300,
        "Timeout": 5
       },
-      "Image": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.9.1-neuronx-py311-sdk2.26.0-ubuntu22.04",
+      "Image": "public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04",
       "LinuxParameters": {
        "Capabilities": {},
        "Devices": [
@@ -3026,7 +3030,7 @@
              "\"",
              {
               "Fn::GetAtt": [
-               "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+               "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0",
                "Data"
               ]
              }
@@ -4284,7 +4288,7 @@
           "\"",
           {
            "Fn::GetAtt": [
-            "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+            "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0",
             "Data"
            ]
           }

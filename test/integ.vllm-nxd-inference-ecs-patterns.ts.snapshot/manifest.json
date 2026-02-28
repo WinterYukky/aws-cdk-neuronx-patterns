@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/48e4060474d4bb3af62b9b1b0ce791734b7bbc7627354790be574c29f393c138.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/724e143c9ba74d5016de46091cb110b5545282366108238fd877135530223ba0.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1646,10 +1646,10 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionHandlesdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionHandlesdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA"
+            "data": "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/NeuronxCompile": [
@@ -1664,10 +1664,10 @@
             "data": "CompilerNeuronxCompile8E2589B5"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.26.0--62af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975"
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3": [
@@ -2516,7 +2516,10 @@
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "TaskDefinitionB36D86D9"
+            "data": "TaskDefinitionB36D86D9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
+            ]
           }
         ],
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup": [
@@ -3667,6 +3670,24 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
+        ],
+        "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
         ]
       },
       "displayName": "VllmNxDInferenceIntegTestStack"
@@ -3688,7 +3709,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4a5d6f4bae17ae178cfc4a39ae39b4db743001234d31e8f6b57b6a3d563dc5f8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/925d69cb1a5a4360cc25566570951e05e3472f218290cda022e6c022a40be47e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

@@ -12368,6 +12368,10 @@ PytorchTrainingNeuronxImage.fromNeuronSdkVersion(neuronSdkVersion: string, pytho
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_22_0">SDK_2_22_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.22.0. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_23_0">SDK_2_23_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.23.0. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_24_0">SDK_2_24_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.24.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_25_0">SDK_2_25_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.25.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_26_1">SDK_2_26_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.26.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_27_1">SDK_2_27_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.27.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_28_0">SDK_2_28_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a></code> | Neuron SDK 2.28.0. |
 | <code><a href="#aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.size">size</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
 
 ---
@@ -12547,6 +12551,54 @@ public readonly SDK_2_24_0: INeuronxImage;
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
 
 Neuron SDK 2.24.0.
+
+---
+
+##### `SDK_2_25_0`<sup>Required</sup> <a name="SDK_2_25_0" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_25_0"></a>
+
+```typescript
+public readonly SDK_2_25_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.25.0.
+
+---
+
+##### `SDK_2_26_1`<sup>Required</sup> <a name="SDK_2_26_1" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_26_1"></a>
+
+```typescript
+public readonly SDK_2_26_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.26.1.
+
+---
+
+##### `SDK_2_27_1`<sup>Required</sup> <a name="SDK_2_27_1" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_27_1"></a>
+
+```typescript
+public readonly SDK_2_27_1: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.27.1.
+
+---
+
+##### `SDK_2_28_0`<sup>Required</sup> <a name="SDK_2_28_0" id="aws-cdk-neuronx-patterns.PytorchTrainingNeuronxImage.property.SDK_2_28_0"></a>
+
+```typescript
+public readonly SDK_2_28_0: INeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxImage">INeuronxImage</a>
+
+Neuron SDK 2.28.0.
 
 ---
 
@@ -12750,7 +12802,13 @@ VllmInferenceNeuronxImage.fromNeuronSdkVersion(neuronSdkVersion: string, vllmVer
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.LATEST">LATEST</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Latest Neuron SDK. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_24_1">SDK_2_24_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.24.1 with vLLM 0.7.2. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_25_0">SDK_2_25_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.25.0 with vLLM 0.9.1. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_0">SDK_2_26_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.26.0 with vLLM 0.9.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_1">SDK_2_26_1</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.26.1 with vLLM 0.9.1. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_27_1_VLLM_0_11_0">SDK_2_27_1_VLLM_0_11_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.27.1 with vLLM 0.11.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_27_1_VLLM_0_13_0">SDK_2_27_1_VLLM_0_13_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.27.1 with vLLM 0.13.0. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_28_0">SDK_2_28_0</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | Neuron SDK 2.28.0 with vLLM 0.13.0. |
 
 ---
 
@@ -12766,6 +12824,30 @@ Latest Neuron SDK.
 
 ---
 
+##### `SDK_2_24_1`<sup>Required</sup> <a name="SDK_2_24_1" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_24_1"></a>
+
+```typescript
+public readonly SDK_2_24_1: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.24.1 with vLLM 0.7.2.
+
+---
+
+##### `SDK_2_25_0`<sup>Required</sup> <a name="SDK_2_25_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_25_0"></a>
+
+```typescript
+public readonly SDK_2_25_0: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.25.0 with vLLM 0.9.1.
+
+---
+
 ##### `SDK_2_26_0`<sup>Required</sup> <a name="SDK_2_26_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_0"></a>
 
 ```typescript
@@ -12775,6 +12857,54 @@ public readonly SDK_2_26_0: IVllmInferenceNeuronxImage;
 - *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
 
 Neuron SDK 2.26.0 with vLLM 0.9.1.
+
+---
+
+##### `SDK_2_26_1`<sup>Required</sup> <a name="SDK_2_26_1" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_26_1"></a>
+
+```typescript
+public readonly SDK_2_26_1: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.26.1 with vLLM 0.9.1.
+
+---
+
+##### `SDK_2_27_1_VLLM_0_11_0`<sup>Required</sup> <a name="SDK_2_27_1_VLLM_0_11_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_27_1_VLLM_0_11_0"></a>
+
+```typescript
+public readonly SDK_2_27_1_VLLM_0_11_0: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.27.1 with vLLM 0.11.0.
+
+---
+
+##### `SDK_2_27_1_VLLM_0_13_0`<sup>Required</sup> <a name="SDK_2_27_1_VLLM_0_13_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_27_1_VLLM_0_13_0"></a>
+
+```typescript
+public readonly SDK_2_27_1_VLLM_0_13_0: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.27.1 with vLLM 0.13.0.
+
+---
+
+##### `SDK_2_28_0`<sup>Required</sup> <a name="SDK_2_28_0" id="aws-cdk-neuronx-patterns.VllmInferenceNeuronxImage.property.SDK_2_28_0"></a>
+
+```typescript
+public readonly SDK_2_28_0: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+
+Neuron SDK 2.28.0 with vLLM 0.13.0.
 
 ---
 
