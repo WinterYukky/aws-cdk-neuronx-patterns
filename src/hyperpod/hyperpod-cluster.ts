@@ -1,4 +1,4 @@
-import { CfnJson, Size, Stack } from "aws-cdk-lib";
+import { CfnJson, Size } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { CfnAddon } from "aws-cdk-lib/aws-eks";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
@@ -217,15 +217,13 @@ export class HyperPodCluster extends Construct {
     this.inferenceOperatorRole = this.createInferenceOperatorRole();
 
     // --- Install EKS Add-ons and Helm Charts ---
-    // cert-manager must be installed first as other components may depend on it
+    // cert-manager is required before the inference operator
     const certManager = this.installCertManager();
-    const albController = this.installAlbController(props.vpc);
-    const keda = this.installKeda();
-    // Ensure ALB controller and KEDA are installed after cert-manager
-    albController.node.addDependency(certManager);
-    keda.node.addDependency(certManager);
     if (enableInference) {
-      this.installInferenceOperatorAddon();
+      // The inference operator addon bundles ALB Controller and KEDA,
+      // so we don't install them separately via Helm charts.
+      const inferenceAddon = this.installInferenceOperatorAddon();
+      inferenceAddon.node.addDependency(certManager);
     }
   }
 
@@ -273,7 +271,7 @@ export class HyperPodCluster extends Construct {
     return role;
   }
 
-  private installInferenceOperatorAddon() {
+  private installInferenceOperatorAddon(): Construct {
     // S3 bucket for TLS certificates required by the inference operator
     const tlsBucket = new s3.Bucket(this, "TlsCertificateBucket", {
       enforceSSL: true,
@@ -290,77 +288,7 @@ export class HyperPodCluster extends Construct {
     });
     addon.node.addDependency(this.eksCluster);
     addon.node.addDependency(tlsBucket);
-  }
-
-  private installAlbController(vpc: ec2.IVpc): Construct {
-    const albConditions = new CfnJson(this, "AlbControllerOidcCondition", {
-      value: {
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]:
-          "system:serviceaccount:kube-system:aws-load-balancer-controller",
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:aud`]:
-          "sts.amazonaws.com",
-      },
-    });
-
-    const albRole = new iam.Role(this, "AlbControllerRole", {
-      assumedBy: new iam.FederatedPrincipal(
-        this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
-        {
-          StringEquals: albConditions,
-        },
-        "sts:AssumeRoleWithWebIdentity",
-      ),
-    });
-
-    albRole.addToPolicy(
-      new iam.PolicyStatement({
-        effect: iam.Effect.ALLOW,
-        actions: [
-          "elasticloadbalancing:*",
-          "ec2:Describe*",
-          "ec2:Get*",
-          "ec2:AuthorizeSecurityGroupIngress",
-          "ec2:RevokeSecurityGroupIngress",
-          "ec2:CreateSecurityGroup",
-          "ec2:DeleteSecurityGroup",
-          "ec2:CreateTags",
-          "ec2:DeleteTags",
-          "iam:CreateServiceLinkedRole",
-          "cognito-idp:DescribeUserPoolClient",
-          "acm:ListCertificates",
-          "acm:DescribeCertificate",
-          "wafv2:GetWebACL",
-          "wafv2:GetWebACLForResource",
-          "wafv2:AssociateWebACL",
-          "wafv2:DisassociateWebACL",
-          "shield:GetSubscriptionState",
-          "shield:DescribeProtection",
-          "shield:CreateProtection",
-          "shield:DeleteProtection",
-          "tag:GetResources",
-          "tag:TagResources",
-        ],
-        resources: ["*"],
-      }),
-    );
-
-    return this.eksCluster.addHelmChart("AlbController", {
-      chart: "aws-load-balancer-controller",
-      repository: "https://aws.github.io/eks-charts",
-      namespace: "kube-system",
-      values: {
-        clusterName: this.eksCluster.clusterName,
-        serviceAccount: {
-          create: true,
-          name: "aws-load-balancer-controller",
-          annotations: {
-            "eks.amazonaws.com/role-arn": albRole.roleArn,
-          },
-        },
-        region: Stack.of(this).region,
-        vpcId: vpc.vpcId,
-      },
-    });
+    return addon;
   }
 
   private installCertManager(): Construct {
@@ -371,57 +299,6 @@ export class HyperPodCluster extends Construct {
       createNamespace: true,
       values: {
         installCRDs: true,
-      },
-    });
-  }
-
-  private installKeda(): Construct {
-    const kedaConditions = new CfnJson(this, "KedaOperatorOidcCondition", {
-      value: {
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]:
-          "system:serviceaccount:keda:keda-operator",
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:aud`]:
-          "sts.amazonaws.com",
-      },
-    });
-
-    const kedaRole = new iam.Role(this, "KedaOperatorRole", {
-      assumedBy: new iam.FederatedPrincipal(
-        this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
-        {
-          StringEquals: kedaConditions,
-        },
-        "sts:AssumeRoleWithWebIdentity",
-      ),
-    });
-
-    kedaRole.addToPolicy(
-      new iam.PolicyStatement({
-        effect: iam.Effect.ALLOW,
-        actions: [
-          "cloudwatch:GetMetricData",
-          "cloudwatch:ListMetrics",
-          "aps:QueryMetrics",
-          "aps:GetSeries",
-          "aps:GetLabels",
-        ],
-        resources: ["*"],
-      }),
-    );
-
-    return this.eksCluster.addHelmChart("Keda", {
-      chart: "keda",
-      repository: "https://kedacore.github.io/charts",
-      namespace: "keda",
-      createNamespace: true,
-      values: {
-        serviceAccount: {
-          create: true,
-          name: "keda-operator",
-          annotations: {
-            "eks.amazonaws.com/role-arn": kedaRole.roleArn,
-          },
-        },
       },
     });
   }
