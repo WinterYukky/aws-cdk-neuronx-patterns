@@ -6,6 +6,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/lambda-layer-kubectl-v31",
+      "type": "build"
+    },
+    {
       "name": "@aws-sdk/client-batch",
       "type": "build"
     },

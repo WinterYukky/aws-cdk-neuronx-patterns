@@ -202,13 +202,11 @@ export class HyperPodCluster extends Construct {
       nodeRecovery: props.nodeRecovery ?? "Automatic",
       vpcConfig: {
         securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
-        subnets: props.vpc
-          .selectSubnets(
-            props.vpcSubnets ?? {
-              subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-            },
-          )
-          .subnetIds,
+        subnets: props.vpc.selectSubnets(
+          props.vpcSubnets ?? {
+            subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+          },
+        ).subnetIds,
       },
     });
     this.sagemakerCluster.node.addDependency(this.eksCluster);

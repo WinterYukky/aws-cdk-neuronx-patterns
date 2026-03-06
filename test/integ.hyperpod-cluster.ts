@@ -10,10 +10,7 @@ import {
 import { NodegroupAmiType } from "aws-cdk-lib/aws-eks-v2";
 import { KubectlV31Layer } from "@aws-cdk/lambda-layer-kubectl-v31";
 import * as cxapi from "aws-cdk-lib/cx-api";
-import {
-  HyperPodCluster,
-  NeuronxInstanceType,
-} from "../src/index";
+import { HyperPodCluster, NeuronxInstanceType } from "../src/index";
 
 const app = new App();
 Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
@@ -50,9 +47,7 @@ class HyperPodClusterIntegTestStack extends Stack {
 
     // Add a small managed node group for system workloads (cert-manager, KEDA, ALB controller)
     this.cluster.eksCluster.addNodegroupCapacity("SystemNodes", {
-      instanceTypes: [
-        InstanceType.of(InstanceClass.T3, InstanceSize.MEDIUM),
-      ],
+      instanceTypes: [InstanceType.of(InstanceClass.T3, InstanceSize.MEDIUM)],
       minSize: 1,
       maxSize: 2,
       desiredSize: 1,
