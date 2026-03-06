@@ -4,6 +4,7 @@ import { CfnAddon } from "aws-cdk-lib/aws-eks";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import * as sagemaker from "aws-cdk-lib/aws-sagemaker";
 import { Construct } from "constructs";
 import { INeuronxInstanceType } from "../base/neuronx";
@@ -183,6 +184,16 @@ export class HyperPodCluster extends Construct {
         },
       },
       nodeRecovery: props.nodeRecovery ?? "Automatic",
+      vpcConfig: {
+        securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
+        subnets: props.vpc
+          .selectSubnets(
+            props.vpcSubnets ?? {
+              subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+            },
+          )
+          .subnetIds,
+      },
     });
     this.sagemakerCluster.node.addDependency(this.eksCluster);
 
@@ -242,21 +253,23 @@ export class HyperPodCluster extends Construct {
   }
 
   private installInferenceOperatorAddon() {
+    // S3 bucket for TLS certificates required by the inference operator
+    const tlsBucket = new s3.Bucket(this, "TlsCertificateBucket", {
+      bucketName: `hyperpod-tls-${Stack.of(this).account}-${Stack.of(this).region}`,
+      enforceSSL: true,
+    });
+    tlsBucket.grantReadWrite(this.inferenceOperatorRole);
+
     const addon = new CfnAddon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
       clusterName: this.eksCluster.clusterName,
       configurationValues: JSON.stringify({
-        nodeSelector: {},
-        "controller-manager": {
-          serviceAccount: {
-            annotations: {
-              "eks.amazonaws.com/role-arn": this.inferenceOperatorRole.roleArn,
-            },
-          },
-        },
+        executionRoleArn: this.inferenceOperatorRole.roleArn,
+        tlsCertificateS3Bucket: tlsBucket.bucketName,
       }),
     });
     addon.node.addDependency(this.eksCluster);
+    addon.node.addDependency(tlsBucket);
   }
 
   private installAlbController(vpc: ec2.IVpc) {

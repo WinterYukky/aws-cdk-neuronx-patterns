@@ -52,6 +52,11 @@
   resolved "https://registry.npmjs.org/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.241.0-alpha.0.tgz"
   integrity sha512-WVtG8WTLm38uodVP+n+5rkUBz0VQrYET3ZhpfXQ7Ipmq6jQ8DL8nmJMocy5rWWADUJgwxq2vkTXmM7cweyV2Hg==
 
+"@aws-cdk/lambda-layer-kubectl-v31@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@aws-cdk/lambda-layer-kubectl-v31/-/lambda-layer-kubectl-v31-2.1.0.tgz"
+  integrity sha512-ZO3nysb3X3zly10B91vTNXyeAxFPAsYVoKJLXxRTt7PRMhiD7W5TLLd/X/m6UZRbmtH623goi2HVSCAUhNFIuA==
+
 "@aws-cdk/service-spec-types@^0.0.223":
   version "0.0.223"
   resolved "https://registry.npmjs.org/@aws-cdk/service-spec-types/-/service-spec-types-0.0.223.tgz"
@@ -1958,6 +1963,11 @@
   version "1.11.1"
   resolved "https://registry.npmjs.org/@unrs/resolver-binding-linux-x64-gnu/-/resolver-binding-linux-x64-gnu-1.11.1.tgz"
   integrity sha512-C3ZAHugKgovV5YvAMsxhq0gtXuwESUKc5MhEtjBpLoHPLYM+iuwSj3lflFwK3DPm68660rZ7G8BMcwSro7hD5w==
+
+"@unrs/resolver-binding-linux-x64-musl@1.11.1":
+  version "1.11.1"
+  resolved "https://registry.npmjs.org/@unrs/resolver-binding-linux-x64-musl/-/resolver-binding-linux-x64-musl-1.11.1.tgz"
+  integrity sha512-rV0YSoyhK2nZ4vEswT/QwqzqQXw5I6CjoaYMOX0TqBlWhojUf8P94mvI7nuJTeaCkkds3QE4+zS8Ko+GdXuZtA==
 
 "@xmldom/xmldom@^0.9.8":
   version "0.9.8"
