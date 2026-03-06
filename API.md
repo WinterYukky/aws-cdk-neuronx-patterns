@@ -11788,6 +11788,9 @@ new NeuronxInstanceType()
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.INF2_XLARGE">INF2_XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | inf2.xlarge. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN1_2XLARGE">TRN1_2XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | trn1.2xlarge. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN1_32XLARGE">TRN1_32XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | trn1.32xlarge. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2_3XLARGE">TRN2_3XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | trn2.3xlarge. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2_48XLARGE">TRN2_48XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | trn2.48xlarge. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2U_48XLARGE">TRN2U_48XLARGE</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | trn2u.48xlarge. |
 
 ---
 
@@ -11860,6 +11863,42 @@ public readonly TRN1_32XLARGE: INeuronxInstanceType;
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
 trn1.32xlarge.
+
+---
+
+##### `TRN2_3XLARGE`<sup>Required</sup> <a name="TRN2_3XLARGE" id="aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2_3XLARGE"></a>
+
+```typescript
+public readonly TRN2_3XLARGE: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+trn2.3xlarge.
+
+---
+
+##### `TRN2_48XLARGE`<sup>Required</sup> <a name="TRN2_48XLARGE" id="aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2_48XLARGE"></a>
+
+```typescript
+public readonly TRN2_48XLARGE: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+trn2.48xlarge.
+
+---
+
+##### `TRN2U_48XLARGE`<sup>Required</sup> <a name="TRN2U_48XLARGE" id="aws-cdk-neuronx-patterns.NeuronxInstanceType.property.TRN2U_48XLARGE"></a>
+
+```typescript
+public readonly TRN2U_48XLARGE: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+trn2u.48xlarge.
 
 ---
 
@@ -12679,6 +12718,73 @@ public readonly neuronxCores: number;
 ---
 
 
+### Trainium2Chips <a name="Trainium2Chips" id="aws-cdk-neuronx-patterns.Trainium2Chips"></a>
+
+- *Implements:* <a href="#aws-cdk-neuronx-patterns.IAcceleratorChips">IAcceleratorChips</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.Trainium2Chips.Initializer"></a>
+
+```typescript
+import { Trainium2Chips } from 'aws-cdk-neuronx-patterns'
+
+new Trainium2Chips(chips: number)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.Trainium2Chips.Initializer.parameter.chips">chips</a></code> | <code>number</code> | *No description.* |
+
+---
+
+##### `chips`<sup>Required</sup> <a name="chips" id="aws-cdk-neuronx-patterns.Trainium2Chips.Initializer.parameter.chips"></a>
+
+- *Type:* number
+
+---
+
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.Trainium2Chips.property.acceleratorMemory">acceleratorMemory</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.Trainium2Chips.property.chips">chips</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.Trainium2Chips.property.neuronxCores">neuronxCores</a></code> | <code>number</code> | *No description.* |
+
+---
+
+##### `acceleratorMemory`<sup>Required</sup> <a name="acceleratorMemory" id="aws-cdk-neuronx-patterns.Trainium2Chips.property.acceleratorMemory"></a>
+
+```typescript
+public readonly acceleratorMemory: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+
+---
+
+##### `chips`<sup>Required</sup> <a name="chips" id="aws-cdk-neuronx-patterns.Trainium2Chips.property.chips"></a>
+
+```typescript
+public readonly chips: number;
+```
+
+- *Type:* number
+
+---
+
+##### `neuronxCores`<sup>Required</sup> <a name="neuronxCores" id="aws-cdk-neuronx-patterns.Trainium2Chips.property.neuronxCores"></a>
+
+```typescript
+public readonly neuronxCores: number;
+```
+
+- *Type:* number
+
+---
+
+
 ### VllmEngineArgumentsParser <a name="VllmEngineArgumentsParser" id="aws-cdk-neuronx-patterns.VllmEngineArgumentsParser"></a>
 
 #### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.VllmEngineArgumentsParser.Initializer"></a>
@@ -13117,7 +13223,7 @@ The neuronx SDK version.
 
 ### IAcceleratorChips <a name="IAcceleratorChips" id="aws-cdk-neuronx-patterns.IAcceleratorChips"></a>
 
-- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.Inferentia2Chips">Inferentia2Chips</a>, <a href="#aws-cdk-neuronx-patterns.Trainium1Chips">Trainium1Chips</a>, <a href="#aws-cdk-neuronx-patterns.IAcceleratorChips">IAcceleratorChips</a>
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.Inferentia2Chips">Inferentia2Chips</a>, <a href="#aws-cdk-neuronx-patterns.Trainium1Chips">Trainium1Chips</a>, <a href="#aws-cdk-neuronx-patterns.Trainium2Chips">Trainium2Chips</a>, <a href="#aws-cdk-neuronx-patterns.IAcceleratorChips">IAcceleratorChips</a>
 
 
 #### Properties <a name="Properties" id="Properties"></a>
