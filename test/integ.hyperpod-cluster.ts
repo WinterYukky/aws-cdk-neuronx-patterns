@@ -10,7 +10,7 @@ import {
 import { NodegroupAmiType } from "aws-cdk-lib/aws-eks-v2";
 import { KubectlV31Layer } from "@aws-cdk/lambda-layer-kubectl-v31";
 import * as cxapi from "aws-cdk-lib/cx-api";
-import { HyperPodCluster, NeuronxInstanceType } from "../src/index";
+import { HyperPodCluster } from "../src/index";
 
 const app = new App();
 Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
@@ -37,15 +37,14 @@ class HyperPodClusterIntegTestStack extends Stack {
       instanceGroups: [
         {
           name: "inference-workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN1_32XLARGE,
+          instanceType: "ml.trn1.32xlarge",
           instanceCount: 0,
         },
       ],
-      enableInference: true,
       nodeRecovery: "Automatic",
     });
 
-    // Add a small managed node group for system workloads (cert-manager, KEDA, ALB controller)
+    // Add a small managed node group for system workloads
     this.cluster.eksCluster.addNodegroupCapacity("SystemNodes", {
       instanceTypes: [InstanceType.of(InstanceClass.T3, InstanceSize.MEDIUM)],
       minSize: 1,
@@ -58,7 +57,7 @@ class HyperPodClusterIntegTestStack extends Stack {
       value: this.cluster.eksCluster.clusterName,
     });
     new CfnOutput(this, "HyperPodClusterArn", {
-      value: this.cluster.sagemakerCluster.attrClusterArn,
+      value: this.cluster.clusterArn,
     });
   }
 }

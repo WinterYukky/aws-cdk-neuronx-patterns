@@ -1,3 +1,7 @@
+import { Names } from "aws-cdk-lib";
+import { CfnAddon } from "aws-cdk-lib/aws-eks";
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 import { HyperPodCluster } from "./hyperpod-cluster";
 import { VllmNxdInferenceCompiledModel } from "../vllm-nxd-inference/vllm-nxd-inference-compiler";
@@ -126,10 +130,13 @@ export interface HyperPodVllmNxdInferenceServiceProps {
 /**
  * High-level construct that deploys a vLLM inference endpoint on a HyperPod cluster
  * using the InferenceEndpointConfig Kubernetes CRD.
+ *
+ * This construct installs the required inference operator addon, cert-manager,
+ * and configures IRSA roles automatically.
  */
 export class HyperPodVllmNxdInferenceService extends Construct {
   /**
-   * The Kubernetes manifest for the InferenceEndpointConfig CRD.
+   * The Kubernetes endpoint name.
    */
   readonly endpointName: string;
 
@@ -159,7 +166,10 @@ export class HyperPodVllmNxdInferenceService extends Construct {
 
     const instanceType = `ml.${props.compiledModel.compileTimeInstanceType.instanceType.toString()}`;
 
-    // Build the InferenceEndpointConfig CRD manifest
+    // --- Install inference prerequisites ---
+    this.installInferencePrerequisites(props.cluster);
+
+    // --- Build the InferenceEndpointConfig CRD manifest ---
     const manifest: Record<string, any> = {
       apiVersion: "inference.sagemaker.aws.amazon.com/v1alpha1",
       kind: "InferenceEndpointConfig",
@@ -289,5 +299,45 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         scaledObjectManifest,
       );
     }
+  }
+
+  private installInferencePrerequisites(cluster: HyperPodCluster): Construct {
+    // Inference Operator IRSA role
+    const inferenceOperatorRole = cluster.createServiceAccountRole(
+      "InferenceOperatorRole",
+      "hyperpod-inference-controller-manager",
+      "kube-system",
+    );
+    inferenceOperatorRole.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "AmazonSageMakerHyperPodInferenceAccess",
+      ),
+    );
+    // Override role name to match inference operator's required pattern
+    const cfnRole = inferenceOperatorRole.node.defaultChild as iam.CfnRole;
+    cfnRole.addPropertyOverride(
+      "RoleName",
+      `SageMakerHyperPodInference-${Names.uniqueResourceName(this, { maxLength: 64 - "SageMakerHyperPodInference-".length, allowedSpecialCharacters: "-" })}`,
+    );
+
+    // TLS certificate bucket
+    const tlsBucket = new s3.Bucket(this, "TlsCertificateBucket", {
+      enforceSSL: true,
+    });
+    tlsBucket.grantReadWrite(inferenceOperatorRole);
+
+    // Inference Operator EKS Addon (bundles ALB Controller, KEDA, and cert-manager)
+    const addon = new CfnAddon(this, "InferenceOperatorAddon", {
+      addonName: "amazon-sagemaker-hyperpod-inference",
+      clusterName: cluster.eksCluster.clusterName,
+      configurationValues: JSON.stringify({
+        executionRoleArn: inferenceOperatorRole.roleArn,
+        tlsCertificateS3Bucket: tlsBucket.bucketName,
+      }),
+    });
+    addon.node.addDependency(cluster.eksCluster);
+    addon.node.addDependency(tlsBucket);
+
+    return addon;
   }
 }

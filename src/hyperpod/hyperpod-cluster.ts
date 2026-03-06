@@ -1,13 +1,10 @@
 import { CfnJson, Names, Size } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
-import { CfnAddon } from "aws-cdk-lib/aws-eks";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as s3 from "aws-cdk-lib/aws-s3";
 import * as sagemaker from "aws-cdk-lib/aws-sagemaker";
 import { Construct } from "constructs";
-import { INeuronxInstanceType } from "../base/neuronx";
 
 /**
  * Configuration for a HyperPod instance group.
@@ -18,9 +15,9 @@ export interface HyperPodInstanceGroup {
    */
   readonly name: string;
   /**
-   * Neuronx instance type. Only trn1/trn2 are supported in HyperPod.
+   * Instance type (e.g. 'ml.trn1.32xlarge', 'ml.g5.xlarge', 'ml.t3.medium').
    */
-  readonly neuronxInstanceType: INeuronxInstanceType;
+  readonly instanceType: string;
   /**
    * Number of instances in the group.
    */
@@ -42,7 +39,7 @@ export interface HyperPodClusterProps {
   readonly vpc: ec2.IVpc;
   /**
    * VPC subnets for worker nodes.
-   * @default - private subnets
+   * @default - private subnets with egress
    */
   readonly vpcSubnets?: ec2.SubnetSelection;
   /**
@@ -71,18 +68,25 @@ export interface HyperPodClusterProps {
    * @default 'Automatic'
    */
   readonly nodeRecovery?: "Automatic" | "None";
-  /**
-   * Whether to install the SageMaker HyperPod inference operator add-on.
-   * @default true
-   */
-  readonly enableInference?: boolean;
 }
 
 /**
- * High-level construct that creates both an EKS cluster and a SageMaker HyperPod cluster.
+ * L2 construct for SageMaker HyperPod with EKS orchestration.
  *
- * The EKS cluster serves as the control plane, while HyperPod manages the worker nodes
- * with Trainium instances for inference workloads.
+ * Creates both an EKS cluster (control plane) and a SageMaker HyperPod cluster
+ * (worker nodes) with a 1:1 mapping. This construct can be used for both
+ * training and inference workloads.
+ *
+ * @example
+ * const cluster = new HyperPodCluster(this, 'HyperPod', {
+ *   vpc,
+ *   kubectlLayer: new KubectlV31Layer(this, 'KubectlLayer'),
+ *   instanceGroups: [{
+ *     name: 'workers',
+ *     instanceType: 'ml.trn1.32xlarge',
+ *     instanceCount: 2,
+ *   }],
+ * });
  */
 export class HyperPodCluster extends Construct {
   /**
@@ -90,33 +94,31 @@ export class HyperPodCluster extends Construct {
    */
   readonly eksCluster: eks.Cluster;
   /**
-   * The SageMaker HyperPod cluster (L1 CfnCluster).
+   * The SageMaker HyperPod cluster resource.
    */
   readonly sagemakerCluster: sagemaker.CfnCluster;
   /**
-   * The HyperPod execution role.
+   * The HyperPod execution role used by instance groups.
    */
   readonly executionRole: iam.Role;
   /**
-   * The IAM role for the inference operator service account.
+   * The cluster ARN.
    */
-  readonly inferenceOperatorRole: iam.Role;
+  readonly clusterArn: string;
 
   constructor(scope: Construct, id: string, props: HyperPodClusterProps) {
     super(scope, id);
 
-    this.validateInstanceTypes(props.instanceGroups);
-
     const kubernetesVersion =
       props.kubernetesVersion ?? eks.KubernetesVersion.V1_31;
-    const enableInference = props.enableInference ?? true;
+    const subnetSelection = props.vpcSubnets ?? {
+      subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+    };
 
     // --- EKS Cluster ---
     this.eksCluster = new eks.Cluster(this, "EksCluster", {
       vpc: props.vpc,
-      vpcSubnets: props.vpcSubnets
-        ? [props.vpcSubnets]
-        : [{ subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS }],
+      vpcSubnets: [subnetSelection],
       version: kubernetesVersion,
       kubectlProviderOptions: {
         kubectlLayer: props.kubectlLayer,
@@ -153,7 +155,7 @@ export class HyperPodCluster extends Construct {
       }),
     );
 
-    // Grant the execution role cluster admin access via EKS Access API
+    // Grant the execution role cluster admin access
     this.eksCluster.grantClusterAdmin(
       "HyperPodExecutionRoleAccess",
       this.executionRole.roleArn,
@@ -164,35 +166,27 @@ export class HyperPodCluster extends Construct {
       props.instanceGroups.map<sagemaker.CfnCluster.ClusterInstanceGroupProperty>(
         (group) => ({
           instanceGroupName: group.name,
-          instanceType: `ml.${group.neuronxInstanceType.instanceType.toString()}`,
+          instanceType: group.instanceType,
           instanceCount: group.instanceCount,
           executionRole: this.executionRole.roleArn,
           lifeCycleConfig: {
             sourceS3Uri: "s3://placeholder/lifecycle-scripts/",
             onCreate: "on_create.sh",
           },
-          instanceStorageConfigs: group.additionalVolumeSize
-            ? [
-                {
-                  ebsVolumeConfig: {
-                    volumeSizeInGb: group.additionalVolumeSize.toGibibytes(),
-                  },
-                },
-              ]
-            : [
-                {
-                  ebsVolumeConfig: {
-                    volumeSizeInGb: 500,
-                  },
-                },
-              ],
+          instanceStorageConfigs: [
+            {
+              ebsVolumeConfig: {
+                volumeSizeInGb: group.additionalVolumeSize
+                  ? group.additionalVolumeSize.toGibibytes()
+                  : 500,
+              },
+            },
+          ],
         }),
       );
 
-    this.sagemakerCluster = new sagemaker.CfnCluster(this, "HyperPodCluster", {
-      clusterName: props.clusterName
-        ? `${props.clusterName}-hyperpod`
-        : undefined,
+    this.sagemakerCluster = new sagemaker.CfnCluster(this, "SageMakerCluster", {
+      clusterName: props.clusterName,
       instanceGroups,
       orchestrator: {
         eks: {
@@ -202,56 +196,39 @@ export class HyperPodCluster extends Construct {
       nodeRecovery: props.nodeRecovery ?? "Automatic",
       vpcConfig: {
         securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
-        subnets: props.vpc.selectSubnets(
-          props.vpcSubnets ?? {
-            subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-          },
-        ).subnetIds,
+        subnets: props.vpc.selectSubnets(subnetSelection).subnetIds,
       },
     });
     this.sagemakerCluster.node.addDependency(this.eksCluster);
-
-    // --- Inference Operator Role (IRSA) ---
-    this.inferenceOperatorRole = this.createInferenceOperatorRole();
-
-    // --- Install EKS Add-ons and Helm Charts ---
-    // cert-manager is required before the inference operator
-    const certManager = this.installCertManager();
-    if (enableInference) {
-      // The inference operator addon bundles ALB Controller and KEDA,
-      // so we don't install them separately via Helm charts.
-      const inferenceAddon = this.installInferenceOperatorAddon();
-      inferenceAddon.node.addDependency(certManager);
-    }
+    this.clusterArn = this.sagemakerCluster.attrClusterArn;
   }
 
-  private validateInstanceTypes(instanceGroups: HyperPodInstanceGroup[]) {
-    for (const group of instanceGroups) {
-      const instanceTypeName =
-        group.neuronxInstanceType.instanceType.toString();
-      if (
-        !instanceTypeName.startsWith("trn1") &&
-        !instanceTypeName.startsWith("trn2")
-      ) {
-        throw new Error(
-          `HyperPod only supports trn1/trn2 instance types for Neuron workloads. Got: ${instanceTypeName}`,
-        );
-      }
-    }
-  }
-
-  private createInferenceOperatorRole(): iam.Role {
-    const conditions = new CfnJson(this, "InferenceOperatorOidcCondition", {
+  /**
+   * Creates an IRSA (IAM Role for Service Account) with trust policy for the EKS OIDC provider.
+   * @param id Construct ID for the role
+   * @param serviceAccountName Kubernetes service account name
+   * @param serviceAccountNamespace Kubernetes namespace for the service account
+   * @returns IAM Role with OIDC trust policy
+   */
+  createServiceAccountRole(
+    id: string,
+    serviceAccountName: string,
+    serviceAccountNamespace: string,
+  ): iam.Role {
+    const conditions = new CfnJson(this, `${id}OidcCondition`, {
       value: {
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]:
-          "system:serviceaccount:kube-system:hyperpod-inference-controller-manager",
+        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]: `system:serviceaccount:${serviceAccountNamespace}:${serviceAccountName}`,
         [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:aud`]:
           "sts.amazonaws.com",
       },
     });
 
-    const role = new iam.Role(this, "InferenceOperatorRole", {
-      roleName: `SageMakerHyperPodInference-${Names.uniqueResourceName(this, { maxLength: 64 - "SageMakerHyperPodInference-".length, allowedSpecialCharacters: "-" })}`,
+    return new iam.Role(this, id, {
+      roleName:
+        `${Names.uniqueResourceName(this, { maxLength: 50, allowedSpecialCharacters: "-" })}-${id}`.substring(
+          0,
+          64,
+        ),
       assumedBy: new iam.FederatedPrincipal(
         this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
         {
@@ -259,45 +236,6 @@ export class HyperPodCluster extends Construct {
         },
         "sts:AssumeRoleWithWebIdentity",
       ),
-      managedPolicies: [
-        iam.ManagedPolicy.fromAwsManagedPolicyName(
-          "AmazonSageMakerHyperPodInferenceAccess",
-        ),
-      ],
-    });
-
-    return role;
-  }
-
-  private installInferenceOperatorAddon(): Construct {
-    // S3 bucket for TLS certificates required by the inference operator
-    const tlsBucket = new s3.Bucket(this, "TlsCertificateBucket", {
-      enforceSSL: true,
-    });
-    tlsBucket.grantReadWrite(this.inferenceOperatorRole);
-
-    const addon = new CfnAddon(this, "InferenceOperatorAddon", {
-      addonName: "amazon-sagemaker-hyperpod-inference",
-      clusterName: this.eksCluster.clusterName,
-      configurationValues: JSON.stringify({
-        executionRoleArn: this.inferenceOperatorRole.roleArn,
-        tlsCertificateS3Bucket: tlsBucket.bucketName,
-      }),
-    });
-    addon.node.addDependency(this.eksCluster);
-    addon.node.addDependency(tlsBucket);
-    return addon;
-  }
-
-  private installCertManager(): Construct {
-    return this.eksCluster.addHelmChart("CertManager", {
-      chart: "cert-manager",
-      repository: "https://charts.jetstack.io",
-      namespace: "cert-manager",
-      createNamespace: true,
-      values: {
-        installCRDs: true,
-      },
     });
   }
 }

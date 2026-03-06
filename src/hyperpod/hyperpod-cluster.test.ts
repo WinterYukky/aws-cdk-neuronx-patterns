@@ -2,7 +2,6 @@ import { App, Stack } from "aws-cdk-lib";
 import { Template, Match } from "aws-cdk-lib/assertions";
 import { Vpc } from "aws-cdk-lib/aws-ec2";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import { NeuronxInstanceType } from "../base/neuronx";
 import { HyperPodCluster } from "./hyperpod-cluster";
 
 describe("HyperPodCluster", () => {
@@ -29,7 +28,7 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+          instanceType: "ml.trn2.48xlarge",
           instanceCount: 1,
         },
       ],
@@ -49,7 +48,7 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+          instanceType: "ml.trn2.48xlarge",
           instanceCount: 2,
         },
       ],
@@ -74,7 +73,7 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN1_32XLARGE,
+          instanceType: "ml.trn1.32xlarge",
           instanceCount: 1,
         },
       ],
@@ -104,33 +103,15 @@ describe("HyperPodCluster", () => {
     });
   });
 
-  it("throws error for inf2 instance types", () => {
+  it("supports any instance type (generic L2)", () => {
     expect(() => {
       new HyperPodCluster(stack, "HyperPod", {
         vpc,
         kubectlLayer,
         instanceGroups: [
           {
-            name: "workers",
-            neuronxInstanceType: NeuronxInstanceType.INF2_48XLARGE,
-            instanceCount: 1,
-          },
-        ],
-      });
-    }).toThrow(
-      /HyperPod only supports trn1\/trn2 instance types for Neuron workloads/,
-    );
-  });
-
-  it("allows trn1 instance types", () => {
-    expect(() => {
-      new HyperPodCluster(stack, "HyperPod", {
-        vpc,
-        kubectlLayer,
-        instanceGroups: [
-          {
-            name: "workers",
-            neuronxInstanceType: NeuronxInstanceType.TRN1_32XLARGE,
+            name: "gpu-workers",
+            instanceType: "ml.g5.xlarge",
             instanceCount: 1,
           },
         ],
@@ -138,62 +119,20 @@ describe("HyperPodCluster", () => {
     }).not.toThrow();
   });
 
-  it("allows trn2 instance types", () => {
+  it("supports CPU instance types", () => {
     expect(() => {
       new HyperPodCluster(stack, "HyperPod", {
         vpc,
         kubectlLayer,
         instanceGroups: [
           {
-            name: "workers",
-            neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+            name: "cpu-workers",
+            instanceType: "ml.t3.medium",
             instanceCount: 1,
           },
         ],
       });
     }).not.toThrow();
-  });
-
-  it("installs inference operator addon when enableInference is true", () => {
-    new HyperPodCluster(stack, "HyperPod", {
-      vpc,
-      kubectlLayer,
-      instanceGroups: [
-        {
-          name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
-          instanceCount: 1,
-        },
-      ],
-      enableInference: true,
-    });
-    const template = Template.fromStack(stack);
-    template.hasResourceProperties("AWS::EKS::Addon", {
-      AddonName: "amazon-sagemaker-hyperpod-inference",
-    });
-  });
-
-  it("does not install inference operator addon when enableInference is false", () => {
-    new HyperPodCluster(stack, "HyperPod", {
-      vpc,
-      kubectlLayer,
-      instanceGroups: [
-        {
-          name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
-          instanceCount: 1,
-        },
-      ],
-      enableInference: false,
-    });
-    const template = Template.fromStack(stack);
-    template.resourcePropertiesCountIs(
-      "AWS::EKS::Addon",
-      {
-        AddonName: "amazon-sagemaker-hyperpod-inference",
-      },
-      0,
-    );
   });
 
   it("sets node recovery to None when specified", () => {
@@ -203,7 +142,7 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+          instanceType: "ml.trn2.48xlarge",
           instanceCount: 1,
         },
       ],
@@ -222,7 +161,7 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+          instanceType: "ml.trn2.48xlarge",
           instanceCount: 1,
         },
       ],
@@ -233,6 +172,52 @@ describe("HyperPodCluster", () => {
         Eks: Match.objectLike({
           ClusterArn: Match.anyValue(),
         }),
+      }),
+    });
+  });
+
+  it("includes VPC config in HyperPod cluster", () => {
+    new HyperPodCluster(stack, "HyperPod", {
+      vpc,
+      kubectlLayer,
+      instanceGroups: [
+        {
+          name: "workers",
+          instanceType: "ml.trn2.48xlarge",
+          instanceCount: 1,
+        },
+      ],
+    });
+    const template = Template.fromStack(stack);
+    template.hasResourceProperties("AWS::SageMaker::Cluster", {
+      VpcConfig: Match.objectLike({
+        SecurityGroupIds: Match.anyValue(),
+        Subnets: Match.anyValue(),
+      }),
+    });
+  });
+
+  it("createServiceAccountRole creates IRSA role", () => {
+    const cluster = new HyperPodCluster(stack, "HyperPod", {
+      vpc,
+      kubectlLayer,
+      instanceGroups: [
+        {
+          name: "workers",
+          instanceType: "ml.trn2.48xlarge",
+          instanceCount: 1,
+        },
+      ],
+    });
+    cluster.createServiceAccountRole("TestRole", "test-sa", "test-namespace");
+    const template = Template.fromStack(stack);
+    template.hasResourceProperties("AWS::IAM::Role", {
+      AssumeRolePolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([
+          Match.objectLike({
+            Action: "sts:AssumeRoleWithWebIdentity",
+          }),
+        ]),
       }),
     });
   });

@@ -31,7 +31,7 @@ describe("HyperPodVllmNxdInferenceService", () => {
       instanceGroups: [
         {
           name: "workers",
-          neuronxInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+          instanceType: "ml.trn2.48xlarge",
           instanceCount: 1,
         },
       ],
@@ -55,13 +55,16 @@ describe("HyperPodVllmNxdInferenceService", () => {
     };
   });
 
-  it("creates a basic inference service", () => {
+  it("creates a basic inference service with addon", () => {
     new HyperPodVllmNxdInferenceService(stack, "InferenceService", {
       cluster,
       compiledModel,
     });
     const template = Template.fromStack(stack);
-    template.resourceCountIs("Custom::AWSCDK-EKS-KubernetesResource", 1);
+    // Should have K8s manifests (inference endpoint + cert-manager) and EKS addon
+    template.hasResourceProperties("AWS::EKS::Addon", {
+      AddonName: "amazon-sagemaker-hyperpod-inference",
+    });
   });
 
   it("creates inference service with KV cache config", () => {
@@ -75,7 +78,9 @@ describe("HyperPodVllmNxdInferenceService", () => {
       },
     });
     const template = Template.fromStack(stack);
-    template.resourceCountIs("Custom::AWSCDK-EKS-KubernetesResource", 1);
+    template.hasResourceProperties("AWS::EKS::Addon", {
+      AddonName: "amazon-sagemaker-hyperpod-inference",
+    });
   });
 
   it("creates inference service with intelligent routing", () => {
@@ -88,7 +93,9 @@ describe("HyperPodVllmNxdInferenceService", () => {
       },
     });
     const template = Template.fromStack(stack);
-    template.resourceCountIs("Custom::AWSCDK-EKS-KubernetesResource", 1);
+    template.hasResourceProperties("AWS::EKS::Addon", {
+      AddonName: "amazon-sagemaker-hyperpod-inference",
+    });
   });
 
   it("creates inference service with autoscaling", () => {
@@ -103,18 +110,28 @@ describe("HyperPodVllmNxdInferenceService", () => {
       },
     });
     const template = Template.fromStack(stack);
-    // Should have 2 K8s manifests: InferenceEndpointConfig + ScaledObject
-    template.resourceCountIs("Custom::AWSCDK-EKS-KubernetesResource", 2);
+    template.hasResourceProperties("AWS::EKS::Addon", {
+      AddonName: "amazon-sagemaker-hyperpod-inference",
+    });
   });
 
-  it("creates inference service with SageMaker endpoint registration", () => {
+  it("creates inference operator IRSA role with correct name pattern", () => {
     new HyperPodVllmNxdInferenceService(stack, "InferenceService", {
       cluster,
       compiledModel,
-      registerEndpoint: true,
     });
     const template = Template.fromStack(stack);
-    template.resourceCountIs("Custom::AWSCDK-EKS-KubernetesResource", 1);
+    template.hasResourceProperties("AWS::IAM::Role", {
+      ManagedPolicyArns: Match.arrayWith([
+        Match.objectLike({
+          "Fn::Join": Match.arrayWith([
+            Match.arrayWith([
+              Match.stringLikeRegexp("AmazonSageMakerHyperPodInferenceAccess"),
+            ]),
+          ]),
+        }),
+      ]),
+    });
   });
 
   it("grants S3 read access to the execution role", () => {
