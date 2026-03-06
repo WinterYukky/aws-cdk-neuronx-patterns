@@ -136,6 +136,22 @@ export class HyperPodCluster extends Construct {
         ),
       ],
     });
+    this.executionRole.addToPolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          "ec2:DescribeSubnets",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeVpcs",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:CreateNetworkInterface",
+          "ec2:CreateNetworkInterfacePermission",
+          "ec2:DeleteNetworkInterface",
+          "ec2:ModifyNetworkInterfaceAttribute",
+        ],
+        resources: ["*"],
+      }),
+    );
 
     // Grant the execution role cluster admin access via EKS Access API
     this.eksCluster.grantClusterAdmin(
@@ -239,6 +255,7 @@ export class HyperPodCluster extends Construct {
     });
 
     const role = new iam.Role(this, "InferenceOperatorRole", {
+      roleName: `SageMakerHyperPodInference-${this.eksCluster.clusterName}`,
       assumedBy: new iam.FederatedPrincipal(
         this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
         {
