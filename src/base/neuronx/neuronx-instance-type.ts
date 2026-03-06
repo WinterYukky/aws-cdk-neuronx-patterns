@@ -27,6 +27,18 @@ export class Trainium1Chips implements IAcceleratorChips {
     this.acceleratorMemory = Size.gibibytes(16 * this.neuronxCores);
   }
 }
+
+export class Trainium2Chips implements IAcceleratorChips {
+  readonly neuronxCores: number;
+  readonly acceleratorMemory: Size;
+  constructor(readonly chips: number) {
+    // Each Trainium2 chip has 8 physical NeuronCore-v3.
+    // With LNC=2 (default), 2 physical cores are combined into 1 logical core,
+    // resulting in 4 logical NeuronCores per chip, each with 24 GiB of memory.
+    this.neuronxCores = chips * 4;
+    this.acceleratorMemory = Size.gibibytes(24 * this.neuronxCores);
+  }
+}
 export interface INeuronxInstanceType {
   readonly supportedTensorParallelism: number[];
   readonly instanceType: ec2.InstanceType;
@@ -98,6 +110,26 @@ class Trainium1InstanceType extends NeuronxInstanceTypeBase {
       vCpu: props.vCpu,
       memory: props.memory,
       acceleratorChips: new Trainium1Chips(props.chips),
+    });
+  }
+}
+class Trainium2InstanceType extends NeuronxInstanceTypeBase {
+  get supportedTensorParallelism(): number[] {
+    return [1, 2, 4, 8, 16, 32, 64].filter(
+      (tp) => tp <= this.acceleratorChips.neuronxCores,
+    );
+  }
+  constructor(props: {
+    instanceType: ec2.InstanceType;
+    vCpu: number;
+    memory: Size;
+    chips: number;
+  }) {
+    super({
+      instanceType: props.instanceType,
+      vCpu: props.vCpu,
+      memory: props.memory,
+      acceleratorChips: new Trainium2Chips(props.chips),
     });
   }
 }
@@ -179,6 +211,45 @@ export abstract class NeuronxInstanceType {
       ),
       vCpu: 128,
       memory: Size.gibibytes(512),
+      chips: 16,
+    });
+  /**
+   * trn2.3xlarge
+   */
+  public static readonly TRN2_3XLARGE: INeuronxInstanceType =
+    new Trainium2InstanceType({
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.TRN2,
+        ec2.InstanceSize.XLARGE3,
+      ),
+      vCpu: 12,
+      memory: Size.gibibytes(128),
+      chips: 1,
+    });
+  /**
+   * trn2.48xlarge
+   */
+  public static readonly TRN2_48XLARGE: INeuronxInstanceType =
+    new Trainium2InstanceType({
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.TRN2,
+        ec2.InstanceSize.XLARGE48,
+      ),
+      vCpu: 192,
+      memory: Size.gibibytes(2048),
+      chips: 16,
+    });
+  /**
+   * trn2u.48xlarge
+   */
+  public static readonly TRN2U_48XLARGE: INeuronxInstanceType =
+    new Trainium2InstanceType({
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.TRN2U,
+        ec2.InstanceSize.XLARGE48,
+      ),
+      vCpu: 192,
+      memory: Size.gibibytes(2048),
       chips: 16,
     });
 }
