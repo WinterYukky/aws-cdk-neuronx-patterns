@@ -15,9 +15,12 @@ export interface HyperPodInstanceGroup {
    */
   readonly name: string;
   /**
-   * Instance type (e.g. 'ml.trn1.32xlarge', 'ml.g5.xlarge', 'ml.t3.medium').
+   * EC2 instance type for the group.
+   * The `ml.` prefix is automatically added for the SageMaker HyperPod API.
+   *
+   * @example InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32)
    */
-  readonly instanceType: string;
+  readonly instanceType: ec2.InstanceType;
   /**
    * Number of instances in the group.
    */
@@ -166,7 +169,7 @@ export class HyperPodCluster extends Construct {
       props.instanceGroups.map<sagemaker.CfnCluster.ClusterInstanceGroupProperty>(
         (group) => ({
           instanceGroupName: group.name,
-          instanceType: group.instanceType,
+          instanceType: `ml.${group.instanceType.toString()}`,
           instanceCount: group.instanceCount,
           executionRole: this.executionRole.roleArn,
           lifeCycleConfig: {

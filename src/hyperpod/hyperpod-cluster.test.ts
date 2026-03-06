@@ -1,6 +1,11 @@
 import { App, Stack } from "aws-cdk-lib";
 import { Template, Match } from "aws-cdk-lib/assertions";
-import { Vpc } from "aws-cdk-lib/aws-ec2";
+import {
+  InstanceClass,
+  InstanceSize,
+  InstanceType,
+  Vpc,
+} from "aws-cdk-lib/aws-ec2";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { HyperPodCluster } from "./hyperpod-cluster";
 
@@ -28,7 +33,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],
@@ -48,7 +56,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 2,
         },
       ],
@@ -73,7 +84,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn1.32xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN1,
+            InstanceSize.XLARGE32,
+          ),
           instanceCount: 1,
         },
       ],
@@ -111,7 +125,10 @@ describe("HyperPodCluster", () => {
         instanceGroups: [
           {
             name: "gpu-workers",
-            instanceType: "ml.g5.xlarge",
+            instanceType: InstanceType.of(
+              InstanceClass.G5,
+              InstanceSize.XLARGE,
+            ),
             instanceCount: 1,
           },
         ],
@@ -127,7 +144,10 @@ describe("HyperPodCluster", () => {
         instanceGroups: [
           {
             name: "cpu-workers",
-            instanceType: "ml.t3.medium",
+            instanceType: InstanceType.of(
+              InstanceClass.T3,
+              InstanceSize.MEDIUM,
+            ),
             instanceCount: 1,
           },
         ],
@@ -142,7 +162,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],
@@ -161,7 +184,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],
@@ -183,7 +209,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],
@@ -204,7 +233,10 @@ describe("HyperPodCluster", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],

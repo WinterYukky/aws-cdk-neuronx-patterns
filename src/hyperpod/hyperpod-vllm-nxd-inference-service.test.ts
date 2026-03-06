@@ -1,6 +1,11 @@
 import { App, Size, Stack } from "aws-cdk-lib";
 import { Template, Match } from "aws-cdk-lib/assertions";
-import { Vpc } from "aws-cdk-lib/aws-ec2";
+import {
+  InstanceClass,
+  InstanceSize,
+  InstanceType,
+  Vpc,
+} from "aws-cdk-lib/aws-ec2";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { NeuronxInstanceType } from "../base/neuronx";
@@ -31,7 +36,10 @@ describe("HyperPodVllmNxdInferenceService", () => {
       instanceGroups: [
         {
           name: "workers",
-          instanceType: "ml.trn2.48xlarge",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
           instanceCount: 1,
         },
       ],
