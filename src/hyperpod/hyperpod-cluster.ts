@@ -1,4 +1,4 @@
-import { CfnJson, Size } from "aws-cdk-lib";
+import { CfnJson, Names, Size } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { CfnAddon } from "aws-cdk-lib/aws-eks";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
@@ -251,7 +251,7 @@ export class HyperPodCluster extends Construct {
     });
 
     const role = new iam.Role(this, "InferenceOperatorRole", {
-      roleName: `SageMakerHyperPodInference-${this.node.addr.substring(0, 32)}`,
+      roleName: `SageMakerHyperPodInference-${Names.uniqueResourceName(this, { maxLength: 64 - "SageMakerHyperPodInference-".length, allowedSpecialCharacters: "-" })}`,
       assumedBy: new iam.FederatedPrincipal(
         this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
         {
