@@ -62,6 +62,50 @@ describe("When the attention head is divisible", () => {
       },
     ]);
   });
+  test("Trn2", () => {
+    const tensorParallel = calcTensorParallel(
+      NeuronxInstanceType.TRN2_48XLARGE,
+      Size.gibibytes(24),
+      64,
+    );
+    expect(tensorParallel).toEqual([
+      {
+        tp: 1,
+        workers: 64,
+        usage: 1,
+      },
+      {
+        tp: 2,
+        workers: 32,
+        usage: 1,
+      },
+      {
+        tp: 4,
+        workers: 16,
+        usage: 1,
+      },
+      {
+        tp: 8,
+        workers: 8,
+        usage: 1,
+      },
+      {
+        tp: 16,
+        workers: 4,
+        usage: 1,
+      },
+      {
+        tp: 32,
+        workers: 2,
+        usage: 1,
+      },
+      {
+        tp: 64,
+        workers: 1,
+        usage: 1,
+      },
+    ]);
+  });
 });
 describe("The one with low usage is shown last", () => {
   test("Inf2", () => {
@@ -122,6 +166,30 @@ describe("The one with low usage is shown last", () => {
       },
       {
         tp: 32,
+        workers: 1,
+        usage: 1,
+      },
+    ]);
+  });
+  test("Trn2", () => {
+    const tensorParallel = calcTensorParallel(
+      NeuronxInstanceType.TRN2_3XLARGE,
+      Size.gibibytes(24),
+      32,
+    );
+    expect(tensorParallel).toEqual([
+      {
+        tp: 1,
+        workers: 4,
+        usage: 1,
+      },
+      {
+        tp: 2,
+        workers: 2,
+        usage: 1,
+      },
+      {
+        tp: 4,
         workers: 1,
         usage: 1,
       },
