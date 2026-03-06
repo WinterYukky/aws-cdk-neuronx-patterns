@@ -259,7 +259,6 @@ export class HyperPodCluster extends Construct {
   private installInferenceOperatorAddon() {
     // S3 bucket for TLS certificates required by the inference operator
     const tlsBucket = new s3.Bucket(this, "TlsCertificateBucket", {
-      bucketName: `hyperpod-tls-${Stack.of(this).account}-${Stack.of(this).region}`,
       enforceSSL: true,
     });
     tlsBucket.grantReadWrite(this.inferenceOperatorRole);
