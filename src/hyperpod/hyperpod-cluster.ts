@@ -201,12 +201,16 @@ export class HyperPodCluster extends Construct {
     this.inferenceOperatorRole = this.createInferenceOperatorRole();
 
     // --- Install EKS Add-ons and Helm Charts ---
+    // cert-manager must be installed first as other components may depend on it
+    const certManager = this.installCertManager();
+    const albController = this.installAlbController(props.vpc);
+    const keda = this.installKeda();
+    // Ensure ALB controller and KEDA are installed after cert-manager
+    albController.node.addDependency(certManager);
+    keda.node.addDependency(certManager);
     if (enableInference) {
       this.installInferenceOperatorAddon();
     }
-    this.installAlbController(props.vpc);
-    this.installCertManager();
-    this.installKeda();
   }
 
   private validateInstanceTypes(instanceGroups: HyperPodInstanceGroup[]) {
@@ -272,7 +276,7 @@ export class HyperPodCluster extends Construct {
     addon.node.addDependency(tlsBucket);
   }
 
-  private installAlbController(vpc: ec2.IVpc) {
+  private installAlbController(vpc: ec2.IVpc): Construct {
     const albConditions = new CfnJson(this, "AlbControllerOidcCondition", {
       value: {
         [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]:
@@ -324,7 +328,7 @@ export class HyperPodCluster extends Construct {
       }),
     );
 
-    this.eksCluster.addHelmChart("AlbController", {
+    return this.eksCluster.addHelmChart("AlbController", {
       chart: "aws-load-balancer-controller",
       repository: "https://aws.github.io/eks-charts",
       namespace: "kube-system",
@@ -343,8 +347,8 @@ export class HyperPodCluster extends Construct {
     });
   }
 
-  private installCertManager() {
-    this.eksCluster.addHelmChart("CertManager", {
+  private installCertManager(): Construct {
+    return this.eksCluster.addHelmChart("CertManager", {
       chart: "cert-manager",
       repository: "https://charts.jetstack.io",
       namespace: "cert-manager",
@@ -355,7 +359,7 @@ export class HyperPodCluster extends Construct {
     });
   }
 
-  private installKeda() {
+  private installKeda(): Construct {
     const kedaConditions = new CfnJson(this, "KedaOperatorOidcCondition", {
       value: {
         [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]:
@@ -389,7 +393,7 @@ export class HyperPodCluster extends Construct {
       }),
     );
 
-    this.eksCluster.addHelmChart("Keda", {
+    return this.eksCluster.addHelmChart("Keda", {
       chart: "keda",
       repository: "https://kedacore.github.io/charts",
       namespace: "keda",
