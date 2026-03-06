@@ -255,7 +255,7 @@ export class HyperPodCluster extends Construct {
     });
 
     const role = new iam.Role(this, "InferenceOperatorRole", {
-      roleName: `SageMakerHyperPodInference-${this.eksCluster.clusterName}`,
+      roleName: `SageMakerHyperPodInference-${this.node.addr.substring(0, 32)}`,
       assumedBy: new iam.FederatedPrincipal(
         this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
         {
