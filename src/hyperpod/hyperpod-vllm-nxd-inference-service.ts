@@ -3,7 +3,7 @@ import { CfnAddon } from "aws-cdk-lib/aws-eks";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
-import { HyperPodCluster } from "./hyperpod-cluster";
+import { HyperPodCluster } from "../base/sagemaker";
 import { VllmNxdInferenceCompiledModel } from "../vllm-nxd-inference/vllm-nxd-inference-compiler";
 import {
   VllmEngineArguments,

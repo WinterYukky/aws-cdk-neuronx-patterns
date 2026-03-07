@@ -86,7 +86,7 @@ export interface HyperPodClusterProps {
  *   kubectlLayer: new KubectlV31Layer(this, 'KubectlLayer'),
  *   instanceGroups: [{
  *     name: 'workers',
- *     instanceType: 'ml.trn1.32xlarge',
+ *     instanceType: InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32),
  *     instanceCount: 2,
  *   }],
  * });
@@ -97,10 +97,6 @@ export class HyperPodCluster extends Construct {
    */
   readonly eksCluster: eks.Cluster;
   /**
-   * The SageMaker HyperPod cluster resource.
-   */
-  readonly sagemakerCluster: sagemaker.CfnCluster;
-  /**
    * The HyperPod execution role used by instance groups.
    */
   readonly executionRole: iam.Role;
@@ -108,6 +104,8 @@ export class HyperPodCluster extends Construct {
    * The cluster ARN.
    */
   readonly clusterArn: string;
+
+  private readonly _sagemakerCluster: sagemaker.CfnCluster;
 
   constructor(scope: Construct, id: string, props: HyperPodClusterProps) {
     super(scope, id);
@@ -188,22 +186,26 @@ export class HyperPodCluster extends Construct {
         }),
       );
 
-    this.sagemakerCluster = new sagemaker.CfnCluster(this, "SageMakerCluster", {
-      clusterName: props.clusterName,
-      instanceGroups,
-      orchestrator: {
-        eks: {
-          clusterArn: this.eksCluster.clusterArn,
+    this._sagemakerCluster = new sagemaker.CfnCluster(
+      this,
+      "SageMakerCluster",
+      {
+        clusterName: props.clusterName,
+        instanceGroups,
+        orchestrator: {
+          eks: {
+            clusterArn: this.eksCluster.clusterArn,
+          },
+        },
+        nodeRecovery: props.nodeRecovery ?? "Automatic",
+        vpcConfig: {
+          securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
+          subnets: props.vpc.selectSubnets(subnetSelection).subnetIds,
         },
       },
-      nodeRecovery: props.nodeRecovery ?? "Automatic",
-      vpcConfig: {
-        securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
-        subnets: props.vpc.selectSubnets(subnetSelection).subnetIds,
-      },
-    });
-    this.sagemakerCluster.node.addDependency(this.eksCluster);
-    this.clusterArn = this.sagemakerCluster.attrClusterArn;
+    );
+    this._sagemakerCluster.node.addDependency(this.eksCluster);
+    this.clusterArn = this._sagemakerCluster.attrClusterArn;
   }
 
   /**

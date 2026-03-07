@@ -11,7 +11,7 @@ import { Bucket } from "aws-cdk-lib/aws-s3";
 import { NeuronxInstanceType } from "../base/neuronx";
 import { BlockSize } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceCompiledModel } from "../vllm-nxd-inference/vllm-nxd-inference-compiler";
-import { HyperPodCluster } from "./hyperpod-cluster";
+import { HyperPodCluster } from "../base/sagemaker";
 import { HyperPodVllmNxdInferenceService } from "./hyperpod-vllm-nxd-inference-service";
 
 describe("HyperPodVllmNxdInferenceService", () => {
