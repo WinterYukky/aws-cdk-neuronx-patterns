@@ -6,6 +6,7 @@ import {
   InstanceType,
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
+import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { HyperPodCluster } from "./hyperpod-cluster";
 
@@ -252,5 +253,58 @@ describe("HyperPodCluster", () => {
         ]),
       }),
     });
+  });
+
+  it("uses an existing EKS cluster when provided", () => {
+    const existingCluster = new eks.Cluster(stack, "ExistingEks", {
+      vpc,
+      version: eks.KubernetesVersion.V1_31,
+      kubectlProviderOptions: {
+        kubectlLayer,
+      },
+      defaultCapacity: 0,
+      defaultCapacityType: eks.DefaultCapacityType.NODEGROUP,
+    });
+    const cluster = new HyperPodCluster(stack, "HyperPod", {
+      vpc,
+      eksCluster: existingCluster,
+      instanceGroups: [
+        {
+          name: "workers",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
+          instanceCount: 1,
+        },
+      ],
+    });
+    expect(cluster.eksCluster).toBe(existingCluster);
+    const template = Template.fromStack(stack);
+    template.hasResourceProperties("AWS::SageMaker::Cluster", {
+      Orchestrator: Match.objectLike({
+        Eks: Match.objectLike({
+          ClusterArn: Match.anyValue(),
+        }),
+      }),
+    });
+  });
+
+  it("throws when neither eksCluster nor kubectlLayer is provided", () => {
+    expect(() => {
+      new HyperPodCluster(stack, "HyperPod", {
+        vpc,
+        instanceGroups: [
+          {
+            name: "workers",
+            instanceType: InstanceType.of(
+              InstanceClass.TRN2,
+              InstanceSize.XLARGE48,
+            ),
+            instanceCount: 1,
+          },
+        ],
+      });
+    }).toThrow("kubectlLayer is required when eksCluster is not provided");
   });
 });

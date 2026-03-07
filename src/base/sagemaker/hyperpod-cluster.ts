@@ -51,7 +51,16 @@ export interface HyperPodClusterProps {
    */
   readonly clusterName?: string;
   /**
+   * An existing EKS cluster to use.
+   * When provided, `kubernetesVersion` and `kubectlLayer` are ignored
+   * and a new EKS cluster will not be created.
+   *
+   * @default - a new EKS cluster is created
+   */
+  readonly eksCluster?: eks.Cluster;
+  /**
    * Kubernetes version for the EKS cluster.
+   * Ignored when `eksCluster` is provided.
    * @default eks.KubernetesVersion.V1_31
    */
   readonly kubernetesVersion?: eks.KubernetesVersion;
@@ -60,8 +69,9 @@ export interface HyperPodClusterProps {
    * You must pick an appropriate release of one of the
    * `@aws-cdk/layer-kubectl-vXX` packages that works with
    * the version of Kubernetes you have chosen.
+   * Required when `eksCluster` is not provided.
    */
-  readonly kubectlLayer: lambda.ILayerVersion;
+  readonly kubectlLayer?: lambda.ILayerVersion;
   /**
    * Instance groups configuration.
    */
@@ -81,9 +91,22 @@ export interface HyperPodClusterProps {
  * training and inference workloads.
  *
  * @example
+ * // Create with a new EKS cluster
  * const cluster = new HyperPodCluster(this, 'HyperPod', {
  *   vpc,
  *   kubectlLayer: new KubectlV31Layer(this, 'KubectlLayer'),
+ *   instanceGroups: [{
+ *     name: 'workers',
+ *     instanceType: InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32),
+ *     instanceCount: 2,
+ *   }],
+ * });
+ *
+ * @example
+ * // Use an existing EKS cluster
+ * const cluster = new HyperPodCluster(this, 'HyperPod', {
+ *   vpc,
+ *   eksCluster: existingEksCluster,
  *   instanceGroups: [{
  *     name: 'workers',
  *     instanceType: InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32),
@@ -110,25 +133,34 @@ export class HyperPodCluster extends Construct {
   constructor(scope: Construct, id: string, props: HyperPodClusterProps) {
     super(scope, id);
 
-    const kubernetesVersion =
-      props.kubernetesVersion ?? eks.KubernetesVersion.V1_31;
     const subnetSelection = props.vpcSubnets ?? {
       subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
     };
 
     // --- EKS Cluster ---
-    this.eksCluster = new eks.Cluster(this, "EksCluster", {
-      vpc: props.vpc,
-      vpcSubnets: [subnetSelection],
-      version: kubernetesVersion,
-      kubectlProviderOptions: {
-        kubectlLayer: props.kubectlLayer,
-      },
-      defaultCapacity: 0,
-      defaultCapacityType: eks.DefaultCapacityType.NODEGROUP,
-      clusterName: props.clusterName,
-      endpointAccess: eks.EndpointAccess.PRIVATE,
-    });
+    if (props.eksCluster) {
+      this.eksCluster = props.eksCluster;
+    } else {
+      if (!props.kubectlLayer) {
+        throw new Error(
+          "kubectlLayer is required when eksCluster is not provided",
+        );
+      }
+      const kubernetesVersion =
+        props.kubernetesVersion ?? eks.KubernetesVersion.V1_31;
+      this.eksCluster = new eks.Cluster(this, "EksCluster", {
+        vpc: props.vpc,
+        vpcSubnets: [subnetSelection],
+        version: kubernetesVersion,
+        kubectlProviderOptions: {
+          kubectlLayer: props.kubectlLayer,
+        },
+        defaultCapacity: 0,
+        defaultCapacityType: eks.DefaultCapacityType.NODEGROUP,
+        clusterName: props.clusterName,
+        endpointAccess: eks.EndpointAccess.PRIVATE,
+      });
+    }
 
     // --- HyperPod Execution Role ---
     this.executionRole = new iam.Role(this, "ExecutionRole", {
