@@ -55,9 +55,12 @@ export interface HyperPodClusterProps {
    * When provided, `kubernetesVersion` and `kubectlLayer` are ignored
    * and a new EKS cluster will not be created.
    *
+   * Note: When providing an existing cluster, you must ensure the HyperPod
+   * execution role has cluster admin access.
+   *
    * @default - a new EKS cluster is created
    */
-  readonly eksCluster?: eks.Cluster;
+  readonly eksCluster?: eks.ICluster;
   /**
    * Kubernetes version for the EKS cluster.
    * Ignored when `eksCluster` is provided.
@@ -118,7 +121,7 @@ export class HyperPodCluster extends Construct {
   /**
    * The underlying EKS cluster.
    */
-  readonly eksCluster: eks.Cluster;
+  readonly eksCluster: eks.ICluster;
   /**
    * The HyperPod execution role used by instance groups.
    */
@@ -188,11 +191,13 @@ export class HyperPodCluster extends Construct {
       }),
     );
 
-    // Grant the execution role cluster admin access
-    this.eksCluster.grantClusterAdmin(
-      "HyperPodExecutionRoleAccess",
-      this.executionRole.roleArn,
-    );
+    // Grant the execution role cluster admin access (only when we create the cluster)
+    if (!props.eksCluster && this.eksCluster instanceof eks.Cluster) {
+      this.eksCluster.grantClusterAdmin(
+        "HyperPodExecutionRoleAccess",
+        this.executionRole.roleArn,
+      );
+    }
 
     // --- SageMaker HyperPod Cluster ---
     const instanceGroups =
@@ -252,11 +257,13 @@ export class HyperPodCluster extends Construct {
     serviceAccountName: string,
     serviceAccountNamespace: string,
   ): iam.Role {
+    const oidcProvider = this.eksCluster.openIdConnectProvider;
+    const issuerUrl = oidcProvider.openIdConnectProviderIssuer;
+
     const conditions = new CfnJson(this, `${id}OidcCondition`, {
       value: {
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:sub`]: `system:serviceaccount:${serviceAccountNamespace}:${serviceAccountName}`,
-        [`${this.eksCluster.clusterOpenIdConnectIssuerUrl}:aud`]:
-          "sts.amazonaws.com",
+        [`${issuerUrl}:sub`]: `system:serviceaccount:${serviceAccountNamespace}:${serviceAccountName}`,
+        [`${issuerUrl}:aud`]: "sts.amazonaws.com",
       },
     });
 
@@ -267,7 +274,7 @@ export class HyperPodCluster extends Construct {
           64,
         ),
       assumedBy: new iam.FederatedPrincipal(
-        this.eksCluster.openIdConnectProvider.openIdConnectProviderArn,
+        oidcProvider.openIdConnectProviderArn,
         {
           StringEquals: conditions,
         },
