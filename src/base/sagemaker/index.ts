@@ -1,1 +1,1 @@
-export * from "./hyperpod-cluster";
+export * from "./hyper-pod-cluster";

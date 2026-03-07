@@ -1,3 +1,3 @@
 export * from "./base";
-export * from "./hyperpod";
+export * from "./hyper-pod";
 export * from "./vllm-nxd-inference";

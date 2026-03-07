@@ -8,7 +8,7 @@ import {
 } from "aws-cdk-lib/aws-ec2";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import { HyperPodCluster } from "./hyperpod-cluster";
+import { HyperPodCluster } from "./hyper-pod-cluster";
 
 describe("HyperPodCluster", () => {
   let app: App;

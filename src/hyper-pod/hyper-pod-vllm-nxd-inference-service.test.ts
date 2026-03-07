@@ -12,7 +12,7 @@ import { NeuronxInstanceType } from "../base/neuronx";
 import { BlockSize } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceCompiledModel } from "../vllm-nxd-inference/vllm-nxd-inference-compiler";
 import { HyperPodCluster } from "../base/sagemaker";
-import { HyperPodVllmNxdInferenceService } from "./hyperpod-vllm-nxd-inference-service";
+import { HyperPodVllmNxdInferenceService } from "./hyper-pod-vllm-nxd-inference-service";
 
 describe("HyperPodVllmNxdInferenceService", () => {
   let app: App;
