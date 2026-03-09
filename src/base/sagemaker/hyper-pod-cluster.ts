@@ -3,8 +3,10 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as s3assets from "aws-cdk-lib/aws-s3-assets";
 import * as sagemaker from "aws-cdk-lib/aws-sagemaker";
 import { Construct } from "constructs";
+import { join } from "path";
 
 /**
  * Configuration for a HyperPod instance group.
@@ -191,13 +193,38 @@ export class HyperPodCluster extends Construct {
       }),
     );
 
-    // Grant the execution role cluster admin access (only when we create the cluster)
+    // Grant the execution role cluster admin access via HYPERPOD_LINUX access entry
     if (!props.eksCluster && this.eksCluster instanceof eks.Cluster) {
-      this.eksCluster.grantClusterAdmin(
-        "HyperPodExecutionRoleAccess",
-        this.executionRole.roleArn,
-      );
+      new eks.AccessEntry(this, "HyperPodExecutionRoleAccess", {
+        cluster: this.eksCluster,
+        principal: this.executionRole.roleArn,
+        accessEntryType: eks.AccessEntryType.HYPERPOD_LINUX,
+        accessPolicies: [],
+      });
     }
+
+    // --- Install HyperPod Dependencies Helm Chart ---
+    // The HyperPod dependencies (health monitoring agent, deep health check,
+    // job auto restart, device plugins, etc.) must be installed on the EKS
+    // cluster before the SageMaker HyperPod cluster can be created.
+    // See: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-eks-install-packages-using-helm-chart.html
+    const hyperPodDepsChart = this.eksCluster.addHelmChart(
+      "HyperPodDependencies",
+      {
+        chartAsset: new s3assets.Asset(this, "HyperPodHelmChartAsset", {
+          path: join(__dirname, "../../../scripts/hyper-pod-helm-chart"),
+        }),
+        namespace: "kube-system",
+        release: "hyperpod-dependencies",
+        values: {
+          "nvidia-device-plugin": {
+            devicePlugin: {
+              enabled: false,
+            },
+          },
+        },
+      },
+    );
 
     // --- SageMaker HyperPod Cluster ---
     const instanceGroups =
@@ -242,6 +269,7 @@ export class HyperPodCluster extends Construct {
       },
     );
     this._sagemakerCluster.node.addDependency(this.eksCluster);
+    this._sagemakerCluster.node.addDependency(hyperPodDepsChart);
     this.clusterArn = this._sagemakerCluster.attrClusterArn;
   }
 

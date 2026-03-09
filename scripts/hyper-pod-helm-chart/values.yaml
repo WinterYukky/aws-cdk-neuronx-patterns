@@ -1,0 +1,293 @@
+# Default values for HyperPodHelmChart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global configuration
+global:
+  # AWS region for all components (can be overridden per component)
+  region: ""
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+namespace:
+  create: true
+  name: aws-hyperpod
+
+cert-manager:
+  enabled: false
+  namespace: cert-manager
+  global:
+    leaderElection:
+      namespace: cert-manager
+  crds:
+    enabled: true
+
+mlflow:
+  enabled: false
+
+trainingOperators:
+  enabled: true
+
+inferenceOperators:
+  enabled: false
+
+storage:
+  enabled: false
+
+cluster-role-and-bindings:
+  enabled: false
+
+namespaced-role-and-bindings:
+  enable: false
+
+team-role-and-bindings:
+  enabled: false
+
+nvidia-device-plugin:
+  devicePlugin:
+    enabled: true
+  allowDefaultNamespace: true
+  namespaceOverride: "kube-system"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms: 
+        - matchExpressions:
+          - key: node.kubernetes.io/instance-type
+            operator: In
+            values:
+              - ml.g5.xlarge
+              - ml.g5.2xlarge
+              - ml.g5.4xlarge
+              - ml.g5.8xlarge
+              - ml.g5.12xlarge
+              - ml.g5.16xlarge
+              - ml.g5.24xlarge
+              - ml.g5.48xlarge
+              - ml.g6.xlarge
+              - ml.g6.2xlarge
+              - ml.g6.4xlarge
+              - ml.g6.8xlarge
+              - ml.g6.16xlarge
+              - ml.g6.12xlarge
+              - ml.g6.24xlarge
+              - ml.g6.48xlarge
+              - ml.g6e.xlarge
+              - ml.g6e.2xlarge
+              - ml.g6e.4xlarge
+              - ml.g6e.8xlarge
+              - ml.g6e.12xlarge
+              - ml.g6e.16xlarge
+              - ml.g6e.24xlarge
+              - ml.g6e.48xlarge
+              - ml.gr6.4xlarge
+              - ml.gr6.8xlarge
+              - ml.p4d.24xlarge
+              - ml.p4de.24xlarge
+              - ml.p5.4xlarge
+              - ml.p5.48xlarge
+              - ml.p5e.48xlarge
+              - ml.p5en.48xlarge
+              - ml.p6-b200.48xlarge
+              - ml.p6e-gb200.36xlarge
+  tolerations:
+    - key: nvidia.com/gpu
+      operator: Exists
+      effect: NoSchedule
+    - key: sagemaker.amazonaws.com/node-health-status
+      operator: Equal
+      value: Unschedulable
+      effect: NoSchedule
+
+neuron-device-plugin:
+  devicePlugin:
+    enabled: true
+
+aws-efa-k8s-device-plugin:
+  devicePlugin:
+    enabled: true
+  supportedInstanceLabels:
+    # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html#efa-instance-types
+    values:
+      - ml.c5n.9xlarge
+      - ml.c5n.18xlarge
+      - ml.g5.8xlarge
+      - ml.g5.12xlarge
+      - ml.g5.16xlarge
+      - ml.g5.24xlarge
+      - ml.g5.48xlarge
+      - ml.g6.8xlarge
+      - ml.g6.12xlarge
+      - ml.g6.16xlarge
+      - ml.g6.24xlarge
+      - ml.g6.48xlarge
+      - ml.g6e.8xlarge
+      - ml.g6e.12xlarge
+      - ml.g6e.16xlarge
+      - ml.g6e.24xlarge
+      - ml.g6e.48xlarge
+      - ml.gr6.8xlarge
+      - ml.i3en.large
+      - ml.i3en.xlarge
+      - ml.i3en.2xlarge
+      - ml.i3en.3xlarge
+      - ml.i3en.6xlarge
+      - ml.i3en.12xlarge
+      - ml.i3en.24xlarge
+      - ml.m7i.large
+      - ml.m7i.xlarge
+      - ml.m7i.2xlarge
+      - ml.m7i.4xlarge
+      - ml.m7i.8xlarge
+      - ml.m7i.12xlarge
+      - ml.m7i.16xlarge
+      - ml.m7i.24xlarge
+      - ml.m7i.48xlarge
+      - ml.p4d.24xlarge
+      - ml.p4de.24xlarge
+      - ml.p5.4xlarge
+      - ml.p5.48xlarge
+      - ml.p5e.48xlarge
+      - ml.p5en.48xlarge
+      - ml.p6-b200.48xlarge
+      - ml.p6e-gb200.36xlarge
+      - ml.r7i.large
+      - ml.r7i.xlarge
+      - ml.r7i.2xlarge
+      - ml.r7i.4xlarge
+      - ml.r7i.8xlarge
+      - ml.r7i.12xlarge
+      - ml.r7i.16xlarge
+      - ml.r7i.24xlarge
+      - ml.r7i.48xlarge
+      - ml.trn1.32xlarge
+      - ml.trn1n.32xlarge
+      - ml.trn2.3xlarge
+      - ml.trn2.48xlarge
+  tolerations:
+    - key: CriticalAddonsOnly
+      operator: Exists
+    - effect: NoSchedule
+      key: aws.amazon.com/efa
+      operator: Exists
+    - key: sagemaker.amazonaws.com/node-health-status
+      operator: "Equal"
+      value: "Unschedulable"
+      effect: "NoSchedule"
+
+mpi-operator:
+  enabled: true
+health-monitoring-agent:
+  enabled: true
+  # AWS region will be automatically detected or can be specified
+  # region: "us-east-1"
+deep-health-check:
+  enabled: true
+job-auto-restart:
+  enabled: true
+hyperpod-patching:
+  enabled: true
+gpu-operator:
+  enabled: false
