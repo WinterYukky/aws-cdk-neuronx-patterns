@@ -474,6 +474,388 @@ public readonly taskDefinition: Ec2TaskDefinition;
 ---
 
 
+### HyperPodCluster <a name="HyperPodCluster" id="aws-cdk-neuronx-patterns.HyperPodCluster"></a>
+
+L2 construct for SageMaker HyperPod with EKS orchestration.
+
+Creates both an EKS cluster (control plane) and a SageMaker HyperPod cluster
+(worker nodes) with a 1:1 mapping. This construct can be used for both
+training and inference workloads.
+
+*Example*
+
+```typescript
+// Use an existing EKS cluster
+const cluster = new HyperPodCluster(this, 'HyperPod', {
+  vpc,
+  eksCluster: existingEksCluster,
+  instanceGroups: [{
+    name: 'workers',
+    instanceType: InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32),
+    instanceCount: 2,
+  }],
+});
+```
+
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.HyperPodCluster.Initializer"></a>
+
+```typescript
+import { HyperPodCluster } from 'aws-cdk-neuronx-patterns'
+
+new HyperPodCluster(scope: Construct, id: string, props: HyperPodClusterProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps">HyperPodClusterProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.HyperPodCluster.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps">HyperPodClusterProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.createServiceAccountRole">createServiceAccountRole</a></code> | Creates an IRSA (IAM Role for Service Account) with trust policy for the EKS OIDC provider. |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.HyperPodCluster.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.HyperPodCluster.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.HyperPodCluster.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+##### `createServiceAccountRole` <a name="createServiceAccountRole" id="aws-cdk-neuronx-patterns.HyperPodCluster.createServiceAccountRole"></a>
+
+```typescript
+public createServiceAccountRole(id: string, serviceAccountName: string, serviceAccountNamespace: string): Role
+```
+
+Creates an IRSA (IAM Role for Service Account) with trust policy for the EKS OIDC provider.
+
+###### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.HyperPodCluster.createServiceAccountRole.parameter.id"></a>
+
+- *Type:* string
+
+Construct ID for the role.
+
+---
+
+###### `serviceAccountName`<sup>Required</sup> <a name="serviceAccountName" id="aws-cdk-neuronx-patterns.HyperPodCluster.createServiceAccountRole.parameter.serviceAccountName"></a>
+
+- *Type:* string
+
+Kubernetes service account name.
+
+---
+
+###### `serviceAccountNamespace`<sup>Required</sup> <a name="serviceAccountNamespace" id="aws-cdk-neuronx-patterns.HyperPodCluster.createServiceAccountRole.parameter.serviceAccountNamespace"></a>
+
+- *Type:* string
+
+Kubernetes namespace for the service account.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-cdk-neuronx-patterns.HyperPodCluster.isConstruct"></a>
+
+```typescript
+import { HyperPodCluster } from 'aws-cdk-neuronx-patterns'
+
+HyperPodCluster.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.HyperPodCluster.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.property.clusterArn">clusterArn</a></code> | <code>string</code> | The cluster ARN. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.property.eksCluster">eksCluster</a></code> | <code>aws-cdk-lib.aws_eks_v2.ICluster</code> | The underlying EKS cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster.property.executionRole">executionRole</a></code> | <code>aws-cdk-lib.aws_iam.Role</code> | The HyperPod execution role used by instance groups. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.HyperPodCluster.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `clusterArn`<sup>Required</sup> <a name="clusterArn" id="aws-cdk-neuronx-patterns.HyperPodCluster.property.clusterArn"></a>
+
+```typescript
+public readonly clusterArn: string;
+```
+
+- *Type:* string
+
+The cluster ARN.
+
+---
+
+##### `eksCluster`<sup>Required</sup> <a name="eksCluster" id="aws-cdk-neuronx-patterns.HyperPodCluster.property.eksCluster"></a>
+
+```typescript
+public readonly eksCluster: ICluster;
+```
+
+- *Type:* aws-cdk-lib.aws_eks_v2.ICluster
+
+The underlying EKS cluster.
+
+---
+
+##### `executionRole`<sup>Required</sup> <a name="executionRole" id="aws-cdk-neuronx-patterns.HyperPodCluster.property.executionRole"></a>
+
+```typescript
+public readonly executionRole: Role;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.Role
+
+The HyperPod execution role used by instance groups.
+
+---
+
+
+### HyperPodVllmNxdInferenceService <a name="HyperPodVllmNxdInferenceService" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService"></a>
+
+High-level construct that deploys a vLLM inference endpoint on a HyperPod cluster using the InferenceEndpointConfig Kubernetes CRD.
+
+This construct installs the required inference operator addon, cert-manager,
+and configures IRSA roles automatically.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer"></a>
+
+```typescript
+import { HyperPodVllmNxdInferenceService } from 'aws-cdk-neuronx-patterns'
+
+new HyperPodVllmNxdInferenceService(scope: Construct, id: string, props: HyperPodVllmNxdInferenceServiceProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps">HyperPodVllmNxdInferenceServiceProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps">HyperPodVllmNxdInferenceServiceProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.with">with</a></code> | Applies one or more mixins to this construct. |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.isConstruct"></a>
+
+```typescript
+import { HyperPodVllmNxdInferenceService } from 'aws-cdk-neuronx-patterns'
+
+HyperPodVllmNxdInferenceService.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.property.endpointName">endpointName</a></code> | <code>string</code> | The Kubernetes endpoint name. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `endpointName`<sup>Required</sup> <a name="endpointName" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.property.endpointName"></a>
+
+```typescript
+public readonly endpointName: string;
+```
+
+- *Type:* string
+
+The Kubernetes endpoint name.
+
+---
+
+
 ### NeuronOptimizedMachineImage <a name="NeuronOptimizedMachineImage" id="aws-cdk-neuronx-patterns.NeuronOptimizedMachineImage"></a>
 
 - *Implements:* aws-cdk-lib.aws_ec2.IMachineImage
@@ -4649,6 +5031,560 @@ public readonly taskDefinition: Ec2TaskDefinition;
 The task definition to use for tasks in the service. TaskDefinition or TaskImageOptions must be specified, but not both..
 
 [disable-awslint:ref-via-interface]
+
+---
+
+### AutoscalingConfig <a name="AutoscalingConfig" id="aws-cdk-neuronx-patterns.AutoscalingConfig"></a>
+
+Autoscaling configuration for the inference endpoint via KEDA.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.AutoscalingConfig.Initializer"></a>
+
+```typescript
+import { AutoscalingConfig } from 'aws-cdk-neuronx-patterns'
+
+const autoscalingConfig: AutoscalingConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.maxReplicas">maxReplicas</a></code> | <code>number</code> | Maximum number of replicas. |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.minReplicas">minReplicas</a></code> | <code>number</code> | Minimum number of replicas. |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetMetric">targetMetric</a></code> | <code>string</code> | Target metric name for autoscaling. |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetValue">targetValue</a></code> | <code>number</code> | Target metric value threshold. |
+
+---
+
+##### `maxReplicas`<sup>Optional</sup> <a name="maxReplicas" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.maxReplicas"></a>
+
+```typescript
+public readonly maxReplicas: number;
+```
+
+- *Type:* number
+- *Default:* 1
+
+Maximum number of replicas.
+
+---
+
+##### `minReplicas`<sup>Optional</sup> <a name="minReplicas" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.minReplicas"></a>
+
+```typescript
+public readonly minReplicas: number;
+```
+
+- *Type:* number
+- *Default:* 1
+
+Minimum number of replicas.
+
+---
+
+##### `targetMetric`<sup>Optional</sup> <a name="targetMetric" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetMetric"></a>
+
+```typescript
+public readonly targetMetric: string;
+```
+
+- *Type:* string
+
+Target metric name for autoscaling.
+
+---
+
+##### `targetValue`<sup>Optional</sup> <a name="targetValue" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetValue"></a>
+
+```typescript
+public readonly targetValue: number;
+```
+
+- *Type:* number
+
+Target metric value threshold.
+
+---
+
+### HyperPodClusterProps <a name="HyperPodClusterProps" id="aws-cdk-neuronx-patterns.HyperPodClusterProps"></a>
+
+Props for HyperPodCluster construct.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.Initializer"></a>
+
+```typescript
+import { HyperPodClusterProps } from 'aws-cdk-neuronx-patterns'
+
+const hyperPodClusterProps: HyperPodClusterProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.instanceGroups">instanceGroups</a></code> | <code><a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup">HyperPodInstanceGroup</a>[]</code> | Instance groups configuration. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC for the cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.clusterName">clusterName</a></code> | <code>string</code> | Cluster name. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.eksCluster">eksCluster</a></code> | <code>aws-cdk-lib.aws_eks_v2.ICluster</code> | An existing EKS cluster to use. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubectlLayer">kubectlLayer</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion</code> | An AWS Lambda Layer which includes kubectl and Helm. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubernetesVersion">kubernetesVersion</a></code> | <code>aws-cdk-lib.aws_eks_v2.KubernetesVersion</code> | Kubernetes version for the EKS cluster. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.nodeRecovery">nodeRecovery</a></code> | <code>string</code> | Enable automatic node recovery. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | VPC subnets for worker nodes. |
+
+---
+
+##### `instanceGroups`<sup>Required</sup> <a name="instanceGroups" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.instanceGroups"></a>
+
+```typescript
+public readonly instanceGroups: HyperPodInstanceGroup[];
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup">HyperPodInstanceGroup</a>[]
+
+Instance groups configuration.
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+VPC for the cluster.
+
+---
+
+##### `clusterName`<sup>Optional</sup> <a name="clusterName" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.clusterName"></a>
+
+```typescript
+public readonly clusterName: string;
+```
+
+- *Type:* string
+- *Default:* auto-generated
+
+Cluster name.
+
+---
+
+##### `eksCluster`<sup>Optional</sup> <a name="eksCluster" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.eksCluster"></a>
+
+```typescript
+public readonly eksCluster: ICluster;
+```
+
+- *Type:* aws-cdk-lib.aws_eks_v2.ICluster
+- *Default:* a new EKS cluster is created
+
+An existing EKS cluster to use.
+
+When provided, `kubernetesVersion` and `kubectlLayer` are ignored
+and a new EKS cluster will not be created.
+
+Note: When providing an existing cluster, you must ensure the HyperPod
+execution role has cluster admin access.
+
+---
+
+##### `kubectlLayer`<sup>Optional</sup> <a name="kubectlLayer" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubectlLayer"></a>
+
+```typescript
+public readonly kubectlLayer: ILayerVersion;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.ILayerVersion
+
+An AWS Lambda Layer which includes kubectl and Helm.
+
+You must pick an appropriate release of one of the
+`@aws-cdk/layer-kubectl-vXX` packages that works with
+the version of Kubernetes you have chosen.
+Required when `eksCluster` is not provided.
+
+---
+
+##### `kubernetesVersion`<sup>Optional</sup> <a name="kubernetesVersion" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubernetesVersion"></a>
+
+```typescript
+public readonly kubernetesVersion: KubernetesVersion;
+```
+
+- *Type:* aws-cdk-lib.aws_eks_v2.KubernetesVersion
+- *Default:* eks.KubernetesVersion.V1_31
+
+Kubernetes version for the EKS cluster.
+
+Ignored when `eksCluster` is provided.
+
+---
+
+##### `nodeRecovery`<sup>Optional</sup> <a name="nodeRecovery" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.nodeRecovery"></a>
+
+```typescript
+public readonly nodeRecovery: string;
+```
+
+- *Type:* string
+- *Default:* 'Automatic'
+
+Enable automatic node recovery.
+
+---
+
+##### `vpcSubnets`<sup>Optional</sup> <a name="vpcSubnets" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* private subnets with egress
+
+VPC subnets for worker nodes.
+
+---
+
+### HyperPodInstanceGroup <a name="HyperPodInstanceGroup" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup"></a>
+
+Configuration for a HyperPod instance group.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup.Initializer"></a>
+
+```typescript
+import { HyperPodInstanceGroup } from 'aws-cdk-neuronx-patterns'
+
+const hyperPodInstanceGroup: HyperPodInstanceGroup = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.instanceCount">instanceCount</a></code> | <code>number</code> | Number of instances in the group. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.instanceType">instanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | EC2 instance type for the group. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.name">name</a></code> | <code>string</code> | Instance group name. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.additionalVolumeSize">additionalVolumeSize</a></code> | <code>aws-cdk-lib.Size</code> | Additional EBS volume size for each instance. |
+
+---
+
+##### `instanceCount`<sup>Required</sup> <a name="instanceCount" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.instanceCount"></a>
+
+```typescript
+public readonly instanceCount: number;
+```
+
+- *Type:* number
+
+Number of instances in the group.
+
+---
+
+##### `instanceType`<sup>Required</sup> <a name="instanceType" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.instanceType"></a>
+
+```typescript
+public readonly instanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+
+EC2 instance type for the group.
+
+The `ml.` prefix is automatically added for the SageMaker HyperPod API.
+
+---
+
+*Example*
+
+```typescript
+InstanceType.of(InstanceClass.TRN1, InstanceSize.XLARGE32)
+```
+
+
+##### `name`<sup>Required</sup> <a name="name" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+Instance group name.
+
+---
+
+##### `additionalVolumeSize`<sup>Optional</sup> <a name="additionalVolumeSize" id="aws-cdk-neuronx-patterns.HyperPodInstanceGroup.property.additionalVolumeSize"></a>
+
+```typescript
+public readonly additionalVolumeSize: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+- *Default:* Size.gibibytes(500)
+
+Additional EBS volume size for each instance.
+
+---
+
+### HyperPodVllmNxdInferenceServiceProps <a name="HyperPodVllmNxdInferenceServiceProps" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps"></a>
+
+Props for HyperPodVllmNxdInferenceService construct.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.Initializer"></a>
+
+```typescript
+import { HyperPodVllmNxdInferenceServiceProps } from 'aws-cdk-neuronx-patterns'
+
+const hyperPodVllmNxdInferenceServiceProps: HyperPodVllmNxdInferenceServiceProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.cluster">cluster</a></code> | <code><a href="#aws-cdk-neuronx-patterns.HyperPodCluster">HyperPodCluster</a></code> | The HyperPod cluster to deploy on. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.compiledModel">compiledModel</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a></code> | The compiled model to deploy. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.autoscaling">autoscaling</a></code> | <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig">AutoscalingConfig</a></code> | Autoscaling configuration. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a></code> | The vLLM container image to use. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.intelligentRouting">intelligentRouting</a></code> | <code><a href="#aws-cdk-neuronx-patterns.IntelligentRoutingConfig">IntelligentRoutingConfig</a></code> | Intelligent routing configuration. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.kvCacheConfig">kvCacheConfig</a></code> | <code><a href="#aws-cdk-neuronx-patterns.KvCacheConfig">KvCacheConfig</a></code> | KV cache configuration. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.namespace">namespace</a></code> | <code>string</code> | Kubernetes namespace for the deployment. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.registerEndpoint">registerEndpoint</a></code> | <code>boolean</code> | Register as SageMaker endpoint for invoke-endpoint API. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.vllmArgs">vllmArgs</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments">VllmEngineArguments</a></code> | vLLM engine arguments override. |
+
+---
+
+##### `cluster`<sup>Required</sup> <a name="cluster" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.cluster"></a>
+
+```typescript
+public readonly cluster: HyperPodCluster;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.HyperPodCluster">HyperPodCluster</a>
+
+The HyperPod cluster to deploy on.
+
+---
+
+##### `compiledModel`<sup>Required</sup> <a name="compiledModel" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.compiledModel"></a>
+
+```typescript
+public readonly compiledModel: VllmNxdInferenceCompiledModel;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel">VllmNxdInferenceCompiledModel</a>
+
+The compiled model to deploy.
+
+---
+
+##### `autoscaling`<sup>Optional</sup> <a name="autoscaling" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.autoscaling"></a>
+
+```typescript
+public readonly autoscaling: AutoscalingConfig;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.AutoscalingConfig">AutoscalingConfig</a>
+
+Autoscaling configuration.
+
+---
+
+##### `image`<sup>Optional</sup> <a name="image" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.image"></a>
+
+```typescript
+public readonly image: IVllmInferenceNeuronxImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IVllmInferenceNeuronxImage">IVllmInferenceNeuronxImage</a>
+- *Default:* latest VllmInferenceNeuronxImage
+
+The vLLM container image to use.
+
+---
+
+##### `intelligentRouting`<sup>Optional</sup> <a name="intelligentRouting" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.intelligentRouting"></a>
+
+```typescript
+public readonly intelligentRouting: IntelligentRoutingConfig;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.IntelligentRoutingConfig">IntelligentRoutingConfig</a>
+
+Intelligent routing configuration.
+
+---
+
+##### `kvCacheConfig`<sup>Optional</sup> <a name="kvCacheConfig" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.kvCacheConfig"></a>
+
+```typescript
+public readonly kvCacheConfig: KvCacheConfig;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.KvCacheConfig">KvCacheConfig</a>
+
+KV cache configuration.
+
+---
+
+##### `namespace`<sup>Optional</sup> <a name="namespace" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.namespace"></a>
+
+```typescript
+public readonly namespace: string;
+```
+
+- *Type:* string
+- *Default:* 'default'
+
+Kubernetes namespace for the deployment.
+
+---
+
+##### `registerEndpoint`<sup>Optional</sup> <a name="registerEndpoint" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.registerEndpoint"></a>
+
+```typescript
+public readonly registerEndpoint: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Register as SageMaker endpoint for invoke-endpoint API.
+
+---
+
+##### `vllmArgs`<sup>Optional</sup> <a name="vllmArgs" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceServiceProps.property.vllmArgs"></a>
+
+```typescript
+public readonly vllmArgs: VllmEngineArguments;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.VllmEngineArguments">VllmEngineArguments</a>
+
+vLLM engine arguments override.
+
+---
+
+### IntelligentRoutingConfig <a name="IntelligentRoutingConfig" id="aws-cdk-neuronx-patterns.IntelligentRoutingConfig"></a>
+
+Intelligent routing configuration for the inference endpoint.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.IntelligentRoutingConfig.Initializer"></a>
+
+```typescript
+import { IntelligentRoutingConfig } from 'aws-cdk-neuronx-patterns'
+
+const intelligentRoutingConfig: IntelligentRoutingConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.IntelligentRoutingConfig.property.enabled">enabled</a></code> | <code>boolean</code> | Whether intelligent routing is enabled. |
+| <code><a href="#aws-cdk-neuronx-patterns.IntelligentRoutingConfig.property.routingStrategy">routingStrategy</a></code> | <code>string</code> | Routing strategy to use. |
+
+---
+
+##### `enabled`<sup>Required</sup> <a name="enabled" id="aws-cdk-neuronx-patterns.IntelligentRoutingConfig.property.enabled"></a>
+
+```typescript
+public readonly enabled: boolean;
+```
+
+- *Type:* boolean
+
+Whether intelligent routing is enabled.
+
+---
+
+##### `routingStrategy`<sup>Optional</sup> <a name="routingStrategy" id="aws-cdk-neuronx-patterns.IntelligentRoutingConfig.property.routingStrategy"></a>
+
+```typescript
+public readonly routingStrategy: string;
+```
+
+- *Type:* string
+- *Default:* 'prefixaware'
+
+Routing strategy to use.
+
+---
+
+### KvCacheConfig <a name="KvCacheConfig" id="aws-cdk-neuronx-patterns.KvCacheConfig"></a>
+
+KV cache configuration for the inference endpoint.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.KvCacheConfig.Initializer"></a>
+
+```typescript
+import { KvCacheConfig } from 'aws-cdk-neuronx-patterns'
+
+const kvCacheConfig: KvCacheConfig = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.KvCacheConfig.property.enableL1Cache">enableL1Cache</a></code> | <code>boolean</code> | Enable L1 (in-memory) KV cache. |
+| <code><a href="#aws-cdk-neuronx-patterns.KvCacheConfig.property.enableL2Cache">enableL2Cache</a></code> | <code>boolean</code> | Enable L2 (persistent) KV cache. |
+| <code><a href="#aws-cdk-neuronx-patterns.KvCacheConfig.property.l2CacheBackend">l2CacheBackend</a></code> | <code>string</code> | L2 cache backend type. |
+| <code><a href="#aws-cdk-neuronx-patterns.KvCacheConfig.property.l2CacheLocalUrl">l2CacheLocalUrl</a></code> | <code>string</code> | L2 cache local URL override. |
+
+---
+
+##### `enableL1Cache`<sup>Optional</sup> <a name="enableL1Cache" id="aws-cdk-neuronx-patterns.KvCacheConfig.property.enableL1Cache"></a>
+
+```typescript
+public readonly enableL1Cache: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Enable L1 (in-memory) KV cache.
+
+---
+
+##### `enableL2Cache`<sup>Optional</sup> <a name="enableL2Cache" id="aws-cdk-neuronx-patterns.KvCacheConfig.property.enableL2Cache"></a>
+
+```typescript
+public readonly enableL2Cache: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Enable L2 (persistent) KV cache.
+
+---
+
+##### `l2CacheBackend`<sup>Optional</sup> <a name="l2CacheBackend" id="aws-cdk-neuronx-patterns.KvCacheConfig.property.l2CacheBackend"></a>
+
+```typescript
+public readonly l2CacheBackend: string;
+```
+
+- *Type:* string
+- *Default:* 'tieredstorage'
+
+L2 cache backend type.
+
+---
+
+##### `l2CacheLocalUrl`<sup>Optional</sup> <a name="l2CacheLocalUrl" id="aws-cdk-neuronx-patterns.KvCacheConfig.property.l2CacheLocalUrl"></a>
+
+```typescript
+public readonly l2CacheLocalUrl: string;
+```
+
+- *Type:* string
+
+L2 cache local URL override.
 
 ---
 
