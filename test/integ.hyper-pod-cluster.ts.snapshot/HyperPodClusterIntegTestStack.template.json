@@ -1189,7 +1189,7 @@
     },
     "Release": "hyperpod-dependencies",
     "ChartAssetURL": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/df66cdfd7320841159e7eda19bb9f407d786471cc8db657b1e481ee273926e14.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/64fcfd539c0e39f328c5dd03fea22811ff02d5af6de05435d30f8010ca280796.zip"
     },
     "Values": "{\"nvidia-device-plugin\":{\"devicePlugin\":{\"enabled\":false}}}",
     "Namespace": "kube-system",
