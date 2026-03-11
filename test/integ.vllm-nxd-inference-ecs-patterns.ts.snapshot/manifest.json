@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/724e143c9ba74d5016de46091cb110b5545282366108238fd877135530223ba0.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f309097bb8021f62c3a94e9a04b834fb571278e725e35f17605355e7f4a87714.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -461,192 +461,7 @@
             "data": "CompilerLaunchTemplate4C63C08A"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiFunction": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "code": "*",
-              "handler": "*",
-              "runtime": "*",
-              "uuid": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "code": "*",
-              "description": "*",
-              "runtime": "*",
-              "handler": "*",
-              "timeout": "*",
-              "loggingFormat": "JSON",
-              "applicationLogLevelV2": "FATAL",
-              "logGroup": "*",
-              "vpc": "*",
-              "vpcSubnets": "*",
-              "securityGroups": "*",
-              "role": "*",
-              "functionName": "*",
-              "environmentEncryption": "*"
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addEnvironment": [
-                "*",
-                "*"
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              },
-              "managedPolicies": [
-                {
-                  "managedPolicyArn": "*"
-                }
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachInlinePolicy": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addToPrincipalPolicy": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "attachToRole": [
-                "*"
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "addStatements": [
-                {}
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "logGroupName": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/LogGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/Image.Parameter": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmi": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": "*"
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": "*"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmi/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -655,17 +470,11 @@
               "instanceTypes": "*",
               "useOptimalInstanceClasses": false,
               "launchTemplate": "*",
-              "spot": "*",
-              "images": [
-                {
-                  "image": "*",
-                  "imageType": "ECS_AL2023"
-                }
-              ]
+              "spot": "*"
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -673,13 +482,13 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentSecurityGroup3ADC0F04"
+            "data": "CompilerComputeEnvironmentSecurityGroupC05FE9C7"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -719,13 +528,13 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+            "data": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/DefaultPolicy": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/DefaultPolicy": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -755,37 +564,25 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfileRole/DefaultPolicy/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B"
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/InstanceProfile": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfile": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironmentInstanceProfileA05F57F0"
+            "data": "CompilerComputeEnvironmentInstanceProfile719C0447"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerComputeEnvironment83CAC2B9"
+            "data": "CompilerComputeEnvironmentFB939B89"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {}
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerJobQueue59AB0D38"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -837,13 +634,13 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A"
+            "data": "CompilerContainerDefinitionExecutionRoleB7A79408"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/DefaultPolicy": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/DefaultPolicy": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -889,33 +686,36 @@
             }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993"
+            "data": "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
               "container": "*"
             }
-          },
-          {
-            "type": "aws:cdk:analytics:method",
-            "data": {
-              "grantSubmitJob": [
-                "*",
-                "*"
-              ]
-            }
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource/Resource": [
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobDefinition/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerJobDefinitionE25875BC"
+            "data": "CompilerJobDefinition637B02EA"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {}
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobQueue59AB0D38"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/Compiler/Resource/JobSubmitFunction": [
@@ -1978,58 +1778,6 @@
             "data": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
           }
         ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "code": "*",
-              "handler": "*",
-              "runtime": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "assumedBy": {
-                "principalAccount": "*",
-                "assumeRoleAction": "*"
-              },
-              "managedPolicies": [
-                {
-                  "managedPolicyArn": "*"
-                }
-              ]
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup": [
-          {
-            "type": "aws:cdk:analytics:construct",
-            "data": {
-              "logGroupName": "*"
-            }
-          }
-        ],
-        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6"
-          }
-        ],
         "/VllmNxDInferenceIntegTestStack/SingletonLambda1361f4695c924c469e115d1dbf925bac": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -2516,10 +2264,7 @@
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "TaskDefinitionB36D86D9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "TaskDefinitionB36D86D9"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup": [
@@ -3547,6 +3292,58 @@
             "data": "EcsDefaultClusterMnL3mNNYNVpcF07F0074"
           }
         ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6"
+          }
+        ],
         "/VllmNxDInferenceIntegTestStack/CompiledArtifact": [
           {
             "type": "aws:cdk:logicalId",
@@ -3671,19 +3468,118 @@
             "data": "CheckBootstrapVersion"
           }
         ],
-        "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA": [
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionHandlesdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aed86345EAA",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2",
             "trace": [
               "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
             ]
           }
         ],
-        "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975": [
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk226062af3ef16b9c24a5320096502a2dd0f7dfe08217dd00e61251b9c9913a133aedA4A17975",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentSecurityGroup3ADC0F04": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentSecurityGroup3ADC0F04",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileA05F57F0": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileA05F57F0",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironment83CAC2B9": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironment83CAC2B9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionE25875BC": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionE25875BC",
             "trace": [
               "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
             ]
@@ -3709,7 +3605,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/925d69cb1a5a4360cc25566570951e05e3472f218290cda022e6c022a40be47e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2b50066b9fcdc53493fc18b7ae4d678bee34842af5249a98d30e8087a0dc83fa.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -4348,5 +4244,5 @@
       }
     }
   },
-  "minimumCliVersion": "2.1108.0"
+  "minimumCliVersion": "2.1110.0"
 }
