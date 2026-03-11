@@ -1,4 +1,4 @@
-import { IntegTest } from "@aws-cdk/integ-tests-alpha";
+import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
 import { App, CfnOutput, Stack } from "aws-cdk-lib";
 import {
   GatewayVpcEndpointAwsService,
@@ -71,6 +71,30 @@ const stack = new HyperPodClusterIntegTestStack(
   "HyperPodClusterIntegTestStack",
 );
 
-new IntegTest(app, "IntegTest", {
+const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
 });
+
+// Assert that the HyperPod cluster is InService
+const describeCluster = integTest.assertions.awsApiCall("SageMaker", "describeCluster", {
+  ClusterName: stack.cluster.clusterArn,
+});
+
+describeCluster
+  .expect(
+    ExpectedResult.objectLike({
+      ClusterStatus: "InService",
+      Orchestrator: Match.objectLike({
+        Eks: Match.objectLike({
+          ClusterArn: Match.stringLikeRegexp(".*"),
+        }),
+      }),
+      InstanceGroups: Match.arrayWith([
+        Match.objectLike({
+          InstanceGroupName: "inference-workers",
+          InstanceType: "ml.trn1.32xlarge",
+        }),
+      ]),
+    }),
+  )
+  .waitForAssertions();
