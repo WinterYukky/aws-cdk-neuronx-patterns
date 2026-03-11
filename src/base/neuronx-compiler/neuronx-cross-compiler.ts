@@ -44,7 +44,7 @@ export class NeuronxCrossCompiler extends NeuronxCompilerBase {
   }
 
   protected createComputeEnvironment(
-    props: NeuronxCrossCompilerProps,
+    props: NeuronxCompilerBaseProps,
   ): ComputeEnvironmentResult {
     const volumeSize =
       props.volumeSize?.toGibibytes() ??
@@ -99,7 +99,7 @@ export class NeuronxCrossCompiler extends NeuronxCompilerBase {
   }
 
   protected createJobDefinition(
-    props: NeuronxCrossCompilerProps,
+    props: NeuronxCompilerBaseProps,
   ): batch.IJobDefinition {
     const neuronxInstanceType = props.neuronxInstanceType;
     const targetPlatform = neuronxInstanceType.instanceType
