@@ -76,9 +76,13 @@ const integTest = new IntegTest(app, "IntegTest", {
 });
 
 // Assert that the HyperPod cluster is InService
-const describeCluster = integTest.assertions.awsApiCall("SageMaker", "describeCluster", {
-  ClusterName: stack.cluster.clusterArn,
-});
+const describeCluster = integTest.assertions.awsApiCall(
+  "SageMaker",
+  "describeCluster",
+  {
+    ClusterName: stack.cluster.clusterArn,
+  },
+);
 
 describeCluster
   .expect(
