@@ -1580,6 +1580,305 @@ The tree node.
 ---
 
 
+### NeuronxCompilerBase <a name="NeuronxCompilerBase" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase"></a>
+
+- *Implements:* <a href="#aws-cdk-neuronx-patterns.INeuronxCompiler">INeuronxCompiler</a>
+
+Abstract base class for Neuronx compilers.
+
+Provides the common orchestration logic (Lambda, CustomResource, WaitCondition)
+while subclasses define how to create the Batch compute environment and job definition.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer"></a>
+
+```typescript
+import { NeuronxCompilerBase } from 'aws-cdk-neuronx-patterns'
+
+new NeuronxCompilerBase(scope: Construct, id: string, props: NeuronxCompilerBaseProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps">NeuronxCompilerBaseProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps">NeuronxCompilerBaseProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.compile">compile</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+##### `compile` <a name="compile" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.compile"></a>
+
+```typescript
+public compile(): NeuronxCompiledModel
+```
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.isConstruct"></a>
+
+```typescript
+import { NeuronxCompilerBase } from 'aws-cdk-neuronx-patterns'
+
+NeuronxCompilerBase.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+
+### NeuronxCrossCompiler <a name="NeuronxCrossCompiler" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler"></a>
+
+Neuronx cross-compiler construct.
+
+Compile the model on a non-Neuron instance and upload the artifacts to an S3 bucket.
+This avoids the need for expensive Neuron instances during the compilation phase.
+
+The compilation uses `vllm serve` which performs model tracing and neuronx-cc compilation
+entirely on CPU. The resulting artifacts are compatible with Neuron instances for inference.
+
+#### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer"></a>
+
+```typescript
+import { NeuronxCrossCompiler } from 'aws-cdk-neuronx-patterns'
+
+new NeuronxCrossCompiler(scope: Construct, id: string, props: NeuronxCrossCompilerProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps">NeuronxCrossCompilerProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps">NeuronxCrossCompilerProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.compile">compile</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
+
+##### `compile` <a name="compile" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.compile"></a>
+
+```typescript
+public compile(): NeuronxCompiledModel
+```
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.isConstruct"></a>
+
+```typescript
+import { NeuronxCrossCompiler } from 'aws-cdk-neuronx-patterns'
+
+NeuronxCrossCompiler.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="aws-cdk-neuronx-patterns.NeuronxCrossCompiler.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+
 ### NeuronxTaskDefinition <a name="NeuronxTaskDefinition" id="aws-cdk-neuronx-patterns.NeuronxTaskDefinition"></a>
 
 - *Implements:* <a href="#aws-cdk-neuronx-patterns.INeuronxTaskDefinition">INeuronxTaskDefinition</a>
@@ -4652,6 +4951,47 @@ The task definition to use for tasks in the service. TaskDefinition or TaskImage
 
 ---
 
+### ComputeEnvironmentResult <a name="ComputeEnvironmentResult" id="aws-cdk-neuronx-patterns.ComputeEnvironmentResult"></a>
+
+Result of creating a compute environment.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.ComputeEnvironmentResult.Initializer"></a>
+
+```typescript
+import { ComputeEnvironmentResult } from 'aws-cdk-neuronx-patterns'
+
+const computeEnvironmentResult: ComputeEnvironmentResult = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.computeEnvironment">computeEnvironment</a></code> | <code>aws-cdk-lib.aws_batch.IComputeEnvironment</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.instanceRole">instanceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
+
+---
+
+##### `computeEnvironment`<sup>Required</sup> <a name="computeEnvironment" id="aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.computeEnvironment"></a>
+
+```typescript
+public readonly computeEnvironment: IComputeEnvironment;
+```
+
+- *Type:* aws-cdk-lib.aws_batch.IComputeEnvironment
+
+---
+
+##### `instanceRole`<sup>Required</sup> <a name="instanceRole" id="aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.instanceRole"></a>
+
+```typescript
+public readonly instanceRole: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
 ### ModelConfig <a name="ModelConfig" id="aws-cdk-neuronx-patterns.ModelConfig"></a>
 
 #### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.ModelConfig.Initializer"></a>
@@ -5953,6 +6293,8 @@ The VPC Subnets this Compute Environment will launch instances in.
 
 ### NeuronxCompiledModel <a name="NeuronxCompiledModel" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel"></a>
 
+The model compiled by Neuronx compiler.
+
 #### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.Initializer"></a>
 
 ```typescript
@@ -5965,11 +6307,11 @@ const neuronxCompiledModel: NeuronxCompiledModel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.compileTimeInstanceType">compileTimeInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | The model name. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | S3 prefix that compiled artifact uploaded. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
 
 ---
@@ -5981,8 +6323,6 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
-
-The bucket to upload compiled artifacts.
 
 ---
 
@@ -6004,8 +6344,6 @@ public readonly modelName: string;
 
 - *Type:* string
 
-The model name.
-
 ---
 
 ##### `s3Prefix`<sup>Required</sup> <a name="s3Prefix" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix"></a>
@@ -6015,8 +6353,6 @@ public readonly s3Prefix: string;
 ```
 
 - *Type:* string
-
-S3 prefix that compiled artifact uploaded.
 
 ---
 
@@ -6028,8 +6364,6 @@ public readonly s3Uri: string;
 
 - *Type:* string
 
-S3 URL that compiled artifact uploaded.
-
 ---
 
 ##### `weightSize`<sup>Required</sup> <a name="weightSize" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.weightSize"></a>
@@ -6039,6 +6373,157 @@ public readonly weightSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+
+---
+
+### NeuronxCompilerBaseProps <a name="NeuronxCompilerBaseProps" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps"></a>
+
+Common props for NeuronxCompilerBase.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.Initializer"></a>
+
+```typescript
+import { NeuronxCompilerBaseProps } from 'aws-cdk-neuronx-patterns'
+
+const neuronxCompilerBaseProps: NeuronxCompilerBaseProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
+
+---
+
+##### `artifactS3Prefix`<sup>Required</sup> <a name="artifactS3Prefix" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.artifactS3Prefix"></a>
+
+```typescript
+public readonly artifactS3Prefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.bucket"></a>
+
+```typescript
+public readonly bucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.image"></a>
+
+```typescript
+public readonly image: INeuronxContainerImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
+
+---
+
+##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.model"></a>
+
+```typescript
+public readonly model: Model;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
+
+---
+
+##### `neuronxInstanceType`<sup>Required</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.neuronxInstanceType"></a>
+
+```typescript
+public readonly neuronxInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+---
+
+##### `command`<sup>Optional</sup> <a name="command" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.command"></a>
+
+```typescript
+public readonly command: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.environment"></a>
+
+```typescript
+public readonly environment: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+---
+
+##### `secrets`<sup>Optional</sup> <a name="secrets" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.secrets"></a>
+
+```typescript
+public readonly secrets: {[ key: string ]: Secret};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
+
+---
+
+##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `volumeSize`<sup>Optional</sup> <a name="volumeSize" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.volumeSize"></a>
+
+```typescript
+public readonly volumeSize: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+
+---
+
+##### `vpcSubnets`<sup>Optional</sup> <a name="vpcSubnets" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
 
 ---
 
@@ -6058,18 +6543,18 @@ const neuronxCompilerProps: NeuronxCompilerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | An image of the container where the compile job is executed. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | The model to be compiled. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | Secrets to pass to the container. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | Whether or not to use spot instances. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
 
 ---
 
@@ -6081,10 +6566,6 @@ public readonly artifactS3Prefix: string;
 
 - *Type:* string
 
-S3 Prefix that compiled artifact uploaded.
-
-This property is not depends on compile job finish.
-
 ---
 
 ##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.bucket"></a>
@@ -6094,8 +6575,6 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
-
-The bucket to upload compiled artifacts.
 
 ---
 
@@ -6107,8 +6586,6 @@ public readonly image: INeuronxContainerImage;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
-An image of the container where the compile job is executed.
-
 ---
 
 ##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.model"></a>
@@ -6118,8 +6595,6 @@ public readonly model: Model;
 ```
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
-
-The model to be compiled.
 
 ---
 
@@ -6131,8 +6606,6 @@ public readonly neuronxInstanceType: INeuronxInstanceType;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
-The instance type of compile worker instance.
-
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.vpc"></a>
@@ -6142,8 +6615,6 @@ public readonly vpc: IVpc;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
-
-VPC in which this will launch compile worker instance.
 
 ---
 
@@ -6164,11 +6635,6 @@ public readonly environment: {[ key: string ]: string};
 ```
 
 - *Type:* {[ key: string ]: string}
-- *Default:* No environment variables.
-
-The environment variables to pass to the container.
-
-This is only applicable when using container runtime.
 
 ---
 
@@ -6180,8 +6646,6 @@ public readonly secrets: {[ key: string ]: Secret};
 
 - *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
 
-Secrets to pass to the container.
-
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxCompilerProps.property.spot"></a>
@@ -6191,11 +6655,6 @@ public readonly spot: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
-
-Whether or not to use spot instances.
-
-Spot instances are less expensive EC2 instances that can be reclaimed by EC2 at any time; your job will be given two minutes of notice before reclamation.
 
 ---
 
@@ -6206,9 +6665,6 @@ public readonly volumeSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
-- *Default:* N bilion parameters * 5GiB EBS
-
-The root volume of worker instance.
 
 ---
 
@@ -6219,9 +6675,174 @@ public readonly vpcSubnets: SubnetSelection;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
-- *Default:* new subnets will be created
 
-The VPC Subnets this Compute Environment will launch instances in.
+---
+
+### NeuronxCrossCompilerProps <a name="NeuronxCrossCompilerProps" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps"></a>
+
+Props of NeuronxCrossCompiler.
+
+#### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.Initializer"></a>
+
+```typescript
+import { NeuronxCrossCompilerProps } from 'aws-cdk-neuronx-patterns'
+
+const neuronxCrossCompilerProps: NeuronxCrossCompilerProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.compileInstanceType">compileInstanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | The EC2 instance type to use for cross-compilation. |
+
+---
+
+##### `artifactS3Prefix`<sup>Required</sup> <a name="artifactS3Prefix" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.artifactS3Prefix"></a>
+
+```typescript
+public readonly artifactS3Prefix: string;
+```
+
+- *Type:* string
+
+---
+
+##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.bucket"></a>
+
+```typescript
+public readonly bucket: IBucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+##### `image`<sup>Required</sup> <a name="image" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.image"></a>
+
+```typescript
+public readonly image: INeuronxContainerImage;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
+
+---
+
+##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.model"></a>
+
+```typescript
+public readonly model: Model;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
+
+---
+
+##### `neuronxInstanceType`<sup>Required</sup> <a name="neuronxInstanceType" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.neuronxInstanceType"></a>
+
+```typescript
+public readonly neuronxInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+---
+
+##### `command`<sup>Optional</sup> <a name="command" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.command"></a>
+
+```typescript
+public readonly command: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.environment"></a>
+
+```typescript
+public readonly environment: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+---
+
+##### `secrets`<sup>Optional</sup> <a name="secrets" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.secrets"></a>
+
+```typescript
+public readonly secrets: {[ key: string ]: Secret};
+```
+
+- *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
+
+---
+
+##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `volumeSize`<sup>Optional</sup> <a name="volumeSize" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.volumeSize"></a>
+
+```typescript
+public readonly volumeSize: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+
+---
+
+##### `vpcSubnets`<sup>Optional</sup> <a name="vpcSubnets" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+
+---
+
+##### `compileInstanceType`<sup>Optional</sup> <a name="compileInstanceType" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.compileInstanceType"></a>
+
+```typescript
+public readonly compileInstanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+- *Default:* ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE4)
+
+The EC2 instance type to use for cross-compilation.
+
+This should be a non-Neuron instance type with sufficient memory and CPU
+for model compilation.
 
 ---
 
@@ -10553,11 +11174,11 @@ const vllmNxdInferenceCompiledModel: VllmNxdInferenceCompiledModel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.compileTimeInstanceType">compileTimeInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | The model name. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | S3 prefix that compiled artifact uploaded. |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.vllmArgs">vllmArgs</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments">VllmEngineArguments</a></code> | Passed to the vllm engine at compile time. |
 
@@ -10570,8 +11191,6 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
-
-The bucket to upload compiled artifacts.
 
 ---
 
@@ -10593,8 +11212,6 @@ public readonly modelName: string;
 
 - *Type:* string
 
-The model name.
-
 ---
 
 ##### `s3Prefix`<sup>Required</sup> <a name="s3Prefix" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix"></a>
@@ -10605,8 +11222,6 @@ public readonly s3Prefix: string;
 
 - *Type:* string
 
-S3 prefix that compiled artifact uploaded.
-
 ---
 
 ##### `s3Uri`<sup>Required</sup> <a name="s3Uri" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Uri"></a>
@@ -10616,8 +11231,6 @@ public readonly s3Uri: string;
 ```
 
 - *Type:* string
-
-S3 URL that compiled artifact uploaded.
 
 ---
 
@@ -13265,6 +13878,27 @@ public readonly neuronxCores: number;
 - *Type:* number
 
 ---
+
+### INeuronxCompiler <a name="INeuronxCompiler" id="aws-cdk-neuronx-patterns.INeuronxCompiler"></a>
+
+- *Implemented By:* <a href="#aws-cdk-neuronx-patterns.NeuronxCompiler">NeuronxCompiler</a>, <a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBase">NeuronxCompilerBase</a>, <a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompiler">NeuronxCrossCompiler</a>, <a href="#aws-cdk-neuronx-patterns.INeuronxCompiler">INeuronxCompiler</a>
+
+Interface for Neuronx compilers.
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.INeuronxCompiler.compile">compile</a></code> | *No description.* |
+
+---
+
+##### `compile` <a name="compile" id="aws-cdk-neuronx-patterns.INeuronxCompiler.compile"></a>
+
+```typescript
+public compile(): NeuronxCompiledModel
+```
+
 
 ### INeuronxContainerImage <a name="INeuronxContainerImage" id="aws-cdk-neuronx-patterns.INeuronxContainerImage"></a>
 

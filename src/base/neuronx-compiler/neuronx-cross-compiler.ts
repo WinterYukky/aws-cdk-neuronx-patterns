@@ -35,11 +35,7 @@ export interface NeuronxCrossCompilerProps extends NeuronxCompilerBaseProps {
  * entirely on CPU. The resulting artifacts are compatible with Neuron instances for inference.
  */
 export class NeuronxCrossCompiler extends NeuronxCompilerBase {
-  constructor(
-    scope: Construct,
-    id: string,
-    props: NeuronxCrossCompilerProps,
-  ) {
+  constructor(scope: Construct, id: string, props: NeuronxCrossCompilerProps) {
     super(scope, id, props);
   }
 
