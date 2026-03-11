@@ -21,9 +21,10 @@ import {
   VllmInferenceNeuronxImage,
 } from "../base/neuronx";
 import {
+  INeuronxCompiler,
   INeuronxContainerImage,
   NeuronxCompiledModel,
-  NeuronxCompiler,
+  NeuronxCrossCompiler,
 } from "../base/neuronx-compiler";
 import {
   BlockSize,
@@ -132,7 +133,7 @@ export interface VllmNxdInferenceCompiledModel extends NeuronxCompiledModel {
  */
 export class VllmNxdInferenceCompiler extends Construct {
   private readonly vllmArgs: VllmEngineArguments;
-  private readonly compiler: NeuronxCompiler;
+  private readonly compiler: INeuronxCompiler;
   constructor(
     scope: Construct,
     id: string,
@@ -231,7 +232,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       ),
     );
 
-    const compiler = new NeuronxCompiler(this, "Resource", {
+    const compiler = new NeuronxCrossCompiler(this, "Resource", {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
       artifactS3Prefix,
