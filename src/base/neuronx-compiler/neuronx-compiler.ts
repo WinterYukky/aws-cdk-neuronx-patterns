@@ -1,7 +1,6 @@
 import { Size, Tags } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
-import { IRole } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 import {
   NeuronxBatchComputeEnvironment,
@@ -17,6 +16,7 @@ import {
   NeuronxCompiledModel,
   NeuronxCompilerBase,
   NeuronxCompilerBaseProps,
+  ComputeEnvironmentResult,
 } from "./neuronx-compiler-base";
 
 /**
@@ -35,7 +35,7 @@ export class NeuronxCompiler extends NeuronxCompilerBase {
 
   protected createComputeEnvironment(
     props: NeuronxCompilerBaseProps,
-  ): { computeEnvironment: batch.IComputeEnvironment; instanceRole: IRole } {
+  ): ComputeEnvironmentResult {
     const volumeSize =
       props.volumeSize?.toGibibytes() ??
       Math.ceil(
@@ -79,7 +79,7 @@ export class NeuronxCompiler extends NeuronxCompilerBase {
 
   protected createJobDefinition(
     props: NeuronxCompilerBaseProps,
-  ): NeuronxBatchEcsJobDefinition {
+  ): batch.IJobDefinition {
     const neuronxInstanceType =
       props.neuronxInstanceType ?? NeuronxInstanceType.INF2_48XLARGE;
     return new NeuronxBatchEcsJobDefinition(this, "JobDefinition", {

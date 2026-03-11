@@ -75,6 +75,14 @@ export interface NeuronxCompilerBaseProps {
 }
 
 /**
+ * Result of creating a compute environment.
+ */
+export interface ComputeEnvironmentResult {
+  readonly computeEnvironment: batch.IComputeEnvironment;
+  readonly instanceRole: IRole;
+}
+
+/**
  * Abstract base class for Neuronx compilers.
  * Provides the common orchestration logic (Lambda, CustomResource, WaitCondition)
  * while subclasses define how to create the Batch compute environment and job definition.
@@ -120,7 +128,11 @@ export abstract class NeuronxCompilerBase
         JOB_QUEUE_ARN: jobQueue.jobQueueArn,
       },
     });
-    jobDefinition.grantSubmitJob(jobSubmitFunction, jobQueue);
+    Grant.addToPrincipal({
+      resourceArns: [jobDefinition.jobDefinitionArn, jobQueue.jobQueueArn],
+      grantee: jobSubmitFunction,
+      actions: ["batch:SubmitJob"],
+    });
     const jobMonitoringFunction = new SingletonFunction(
       this,
       "JobMonitoringFunction",
@@ -168,7 +180,7 @@ export abstract class NeuronxCompilerBase
    */
   protected abstract createComputeEnvironment(
     props: NeuronxCompilerBaseProps,
-  ): { computeEnvironment: batch.IComputeEnvironment; instanceRole: IRole };
+  ): ComputeEnvironmentResult;
 
   /**
    * Create the Batch job definition.
@@ -176,9 +188,7 @@ export abstract class NeuronxCompilerBase
    */
   protected abstract createJobDefinition(
     props: NeuronxCompilerBaseProps,
-  ): batch.IJobDefinition & {
-    grantSubmitJob(identity: import("aws-cdk-lib/aws-iam").IGrantable, queue: batch.IJobQueue): void;
-  };
+  ): batch.IJobDefinition;
 
   private createJobQueue(
     computeEnvironment: batch.IComputeEnvironment,
