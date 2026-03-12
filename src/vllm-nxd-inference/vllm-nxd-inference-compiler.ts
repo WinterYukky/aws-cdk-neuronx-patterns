@@ -48,11 +48,20 @@ function selectCompileInstanceType(weightSize: Size): ec2.InstanceType {
   } else if (requiredMemoryGiB <= 64) {
     return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE8);
   } else if (requiredMemoryGiB <= 96) {
-    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE12);
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE12,
+    );
   } else if (requiredMemoryGiB <= 192) {
-    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE24);
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE24,
+    );
   } else {
-    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE48);
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE48,
+    );
   }
 }
 
@@ -266,8 +275,7 @@ export class VllmNxdInferenceCompiler extends Construct {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
       compileInstanceType:
-        props.compileInstanceType ??
-        selectCompileInstanceType(weightSize),
+        props.compileInstanceType ?? selectCompileInstanceType(weightSize),
       artifactS3Prefix,
       image: image,
       command: vllmCliArgs,

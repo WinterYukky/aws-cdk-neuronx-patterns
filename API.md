@@ -4967,8 +4967,8 @@ const computeEnvironmentResult: ComputeEnvironmentResult = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.computeEnvironment">computeEnvironment</a></code> | <code>aws-cdk-lib.aws_batch.IComputeEnvironment</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.instanceRole">instanceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.computeEnvironment">computeEnvironment</a></code> | <code>aws-cdk-lib.aws_batch.IComputeEnvironment</code> | The compute environment. |
+| <code><a href="#aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.instanceRole">instanceRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The instance role associated with the compute environment. |
 
 ---
 
@@ -4980,6 +4980,8 @@ public readonly computeEnvironment: IComputeEnvironment;
 
 - *Type:* aws-cdk-lib.aws_batch.IComputeEnvironment
 
+The compute environment.
+
 ---
 
 ##### `instanceRole`<sup>Required</sup> <a name="instanceRole" id="aws-cdk-neuronx-patterns.ComputeEnvironmentResult.property.instanceRole"></a>
@@ -4989,6 +4991,8 @@ public readonly instanceRole: IRole;
 ```
 
 - *Type:* aws-cdk-lib.aws_iam.IRole
+
+The instance role associated with the compute environment.
 
 ---
 
@@ -6307,12 +6311,12 @@ const neuronxCompiledModel: NeuronxCompiledModel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.compileTimeInstanceType">compileTimeInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | The model name. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.recommendedInstanceType">recommendedInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The recommended Neuron instance type for running inference with this compiled model. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | S3 prefix that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | The weight size of the model. |
 
 ---
 
@@ -6324,15 +6328,7 @@ public readonly bucket: IBucket;
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
 
----
-
-##### `compileTimeInstanceType`<sup>Required</sup> <a name="compileTimeInstanceType" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.compileTimeInstanceType"></a>
-
-```typescript
-public readonly compileTimeInstanceType: INeuronxInstanceType;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+The bucket to upload compiled artifacts.
 
 ---
 
@@ -6344,6 +6340,20 @@ public readonly modelName: string;
 
 - *Type:* string
 
+The model name.
+
+---
+
+##### `recommendedInstanceType`<sup>Required</sup> <a name="recommendedInstanceType" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.recommendedInstanceType"></a>
+
+```typescript
+public readonly recommendedInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+The recommended Neuron instance type for running inference with this compiled model.
+
 ---
 
 ##### `s3Prefix`<sup>Required</sup> <a name="s3Prefix" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.s3Prefix"></a>
@@ -6353,6 +6363,8 @@ public readonly s3Prefix: string;
 ```
 
 - *Type:* string
+
+S3 prefix that compiled artifact uploaded.
 
 ---
 
@@ -6364,6 +6376,8 @@ public readonly s3Uri: string;
 
 - *Type:* string
 
+S3 URL that compiled artifact uploaded.
+
 ---
 
 ##### `weightSize`<sup>Required</sup> <a name="weightSize" id="aws-cdk-neuronx-patterns.NeuronxCompiledModel.property.weightSize"></a>
@@ -6373,6 +6387,8 @@ public readonly weightSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+
+The weight size of the model.
 
 ---
 
@@ -6392,18 +6408,18 @@ const neuronxCompilerBaseProps: NeuronxCompilerBaseProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | An image of the container where the compile job is executed. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | The model to be compiled. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.command">command</a></code> | <code>string[]</code> | The command to run in the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | Secrets to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.spot">spot</a></code> | <code>boolean</code> | Whether or not to use spot instances. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
 
 ---
 
@@ -6415,6 +6431,10 @@ public readonly artifactS3Prefix: string;
 
 - *Type:* string
 
+S3 Prefix that compiled artifact uploaded.
+
+This property is not depends on compile job finish.
+
 ---
 
 ##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.bucket"></a>
@@ -6424,6 +6444,8 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
+
+The bucket to upload compiled artifacts.
 
 ---
 
@@ -6435,6 +6457,8 @@ public readonly image: INeuronxContainerImage;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
+An image of the container where the compile job is executed.
+
 ---
 
 ##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.model"></a>
@@ -6444,6 +6468,8 @@ public readonly model: Model;
 ```
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
+
+The model to be compiled.
 
 ---
 
@@ -6455,6 +6481,8 @@ public readonly neuronxInstanceType: INeuronxInstanceType;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
+The instance type of compile worker instance.
+
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.vpc"></a>
@@ -6464,6 +6492,8 @@ public readonly vpc: IVpc;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+VPC in which this will launch compile worker instance.
 
 ---
 
@@ -6475,6 +6505,8 @@ public readonly command: string[];
 
 - *Type:* string[]
 
+The command to run in the container.
+
 ---
 
 ##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.environment"></a>
@@ -6484,6 +6516,11 @@ public readonly environment: {[ key: string ]: string};
 ```
 
 - *Type:* {[ key: string ]: string}
+- *Default:* No environment variables.
+
+The environment variables to pass to the container.
+
+This is only applicable when using container runtime.
 
 ---
 
@@ -6495,6 +6532,8 @@ public readonly secrets: {[ key: string ]: Secret};
 
 - *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
 
+Secrets to pass to the container.
+
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxCompilerBaseProps.property.spot"></a>
@@ -6504,6 +6543,11 @@ public readonly spot: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* false
+
+Whether or not to use spot instances.
+
+Spot instances are less expensive EC2 instances that can be reclaimed by EC2 at any time; your job will be given two minutes of notice before reclamation.
 
 ---
 
@@ -6514,6 +6558,9 @@ public readonly volumeSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+- *Default:* N billion parameters * 5GiB EBS
+
+The root volume of worker instance.
 
 ---
 
@@ -6524,6 +6571,9 @@ public readonly vpcSubnets: SubnetSelection;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* new subnets will be created
+
+The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
@@ -6543,18 +6593,18 @@ const neuronxCrossCompilerProps: NeuronxCrossCompilerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | An image of the container where the compile job is executed. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | The model to be compiled. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.command">command</a></code> | <code>string[]</code> | The command to run in the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | Secrets to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | Whether or not to use spot instances. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
 | <code><a href="#aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.compileInstanceType">compileInstanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | The EC2 instance type to use for cross-compilation. |
 
 ---
@@ -6567,6 +6617,10 @@ public readonly artifactS3Prefix: string;
 
 - *Type:* string
 
+S3 Prefix that compiled artifact uploaded.
+
+This property is not depends on compile job finish.
+
 ---
 
 ##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.bucket"></a>
@@ -6576,6 +6630,8 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
+
+The bucket to upload compiled artifacts.
 
 ---
 
@@ -6587,6 +6643,8 @@ public readonly image: INeuronxContainerImage;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
+An image of the container where the compile job is executed.
+
 ---
 
 ##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.model"></a>
@@ -6596,6 +6654,8 @@ public readonly model: Model;
 ```
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
+
+The model to be compiled.
 
 ---
 
@@ -6607,6 +6667,8 @@ public readonly neuronxInstanceType: INeuronxInstanceType;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
+The instance type of compile worker instance.
+
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.vpc"></a>
@@ -6616,6 +6678,8 @@ public readonly vpc: IVpc;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+VPC in which this will launch compile worker instance.
 
 ---
 
@@ -6627,6 +6691,8 @@ public readonly command: string[];
 
 - *Type:* string[]
 
+The command to run in the container.
+
 ---
 
 ##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.environment"></a>
@@ -6636,6 +6702,11 @@ public readonly environment: {[ key: string ]: string};
 ```
 
 - *Type:* {[ key: string ]: string}
+- *Default:* No environment variables.
+
+The environment variables to pass to the container.
+
+This is only applicable when using container runtime.
 
 ---
 
@@ -6647,6 +6718,8 @@ public readonly secrets: {[ key: string ]: Secret};
 
 - *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
 
+Secrets to pass to the container.
+
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxCrossCompilerProps.property.spot"></a>
@@ -6656,6 +6729,11 @@ public readonly spot: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* false
+
+Whether or not to use spot instances.
+
+Spot instances are less expensive EC2 instances that can be reclaimed by EC2 at any time; your job will be given two minutes of notice before reclamation.
 
 ---
 
@@ -6666,6 +6744,9 @@ public readonly volumeSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+- *Default:* N billion parameters * 5GiB EBS
+
+The root volume of worker instance.
 
 ---
 
@@ -6676,6 +6757,9 @@ public readonly vpcSubnets: SubnetSelection;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* new subnets will be created
+
+The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
@@ -6711,18 +6795,18 @@ const neuronxNativeCompilerProps: NeuronxNativeCompilerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.command">command</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.artifactS3Prefix">artifactS3Prefix</a></code> | <code>string</code> | S3 Prefix that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | An image of the container where the compile job is executed. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | The model to be compiled. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.command">command</a></code> | <code>string[]</code> | The command to run in the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.secrets">secrets</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_batch.Secret}</code> | Secrets to pass to the container. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.spot">spot</a></code> | <code>boolean</code> | Whether or not to use spot instances. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.volumeSize">volumeSize</a></code> | <code>aws-cdk-lib.Size</code> | The root volume of worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The VPC Subnets this Compute Environment will launch instances in. |
 
 ---
 
@@ -6734,6 +6818,10 @@ public readonly artifactS3Prefix: string;
 
 - *Type:* string
 
+S3 Prefix that compiled artifact uploaded.
+
+This property is not depends on compile job finish.
+
 ---
 
 ##### `bucket`<sup>Required</sup> <a name="bucket" id="aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.bucket"></a>
@@ -6743,6 +6831,8 @@ public readonly bucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
+
+The bucket to upload compiled artifacts.
 
 ---
 
@@ -6754,6 +6844,8 @@ public readonly image: INeuronxContainerImage;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a>
 
+An image of the container where the compile job is executed.
+
 ---
 
 ##### `model`<sup>Required</sup> <a name="model" id="aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.model"></a>
@@ -6763,6 +6855,8 @@ public readonly model: Model;
 ```
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.Model">Model</a>
+
+The model to be compiled.
 
 ---
 
@@ -6774,6 +6868,8 @@ public readonly neuronxInstanceType: INeuronxInstanceType;
 
 - *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
 
+The instance type of compile worker instance.
+
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="vpc" id="aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.vpc"></a>
@@ -6783,6 +6879,8 @@ public readonly vpc: IVpc;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
+
+VPC in which this will launch compile worker instance.
 
 ---
 
@@ -6794,6 +6892,8 @@ public readonly command: string[];
 
 - *Type:* string[]
 
+The command to run in the container.
+
 ---
 
 ##### `environment`<sup>Optional</sup> <a name="environment" id="aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.environment"></a>
@@ -6803,6 +6903,11 @@ public readonly environment: {[ key: string ]: string};
 ```
 
 - *Type:* {[ key: string ]: string}
+- *Default:* No environment variables.
+
+The environment variables to pass to the container.
+
+This is only applicable when using container runtime.
 
 ---
 
@@ -6814,6 +6919,8 @@ public readonly secrets: {[ key: string ]: Secret};
 
 - *Type:* {[ key: string ]: aws-cdk-lib.aws_batch.Secret}
 
+Secrets to pass to the container.
+
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="spot" id="aws-cdk-neuronx-patterns.NeuronxNativeCompilerProps.property.spot"></a>
@@ -6823,6 +6930,11 @@ public readonly spot: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* false
+
+Whether or not to use spot instances.
+
+Spot instances are less expensive EC2 instances that can be reclaimed by EC2 at any time; your job will be given two minutes of notice before reclamation.
 
 ---
 
@@ -6833,6 +6945,9 @@ public readonly volumeSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+- *Default:* N billion parameters * 5GiB EBS
+
+The root volume of worker instance.
 
 ---
 
@@ -6843,6 +6958,9 @@ public readonly vpcSubnets: SubnetSelection;
 ```
 
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* new subnets will be created
+
+The VPC Subnets this Compute Environment will launch instances in.
 
 ---
 
@@ -11174,12 +11292,12 @@ const vllmNxdInferenceCompiledModel: VllmNxdInferenceCompiledModel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.compileTimeInstanceType">compileTimeInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | *No description.* |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.modelName">modelName</a></code> | <code>string</code> | The model name. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.recommendedInstanceType">recommendedInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The recommended Neuron instance type for running inference with this compiled model. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix">s3Prefix</a></code> | <code>string</code> | S3 prefix that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Uri">s3Uri</a></code> | <code>string</code> | S3 URL that compiled artifact uploaded. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.weightSize">weightSize</a></code> | <code>aws-cdk-lib.Size</code> | The weight size of the model. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.vllmArgs">vllmArgs</a></code> | <code><a href="#aws-cdk-neuronx-patterns.VllmEngineArguments">VllmEngineArguments</a></code> | Passed to the vllm engine at compile time. |
 
 ---
@@ -11192,15 +11310,7 @@ public readonly bucket: IBucket;
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
 
----
-
-##### `compileTimeInstanceType`<sup>Required</sup> <a name="compileTimeInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.compileTimeInstanceType"></a>
-
-```typescript
-public readonly compileTimeInstanceType: INeuronxInstanceType;
-```
-
-- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+The bucket to upload compiled artifacts.
 
 ---
 
@@ -11212,6 +11322,20 @@ public readonly modelName: string;
 
 - *Type:* string
 
+The model name.
+
+---
+
+##### `recommendedInstanceType`<sup>Required</sup> <a name="recommendedInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.recommendedInstanceType"></a>
+
+```typescript
+public readonly recommendedInstanceType: INeuronxInstanceType;
+```
+
+- *Type:* <a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a>
+
+The recommended Neuron instance type for running inference with this compiled model.
+
 ---
 
 ##### `s3Prefix`<sup>Required</sup> <a name="s3Prefix" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.s3Prefix"></a>
@@ -11221,6 +11345,8 @@ public readonly s3Prefix: string;
 ```
 
 - *Type:* string
+
+S3 prefix that compiled artifact uploaded.
 
 ---
 
@@ -11232,6 +11358,8 @@ public readonly s3Uri: string;
 
 - *Type:* string
 
+S3 URL that compiled artifact uploaded.
+
 ---
 
 ##### `weightSize`<sup>Required</sup> <a name="weightSize" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompiledModel.property.weightSize"></a>
@@ -11241,6 +11369,8 @@ public readonly weightSize: Size;
 ```
 
 - *Type:* aws-cdk-lib.Size
+
+The weight size of the model.
 
 ---
 
@@ -11275,6 +11405,7 @@ const vllmNxdInferenceCompileProps: VllmNxdInferenceCompileProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket to upload compiled artifacts. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.model">model</a></code> | <code><a href="#aws-cdk-neuronx-patterns.Model">Model</a></code> | The model to be compiled. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC in which this will launch compile worker instance. |
+| <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.compileInstanceType">compileInstanceType</a></code> | <code>aws-cdk-lib.aws_ec2.InstanceType</code> | The EC2 instance type to use for cross-compilation. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | The environment variables to pass to the container. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.image">image</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxContainerImage">INeuronxContainerImage</a></code> | An image of the container where the compile job is executed. |
 | <code><a href="#aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.neuronxInstanceType">neuronxInstanceType</a></code> | <code><a href="#aws-cdk-neuronx-patterns.INeuronxInstanceType">INeuronxInstanceType</a></code> | The instance type of compile worker instance. |
@@ -11318,6 +11449,21 @@ public readonly vpc: IVpc;
 - *Type:* aws-cdk-lib.aws_ec2.IVpc
 
 VPC in which this will launch compile worker instance.
+
+---
+
+##### `compileInstanceType`<sup>Optional</sup> <a name="compileInstanceType" id="aws-cdk-neuronx-patterns.VllmNxdInferenceCompileProps.property.compileInstanceType"></a>
+
+```typescript
+public readonly compileInstanceType: InstanceType;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.InstanceType
+- *Default:* Automatically selected based on model size
+
+The EC2 instance type to use for cross-compilation.
+
+This should be a non-Neuron instance type with sufficient memory for model compilation.
 
 ---
 
