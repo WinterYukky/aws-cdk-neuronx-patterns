@@ -7,6 +7,7 @@ import {
   Size,
 } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
+import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { Grant, IRole } from "aws-cdk-lib/aws-iam";
 import {
@@ -39,11 +40,29 @@ export interface INeuronxContainerImage {
  * The model compiled by Neuronx compiler.
  */
 export interface NeuronxCompiledModel {
+  /**
+   * The instance type used at compile time.
+   */
   readonly compileTimeInstanceType: INeuronxInstanceType;
+  /**
+   * The bucket to upload compiled artifacts.
+   */
   readonly bucket: IBucket;
+  /**
+   * S3 URL that compiled artifact uploaded.
+   */
   readonly s3Uri: string;
+  /**
+   * S3 prefix that compiled artifact uploaded.
+   */
   readonly s3Prefix: string;
+  /**
+   * The model name.
+   */
   readonly modelName: string;
+  /**
+   * The weight size of the model.
+   */
   readonly weightSize: Size;
 }
 
@@ -58,17 +77,62 @@ export interface INeuronxCompiler {
  * Common props for NeuronxCompilerBase.
  */
 export interface NeuronxCompilerBaseProps {
-  readonly vpc: import("aws-cdk-lib/aws-ec2").IVpc;
+  /**
+   * VPC in which this will launch compile worker instance.
+   */
+  readonly vpc: IVpc;
+  /**
+   * The bucket to upload compiled artifacts.
+   */
   readonly bucket: IBucket;
+  /**
+   * Secrets to pass to the container.
+   */
   readonly secrets?: { [key: string]: batch.Secret };
+  /**
+   * S3 Prefix that compiled artifact uploaded.
+   * This property is not depends on compile job finish.
+   */
   readonly artifactS3Prefix: string;
+  /**
+   * The instance type of compile worker instance.
+   */
   readonly neuronxInstanceType: INeuronxInstanceType;
+  /**
+   * The model to be compiled.
+   */
   readonly model: Model;
+  /**
+   * An image of the container where the compile job is executed.
+   */
   readonly image: INeuronxContainerImage;
+  /**
+   * The command to run in the container.
+   */
   readonly command?: string[];
+  /**
+   * The root volume of worker instance.
+   * @default - N billion parameters * 5GiB EBS
+   */
   readonly volumeSize?: Size;
+  /**
+   * Whether or not to use spot instances. Spot instances are less expensive EC2 instances that can be reclaimed by EC2 at any time; your job will be given two minutes of notice before reclamation.
+   *
+   * @default false
+   */
   readonly spot?: boolean;
-  readonly vpcSubnets?: import("aws-cdk-lib/aws-ec2").SubnetSelection;
+  /**
+   * The VPC Subnets this Compute Environment will launch instances in.
+   *
+   * @default - new subnets will be created
+   */
+  readonly vpcSubnets?: SubnetSelection;
+  /**
+   * The environment variables to pass to the container.
+   * This is only applicable when using container runtime.
+   *
+   * @default - No environment variables.
+   */
   readonly environment?: {
     [key: string]: string;
   };
@@ -78,7 +142,13 @@ export interface NeuronxCompilerBaseProps {
  * Result of creating a compute environment.
  */
 export interface ComputeEnvironmentResult {
+  /**
+   * The compute environment.
+   */
   readonly computeEnvironment: batch.IComputeEnvironment;
+  /**
+   * The instance role associated with the compute environment.
+   */
   readonly instanceRole: IRole;
 }
 
