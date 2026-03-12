@@ -43,36 +43,36 @@
         }
       }
     },
-    "a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410": {
+    "bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf": {
       "displayName": "Compiler/CompileImage/Source",
       "source": {
-        "path": "asset.a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410",
+        "path": "asset.bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf",
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-current_region-aec36cf7": {
+        "current_account-current_region-66af0fe5": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410.zip",
+          "objectKey": "bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
-    "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d": {
-      "displayName": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Code",
+    "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48": {
+      "displayName": "SingletonLambda1361f4695c924c469e115d1dbf925bac/Code",
       "source": {
-        "path": "asset.5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d",
+        "path": "asset.fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48",
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-current_region-06b8e1ef": {
+        "current_account-current_region-1dc6e40c": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d.zip",
+          "objectKey": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
     "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57": {
-      "displayName": "Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider/framework-onEvent/Code",
+      "displayName": "Compiler/Resource/CompileJobProvider/framework-onEvent/Code",
       "source": {
         "path": "asset.07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57",
         "packaging": "zip"
@@ -85,16 +85,16 @@
         }
       }
     },
-    "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9": {
-      "displayName": "SingletonLambda1361f4695c924c469e115d1dbf925bac/Code",
+    "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee": {
+      "displayName": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258/Code",
       "source": {
-        "path": "asset.654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9",
+        "path": "asset.4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee",
         "packaging": "zip"
       },
       "destinations": {
-        "current_account-current_region-2bf9a72d": {
+        "current_account-current_region-c40c204e": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip",
+          "objectKey": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
@@ -113,16 +113,16 @@
         }
       }
     },
-    "724e143c9ba74d5016de46091cb110b5545282366108238fd877135530223ba0": {
+    "dd3d24719e00cf9f0d4e25bacbed17605e28a221d7ff7407d43f7f44a11371c8": {
       "displayName": "VllmNxDInferenceIntegTestStack Template",
       "source": {
         "path": "VllmNxDInferenceIntegTestStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-077a5f31": {
+        "current_account-current_region-1929451f": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "724e143c9ba74d5016de46091cb110b5545282366108238fd877135530223ba0.json",
+          "objectKey": "dd3d24719e00cf9f0d4e25bacbed17605e28a221d7ff7407d43f7f44a11371c8.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

@@ -87,7 +87,10 @@ new cdk.CfnOutput(stack, "LoadBalancerDNS", {
 ## vLLM NxD Inference on ALB & ECS on EC2
 
 > [!WARNING]
-> このコンストラクトは EC2 上で Inferentia2 インスタンスを使用します。AWS アカウントで Inferentia2 インスタンスのサービスクォータを増やす必要がある場合があります。[Service Quotas コンソール](https://console.aws.amazon.com/servicequotas/)から申請してください。
+> このコンストラクトは EC2 上で Inferentia2 インスタンスを推論に使用します。AWS アカウントで Inferentia2 インスタンスのサービスクォータを増やす必要がある場合があります。[Service Quotas コンソール](https://console.aws.amazon.com/servicequotas/)から申請してください。
+>
+> [!NOTE]
+> モデルのコンパイルは標準（非 Neuron）EC2 インスタンス上でクロスコンパイルにより実行されるため、コンパイルフェーズでは Inferentia/Trainium のクォータは不要です。
 
 このパターンは、モデルのコンパイルに `VllmNxdInferenceCompiler` を、デプロイに `ApplicationLoadBalancedVllmNxDInferenceService` を組み合わせて使用します。HuggingFace で公開されているモデルを簡単にコンパイルし、Application Load Balancer を使った ECS にデプロイできます。
 
@@ -320,7 +323,16 @@ Secret は、コンパイル Batch Job と推論サーバーを実行する ECS 
 
 ## Neuronx Compiler
 
-> [!WARNING]
+> このコンストラクトは EC2 上で Inferentia2 インスタンスを使用します。AWS アカウントで Inferentia2 インスタンスのサービスクォータを増やす必要がある場合があります。
+
+このコンストラクトは、Neuronx でサポートされているモデルをコンパイルし、指定された S3 バケットにアップロードします。コンストラクトは、モデルのパラメータ数に基づいて必要なインスタンスタイプを自動的に選択します。
+
+コンパイラーには2つのバリアントがあります：
+
+- **`NeuronxNativeCompiler`** — Neuron インスタンス（Inferentia2/Trainium）上でコンパイルします。Neuron デバイスクォータが必要です。
+- **`NeuronxCrossCompiler`** — 標準 EC2 インスタンス（例：`c7i-flex.4xlarge`）上で Neuron ハードウェアなしにクロスコンパイルします。`VllmNxdInferenceCompiler` がデフォルトで使用します。
+
+両方とも `INeuronxCompiler` インターフェースを実装し、互換性のあるアーティファクトを生成します。
 > このコンストラクトは EC2 上で Inferentia2 インスタンスを使用します。AWS アカウントで Inferentia2 インスタンスのサービスクォータを増やす必要がある場合があります。
 
 このコンストラクトは、Neuronx でサポートされているモデルをコンパイルし、指定された S3 バケットにアップロードします。コンストラクトは、モデルのパラメータ数に基づいて必要なインスタンスタイプを自動的に選択します。
@@ -330,13 +342,13 @@ Secret は、コンパイル Batch Job と推論サーバーを実行する ECS 
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { NeuronxCompiler, Model } from "aws-cdk-neuronx-patterns";
+import { NeuronxNativeCompiler, Model } from "aws-cdk-neuronx-patterns";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
 declare const image: INeuronxContainerImage;
 
-const compiler = new NeuronxCompiler(this, "NeuronxCompiler", {
+const compiler = new NeuronxNativeCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct"),
@@ -362,13 +374,13 @@ new cdk.CfnOutput(this, "CompiledArtifact", {
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { NeuronxCompiler, Model } from "aws-cdk-neuronx-patterns";
+import { NeuronxNativeCompiler, Model } from "aws-cdk-neuronx-patterns";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
 declare const image: INeuronxContainerImage;
 
-new NeuronxCompiler(this, "NeuronxCompiler", {
+new NeuronxNativeCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct"),

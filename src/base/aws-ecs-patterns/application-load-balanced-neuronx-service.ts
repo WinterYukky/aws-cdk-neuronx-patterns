@@ -55,7 +55,7 @@ export class NeuronxTaskDefinition
   protected readonly linuxParameters: ecs.LinuxParameters;
   constructor(scope: Construct, id: string, props: NeuronxTaskDefinitionProps) {
     const neuronxInstanceType =
-      props.neuronxInstanceType ?? props.compiledModel.compileTimeInstanceType;
+      props.neuronxInstanceType ?? props.compiledModel.recommendedInstanceType;
     const tensorParallelSize = props.tensorParallelSize ?? 1;
     const tasksPerInstance = Math.floor(
       neuronxInstanceType.acceleratorChips.neuronxCores / tensorParallelSize,

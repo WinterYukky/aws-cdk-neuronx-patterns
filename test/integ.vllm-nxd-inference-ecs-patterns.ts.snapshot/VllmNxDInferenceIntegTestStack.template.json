@@ -728,7 +728,7 @@
      "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
     },
     "sourceS3Url": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a450e75ad33fb31ca80ad703a9cbb30aef6732fe2461ba48d5a5b0522e082410.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
     }
    },
    "DependsOn": [
@@ -787,185 +787,10 @@
     ]
    }
   },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "lambda.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     }
-    ],
-    "Tags": [
-     {
-      "Key": "Name",
-      "Value": "neuronx-compile-worker"
-     }
-    ]
-   }
-  },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
-      {
-       "Action": "lambda:InvokeFunction",
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-          "Arn"
-         ]
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::GetAtt": [
-             "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-             "Arn"
-            ]
-           },
-           ":*"
-          ]
-         ]
-        }
-       ]
-      },
-      {
-       "Action": "lambda:GetFunction",
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
-    "Roles": [
-     {
-      "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
-     }
-    ]
-   }
-  },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF": {
-   "Type": "AWS::Lambda::Function",
-   "Properties": {
-    "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     },
-     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
-    },
-    "Description": "AWS CDK resource provider framework - onEvent (VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/NeuronOptimizedMachineImage/NeuronxAmiProvider)",
-    "Environment": {
-     "Variables": {
-      "USER_ON_EVENT_FUNCTION_ARN": {
-       "Fn::GetAtt": [
-        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-        "Arn"
-       ]
-      }
-     }
-    },
-    "Handler": "framework.onEvent",
-    "LoggingConfig": {
-     "ApplicationLogLevel": "FATAL",
-     "LogFormat": "JSON"
-    },
-    "Role": {
-     "Fn::GetAtt": [
-      "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2",
-      "Arn"
-     ]
-    },
-    "Runtime": "nodejs22.x",
-    "Tags": [
-     {
-      "Key": "Name",
-      "Value": "neuronx-compile-worker"
-     }
-    ],
-    "Timeout": 900
-   },
-   "DependsOn": [
-    "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
-    "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2"
-   ]
-  },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099": {
-   "Type": "AWS::Logs::LogGroup",
-   "Properties": {
-    "LogGroupName": {
-     "Fn::Join": [
-      "",
-      [
-       "/aws/lambda/",
-       {
-        "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF"
-       }
-      ]
-     ]
-    },
-    "RetentionInDays": 731,
-    "Tags": [
-     {
-      "Key": "Name",
-      "Value": "neuronx-compile-worker"
-     }
-    ]
-   },
-   "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain"
-  },
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": {
-   "Type": "Custom::NeuronxAmi",
-   "Properties": {
-    "ServiceToken": {
-     "Fn::GetAtt": [
-      "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF",
-      "Arn"
-     ]
-    },
-    "image": {
-     "Ref": "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED"
-    }
-   },
-   "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete"
-  },
-  "CompilerComputeEnvironmentSecurityGroup3ADC0F04": {
+  "CompilerComputeEnvironmentSecurityGroupC05FE9C7": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource/SecurityGroup",
+    "GroupDescription": "VllmNxDInferenceIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -976,7 +801,7 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "neuronx-compile-worker"
+      "Value": "neuronx-cross-compile-worker"
      }
     ],
     "VpcId": {
@@ -984,7 +809,7 @@
     }
    }
   },
-  "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B": {
+  "CompilerComputeEnvironmentInstanceProfileRole028A791A": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -1016,12 +841,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "neuronx-compile-worker"
+      "Value": "neuronx-cross-compile-worker"
      }
     ]
    }
   },
-  "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B": {
+  "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -1066,48 +891,37 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B",
+    "PolicyName": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386",
     "Roles": [
      {
-      "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
      }
     ]
    }
   },
-  "CompilerComputeEnvironmentInstanceProfileA05F57F0": {
+  "CompilerComputeEnvironmentInstanceProfile719C0447": {
    "Type": "AWS::IAM::InstanceProfile",
    "Properties": {
     "Roles": [
      {
-      "Ref": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B"
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
      }
     ]
    }
   },
-  "CompilerComputeEnvironment83CAC2B9": {
+  "CompilerComputeEnvironmentFB939B89": {
    "Type": "AWS::Batch::ComputeEnvironment",
    "Properties": {
     "ComputeResources": {
      "AllocationStrategy": "BEST_FIT_PROGRESSIVE",
-     "Ec2Configuration": [
-      {
-       "ImageIdOverride": {
-        "Fn::GetAtt": [
-         "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1",
-         "image_id"
-        ]
-       },
-       "ImageType": "ECS_AL2023"
-      }
-     ],
      "InstanceRole": {
       "Fn::GetAtt": [
-       "CompilerComputeEnvironmentInstanceProfileA05F57F0",
+       "CompilerComputeEnvironmentInstanceProfile719C0447",
        "Arn"
       ]
      },
      "InstanceTypes": [
-      "inf2.xlarge"
+      "c7i.2xlarge"
      ],
      "LaunchTemplate": {
       "LaunchTemplateId": {
@@ -1125,7 +939,7 @@
      "SecurityGroupIds": [
       {
        "Fn::GetAtt": [
-        "CompilerComputeEnvironmentSecurityGroup3ADC0F04",
+        "CompilerComputeEnvironmentSecurityGroupC05FE9C7",
         "GroupId"
        ]
       }
@@ -1139,46 +953,20 @@
       }
      ],
      "Tags": {
-      "Name": "neuronx-compile-worker"
+      "Name": "neuronx-cross-compile-worker"
      },
      "Type": "EC2"
     },
     "ReplaceComputeEnvironment": false,
     "State": "ENABLED",
     "Tags": {
-     "Name": "neuronx-compile-worker"
+     "Name": "neuronx-cross-compile-worker"
     },
     "Type": "managed",
     "UpdatePolicy": {}
    }
   },
-  "CompilerJobQueue59AB0D38": {
-   "Type": "AWS::Batch::JobQueue",
-   "Properties": {
-    "ComputeEnvironmentOrder": [
-     {
-      "ComputeEnvironment": {
-       "Fn::GetAtt": [
-        "CompilerComputeEnvironment83CAC2B9",
-        "ComputeEnvironmentArn"
-       ]
-      },
-      "Order": 1
-     }
-    ],
-    "JobStateTimeLimitActions": [
-     {
-      "Action": "CANCEL",
-      "MaxTimeSeconds": 600,
-      "Reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
-      "State": "RUNNABLE"
-     }
-    ],
-    "Priority": 1,
-    "State": "ENABLED"
-   }
-  },
-  "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A": {
+  "CompilerContainerDefinitionExecutionRoleB7A79408": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -1195,7 +983,7 @@
     }
    }
   },
-  "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993": {
+  "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -1249,15 +1037,15 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993",
+    "PolicyName": "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370",
     "Roles": [
      {
-      "Ref": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A"
+      "Ref": "CompilerContainerDefinitionExecutionRoleB7A79408"
      }
     ]
    }
   },
-  "CompilerJobDefinitionE25875BC": {
+  "CompilerJobDefinition637B02EA": {
    "Type": "AWS::Batch::JobDefinition",
    "Properties": {
     "ContainerProperties": {
@@ -1289,6 +1077,10 @@
          ]
         ]
        }
+      },
+      {
+       "Name": "NEURON_PLATFORM_TARGET_OVERRIDE",
+       "Value": "inf2"
       },
       {
        "Name": "VLLM_NEURON_FRAMEWORK",
@@ -1336,7 +1128,7 @@
      ],
      "ExecutionRoleArn": {
       "Fn::GetAtt": [
-       "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A",
+       "CompilerContainerDefinitionExecutionRoleB7A79408",
        "Arn"
       ]
      },
@@ -1395,18 +1187,6 @@
        ]
       ]
      },
-     "LinuxParameters": {
-      "Devices": [
-       {
-        "ContainerPath": "/dev/neuron0",
-        "HostPath": "/dev/neuron0",
-        "Permissions": [
-         "read",
-         "write"
-        ]
-       }
-      ]
-     },
      "ReadonlyRootFilesystem": false,
      "ResourceRequirements": [
       {
@@ -1426,6 +1206,32 @@
     "RetryStrategy": {},
     "Timeout": {},
     "Type": "container"
+   }
+  },
+  "CompilerJobQueue59AB0D38": {
+   "Type": "AWS::Batch::JobQueue",
+   "Properties": {
+    "ComputeEnvironmentOrder": [
+     {
+      "ComputeEnvironment": {
+       "Fn::GetAtt": [
+        "CompilerComputeEnvironmentFB939B89",
+        "ComputeEnvironmentArn"
+       ]
+      },
+      "Order": 1
+     }
+    ],
+    "JobStateTimeLimitActions": [
+     {
+      "Action": "CANCEL",
+      "MaxTimeSeconds": 600,
+      "Reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
+      "State": "RUNNABLE"
+     }
+    ],
+    "Priority": 1,
+    "State": "ENABLED"
    }
   },
   "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421": {
@@ -2443,78 +2249,6 @@
     }
    }
   },
-  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "lambda.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     }
-    ]
-   }
-  },
-  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9": {
-   "Type": "AWS::Lambda::Function",
-   "Properties": {
-    "Code": {
-     "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-     },
-     "S3Key": "5a8b8c423d3e4733d72dc024536de398220ec859994764a88a3de5fef306375d.zip"
-    },
-    "Handler": "index.onEvent",
-    "Role": {
-     "Fn::GetAtt": [
-      "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288",
-      "Arn"
-     ]
-    },
-    "Runtime": "nodejs22.x"
-   },
-   "DependsOn": [
-    "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
-   ]
-  },
-  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6": {
-   "Type": "AWS::Logs::LogGroup",
-   "Properties": {
-    "LogGroupName": {
-     "Fn::Join": [
-      "",
-      [
-       "/aws/lambda/",
-       {
-        "Ref": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
-       }
-      ]
-     ]
-    },
-    "RetentionInDays": 731
-   },
-   "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain"
-  },
   "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -2562,7 +2296,7 @@
          ]
         },
         {
-         "Ref": "CompilerJobDefinitionE25875BC"
+         "Ref": "CompilerJobDefinition637B02EA"
         }
        ]
       }
@@ -2584,12 +2318,12 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
       "JOB_DEFINITION_ARN": {
-       "Ref": "CompilerJobDefinitionE25875BC"
+       "Ref": "CompilerJobDefinition637B02EA"
       },
       "JOB_QUEUE_ARN": {
        "Fn::GetAtt": [
@@ -2691,7 +2425,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
@@ -2811,7 +2545,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "654cd87a35d470659ff24fd338ee7880efa6b9dd10cf4e1df5eb59890887d0f9.zip"
+     "S3Key": "fddc499a16a1e4a26192fdc987289a63a82f3f0965f720a204d4abf0c0b80d48.zip"
     },
     "Environment": {
      "Variables": {
@@ -4088,6 +3822,78 @@
     "DefaultCapacityProviderStrategy": []
    }
   },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "4804809c961d1578febbe193771de7211c374792ac40756bbec66f5f443fc0ee.zip"
+    },
+    "Handler": "index.onEvent",
+    "Role": {
+     "Fn::GetAtt": [
+      "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x"
+   },
+   "DependsOn": [
+    "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288"
+   ]
+  },
+  "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
   "HttpRequestFromVpcFunctionServiceRoleA142BB7F": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -4230,21 +4036,6 @@
    "DeletionPolicy": "Retain"
   }
  },
- "Parameters": {
-  "CompilerComputeEnvironmentNeuronOptimizedMachineImageImageParameterAB2049ED": {
-   "Type": "AWS::SSM::Parameter::Value<String>",
-   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
-  },
-  "ServiceNeuronOptimizedMachineImageImageParameter22D845C6": {
-   "Type": "AWS::SSM::Parameter::Value<String>",
-   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
-  },
-  "BootstrapVersion": {
-   "Type": "AWS::SSM::Parameter::Value<String>",
-   "Default": "/cdk-bootstrap/hnb659fds/version",
-   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
-  }
- },
  "Outputs": {
   "ServiceLoadBalancerDNSA8A7A1E7": {
    "Value": {
@@ -4318,6 +4109,17 @@
    "Export": {
     "Name": "VllmNxDInferenceIntegTestStack:ExportsOutputFnGetAttServiceLB4B41E788DNSName4B4235FA"
    }
+  }
+ },
+ "Parameters": {
+  "ServiceNeuronOptimizedMachineImageImageParameter22D845C6": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2023/neuron/recommended"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
   }
  },
  "Rules": {

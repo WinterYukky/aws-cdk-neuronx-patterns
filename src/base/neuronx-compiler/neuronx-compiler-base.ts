@@ -5,12 +5,11 @@ import {
   Duration,
   Fn,
   Size,
-  Tags,
 } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
-import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
-import { Grant } from "aws-cdk-lib/aws-iam";
+import { Grant, IRole } from "aws-cdk-lib/aws-iam";
 import {
   Code,
   Function,
@@ -21,17 +20,7 @@ import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Provider } from "aws-cdk-lib/custom-resources";
 import { Construct } from "constructs";
 import { join } from "path";
-import {
-  NeuronxBatchComputeEnvironment,
-  NeuronxBatchEcsJobDefinition,
-} from "../aws-batch";
-import {
-  INeuronxInstanceType,
-  Model,
-  NeuronOptimizedMachineImage,
-  NeuronxInstanceType,
-  PytorchTrainingNeuronxImage,
-} from "../neuronx";
+import { INeuronxInstanceType, Model } from "../neuronx";
 
 /**
  * Compile runtime.
@@ -48,13 +37,50 @@ export interface INeuronxContainerImage {
 }
 
 /**
- * Props of NeuronxCompiler.
+ * The model compiled by Neuronx compiler.
  */
-export interface NeuronxCompilerProps {
+export interface NeuronxCompiledModel {
+  /**
+   * The recommended Neuron instance type for running inference with this compiled model.
+   */
+  readonly recommendedInstanceType: INeuronxInstanceType;
+  /**
+   * The bucket to upload compiled artifacts.
+   */
+  readonly bucket: IBucket;
+  /**
+   * S3 URL that compiled artifact uploaded.
+   */
+  readonly s3Uri: string;
+  /**
+   * S3 prefix that compiled artifact uploaded.
+   */
+  readonly s3Prefix: string;
+  /**
+   * The model name.
+   */
+  readonly modelName: string;
+  /**
+   * The weight size of the model.
+   */
+  readonly weightSize: Size;
+}
+
+/**
+ * Interface for Neuronx compilers.
+ */
+export interface INeuronxCompiler {
+  compile(): NeuronxCompiledModel;
+}
+
+/**
+ * Common props for NeuronxCompilerBase.
+ */
+export interface NeuronxCompilerBaseProps {
   /**
    * VPC in which this will launch compile worker instance.
    */
-  readonly vpc: ec2.IVpc;
+  readonly vpc: IVpc;
   /**
    * The bucket to upload compiled artifacts.
    */
@@ -80,10 +106,13 @@ export interface NeuronxCompilerProps {
    * An image of the container where the compile job is executed.
    */
   readonly image: INeuronxContainerImage;
+  /**
+   * The command to run in the container.
+   */
   readonly command?: string[];
   /**
    * The root volume of worker instance.
-   * @default - N bilion parameters * 5GiB EBS
+   * @default - N billion parameters * 5GiB EBS
    */
   readonly volumeSize?: Size;
   /**
@@ -97,7 +126,7 @@ export interface NeuronxCompilerProps {
    *
    * @default - new subnets will be created
    */
-  readonly vpcSubnets?: ec2.SubnetSelection;
+  readonly vpcSubnets?: SubnetSelection;
   /**
    * The environment variables to pass to the container.
    * This is only applicable when using container runtime.
@@ -109,122 +138,55 @@ export interface NeuronxCompilerProps {
   };
 }
 
-export interface NeuronxCompiledModel {
-  readonly compileTimeInstanceType: INeuronxInstanceType;
+/**
+ * Result of creating a compute environment.
+ */
+export interface ComputeEnvironmentResult {
   /**
-   * The bucket to upload compiled artifacts.
+   * The compute environment.
    */
-  readonly bucket: IBucket;
+  readonly computeEnvironment: batch.IComputeEnvironment;
   /**
-   * S3 URL that compiled artifact uploaded.
+   * The instance role associated with the compute environment.
    */
-  readonly s3Uri: string;
-  /**
-   * S3 prefix that compiled artifact uploaded.
-   */
-  readonly s3Prefix: string;
-  /**
-   * The model name.
-   */
-  readonly modelName: string;
-  readonly weightSize: Size;
+  readonly instanceRole: IRole;
 }
 
 /**
- * Neuronx compiler construct.
- * Compile the model to work with Inferentia2 and Trainium1 and upload it to an S3 bucket.
+ * Abstract base class for Neuronx compilers.
+ * Provides the common orchestration logic (Lambda, CustomResource, WaitCondition)
+ * while subclasses define how to create the Batch compute environment and job definition.
  */
-export class NeuronxCompiler extends Construct {
+export abstract class NeuronxCompilerBase
+  extends Construct
+  implements INeuronxCompiler
+{
   private compiledModel?: NeuronxCompiledModel;
   private readonly entrypoint: SingletonFunction;
-  private readonly jobDefinition: NeuronxBatchEcsJobDefinition;
-  private readonly jobQueue: batch.JobQueue;
-  private readonly artifactS3Prefix: string;
-  private readonly weightSize: Size;
-  private readonly neuronxInstanceType: INeuronxInstanceType;
-  private readonly model: Model;
-  private readonly bucket: IBucket;
-  constructor(scope: Construct, id: string, props: NeuronxCompilerProps) {
+  protected readonly artifactS3Prefix: string;
+  protected readonly weightSize: Size;
+  protected readonly neuronxInstanceType: INeuronxInstanceType;
+  protected readonly model: Model;
+  protected readonly bucket: IBucket;
+
+  constructor(scope: Construct, id: string, props: NeuronxCompilerBaseProps) {
     super(scope, id);
-    const weightSize = Size.gibibytes(
+
+    this.model = props.model;
+    this.bucket = props.bucket;
+    this.artifactS3Prefix = props.artifactS3Prefix;
+    this.weightSize = Size.gibibytes(
       props.model.options.parameters.toBillion() * 2.5,
     );
-    const volumeSize =
-      props.volumeSize?.toGibibytes() ??
-      Math.ceil(
-        weightSize.toGibibytes() +
-          PytorchTrainingNeuronxImage.size.toGibibytes() +
-          NeuronOptimizedMachineImage.size.toGibibytes(),
-      );
-    const launchTemplate = new ec2.LaunchTemplate(this, "LaunchTemplate", {
-      blockDevices: [
-        {
-          deviceName: "/dev/xvda",
-          volume: ec2.BlockDeviceVolume.ebs(volumeSize, {
-            volumeType: ec2.EbsDeviceVolumeType.GP3,
-            encrypted: true,
-          }),
-        },
-      ],
-    });
+    this.neuronxInstanceType = props.neuronxInstanceType;
 
-    const neuronxInstanceType =
-      props.neuronxInstanceType ?? NeuronxInstanceType.INF2_48XLARGE;
-    const computeEnvironment = new NeuronxBatchComputeEnvironment(
-      this,
-      "ComputeEnvironment",
-      {
-        vpc: props.vpc,
-        vpcSubnets: props.vpcSubnets,
-        instanceTypes: [neuronxInstanceType.instanceType],
-        useOptimalInstanceClasses: false,
-        launchTemplate,
-        spot: props.spot,
-      },
-    );
+    const { computeEnvironment, instanceRole } =
+      this.createComputeEnvironment(props);
+    const jobDefinition = this.createJobDefinition(props);
+    const jobQueue = this.createJobQueue(computeEnvironment);
 
-    Tags.of(computeEnvironment).add("Name", "neuronx-compile-worker");
-    this.jobQueue = new batch.JobQueue(this, "JobQueue", {
-      computeEnvironments: [
-        {
-          computeEnvironment,
-          order: 1,
-        },
-      ],
-      jobStateTimeLimitActions: [
-        {
-          state: batch.JobStateTimeLimitActionsState.RUNNABLE,
-          reason: batch.JobStateTimeLimitActionsReason.JOB_RESOURCE_REQUIREMENT,
-          maxTime: Duration.minutes(10),
-          action: batch.JobStateTimeLimitActionsAction.CANCEL,
-        },
-      ],
-    });
-    props.model.bucket?.grantRead(computeEnvironment.instanceRole);
-    props.bucket.grantReadWrite(computeEnvironment.instanceRole);
-    this.jobDefinition = new NeuronxBatchEcsJobDefinition(
-      this,
-      "JobDefinition",
-      {
-        neuronxInstanceType,
-        image: props.image.image,
-        // The fllowing command was executed on inf2.8xlarge
-        // sh-5.2$ free -b
-        // 			total					used			free					shared	buff/cache	available
-        // Mem:	132265766912	866320384	130341785600	667648	1057660928	130529148928
-        // https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
-        memory: Size.mebibytes(
-          Math.ceil(neuronxInstanceType.memory.toMebibytes() * 0.95),
-        ),
-        cpu: neuronxInstanceType.vCpu,
-        environment: {
-          NEURON_COMPILE_CACHE_URL: `${props.bucket.s3UrlForObject("neuron-compile-cache")}`,
-          ...props.environment,
-        },
-        command: props.command,
-        secrets: props.secrets,
-      },
-    );
+    props.model.bucket?.grantRead(instanceRole);
+    props.bucket.grantReadWrite(instanceRole);
 
     const jobSubmitFunction = new SingletonFunction(this, "JobSubmitFunction", {
       code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
@@ -232,11 +194,15 @@ export class NeuronxCompiler extends Construct {
       runtime: Runtime.NODEJS_LATEST,
       uuid: "1361f469-5c92-4c46-9e11-5d1dbf925bac",
       environment: {
-        JOB_DEFINITION_ARN: this.jobDefinition.jobDefinitionArn,
-        JOB_QUEUE_ARN: this.jobQueue.jobQueueArn,
+        JOB_DEFINITION_ARN: jobDefinition.jobDefinitionArn,
+        JOB_QUEUE_ARN: jobQueue.jobQueueArn,
       },
     });
-    this.jobDefinition.grantSubmitJob(jobSubmitFunction, this.jobQueue);
+    Grant.addToPrincipal({
+      resourceArns: [jobDefinition.jobDefinitionArn, jobQueue.jobQueueArn],
+      grantee: jobSubmitFunction,
+      actions: ["batch:SubmitJob"],
+    });
     const jobMonitoringFunction = new SingletonFunction(
       this,
       "JobMonitoringFunction",
@@ -276,15 +242,46 @@ export class NeuronxCompiler extends Construct {
       "ProviderFunction",
       provider.serviceToken,
     ).grantInvoke(this.entrypoint);
-
-    this.model = props.model;
-    this.bucket = props.bucket;
-    this.artifactS3Prefix = props.artifactS3Prefix;
-    this.weightSize = weightSize;
-    this.neuronxInstanceType = neuronxInstanceType;
   }
-  compile() {
-    // when invoke multiple times
+
+  /**
+   * Create the Batch compute environment.
+   * Subclasses must implement this to provide the appropriate compute environment.
+   */
+  protected abstract createComputeEnvironment(
+    props: NeuronxCompilerBaseProps,
+  ): ComputeEnvironmentResult;
+
+  /**
+   * Create the Batch job definition.
+   * Subclasses must implement this to provide the appropriate job definition.
+   */
+  protected abstract createJobDefinition(
+    props: NeuronxCompilerBaseProps,
+  ): batch.IJobDefinition;
+
+  private createJobQueue(
+    computeEnvironment: batch.IComputeEnvironment,
+  ): batch.JobQueue {
+    return new batch.JobQueue(this, "JobQueue", {
+      computeEnvironments: [
+        {
+          computeEnvironment,
+          order: 1,
+        },
+      ],
+      jobStateTimeLimitActions: [
+        {
+          state: batch.JobStateTimeLimitActionsState.RUNNABLE,
+          reason: batch.JobStateTimeLimitActionsReason.JOB_RESOURCE_REQUIREMENT,
+          maxTime: Duration.minutes(10),
+          action: batch.JobStateTimeLimitActionsAction.CANCEL,
+        },
+      ],
+    });
+  }
+
+  compile(): NeuronxCompiledModel {
     if (this.compiledModel) {
       return this.compiledModel;
     }
@@ -313,7 +310,7 @@ export class NeuronxCompiler extends Construct {
 
     this.compiledModel = {
       modelName: this.model.modelName,
-      compileTimeInstanceType: this.neuronxInstanceType,
+      recommendedInstanceType: this.neuronxInstanceType,
       bucket: this.bucket,
       s3Prefix,
       s3Uri: this.bucket.s3UrlForObject(s3Prefix),
