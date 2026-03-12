@@ -128,7 +128,7 @@ export class SageMakerInferenceToolkitTnxSageMakerInferenceModelData {
       parameters: options.parameters,
     });
   }
-  static fromNeuronxCompiler(
+  static fromNeuronxNativeCompiler(
     compiler: SageMakerInferenceToolkitTnxCompiler,
     code?: ISource,
   ) {

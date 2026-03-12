@@ -20,16 +20,16 @@ import {
 } from "./neuronx-compiler-base";
 
 /**
- * Props of NeuronxCompiler.
+ * Props of NeuronxNativeCompiler.
  */
-export interface NeuronxCompilerProps extends NeuronxCompilerBaseProps {}
+export interface NeuronxNativeCompilerProps extends NeuronxCompilerBaseProps {}
 
 /**
  * Neuronx compiler construct.
  * Compile the model to work with Inferentia2 and Trainium1 and upload it to an S3 bucket.
  */
-export class NeuronxCompiler extends NeuronxCompilerBase {
-  constructor(scope: Construct, id: string, props: NeuronxCompilerProps) {
+export class NeuronxNativeCompiler extends NeuronxCompilerBase {
+  constructor(scope: Construct, id: string, props: NeuronxNativeCompilerProps) {
     super(scope, id, props);
   }
 
