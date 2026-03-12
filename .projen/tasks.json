@@ -307,13 +307,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-cdk/lambda-layer-kubectl-v31,@aws-sdk/client-batch,@aws-sdk/client-lambda,@types/aws-lambda,@types/cfn-response,@types/jest,@types/node,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,prettier,projen,ts-jest,ts-node,typescript,@cdklabs/deploy-time-build"
+          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-cdk/lambda-layer-kubectl-v34,@aws-sdk/client-batch,@aws-sdk/client-lambda,@types/aws-lambda,@types/cfn-response,@types/jest,@types/node,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,prettier,projen,ts-jest,ts-node,typescript,@cdklabs/deploy-time-build"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-cdk/aws-sagemaker-alpha @aws-cdk/lambda-layer-kubectl-v31 @aws-sdk/client-batch @aws-sdk/client-lambda @types/aws-lambda @types/cfn-response @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha aws-cdk-lib constructs @cdklabs/deploy-time-build"
+          "exec": "yarn upgrade @aws-cdk/aws-sagemaker-alpha @aws-cdk/lambda-layer-kubectl-v34 @aws-sdk/client-batch @aws-sdk/client-lambda @types/aws-lambda @types/cfn-response @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha aws-cdk-lib constructs @cdklabs/deploy-time-build"
         },
         {
           "exec": "npx projen"

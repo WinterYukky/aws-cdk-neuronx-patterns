@@ -1,9 +1,11 @@
-import { CfnJson, Names, Size } from "aws-cdk-lib";
+import { CfnJson, Names, RemovalPolicy, Size } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3assets from "aws-cdk-lib/aws-s3-assets";
+import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import * as sagemaker from "aws-cdk-lib/aws-sagemaker";
 import { Construct } from "constructs";
 import { join } from "path";
@@ -66,7 +68,7 @@ export interface HyperPodClusterProps {
   /**
    * Kubernetes version for the EKS cluster.
    * Ignored when `eksCluster` is provided.
-   * @default eks.KubernetesVersion.V1_31
+   * @default eks.KubernetesVersion.V1_34
    */
   readonly kubernetesVersion?: eks.KubernetesVersion;
   /**
@@ -152,7 +154,7 @@ export class HyperPodCluster extends Construct {
         );
       }
       const kubernetesVersion =
-        props.kubernetesVersion ?? eks.KubernetesVersion.V1_31;
+        props.kubernetesVersion ?? eks.KubernetesVersion.V1_34;
       this.eksCluster = new eks.Cluster(this, "EksCluster", {
         vpc: props.vpc,
         vpcSubnets: [subnetSelection],
@@ -166,6 +168,29 @@ export class HyperPodCluster extends Construct {
         endpointAccess: eks.EndpointAccess.PRIVATE,
       });
     }
+
+    // --- EFA-enabled Security Group ---
+    // EFA (Elastic Fabric Adapter) requires a security group that allows all
+    // inbound and outbound traffic to and from itself.
+    // See: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa-start.html#efa-start-security
+    // See: https://github.com/aws-samples/awsome-distributed-training/blob/main/1.architectures/7.sagemaker-hyperpod-eks/cfn-templates/nested-stacks/security-group-stack.yaml
+    const hyperPodSg = new ec2.SecurityGroup(this, "HyperPodSecurityGroup", {
+      vpc: props.vpc,
+      description: "Security group for SageMaker HyperPod with EFA support",
+      allowAllOutbound: true,
+    });
+    hyperPodSg.addIngressRule(
+      hyperPodSg,
+      ec2.Port.allTraffic(),
+      "Allow all inbound traffic within SG for EFA",
+    );
+    // Add explicit self-referencing egress rule for EFA
+    new ec2.CfnSecurityGroupEgress(this, "HyperPodSgSelfEgress", {
+      groupId: hyperPodSg.securityGroupId,
+      ipProtocol: "-1",
+      destinationSecurityGroupId: hyperPodSg.securityGroupId,
+      description: "Allow all outbound traffic within SG for EFA",
+    });
 
     // --- HyperPod Execution Role ---
     this.executionRole = new iam.Role(this, "ExecutionRole", {
@@ -226,6 +251,26 @@ export class HyperPodCluster extends Construct {
       },
     );
 
+    // --- Lifecycle Scripts S3 Bucket ---
+    const lifecycleBucket = new s3.Bucket(this, "LifecycleBucket", {
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+    });
+    const lifecycleDeploy = new s3deploy.BucketDeployment(
+      this,
+      "LifecycleScriptsDeploy",
+      {
+        sources: [
+          s3deploy.Source.asset(
+            join(__dirname, "../../../scripts/hyper-pod-lifecycle-scripts"),
+          ),
+        ],
+        destinationBucket: lifecycleBucket,
+        destinationKeyPrefix: "lifecycle-scripts",
+      },
+    );
+    lifecycleBucket.grantRead(this.executionRole);
+
     // --- SageMaker HyperPod Cluster ---
     const instanceGroups =
       props.instanceGroups.map<sagemaker.CfnCluster.ClusterInstanceGroupProperty>(
@@ -235,7 +280,7 @@ export class HyperPodCluster extends Construct {
           instanceCount: group.instanceCount,
           executionRole: this.executionRole.roleArn,
           lifeCycleConfig: {
-            sourceS3Uri: "s3://placeholder/lifecycle-scripts/",
+            sourceS3Uri: lifecycleBucket.s3UrlForObject("lifecycle-scripts"),
             onCreate: "on_create.sh",
           },
           instanceStorageConfigs: [
@@ -263,13 +308,17 @@ export class HyperPodCluster extends Construct {
         },
         nodeRecovery: props.nodeRecovery ?? "Automatic",
         vpcConfig: {
-          securityGroupIds: [this.eksCluster.clusterSecurityGroupId],
+          securityGroupIds: [
+            this.eksCluster.clusterSecurityGroupId,
+            hyperPodSg.securityGroupId,
+          ],
           subnets: props.vpc.selectSubnets(subnetSelection).subnetIds,
         },
       },
     );
     this._sagemakerCluster.node.addDependency(this.eksCluster);
     this._sagemakerCluster.node.addDependency(hyperPodDepsChart);
+    this._sagemakerCluster.node.addDependency(lifecycleDeploy);
     this.clusterArn = this._sagemakerCluster.attrClusterArn;
   }
 

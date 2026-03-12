@@ -30,7 +30,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "@types/cfn-response",
     "@aws-sdk/client-batch",
     "@aws-sdk/client-lambda",
-    "@aws-cdk/lambda-layer-kubectl-v31",
+    "@aws-cdk/lambda-layer-kubectl-v34",
     "esbuild",
   ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],

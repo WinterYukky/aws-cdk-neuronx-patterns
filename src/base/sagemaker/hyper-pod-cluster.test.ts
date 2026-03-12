@@ -258,7 +258,7 @@ describe("HyperPodCluster", () => {
   it("uses an existing EKS cluster when provided", () => {
     const existingCluster = new eks.Cluster(stack, "ExistingEks", {
       vpc,
-      version: eks.KubernetesVersion.V1_31,
+      version: eks.KubernetesVersion.V1_34,
       kubectlProviderOptions: {
         kubectlLayer,
       },
