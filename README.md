@@ -87,7 +87,10 @@ new cdk.CfnOutput(stack, "LoadBalancerDNS", {
 ## vLLM NxD Inference on ALB & ECS on EC2
 
 > [!WARNING]
-> This construct uses an Inferentia2 instance on EC2. You may need to increase your service quota for Inferentia2 instances in your AWS account via the [Service Quotas console](https://console.aws.amazon.com/servicequotas/).
+> This construct uses an Inferentia2 instance on EC2 for inference. You may need to increase your service quota for Inferentia2 instances in your AWS account via the [Service Quotas console](https://console.aws.amazon.com/servicequotas/).
+
+> [!NOTE]
+> Model compilation is performed on standard (non-Neuron) EC2 instances via cross-compilation, so no Inferentia/Trainium quota is needed for the compilation phase.
 
 This pattern combines `VllmNxdInferenceCompiler` for model compilation and `ApplicationLoadBalancedVllmNxDInferenceService` for deployment. Models published on HuggingFace can be easily compiled and deployed to ECS with Application Load Balancer.
 
@@ -325,18 +328,25 @@ The secret will be securely passed as an environment variable to the compilation
 
 This construct compiles models supported by Neuronx and uploads them to the specified S3 bucket. The construct automatically selects the required instance type based on the number of model parameters.
 
+There are two compiler variants:
+
+- **`NeuronxNativeCompiler`** — Compiles on Neuron instances (Inferentia2/Trainium). Requires Neuron device quota.
+- **`NeuronxCrossCompiler`** — Compiles on standard EC2 instances (e.g., `c7i-flex.4xlarge`) without Neuron hardware. Used by `VllmNxdInferenceCompiler` by default.
+
+Both implement the `INeuronxCompiler` interface and produce compatible artifacts.
+
 ![NeuronxCompiler architecture](./docs/neuronx-compile-architecture.png)
 
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { NeuronxCompiler, Model } from "aws-cdk-neuronx-patterns";
+import { NeuronxNativeCompiler, Model } from "aws-cdk-neuronx-patterns";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
 declare const image: INeuronxContainerImage;
 
-const compiler = new NeuronxCompiler(this, "NeuronxCompiler", {
+const compiler = new NeuronxNativeCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct"),
@@ -362,13 +372,13 @@ You can reduce costs by using Spot Instances for compilation:
 ```ts
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { NeuronxCompiler, Model } from "aws-cdk-neuronx-patterns";
+import { NeuronxNativeCompiler, Model } from "aws-cdk-neuronx-patterns";
 
 declare const vpc: ec2.Vpc;
 declare const bucket: s3.Bucket;
 declare const image: INeuronxContainerImage;
 
-new NeuronxCompiler(this, "NeuronxCompiler", {
+new NeuronxNativeCompiler(this, "NeuronxCompiler", {
   vpc,
   bucket,
   model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct"),
@@ -395,6 +405,7 @@ For detailed API documentation, see [API.md](./API.md).
 For cost estimates, use the [AWS Pricing Calculator](https://calculator.aws).
 
 **Cost optimization tips:**
+- The `VllmNxdInferenceCompiler` uses cross-compilation on standard EC2 instances by default, avoiding expensive Neuron instances during compilation
 - Use Spot Instances for compilation jobs (can save up to 90%)
 - Delete resources when not in use (`cdk destroy`)
 - Use appropriate instance sizes for your workload
