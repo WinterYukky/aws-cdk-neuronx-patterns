@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dde93eda8cdb30d6863b3d0c96236a8009a031e3d64407fee71cd07db6fb629e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dd3d24719e00cf9f0d4e25bacbed17605e28a221d7ff7407d43f7f44a11371c8.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -3467,6 +3467,123 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole6E9F46A2",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy5F8AD1DC",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventD424A8CF",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroupE69C4099",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentNeuronOptimizedMachineImageNeuronxAmiB69CB2B1",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentSecurityGroup3ADC0F04": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentSecurityGroup3ADC0F04",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleA6A4198B",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy93DF298B",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironmentInstanceProfileA05F57F0": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileA05F57F0",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerComputeEnvironment83CAC2B9": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironment83CAC2B9",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRole73B5C07A",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionContainerDefinitionExecutionRoleDefaultPolicy56997993",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerJobDefinitionE25875BC": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinitionE25875BC",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
         ]
       },
       "displayName": "VllmNxDInferenceIntegTestStack"
@@ -3488,7 +3605,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/35d3e91eca077423f1b7a6cdc06629661295425c387d3a6660d0d7cc91491c1a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7f0ea55a6d829a305a7cf7a3429426e51cff5676f81f3236564cc174175aed9b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

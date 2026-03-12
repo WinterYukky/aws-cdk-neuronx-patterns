@@ -41,9 +41,9 @@ export interface INeuronxContainerImage {
  */
 export interface NeuronxCompiledModel {
   /**
-   * The instance type used at compile time.
+   * The recommended Neuron instance type for running inference with this compiled model.
    */
-  readonly compileTimeInstanceType: INeuronxInstanceType;
+  readonly recommendedInstanceType: INeuronxInstanceType;
   /**
    * The bucket to upload compiled artifacts.
    */
@@ -310,7 +310,7 @@ export abstract class NeuronxCompilerBase
 
     this.compiledModel = {
       modelName: this.model.modelName,
-      compileTimeInstanceType: this.neuronxInstanceType,
+      recommendedInstanceType: this.neuronxInstanceType,
       bucket: this.bucket,
       s3Prefix,
       s3Uri: this.bucket.s3UrlForObject(s3Prefix),

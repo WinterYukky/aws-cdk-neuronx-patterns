@@ -921,7 +921,7 @@
       ]
      },
      "InstanceTypes": [
-      "c7i.4xlarge"
+      "c7i.2xlarge"
      ],
      "LaunchTemplate": {
       "LaunchTemplateId": {
