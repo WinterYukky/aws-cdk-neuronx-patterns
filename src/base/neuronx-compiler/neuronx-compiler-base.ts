@@ -297,15 +297,8 @@ export abstract class NeuronxCompilerBase
 
     const compileChain = submitJob.next(waitStep);
 
-    const onDelete = Pass.jsonata(this, "OnDelete", {
-      outputs: {
-        Data: {},
-      },
-    });
-
     const flow = new CustomResourceFlow(this, "Flow", {
       onCreate: compileChain,
-      onDelete,
     });
 
     return new StateMachine(this, "CompileStateMachine", {
