@@ -8,7 +8,7 @@ import {
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
 import { NodegroupAmiType, Cluster } from "aws-cdk-lib/aws-eks-v2";
-import { KubectlV31Layer } from "@aws-cdk/lambda-layer-kubectl-v31";
+import { KubectlV34Layer } from "@aws-cdk/lambda-layer-kubectl-v34";
 import * as cxapi from "aws-cdk-lib/cx-api";
 import { HyperPodCluster } from "../src/index";
 
@@ -33,7 +33,7 @@ class HyperPodClusterIntegTestStack extends Stack {
 
     this.cluster = new HyperPodCluster(this, "HyperPod", {
       vpc,
-      kubectlLayer: new KubectlV31Layer(this, "KubectlLayer"),
+      kubectlLayer: new KubectlV34Layer(this, "KubectlLayer"),
       instanceGroups: [
         {
           name: "inference-workers",
@@ -41,7 +41,7 @@ class HyperPodClusterIntegTestStack extends Stack {
             InstanceClass.TRN1,
             InstanceSize.XLARGE32,
           ),
-          instanceCount: 0,
+          instanceCount: 1,
         },
       ],
       nodeRecovery: "Automatic",

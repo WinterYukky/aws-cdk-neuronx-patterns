@@ -1933,6 +1933,17 @@
      "ClusterArn"
     ]
    }
+  },
+  "ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HyperPodSageMakerCluster3AAE6C37",
+     "ClusterArn"
+    ]
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1"
+   }
   }
  },
  "Parameters": {
