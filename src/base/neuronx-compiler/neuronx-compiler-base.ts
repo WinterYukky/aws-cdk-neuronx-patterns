@@ -243,7 +243,8 @@ export abstract class NeuronxCompilerBase
       iamResources: [jobDefinition.jobDefinitionArn, jobQueue.jobQueueArn],
       iamAction: "batch:SubmitJob",
       parameters: {
-        JobName: "{% 'compile-' & $replace($now(), ':', '-') %}",
+        JobName:
+          "{% 'compile-' & $replace($replace($now(), ':', '-'), '.', '-') %}",
         JobDefinition: jobDefinition.jobDefinitionArn,
         JobQueue: jobQueue.jobQueueArn,
       },

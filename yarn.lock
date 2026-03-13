@@ -1377,10 +1377,10 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-aws-cdk-lambdaless-custom-resource@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lambdaless-custom-resource/-/aws-cdk-lambdaless-custom-resource-0.0.14.tgz#237380550d82373ee6e30e3216984aad96441a5c"
-  integrity sha512-HrDT6oqEXhboVsw6O9R34Fvss5bmeVLmRdXc/vSnClv2rso204m/RRcgi6qivrxsDn6DakjEPD29GCOy0KtJcg==
+aws-cdk-lambdaless-custom-resource@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lambdaless-custom-resource/-/aws-cdk-lambdaless-custom-resource-0.0.15.tgz#31217796754589f4175df9bbed3336fb2771ab24"
+  integrity sha512-wl+l0cJu8d8fmewKHs0fNN9rXsCwCYtiLOtWIejaIGp3H7a75dCzk4uo8mHR3RjXerYdJi4Z6WQRxOd3zrQyAQ==
 
 aws-cdk-lib@2.240.0:
   version "2.240.0"
