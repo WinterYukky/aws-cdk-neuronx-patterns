@@ -1440,7 +1440,7 @@ Batch terminates your jobs if they aren't finished.
 
 Abstract base class for Neuronx compilers.
 
-Provides the common orchestration logic (Lambda, CustomResource, WaitCondition)
+Provides the common orchestration logic (Step Functions, LambdalessWaitCondition)
 while subclasses define how to create the Batch compute environment and job definition.
 
 #### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.NeuronxCompilerBase.Initializer"></a>

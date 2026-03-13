@@ -1,25 +1,25 @@
-import {
-  CfnWaitCondition,
-  CfnWaitConditionHandle,
-  CustomResource,
-  Duration,
-  Fn,
-  Size,
-} from "aws-cdk-lib";
+import { Duration, Size } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
-import { Grant, IRole } from "aws-cdk-lib/aws-iam";
-import {
-  Code,
-  Function,
-  Runtime,
-  SingletonFunction,
-} from "aws-cdk-lib/aws-lambda";
+import { IRole } from "aws-cdk-lib/aws-iam";
 import { IBucket } from "aws-cdk-lib/aws-s3";
-import { Provider } from "aws-cdk-lib/custom-resources";
+import {
+  Choice,
+  Condition,
+  DefinitionBody,
+  Pass,
+  QueryLanguage,
+  StateMachine,
+  Wait,
+  WaitTime,
+} from "aws-cdk-lib/aws-stepfunctions";
+import { CallAwsService } from "aws-cdk-lib/aws-stepfunctions-tasks";
+import {
+  CustomResourceFlow,
+  LambdalessWaitCondition,
+} from "aws-cdk-lambdaless-custom-resource";
 import { Construct } from "constructs";
-import { join } from "path";
 import { INeuronxInstanceType, Model } from "../neuronx";
 
 /**
@@ -154,7 +154,7 @@ export interface ComputeEnvironmentResult {
 
 /**
  * Abstract base class for Neuronx compilers.
- * Provides the common orchestration logic (Lambda, CustomResource, WaitCondition)
+ * Provides the common orchestration logic (Step Functions, LambdalessWaitCondition)
  * while subclasses define how to create the Batch compute environment and job definition.
  */
 export abstract class NeuronxCompilerBase
@@ -162,7 +162,7 @@ export abstract class NeuronxCompilerBase
   implements INeuronxCompiler
 {
   private compiledModel?: NeuronxCompiledModel;
-  private readonly entrypoint: SingletonFunction;
+  private readonly stateMachine: StateMachine;
   protected readonly artifactS3Prefix: string;
   protected readonly weightSize: Size;
   protected readonly neuronxInstanceType: INeuronxInstanceType;
@@ -188,60 +188,11 @@ export abstract class NeuronxCompilerBase
     props.model.bucket?.grantRead(instanceRole);
     props.bucket.grantReadWrite(instanceRole);
 
-    const jobSubmitFunction = new SingletonFunction(this, "JobSubmitFunction", {
-      code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
-      handler: "index.onEvent",
-      runtime: Runtime.NODEJS_LATEST,
-      uuid: "1361f469-5c92-4c46-9e11-5d1dbf925bac",
-      environment: {
-        JOB_DEFINITION_ARN: jobDefinition.jobDefinitionArn,
-        JOB_QUEUE_ARN: jobQueue.jobQueueArn,
-      },
-    });
-    Grant.addToPrincipal({
-      resourceArns: [jobDefinition.jobDefinitionArn, jobQueue.jobQueueArn],
-      grantee: jobSubmitFunction,
-      actions: ["batch:SubmitJob"],
-    });
-    const jobMonitoringFunction = new SingletonFunction(
-      this,
-      "JobMonitoringFunction",
-      {
-        code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
-        handler: "index.isComplete",
-        runtime: Runtime.NODEJS_LATEST,
-        uuid: "df16dba8-5f77-480c-a6ad-cfdf74c3de62",
-        environment: {
-          ARTIFACT_S3_PREFIX: props.artifactS3Prefix,
-        },
-      },
+    this.stateMachine = this.createCompileWorkflow(
+      jobDefinition,
+      jobQueue,
+      props.artifactS3Prefix,
     );
-    Grant.addToPrincipal({
-      resourceArns: ["*"],
-      grantee: jobMonitoringFunction,
-      actions: ["batch:DescribeJobs"],
-    });
-    const provider = new Provider(this, "CompileJobProvider", {
-      onEventHandler: jobSubmitFunction,
-      isCompleteHandler: jobMonitoringFunction,
-      queryInterval: Duration.minutes(1),
-      totalTimeout: Duration.hours(12),
-    });
-    this.entrypoint = new SingletonFunction(this, "JobEntrypointFunction", {
-      code: Code.fromAsset(join(__dirname, "private/await-compile-job")),
-      handler: "index.entrypoint",
-      environment: {
-        PROVIDER_ARN: provider.serviceToken,
-      },
-      timeout: Duration.minutes(15),
-      runtime: Runtime.NODEJS_LATEST,
-      uuid: "f6e66997-5042-4df1-8781-bd68b3ac5313",
-    });
-    Function.fromFunctionArn(
-      this,
-      "ProviderFunction",
-      provider.serviceToken,
-    ).grantInvoke(this.entrypoint);
   }
 
   /**
@@ -281,32 +232,97 @@ export abstract class NeuronxCompilerBase
     });
   }
 
+  private createCompileWorkflow(
+    jobDefinition: batch.IJobDefinition,
+    jobQueue: batch.JobQueue,
+    artifactS3Prefix: string,
+  ): StateMachine {
+    const submitJob = CallAwsService.jsonata(this, "SubmitJob", {
+      service: "batch",
+      action: "submitJob",
+      iamResources: [jobDefinition.jobDefinitionArn, jobQueue.jobQueueArn],
+      iamAction: "batch:SubmitJob",
+      parameters: {
+        JobName:
+          "{% 'compile-' & $now('[Y0001]-[M01]-[D01]-[H01]-[m01]-[s01]') %}",
+        JobDefinition: jobDefinition.jobDefinitionArn,
+        JobQueue: jobQueue.jobQueueArn,
+      },
+      assign: {
+        JobId: "{% $states.result.JobId %}",
+      },
+    });
+
+    const waitStep = Wait.jsonata(this, "WaitForJob", {
+      time: WaitTime.duration(Duration.minutes(1)),
+    });
+
+    const describeJob = CallAwsService.jsonata(this, "DescribeJobs", {
+      service: "batch",
+      action: "describeJobs",
+      iamResources: ["*"],
+      iamAction: "batch:DescribeJobs",
+      parameters: {
+        Jobs: "{% [$JobId] %}",
+      },
+      assign: {
+        JobStatus: "{% $states.result.Jobs[0].Status %}",
+        StatusReason:
+          "{% $exists($states.result.Jobs[0].StatusReason) ? $states.result.Jobs[0].StatusReason : '' %}",
+      },
+    });
+
+    const jobSucceeded = Pass.jsonata(this, "JobSucceeded", {
+      outputs: {
+        Data: {
+          s3Prefix: artifactS3Prefix,
+        },
+      },
+    });
+
+    const jobFailed = Pass.jsonata(this, "JobFailed", {
+      outputs: {
+        "{% 'error' %}": "{% 'CompileJobFailed' %}",
+        "{% 'cause' %}": "{% $StatusReason %}",
+      },
+    });
+
+    const checkJobStatus = Choice.jsonata(this, "CheckJobStatus")
+      .when(Condition.jsonata("{% $JobStatus = 'SUCCEEDED' %}"), jobSucceeded)
+      .when(Condition.jsonata("{% $JobStatus = 'FAILED' %}"), jobFailed)
+      .otherwise(waitStep);
+
+    waitStep.next(describeJob);
+    describeJob.next(checkJobStatus);
+
+    const compileChain = submitJob.next(waitStep);
+
+    const flow = new CustomResourceFlow(this, "Flow", {
+      onCreate: compileChain,
+    });
+
+    return new StateMachine(this, "CompileStateMachine", {
+      queryLanguage: QueryLanguage.JSONATA,
+      definitionBody: DefinitionBody.fromChainable(flow),
+      timeout: Duration.hours(12),
+    });
+  }
+
   compile(): NeuronxCompiledModel {
     if (this.compiledModel) {
       return this.compiledModel;
     }
-    const waitConditionHandle = new CfnWaitConditionHandle(
-      this,
-      `WaitConditionHandle${this.artifactS3Prefix}`,
-    );
-    const compileJob = new CustomResource(this, "NeuronxCompile", {
-      serviceToken: this.entrypoint.functionArn,
-      resourceType: "Custom::NeuronxCompile",
-      properties: {
-        waitConditionCallbackURL: waitConditionHandle.ref,
-      },
-    });
-    const wait = new CfnWaitCondition(
+    const waitCondition = new LambdalessWaitCondition(
       this,
       `WaitCondition${this.artifactS3Prefix}`,
       {
-        count: 1,
-        timeout: Duration.hours(12).toSeconds().toString(),
-        handle: waitConditionHandle.ref,
+        stateMachine: this.stateMachine,
+        timeout: Duration.hours(12),
+        resourceType: "Custom::NeuronxCompile",
       },
     );
-    wait.node.addDependency(compileJob);
-    const s3Prefix = Fn.select(3, Fn.split('"', wait.attrData.toString()));
+
+    const s3Prefix = waitCondition.getAttString("s3Prefix");
 
     this.compiledModel = {
       modelName: this.model.modelName,
