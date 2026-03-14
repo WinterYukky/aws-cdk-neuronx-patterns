@@ -56,6 +56,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
       labels: ["auto-upgrade"],
     },
   },
+  autoApproveOptions: {
+    allowedUsernames: ["winteryukky-projen-bot[bot]"],
+    label: "auto-upgrade",
+  },
   experimentalIntegRunner: true,
   releasableCommits: ReleasableCommits.ofType([
     "feat",
