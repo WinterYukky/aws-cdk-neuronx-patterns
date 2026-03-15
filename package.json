@@ -59,7 +59,7 @@
     "jsii-pacmak": "^1.127.0",
     "jsii-rosetta": "~5.9.0",
     "prettier": "^3.8.1",
-    "projen": "^0.99.19",
+    "projen": "^0.99.20",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
@@ -72,7 +72,7 @@
   "dependencies": {
     "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
     "@cdklabs/deploy-time-build": "^0.1.1",
-    "aws-cdk-lambdaless-custom-resource": "^0.0.15"
+    "aws-cdk-lambdaless-custom-resource": "^0.0.16"
   },
   "keywords": [
     "cdk",
