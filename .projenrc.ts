@@ -1,5 +1,6 @@
 import { ReleasableCommits, awscdk } from "projen";
 import { GithubCredentials } from "projen/lib/github";
+import { JobPermission } from "projen/lib/github/workflows-model";
 const cdkVersion = "2.240.0";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
@@ -60,6 +61,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ["winteryukky-projen-bot[bot]"],
     label: "auto-upgrade",
   },
+  autoMerge: false,
   experimentalIntegRunner: true,
   releasableCommits: ReleasableCommits.ofType([
     "feat",
@@ -72,5 +74,27 @@ const project = new awscdk.AwsCdkConstructLibrary({
 project.eslint?.addRules({
   "import/order": "off",
 });
+
+const autoApproveWorkflow = project.github?.tryFindWorkflow("auto-approve");
+const approveJob = autoApproveWorkflow?.getJob("approve");
+if (approveJob && "steps" in approveJob) {
+  autoApproveWorkflow?.updateJob("approve", {
+    ...approveJob,
+    permissions: {
+      pullRequests: JobPermission.WRITE,
+      contents: JobPermission.WRITE,
+    },
+    steps: [
+      ...(approveJob.steps ?? []),
+      {
+        name: "Enable auto-merge",
+        env: {
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
+        },
+        run: 'gh pr merge --squash --auto "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}"',
+      },
+    ],
+  });
+}
 
 project.synth();
