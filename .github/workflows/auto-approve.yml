@@ -16,13 +16,6 @@ jobs:
       pull-requests: write
     if: contains(github.event.pull_request.labels.*.name, 'auto-upgrade') && (github.event.pull_request.user.login == 'winteryukky-projen-bot[bot]')
     steps:
-      - name: Generate token
-        id: generate_token
-        uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5
+      - uses: hmarr/auto-approve-action@f0939ea97e9205ef24d872e76833fa908a770363
         with:
-          app-id: ${{ secrets.PROJEN_APP_ID }}
-          private-key: ${{ secrets.PROJEN_APP_PRIVATE_KEY }}
-      - name: Auto approve
-        uses: hmarr/auto-approve-action@f0939ea97e9205ef24d872e76833fa908a770363
-        with:
-          github-token: ${{ steps.generate_token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
