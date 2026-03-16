@@ -72,7 +72,7 @@
   "dependencies": {
     "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
     "@cdklabs/deploy-time-build": "^0.1.1",
-    "aws-cdk-lambdaless-custom-resource": "^0.0.16"
+    "aws-cdk-lambdaless-custom-resource": "^0.0.19"
   },
   "keywords": [
     "cdk",
