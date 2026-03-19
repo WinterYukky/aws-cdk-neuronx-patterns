@@ -42,12 +42,12 @@
     semver "^7.7.3"
 
 "@aws-cdk/integ-runner@latest":
-  version "2.197.4"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.197.4.tgz#b4ba63339c58b004f10e0c7fee92f7692726260b"
-  integrity sha512-RrXEvdPyAiVD3e7UBfoqEU0NzB2sC6+RnbLNrVVoJn0egkifqQeB+2vRrXYTgVd1lQgngXF5ELUQ7mS7i8Yx7g==
+  version "2.197.5"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.197.5.tgz#01c8a07e9dc33e02017c741018c3d373bfe5bf42"
+  integrity sha512-49XOXEkB0d0kE7ln6RV5EndSMfFs6GEqt4m/zRX31ue5ZwIB9ZEzpPf8TfM/3yUHw0W+SGNS4tPfDzK2eW1q0w==
   dependencies:
     "@aws-cdk/aws-service-spec" "0.1.161"
-    aws-cdk "2.1111.0"
+    aws-cdk "2.1112.0"
 
 "@aws-cdk/integ-tests-alpha@latest":
   version "2.243.0-alpha.0"
@@ -1410,10 +1410,10 @@ aws-cdk-lib@2.240.0:
     table "^6.9.0"
     yaml "1.10.2"
 
-aws-cdk@2.1111.0:
-  version "2.1111.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1111.0.tgz#b251b922987554d0e0e43b9e8cce134380d490f0"
-  integrity sha512-69AVF04cxbAhYzmeJYtUF5bs6ruNnH05EQZJfjadk5Lpg+HVaJY2NjG/2qgsMmKrfRgvLet73Ir8ehVlAaaGng==
+aws-cdk@2.1112.0:
+  version "2.1112.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1112.0.tgz#d6093478750d696f394539d05d7dbdefb1e01ad7"
+  integrity sha512-IYUbsd9tpBQRqEO2evWsG+p2ZNa6wG5/sJvmWaqo45V1ep8BW+mrf+jEpFLD9uDPXqRA57EZGVGils7QLbOhNA==
 
 babel-jest@^29.7.0:
   version "29.7.0"
@@ -1715,9 +1715,9 @@ comment-json@4.2.2:
     repeat-string "^1.6.1"
 
 commit-and-tag-version@^12:
-  version "12.7.0"
-  resolved "https://registry.yarnpkg.com/commit-and-tag-version/-/commit-and-tag-version-12.7.0.tgz#d893145125e6b6760a82723efc7458ce98cfe953"
-  integrity sha512-uICrirNtf1FvNydqHLrTPsX7zp74pStCJUuenrxlQSwjrriAYeIPIuIl8z7no3fiQEtvQxjJ/A48rMLY5gqOxQ==
+  version "12.7.1"
+  resolved "https://registry.yarnpkg.com/commit-and-tag-version/-/commit-and-tag-version-12.7.1.tgz#8614bb814f55a64e315290aa00903d864145d62f"
+  integrity sha512-18+iV9VMPWQ5rryn1nKprvkwqFMx1eOcEwIprjgyGm8Blhsw7WnsFXgyYLIlBF4uG2fcbbps8P7fBZARvaA0VA==
   dependencies:
     chalk "^2.4.2"
     conventional-changelog "4.0.0"
@@ -1727,7 +1727,7 @@ commit-and-tag-version@^12:
     detect-indent "^6.1.0"
     detect-newline "^3.1.0"
     dotgitignore "^2.1.0"
-    fast-xml-parser "^5.3.4"
+    fast-xml-parser "^5.5.6"
     figures "^3.2.0"
     find-up "^5.0.0"
     git-semver-tags "^5.0.1"
@@ -2128,9 +2128,9 @@ dunder-proto@^1.0.0, dunder-proto@^1.0.1:
     gopd "^1.2.0"
 
 electron-to-chromium@^1.5.263:
-  version "1.5.313"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.313.tgz#193e9ae2c2ab6915acb41e833068381e4ef0b3e4"
-  integrity sha512-QBMrTWEf00GXZmJyx2lbYD45jpI3TUFnNIzJ5BBc8piGUDwMPa1GV6HJWTZVvY/eiN3fSopl7NRbgGp9sZ9LTA==
+  version "1.5.321"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.321.tgz#57a80554e2e7fd65e3689d320f52a64723472d5d"
+  integrity sha512-L2C7Q279W2D/J4PLZLk7sebOILDSWos7bMsMNN06rK482umHUrh/3lM8G7IlHFOYip2oAg5nha1rCMxr/rs6ZQ==
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -2544,7 +2544,7 @@ fast-xml-builder@^1.1.4:
   dependencies:
     path-expression-matcher "^1.1.3"
 
-fast-xml-parser@^5.3.4:
+fast-xml-parser@^5.5.6:
   version "5.5.6"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-5.5.6.tgz#6fc61f5ae06a55a1f058abd6a4f4b5d3e9972cd0"
   integrity sha512-3+fdZyBRVg29n4rXP0joHthhcHdPUHaIC16cuyyd1iLsuaO6Vea36MPrxgAzbZna8lhvZeRL8Bc9GP56/J9xEw==
