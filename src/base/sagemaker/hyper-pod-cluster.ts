@@ -34,6 +34,15 @@ export interface HyperPodInstanceGroup {
    * @default Size.gibibytes(500)
    */
   readonly additionalVolumeSize?: Size;
+  /**
+   * Whether to use Spot Instances for this instance group.
+   * When enabled, HyperPod will request Spot capacity for significant cost savings.
+   * Note: Spot capacity may be interrupted and is best suited for fault-tolerant workloads.
+   * Once set, the capacity type cannot be changed after instance group creation.
+   *
+   * @default false - On-Demand instances are used
+   */
+  readonly useSpot?: boolean;
 }
 
 /**
@@ -272,6 +281,9 @@ export class HyperPodCluster extends Construct {
     lifecycleBucket.grantRead(this.executionRole);
 
     // --- SageMaker HyperPod Cluster ---
+    const hasSpotGroups = props.instanceGroups.some(
+      (group) => group.useSpot === true,
+    );
     const instanceGroups =
       props.instanceGroups.map<sagemaker.CfnCluster.ClusterInstanceGroupProperty>(
         (group) => ({
@@ -292,6 +304,7 @@ export class HyperPodCluster extends Construct {
               },
             },
           ],
+          ...(group.useSpot ? { capacityRequirements: { spot: {} } } : {}),
         }),
       );
 
@@ -307,6 +320,9 @@ export class HyperPodCluster extends Construct {
           },
         },
         nodeRecovery: props.nodeRecovery ?? "Automatic",
+        ...(hasSpotGroups
+          ? { nodeProvisioningMode: "Continuous" }
+          : {}),
         vpcConfig: {
           securityGroupIds: [
             this.eksCluster.clusterSecurityGroupId,

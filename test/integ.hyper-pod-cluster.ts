@@ -38,10 +38,11 @@ class HyperPodClusterIntegTestStack extends Stack {
         {
           name: "inference-workers",
           instanceType: InstanceType.of(
-            InstanceClass.TRN1,
-            InstanceSize.XLARGE32,
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE3,
           ),
           instanceCount: 1,
+          useSpot: true,
         },
       ],
       nodeRecovery: "Automatic",
@@ -96,7 +97,7 @@ describeCluster
       InstanceGroups: Match.arrayWith([
         Match.objectLike({
           InstanceGroupName: "inference-workers",
-          InstanceType: "ml.trn1.32xlarge",
+          InstanceType: "ml.trn2.3xlarge",
         }),
       ]),
     }),

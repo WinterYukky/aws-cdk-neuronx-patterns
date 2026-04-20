@@ -290,6 +290,62 @@ describe("HyperPodCluster", () => {
     });
   });
 
+  it("creates Spot instance group with capacityRequirements and Continuous provisioning", () => {
+    new HyperPodCluster(stack, "HyperPod", {
+      vpc,
+      kubectlLayer,
+      instanceGroups: [
+        {
+          name: "spot-workers",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
+          instanceCount: 1,
+          useSpot: true,
+        },
+      ],
+    });
+    const template = Template.fromStack(stack);
+    template.hasResourceProperties("AWS::SageMaker::Cluster", {
+      InstanceGroups: Match.arrayWith([
+        Match.objectLike({
+          InstanceGroupName: "spot-workers",
+          CapacityRequirements: {
+            Spot: {},
+          },
+        }),
+      ]),
+      NodeProvisioningMode: "Continuous",
+    });
+  });
+
+  it("does not set CapacityRequirements or NodeProvisioningMode for on-demand groups", () => {
+    new HyperPodCluster(stack, "HyperPod", {
+      vpc,
+      kubectlLayer,
+      instanceGroups: [
+        {
+          name: "workers",
+          instanceType: InstanceType.of(
+            InstanceClass.TRN2,
+            InstanceSize.XLARGE48,
+          ),
+          instanceCount: 1,
+        },
+      ],
+    });
+    const template = Template.fromStack(stack);
+    template.hasResourceProperties("AWS::SageMaker::Cluster", {
+      InstanceGroups: Match.arrayWith([
+        Match.objectLike({
+          InstanceGroupName: "workers",
+        }),
+      ]),
+      NodeProvisioningMode: Match.absent(),
+    });
+  });
+
   it("throws when neither eksCluster nor kubectlLayer is provided", () => {
     expect(() => {
       new HyperPodCluster(stack, "HyperPod", {
