@@ -13,9 +13,6 @@
       "Value": "HyperPodClusterIntegTestStack/Vpc"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/Resource"
    }
   },
   "VpcPublicSubnet1Subnet5C2D37C4": {
@@ -52,9 +49,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/Subnet"
    }
   },
   "VpcPublicSubnet1RouteTable6C95E38E": {
@@ -73,9 +67,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/RouteTable"
    }
   },
   "VpcPublicSubnet1RouteTableAssociation97140677": {
@@ -87,9 +78,6 @@
     "SubnetId": {
      "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/RouteTableAssociation"
    }
   },
   "VpcPublicSubnet1DefaultRoute3DA9E72A": {
@@ -105,10 +93,7 @@
    },
    "DependsOn": [
     "VpcVPCGWBF912B6E"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/DefaultRoute"
-   }
+   ]
   },
   "VpcPublicSubnet1EIPD7E02669": {
    "Type": "AWS::EC2::EIP",
@@ -124,9 +109,6 @@
       "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/EIP"
    }
   },
   "VpcPublicSubnet1NATGateway4D7517AA": {
@@ -155,10 +137,7 @@
    "DependsOn": [
     "VpcPublicSubnet1DefaultRoute3DA9E72A",
     "VpcPublicSubnet1RouteTableAssociation97140677"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1/NATGateway"
-   }
+   ]
   },
   "VpcPublicSubnet2Subnet691E08A3": {
    "Type": "AWS::EC2::Subnet",
@@ -194,9 +173,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2/Subnet"
    }
   },
   "VpcPublicSubnet2RouteTable94F7E489": {
@@ -215,9 +191,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2/RouteTable"
    }
   },
   "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
@@ -229,9 +202,6 @@
     "SubnetId": {
      "Ref": "VpcPublicSubnet2Subnet691E08A3"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2/RouteTableAssociation"
    }
   },
   "VpcPublicSubnet2DefaultRoute97F91067": {
@@ -247,10 +217,7 @@
    },
    "DependsOn": [
     "VpcVPCGWBF912B6E"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2/DefaultRoute"
-   }
+   ]
   },
   "VpcPrivateSubnet1Subnet536B997A": {
    "Type": "AWS::EC2::Subnet",
@@ -286,9 +253,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1/Subnet"
    }
   },
   "VpcPrivateSubnet1RouteTableB2C5B500": {
@@ -307,9 +271,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1/RouteTable"
    }
   },
   "VpcPrivateSubnet1RouteTableAssociation70C59FA6": {
@@ -321,9 +282,6 @@
     "SubnetId": {
      "Ref": "VpcPrivateSubnet1Subnet536B997A"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1/RouteTableAssociation"
    }
   },
   "VpcPrivateSubnet1DefaultRouteBE02A9ED": {
@@ -336,9 +294,6 @@
     "RouteTableId": {
      "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1/DefaultRoute"
    }
   },
   "VpcPrivateSubnet2Subnet3788AAA1": {
@@ -375,9 +330,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2/Subnet"
    }
   },
   "VpcPrivateSubnet2RouteTableA678073B": {
@@ -396,9 +348,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2/RouteTable"
    }
   },
   "VpcPrivateSubnet2RouteTableAssociationA89CAD56": {
@@ -410,9 +359,6 @@
     "SubnetId": {
      "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2/RouteTableAssociation"
    }
   },
   "VpcPrivateSubnet2DefaultRoute060D2087": {
@@ -425,9 +371,6 @@
     "RouteTableId": {
      "Ref": "VpcPrivateSubnet2RouteTableA678073B"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2/DefaultRoute"
    }
   },
   "VpcIGWD7BA715C": {
@@ -439,9 +382,6 @@
       "Value": "HyperPodClusterIntegTestStack/Vpc"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/IGW"
    }
   },
   "VpcVPCGWBF912B6E": {
@@ -453,9 +393,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/VPCGW"
    }
   },
   "VpcS3A5408339": {
@@ -497,9 +434,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/S3/Resource"
    }
   },
   "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
@@ -522,10 +456,7 @@
     }
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Vpc/RestrictDefaultSecurityGroupCustomResource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
    "Type": "AWS::IAM::Role",
@@ -594,9 +525,6 @@
       }
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
    }
   },
   "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
@@ -622,12 +550,7 @@
    },
    "DependsOn": [
     "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
-    "aws:asset:path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "KubectlLayer600207B5": {
    "Type": "AWS::Lambda::LayerVersion",
@@ -636,16 +559,10 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "464a642b5b21b070aee08ae83de8e1072bdd1d772a493b7779db1d97f04aed45.zip"
+     "S3Key": "8340e57c9dd5ef860787b6ba79b1fb698b98443065c2e7277e133357da92547f.zip"
     },
-    "Description": "/opt/kubectl/kubectl 1.34.0; /opt/helm/helm 3.19.0",
+    "Description": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3",
     "LicenseInfo": "Apache-2.0"
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/KubectlLayer/Resource",
-    "aws:asset:path": "asset.464a642b5b21b070aee08ae83de8e1072bdd1d772a493b7779db1d97f04aed45.zip",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Content"
    }
   },
   "HyperPodEksClusterRole395F118B": {
@@ -677,9 +594,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/Role/Resource"
    }
   },
   "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8": {
@@ -696,9 +610,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/ControlPlaneSecurityGroup/Resource"
    }
   },
   "HyperPodEksCluster2B4D66BB": {
@@ -773,10 +684,7 @@
     "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE",
     "VpcS3A5408339",
     "VpcVPCGWBF912B6E"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/Resource"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlReadyBarrierFC60BFEC": {
    "Type": "AWS::SSM::Parameter",
@@ -787,10 +695,7 @@
    "DependsOn": [
     "HyperPodEksClusterClusterAdminRoleAccess145D6E10",
     "HyperPodEksCluster2B4D66BB"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlReadyBarrier"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84": {
    "Type": "AWS::IAM::Role",
@@ -871,10 +776,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Handler/ServiceRole/Resource"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520": {
    "Type": "AWS::IAM::Policy",
@@ -947,10 +849,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderHandler3CF4DC9D": {
    "Type": "AWS::Lambda::Function",
@@ -1011,13 +910,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Handler/Resource",
-    "aws:asset:path": "asset.379a97e43c3d01fdb08125fcff9c80a976a33da6287e25571deb51e72b5eeda9",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB": {
    "Type": "AWS::Logs::LogGroup",
@@ -1042,10 +935,7 @@
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ],
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Handler/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0": {
    "Type": "AWS::Lambda::LayerVersion",
@@ -1057,12 +947,6 @@
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
     "Description": "/opt/awscli/aws"
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/AwsCliLayer/Resource",
-    "aws:asset:path": "asset.0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Content"
    }
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475": {
@@ -1112,10 +996,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828": {
    "Type": "AWS::IAM::Policy",
@@ -1173,10 +1054,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8": {
    "Type": "AWS::Lambda::Function",
@@ -1237,13 +1115,7 @@
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider/framework-onEvent/Resource",
-    "aws:asset:path": "asset.07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D": {
    "Type": "AWS::Logs::LogGroup",
@@ -1268,10 +1140,7 @@
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ],
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider/framework-onEvent/LogGroup/Resource"
-   }
+   "DeletionPolicy": "Retain"
   },
   "HyperPodEksClusterClusterAdminRoleAccess145D6E10": {
    "Type": "AWS::EKS::AccessEntry",
@@ -1304,9 +1173,6 @@
       "Arn"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/ClusterAdminRoleAccess/Resource"
    }
   },
   "HyperPodEksClusterchartHyperPodDependencies929AF454": {
@@ -1333,10 +1199,7 @@
     "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
    ],
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/chart-HyperPodDependencies/Resource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "HyperPodEksClusterNodegroupSystemNodesNodeGroupRole650B2494": {
    "Type": "AWS::IAM::Role",
@@ -1391,9 +1254,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/NodegroupSystemNodes/NodeGroupRole/Resource"
    }
   },
   "HyperPodEksClusterNodegroupSystemNodesCB7A5C16": {
@@ -1426,9 +1286,6 @@
       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/EksCluster/NodegroupSystemNodes/Resource"
    }
   },
   "HyperPodHyperPodSecurityGroup3116C127": {
@@ -1445,9 +1302,6 @@
     "VpcId": {
      "Ref": "Vpc8378EB38"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/HyperPodSecurityGroup/Resource"
    }
   },
   "HyperPodHyperPodSecurityGroupfromHyperPodClusterIntegTestStackHyperPodHyperPodSecurityGroupDB2E4A50ALLTRAFFICAAA8E53B": {
@@ -1467,9 +1321,6 @@
       "GroupId"
      ]
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/HyperPodSecurityGroup/from HyperPodClusterIntegTestStackHyperPodHyperPodSecurityGroupDB2E4A50:ALL TRAFFIC"
    }
   },
   "HyperPodHyperPodSgSelfEgress443195C7": {
@@ -1489,9 +1340,6 @@
      ]
     },
     "IpProtocol": "-1"
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/HyperPodSgSelfEgress"
    }
   },
   "HyperPodExecutionRole32B4ED4D": {
@@ -1523,9 +1371,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/ExecutionRole/Resource"
    }
   },
   "HyperPodExecutionRoleDefaultPolicy39EF654D": {
@@ -1586,9 +1431,6 @@
       "Ref": "HyperPodExecutionRole32B4ED4D"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/ExecutionRole/DefaultPolicy/Resource"
    }
   },
   "HyperPodHyperPodExecutionRoleAccess25475103": {
@@ -1605,9 +1447,6 @@
      ]
     },
     "Type": "HYPERPOD_LINUX"
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/HyperPodExecutionRoleAccess/Resource"
    }
   },
   "HyperPodLifecycleBucket47A602DB": {
@@ -1625,10 +1464,7 @@
     ]
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/LifecycleBucket/Resource"
-   }
+   "DeletionPolicy": "Delete"
   },
   "HyperPodLifecycleBucketPolicy8AC282B9": {
    "Type": "AWS::S3::BucketPolicy",
@@ -1680,9 +1516,6 @@
      ],
      "Version": "2012-10-17"
     }
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/LifecycleBucket/Policy/Resource"
    }
   },
   "HyperPodLifecycleBucketAutoDeleteObjectsCustomResource7234B62E": {
@@ -1702,10 +1535,7 @@
     "HyperPodLifecycleBucketPolicy8AC282B9"
    ],
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/LifecycleBucket/AutoDeleteObjectsCustomResource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7": {
    "Type": "AWS::Lambda::LayerVersion",
@@ -1717,12 +1547,6 @@
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
     "Description": "/opt/awscli/aws"
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/LifecycleScriptsDeploy/AwsCliLayer/Resource",
-    "aws:asset:path": "asset.0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Content"
    }
   },
   "HyperPodLifecycleScriptsDeployCustomResource170B3FFF": {
@@ -1751,10 +1575,7 @@
     "OutputObjectKeys": true
    },
    "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/LifecycleScriptsDeploy/CustomResource/Default"
-   }
+   "DeletionPolicy": "Delete"
   },
   "HyperPodSageMakerCluster3AAE6C37": {
    "Type": "AWS::SageMaker::Cluster",
@@ -1854,10 +1675,7 @@
     "HyperPodEksClusterRole395F118B",
     "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7",
     "HyperPodLifecycleScriptsDeployCustomResource170B3FFF"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/HyperPod/SageMakerCluster"
-   }
+   ]
   },
   "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
    "Type": "AWS::IAM::Role",
@@ -1879,9 +1697,6 @@
       "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
    }
   },
   "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
@@ -1918,12 +1733,7 @@
    },
    "DependsOn": [
     "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
-    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
    "Type": "AWS::IAM::Role",
@@ -1954,9 +1764,6 @@
       ]
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource"
    }
   },
   "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
@@ -2051,9 +1858,6 @@
       "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
      }
     ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource"
    }
   },
   "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
@@ -2088,13 +1892,7 @@
    "DependsOn": [
     "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
     "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
-    "aws:asset:path": "asset.3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
-   }
+   ]
   },
   "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CLogGroup817B64E9": {
    "Type": "AWS::Logs::LogGroup",
@@ -2113,20 +1911,7 @@
     "RetentionInDays": 731
    },
    "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/LogGroup/Resource"
-   }
-  },
-  "CDKMetadata": {
-   "Type": "AWS::CDK::Metadata",
-   "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1YW2/bNhT+LdVjwaipEwRFnqo4buvNjQ07C7YZgUGTJw5rihRISqkq+L8PvEiWYjft1q3zij0Yls4hz+U7Fx6qF1e90+P4+Bl+0EeEro84W8bVzGCyRvhBLyogvbi6yci8igQ2b7GBB1zq6Dx6HqEoxR+TT/XLyvMGgmaSCePJm1vUvxM3kz6a5EvOyCxfCjDzKsIFZhwvGWem/F0KCEKKjAxpeCaMqgsuybrRlnkhw2wsRjgX5D46NyoHFLGsOOs/Wo61ZisxzIqzhFIFWo9FXwE2TApvGjoQK5whlF418Ebn8+h5dHswBh6GFT6VfALZp6nMDVzjJYctfUtLtJaEOQHNYvswGE7s3xZsNFGswAb+9sy8w1wfAObfZsbhWHIgZvgsHAoDSkCTQ77HhbfEGEzuUxAGBcpNRuq2OK+sxUGfBlUwAtG5ba6p92jTtMx6C5oByRUz5Vsl86wjgIImimUdnD7PRRHmXD4knI9zs5S5oL4kQwMaipX1eZpz8B3Iht81Il95bSt2CGHzDn3gyBukTxYV1hqMjhP7hyhkXJYWpfgiJ2swlw3Bro4rT73AGpB/nFeRglQWmE8kZ6SMzq2HRsnSepYbeQkcDIyXH4DY48e55kz3+4MYv3leRUv32jqm2vwN4jhdUhxX/TsxwiWoG1DadpM3uSAW0nkVGZaCzM1n4U4hlaqcsU91soIomJLCOhkoSvKaSSStH++xoBxUvSYXVtM24Zv0aQGtw6nhFvhmpm1i6frRRdSFM8R70DZmy/VM57Jun0R7aC2Ld53vWt31qAscl6sVE6s3UqXY0n6aja9sSLOMM+KqbyRXIyiA3/Si8+hNcp2M/Dbn+Q4uXwTgs9C1onEXwnyF0z3RGwiiym7dPYkob0O3Lw+6iLTs2M2h7B5SUJjPjFR4BS3Wfgj25or3kXHQpTaQbiPRhvSrMvLPZ5MrtrqM0IyJFQcjRauw8pzVPf2LyPk6neQqkxp+FDTfg8EUGxygtK3sdj/LI7pBsNaLohdXfZ5rA6pzTLTtn9cVcV1mVmUYf2wLjArf4sKudb4EYvhEyYJRUGOX7rakNrbc73DOTR9nmDBTNk2gQ/UajlFEvE2dUvJnW0IIaN14vlJYmOBBQlMmdlPpSlJYWVS3uv1ZFTGhDRYErNrmhsJEK6Ip/th6o6CZAtqi4JQFVJJR77h3svj46mxxdrqYXSdXl8n0MtrY5P25iwvyPgyEUfZUyRQThGWY11H33tQa3Fp3xDDw0cjqw2zLnxGZuanAeGtqGciNCTrDJDi42fg+3NHx2AK8tS949+63yWA6GV8uRsOrX37dZ5b18x3wtH+PlUEN5vPHur4P5ojhNK6mkoOdz7XOU6AXpQWo8TUhROZNT/Br7IaEtJp0lGKBV0A7+LdpZaLCWp9u30UVetoGSq/lpNZdTz7zKnDdrDkUnAloeE21PMmk9H1b6xex+Pb1LdVPufRjg/6PeP4vBfQAiqcF62M0/2Mx/Itef1cHb/23FA4o3KL8yevFXcuprK+OLS27ZEpnBhuwM5zuxGuX/L/8J+W7eNQXVlhrd1sN85NltUYT99WrPsc3iMuVjqtRmFDnVTOsNkOau7Z8HdGZUcvaII1XkOI1qHhrzQZNQctcEUD9XBuZ1q/1fFf/fIrtX1uPXO6jgPuMMDPYXh3tnr4UlLkbhb8RLNzNYYEfNOEsTh50nzN3D5lX/jsOcbIXKgjXcTPR9e/EODdZbjboZXz87HX4OP7CCz5ygo/CeHxUnJzGYSS8OTn1GnwohaQQf9Avil4vfvkqPn72QTN2FKb9eOr//wBju5VIghcAAA=="
-   },
-   "Metadata": {
-    "aws:cdk:path": "HyperPodClusterIntegTestStack/CDKMetadata/Default"
-   },
-   "Condition": "CDKMetadataAvailable"
+   "DeletionPolicy": "Retain"
   }
  },
  "Conditions": {
@@ -2136,270 +1921,6 @@
      "Ref": "AWS::Partition"
     },
     "aws"
-   ]
-  },
-  "CDKMetadataAvailable": {
-   "Fn::Or": [
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "af-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-3"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-4"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-northwest-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-2"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "il-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "sa-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-west-1"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Equals": [
-      {
-       "Ref": "AWS::Region"
-      },
-      "us-west-2"
-     ]
-    }
    ]
   }
  },
