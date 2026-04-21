@@ -1,8 +1,9 @@
 import { Names } from "aws-cdk-lib";
+import * as cdk from "aws-cdk-lib";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { Construct } from "constructs";
+import { Construct, IDependable } from "constructs";
 import { HyperPodCluster } from "../base/sagemaker";
 import { VllmNxdInferenceCompiledModel } from "../vllm-nxd-inference/vllm-nxd-inference-compiler";
 import {
@@ -175,7 +176,9 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     const instanceType = `ml.${props.compiledModel.recommendedInstanceType.instanceType.toString()}`;
 
     // --- Install inference prerequisites ---
-    this.installInferencePrerequisites(props.cluster);
+    const inferencePrerequisites = this.installInferencePrerequisites(
+      props.cluster,
+    );
 
     // --- Build the InferenceEndpointConfig CRD manifest ---
     const manifest = {
@@ -264,7 +267,23 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     }
 
     // Deploy the CRD manifest via kubectl
-    props.cluster.eksCluster.addManifest("InferenceEndpoint", manifest);
+    const endpointManifest = props.cluster.eksCluster.addManifest(
+      "InferenceEndpoint",
+      manifest,
+    );
+    // The CRDs required by this manifest (e.g. InferenceEndpointConfig) are
+    // installed by the amazon-sagemaker-hyperpod-inference addon. Without
+    // this dependency the manifest can race ahead of the addon and fail
+    // with "no matches for kind InferenceEndpointConfig".
+    //
+    // We depend on the CfnAddon resource directly (rather than the
+    // surrounding Construct) so we only introduce a leaf-level dependency
+    // and avoid CloudFormation dependency cycles caused by the Construct's
+    // other supporting resources (IRSA role, TLS bucket, ...) that already
+    // depend on shared cluster infrastructure.
+    endpointManifest.node.addDependency(
+      inferencePrerequisites.node.defaultChild as cdk.CfnResource,
+    );
 
     // Grant S3 access for model loading
     props.compiledModel.bucket.grantRead(props.cluster.executionRole);
@@ -304,14 +323,19 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         },
       };
 
-      props.cluster.eksCluster.addManifest(
+      const scaledObject = props.cluster.eksCluster.addManifest(
         "AutoscalingScaledObject",
         scaledObjectManifest,
+      );
+      // KEDA's ScaledObject CRD is also installed by the inference addon,
+      // so mirror the dependency used for the InferenceEndpointConfig manifest.
+      scaledObject.node.addDependency(
+        inferencePrerequisites.node.defaultChild as cdk.CfnResource,
       );
     }
   }
 
-  private installInferencePrerequisites(cluster: HyperPodCluster): Construct {
+  private installInferencePrerequisites(cluster: HyperPodCluster): eks.Addon {
     // Inference Operator IRSA role
     const inferenceOperatorRole = cluster.createServiceAccountRole(
       "InferenceOperatorRole",
@@ -345,7 +369,15 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         tlsCertificateS3Bucket: tlsBucket.bucketName,
       },
     });
-    addon.node.addDependency(cluster.eksCluster);
+    // We intentionally depend on the underlying CfnCluster rather than the
+    // Cluster construct itself. Depending on the Construct would expand into
+    // every resource reachable from the cluster subtree (including any
+    // KubernetesManifest rendered via `cluster.eksCluster.addManifest(...)`),
+    // which would cause CloudFormation dependency cycles once we make our
+    // own manifests depend on the addon to ensure CRDs exist first.
+    addon.node.addDependency(
+      (cluster.eksCluster.node.defaultChild ?? cluster.eksCluster) as IDependable,
+    );
     addon.node.addDependency(tlsBucket);
 
     return addon;

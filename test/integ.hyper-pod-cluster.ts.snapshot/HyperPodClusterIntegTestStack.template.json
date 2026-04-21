@@ -3121,7 +3121,8 @@
     "PruneLabel": "aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f"
    },
    "DependsOn": [
-    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC",
+    "InferenceServiceInferenceOperatorAddonFEF09769"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -3939,25 +3940,7 @@
     }
    },
    "DependsOn": [
-    "HyperPodEksClusterchartHyperPodDependencies929AF454",
-    "HyperPodEksClusterClusterAdminRoleAccess145D6E10",
-    "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8",
-    "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0",
-    "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB",
-    "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
-    "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520",
-    "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
-    "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D",
-    "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
-    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828",
-    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475",
-    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC",
-    "HyperPodEksClustermanifestInferenceEndpoint09B1D871",
-    "HyperPodEksClusterNodegroupSystemNodesNodeGroupRole650B2494",
-    "HyperPodEksClusterNodegroupSystemNodesCB7A5C16",
-    "HyperPodEksClusterOidcProviderNative3733B6CC",
     "HyperPodEksCluster2B4D66BB",
-    "HyperPodEksClusterRole395F118B",
     "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
     "InferenceServiceTlsCertificateBucket485D9F51"
    ]
