@@ -282,8 +282,8 @@ export abstract class NeuronxCompilerBase
 
     const jobFailed = Pass.jsonata(this, "JobFailed", {
       outputs: {
-        "{% 'error' %}": "{% 'CompileJobFailed' %}",
-        "{% 'cause' %}": "{% $StatusReason %}",
+        Status: "{% 'FAILED' %}",
+        Reason: "{% 'CompileJobFailed: ' & $StatusReason %}",
       },
     });
 
