@@ -21,7 +21,7 @@ import {
 import {
   INeuronxContainerImage,
   NeuronxCompiledModel,
-  NeuronxCompiler,
+  NeuronxNativeCompiler,
 } from "../base/neuronx-compiler";
 
 /**
@@ -144,7 +144,7 @@ export class SageMakerInferenceToolkitTnxCompiler extends Construct {
   readonly tpDegree: number;
   readonly nPositions: number;
   model: Model;
-  private readonly compiler: NeuronxCompiler;
+  private readonly compiler: NeuronxNativeCompiler;
   constructor(
     scope: Construct,
     id: string,
@@ -208,7 +208,7 @@ export class SageMakerInferenceToolkitTnxCompiler extends Construct {
     if (quantDtype!!) {
       compiledArtifactPathPrefix = `${compiledArtifactPathPrefix}-quant${quantDtype}`;
     }
-    const compiler = new NeuronxCompiler(this, "Resource", {
+    const compiler = new NeuronxNativeCompiler(this, "Resource", {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
       artifactS3Prefix: "test",

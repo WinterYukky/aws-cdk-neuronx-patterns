@@ -1,6 +1,7 @@
 import { ContainerImageBuild } from "@cdklabs/deploy-time-build";
 import { Size } from "aws-cdk-lib";
 import * as batch from "aws-cdk-lib/aws-batch";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { IBucket } from "aws-cdk-lib/aws-s3";
@@ -21,9 +22,10 @@ import {
   VllmInferenceNeuronxImage,
 } from "../base/neuronx";
 import {
+  INeuronxCompiler,
   INeuronxContainerImage,
   NeuronxCompiledModel,
-  NeuronxCompiler,
+  NeuronxCrossCompiler,
 } from "../base/neuronx-compiler";
 import {
   BlockSize,
@@ -31,6 +33,37 @@ import {
   VllmEngineArgumentsParser,
 } from "../base/server-engine/vllm-engine";
 import { VllmNxdInferenceEcsImageBase } from "./vllm-nxd-inference-ecs-patterns";
+
+/**
+ * Select an appropriate compile instance type based on model weight size.
+ * Compilation requires roughly 2-3x the model weight size in RAM for
+ * HLO generation, neuronx-cc compilation, and weight sharding.
+ */
+function selectCompileInstanceType(weightSize: Size): ec2.InstanceType {
+  const requiredMemoryGiB = weightSize.toGibibytes() * 3;
+  if (requiredMemoryGiB <= 16) {
+    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE2);
+  } else if (requiredMemoryGiB <= 32) {
+    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE4);
+  } else if (requiredMemoryGiB <= 64) {
+    return ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE8);
+  } else if (requiredMemoryGiB <= 96) {
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE12,
+    );
+  } else if (requiredMemoryGiB <= 192) {
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE24,
+    );
+  } else {
+    return ec2.InstanceType.of(
+      ec2.InstanceClass.C7I,
+      ec2.InstanceSize.XLARGE48,
+    );
+  }
+}
 
 /**
  * Compile runtime container image for vLLM NxD Inference
@@ -114,6 +147,13 @@ export interface VllmNxdInferenceCompileProps {
    * @default - latest image
    */
   readonly image?: INeuronxContainerImage;
+  /**
+   * The EC2 instance type to use for cross-compilation.
+   * This should be a non-Neuron instance type with sufficient memory for model compilation.
+   *
+   * @default - Automatically selected based on model size
+   */
+  readonly compileInstanceType?: ec2.InstanceType;
 }
 
 /**
@@ -132,7 +172,7 @@ export interface VllmNxdInferenceCompiledModel extends NeuronxCompiledModel {
  */
 export class VllmNxdInferenceCompiler extends Construct {
   private readonly vllmArgs: VllmEngineArguments;
-  private readonly compiler: NeuronxCompiler;
+  private readonly compiler: INeuronxCompiler;
   constructor(
     scope: Construct,
     id: string,
@@ -231,9 +271,11 @@ export class VllmNxdInferenceCompiler extends Construct {
       ),
     );
 
-    const compiler = new NeuronxCompiler(this, "Resource", {
+    const compiler = new NeuronxCrossCompiler(this, "Resource", {
       ...props,
       neuronxInstanceType: availableInstancePatterns[0].neuronxInstanceType,
+      compileInstanceType:
+        props.compileInstanceType ?? selectCompileInstanceType(weightSize),
       artifactS3Prefix,
       image: image,
       command: vllmCliArgs,

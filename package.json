@@ -39,11 +39,6 @@
     "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
     "@aws-cdk/integ-runner": "latest",
     "@aws-cdk/integ-tests-alpha": "latest",
-    "@aws-cdk/lambda-layer-kubectl-v34": "^2.2.1",
-    "@aws-sdk/client-batch": "^3.1005.0",
-    "@aws-sdk/client-lambda": "^3.1005.0",
-    "@types/aws-lambda": "^8.10.161",
-    "@types/cfn-response": "^1.0.9",
     "@types/jest": "^29.5.14",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^8",
@@ -51,7 +46,6 @@
     "aws-cdk-lib": "2.240.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.5.1",
-    "esbuild": "^0.27.3",
     "eslint": "^9",
     "eslint-config-prettier": "^9.1.2",
     "eslint-import-resolver-typescript": "^3.10.1",
@@ -65,7 +59,7 @@
     "jsii-pacmak": "^1.127.0",
     "jsii-rosetta": "~5.9.0",
     "prettier": "^3.8.1",
-    "projen": "^0.99.19",
+    "projen": "^0.99.23",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
@@ -77,7 +71,8 @@
   },
   "dependencies": {
     "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
-    "@cdklabs/deploy-time-build": "^0.1.0"
+    "@cdklabs/deploy-time-build": "^0.1.1",
+    "aws-cdk-lambdaless-custom-resource": "^0.0.19"
   },
   "keywords": [
     "cdk",

@@ -1,5 +1,6 @@
 import { ReleasableCommits, awscdk } from "projen";
 import { GithubCredentials } from "projen/lib/github";
+import { JobPermission } from "projen/lib/github/workflows-model";
 const cdkVersion = "2.240.0";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "WinterYukky",
@@ -22,17 +23,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   deps: [
     `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@cdklabs/deploy-time-build",
+    "aws-cdk-lambdaless-custom-resource",
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: [
-    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
-    "@types/aws-lambda",
-    "@types/cfn-response",
-    "@aws-sdk/client-batch",
-    "@aws-sdk/client-lambda",
-    "@aws-cdk/lambda-layer-kubectl-v34",
-    "esbuild",
-  ],
+  devDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js", ".amazonq"],
   githubOptions: {
@@ -63,6 +57,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
       labels: ["auto-upgrade"],
     },
   },
+  autoApproveOptions: {
+    allowedUsernames: ["winteryukky-projen-bot[bot]"],
+    label: "auto-upgrade",
+  },
+  autoMerge: false,
   experimentalIntegRunner: true,
   releasableCommits: ReleasableCommits.ofType([
     "feat",
@@ -76,16 +75,26 @@ project.eslint?.addRules({
   "import/order": "off",
 });
 
-project.projectBuild.compileTask.prependExec(
-  "esbuild index.ts --bundle --outdir=./ --platform=node --external:@aws-sdk/*",
-  {
-    cwd: "src/base/neuronx-compiler/private/await-compile-job",
-  },
-);
-project.projectBuild.compileTask.prependExec(
-  "esbuild index.ts --bundle --outdir=./ --platform=node --external:@aws-sdk/*",
-  {
-    cwd: "src/base/neuronx/private/neuronx-ami",
-  },
-);
+const autoApproveWorkflow = project.github?.tryFindWorkflow("auto-approve");
+const approveJob = autoApproveWorkflow?.getJob("approve");
+if (approveJob && "steps" in approveJob) {
+  autoApproveWorkflow?.updateJob("approve", {
+    ...approveJob,
+    permissions: {
+      pullRequests: JobPermission.WRITE,
+      contents: JobPermission.WRITE,
+    },
+    steps: [
+      ...(approveJob.steps ?? []),
+      {
+        name: "Enable auto-merge",
+        env: {
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
+        },
+        run: 'gh pr merge --squash --auto "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}"',
+      },
+    ],
+  });
+}
+
 project.synth();

@@ -6,26 +6,6 @@
       "type": "build"
     },
     {
-      "name": "@aws-cdk/lambda-layer-kubectl-v34",
-      "type": "build"
-    },
-    {
-      "name": "@aws-sdk/client-batch",
-      "type": "build"
-    },
-    {
-      "name": "@aws-sdk/client-lambda",
-      "type": "build"
-    },
-    {
-      "name": "@types/aws-lambda",
-      "type": "build"
-    },
-    {
-      "name": "@types/cfn-response",
-      "type": "build"
-    },
-    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -46,10 +26,6 @@
     {
       "name": "commit-and-tag-version",
       "version": "^12",
-      "type": "build"
-    },
-    {
-      "name": "esbuild",
       "type": "build"
     },
     {
@@ -157,6 +133,10 @@
     },
     {
       "name": "@cdklabs/deploy-time-build",
+      "type": "runtime"
+    },
+    {
+      "name": "aws-cdk-lambdaless-custom-resource",
       "type": "runtime"
     }
   ],

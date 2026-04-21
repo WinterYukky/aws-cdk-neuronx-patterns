@@ -100,7 +100,7 @@ export class VllmNxdInferenceTaskDefinition extends NeuronxTaskDefinition {
     props: VllmNxdInferenceTaskDefinitionProps,
   ) {
     const neuronxInstanceType =
-      props.neuronxInstanceType ?? props.compiledModel.compileTimeInstanceType;
+      props.neuronxInstanceType ?? props.compiledModel.recommendedInstanceType;
     const tensorParallelSize =
       props.compiledModel.vllmArgs.tensorParallelSize ?? 1;
     super(scope, id, {
