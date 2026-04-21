@@ -1,5 +1,5 @@
 import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
-import { App, CfnOutput, Stack } from "aws-cdk-lib";
+import { App, CfnOutput, RemovalPolicy, Stack } from "aws-cdk-lib";
 import {
   GatewayVpcEndpointAwsService,
   InstanceClass,
@@ -8,9 +8,17 @@ import {
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
 import { NodegroupAmiType, Cluster } from "aws-cdk-lib/aws-eks-v2";
+import { Bucket } from "aws-cdk-lib/aws-s3";
 import { KubectlV34Layer } from "@aws-cdk/lambda-layer-kubectl-v34";
 import * as cxapi from "aws-cdk-lib/cx-api";
-import { HyperPodCluster } from "../src/index";
+import {
+  HyperPodCluster,
+  HyperPodVllmNxdInferenceService,
+  Model,
+  NeuronxInstanceType,
+  Parameters,
+  VllmNxdInferenceCompiler,
+} from "../src/index";
 
 const app = new App();
 Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
@@ -19,6 +27,7 @@ Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
 
 class HyperPodClusterIntegTestStack extends Stack {
   readonly cluster: HyperPodCluster;
+  readonly inferenceService: HyperPodVllmNxdInferenceService;
   constructor(scope: App, id: string) {
     super(scope, id);
     const vpc = new Vpc(this, "Vpc", {
@@ -30,6 +39,27 @@ class HyperPodClusterIntegTestStack extends Stack {
         },
       },
     });
+
+    const bucket = new Bucket(this, "Bucket", {
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+    });
+
+    // Compile a small model for testing
+    const compiler = new VllmNxdInferenceCompiler(this, "Compiler", {
+      vpc,
+      bucket,
+      model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct", {
+        parameters: Parameters.million(135),
+        config: {
+          attentionHeads: 9,
+          embeddingDimension: 576,
+          layers: 30,
+        },
+      }),
+      neuronxInstanceType: NeuronxInstanceType.TRN2_3XLARGE,
+    });
+    const compiledModel = compiler.compile();
 
     this.cluster = new HyperPodCluster(this, "HyperPod", {
       vpc,
@@ -58,11 +88,28 @@ class HyperPodClusterIntegTestStack extends Stack {
       amiType: NodegroupAmiType.AL2023_X86_64_STANDARD,
     });
 
+    // Deploy inference service with SageMaker endpoint registration
+    this.inferenceService = new HyperPodVllmNxdInferenceService(
+      this,
+      "InferenceService",
+      {
+        cluster: this.cluster,
+        compiledModel,
+        registerEndpoint: true,
+      },
+    );
+
     new CfnOutput(this, "EksClusterName", {
       value: this.cluster.eksCluster.clusterName,
     });
     new CfnOutput(this, "HyperPodClusterArn", {
       value: this.cluster.clusterArn,
+    });
+    new CfnOutput(this, "CompiledArtifact", {
+      value: compiledModel.s3Uri,
+    });
+    new CfnOutput(this, "EndpointName", {
+      value: this.inferenceService.endpointName,
     });
   }
 }
@@ -100,6 +147,38 @@ describeCluster
           InstanceType: "ml.trn2.3xlarge",
         }),
       ]),
+    }),
+  )
+  .waitForAssertions();
+
+// Assert inference via SageMaker Runtime invoke-endpoint
+const invokeEndpoint = integTest.assertions.awsApiCall(
+  "SageMakerRuntime",
+  "invokeEndpoint",
+  {
+    EndpointName: stack.inferenceService.endpointName,
+    ContentType: "application/json",
+    Body: JSON.stringify({
+      model: "HuggingFaceTB/SmolLM-135M-Instruct",
+      messages: [
+        {
+          role: "system",
+          content: "You are helpfull assistant.",
+        },
+        {
+          role: "user",
+          content:
+            "please answer '1+1=?'. You must answer only answer numeric.",
+        },
+      ],
+    }),
+  },
+);
+
+invokeEndpoint
+  .expect(
+    ExpectedResult.objectLike({
+      StatusCode: 200,
     }),
   )
   .waitForAssertions();

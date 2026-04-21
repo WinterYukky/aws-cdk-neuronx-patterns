@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/aeccd14a8100b09174673e151ef3a8dc82c923ecb6f285b5e89203ae1d579780.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dce4f1dc5b07e58e006bf720fef5be00f8124d0b0d5685f3e7bcfb3c54bfb15a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -927,6 +927,26 @@
             "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8"
           }
         ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/VllmNxDInferenceIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE"
+          }
+        ],
         "/VllmNxDInferenceIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -1806,10 +1826,7 @@
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "TaskDefinitionB36D86D9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "TaskDefinitionB36D86D9"
           }
         ],
         "/VllmNxDInferenceIntegTestStack/TaskDefinition/vLLM/LogGroup": [
@@ -2781,348 +2798,6 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
-        ],
-        "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventServiceRoleA392D421",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventServiceRoleDefaultPolicy35DD4FF2",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonEvent782775F0": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEvent782775F0",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonEventLogGroup7DA40C11": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonEventLogGroup7DA40C11",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteServiceRole5D3CE7AF",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteServiceRoleDefaultPolicyCFCE5FAA",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisComplete3CEC6FB9": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisComplete3CEC6FB9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkisCompleteLogGroup4D3BBE69": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkisCompleteLogGroup4D3BBE69",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutServiceRole020BD5A6",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutServiceRoleDefaultPolicy92A1CB50",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeout00B040EB": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeout00B040EB",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderframeworkonTimeoutLogGroup756C2566": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderframeworkonTimeoutLogGroup756C2566",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderwaiterstatemachineRole1FEEAA6D",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderwaiterstatemachineRoleDefaultPolicy071F4FCE",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerCompileJobProviderwaiterstatemachine094C7791": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerCompileJobProviderwaiterstatemachine094C7791",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionHandlesdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace9199924774",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerNeuronxCompile8E2589B5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerNeuronxCompile8E2589B5",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91FE0A07B0",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRole90E87678",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacServiceRoleDefaultPolicy795C8F7D",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bac39F17F23",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda1361f4695c924c469e115d1dbf925bacLogGroup0B81A182": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda1361f4695c924c469e115d1dbf925bacLogGroup0B81A182",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleE0466451",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62ServiceRoleDefaultPolicy92D5204A",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62246EFD86",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62LogGroup25096071": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdadf16dba85f77480ca6adcfdf74c3de62LogGroup25096071",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRole985A70E9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdaf6e6699750424df18781bd68b3ac5313ServiceRoleDefaultPolicyE560BDC4",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdaf6e6699750424df18781bd68b3ac5313C2C0D2F0",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambdaf6e6699750424df18781bd68b3ac5313LogGroupFB3C121A": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambdaf6e6699750424df18781bd68b3ac5313LogGroupFB3C121A",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRole48C4A96B",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventServiceRoleDefaultPolicy89C7BBB2",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEvent614A487C",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroup8981F636": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmiProviderframeworkonEventLogGroup8981F636",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ServiceNeuronOptimizedMachineImageNeuronxAmi8B59262A",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258ServiceRole12DC7288",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a25822148CF9",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SingletonLambda08c9850a6f134ed49e2d7888d7b5a258LogGroup2ABD2DA6",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
         ]
       },
       "displayName": "VllmNxDInferenceIntegTestStack"
@@ -3144,7 +2819,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ef26852d08380cacaba0b476e0cccd54c85a365550536c936f1e626e38e1cc67.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/38bb9d3dec8ab8bbd92e96f8e5d47175df1ea8d2816502d47bc0f51f221360ff.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -3783,5 +3458,5 @@
       }
     }
   },
-  "minimumCliVersion": "2.1111.0"
+  "minimumCliVersion": "2.1118.4"
 }
