@@ -1,5 +1,5 @@
 import { Names } from "aws-cdk-lib";
-import { CfnAddon } from "aws-cdk-lib/aws-eks";
+import * as eks from "aws-cdk-lib/aws-eks-v2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -69,7 +69,7 @@ export interface AutoscalingConfig {
   readonly minReplicas?: number;
   /**
    * Maximum number of replicas.
-   * @default 1
+   * @default 10
    */
   readonly maxReplicas?: number;
   /**
@@ -133,6 +133,9 @@ export interface HyperPodVllmNxdInferenceServiceProps {
  *
  * This construct installs the required inference operator addon, cert-manager,
  * and configures IRSA roles automatically.
+ *
+ * Note: Model artifacts are loaded by the HyperPod execution role. For production
+ * workloads requiring pod-level isolation, consider using IRSA for S3 access instead.
  */
 export class HyperPodVllmNxdInferenceService extends Construct {
   /**
@@ -161,16 +164,18 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     const port = vllmArgs.port ?? 8000;
     const cliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
 
-    this.endpointName =
-      this.node.id.toLowerCase().replace(/[^a-z0-9-]/g, "-") + "-endpoint";
+    this.endpointName = Names.uniqueResourceName(this, {
+      maxLength: 63,
+      allowedSpecialCharacters: "-",
+    }).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^[^a-z]/, "a");
 
-    const instanceType = `ml.${props.compiledModel.compileTimeInstanceType.instanceType.toString()}`;
+    const instanceType = `ml.${props.compiledModel.recommendedInstanceType.instanceType.toString()}`;
 
     // --- Install inference prerequisites ---
     this.installInferencePrerequisites(props.cluster);
 
     // --- Build the InferenceEndpointConfig CRD manifest ---
-    const manifest: Record<string, any> = {
+    const manifest = {
       apiVersion: "inference.sagemaker.aws.amazon.com/v1alpha1",
       kind: "InferenceEndpointConfig",
       metadata: {
@@ -213,12 +218,12 @@ export class HyperPodVllmNxdInferenceService extends Construct {
             s3Uri: props.compiledModel.s3Uri,
           },
         },
-      },
+      } as Record<string, unknown>,
     };
 
     // KV Cache configuration
     if (props.kvCacheConfig) {
-      const kvCacheSpec: Record<string, any> = {};
+      const kvCacheSpec: Record<string, unknown> = {};
       if (props.kvCacheConfig.enableL1Cache !== undefined) {
         kvCacheSpec.enableL1Cache = props.kvCacheConfig.enableL1Cache;
       }
@@ -226,26 +231,26 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         kvCacheSpec.enableL2Cache = props.kvCacheConfig.enableL2Cache;
       }
       if (props.kvCacheConfig.enableL2Cache) {
-        kvCacheSpec.l2CacheSpec = {
+        const l2Spec: Record<string, unknown> = {
           l2CacheBackend: props.kvCacheConfig.l2CacheBackend ?? "tieredstorage",
         };
         if (props.kvCacheConfig.l2CacheLocalUrl) {
-          kvCacheSpec.l2CacheSpec.l2CacheLocalUrl =
-            props.kvCacheConfig.l2CacheLocalUrl;
+          l2Spec.l2CacheLocalUrl = props.kvCacheConfig.l2CacheLocalUrl;
         }
+        kvCacheSpec.l2CacheSpec = l2Spec;
       }
       manifest.spec.kvCacheSpec = kvCacheSpec;
     }
 
     // Intelligent routing configuration
     if (props.intelligentRouting) {
-      manifest.spec.intelligentRoutingSpec = {
+      const routingSpec: Record<string, unknown> = {
         enabled: props.intelligentRouting.enabled,
       };
       if (props.intelligentRouting.routingStrategy) {
-        manifest.spec.intelligentRoutingSpec.routingStrategy =
-          props.intelligentRouting.routingStrategy;
+        routingSpec.routingStrategy = props.intelligentRouting.routingStrategy;
       }
+      manifest.spec.intelligentRoutingSpec = routingSpec;
     }
 
     // SageMaker endpoint registration
@@ -264,11 +269,11 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // Autoscaling via KEDA ScaledObject
     if (props.autoscaling) {
       const minReplicas = props.autoscaling.minReplicas ?? 1;
-      const maxReplicas = props.autoscaling.maxReplicas ?? 1;
+      const maxReplicas = props.autoscaling.maxReplicas ?? 10;
       const targetMetric = props.autoscaling.targetMetric ?? "cpu_utilization";
       const targetValue = props.autoscaling.targetValue ?? 80;
 
-      const scaledObjectManifest: Record<string, any> = {
+      const scaledObjectManifest = {
         apiVersion: "keda.sh/v1alpha1",
         kind: "ScaledObject",
         metadata: {
@@ -277,6 +282,8 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         },
         spec: {
           scaleTargetRef: {
+            apiVersion: "apps/v1",
+            kind: "Deployment",
             name: this.endpointName,
           },
           minReplicaCount: minReplicas,
@@ -327,13 +334,13 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     tlsBucket.grantReadWrite(inferenceOperatorRole);
 
     // Inference Operator EKS Addon (bundles ALB Controller, KEDA, and cert-manager)
-    const addon = new CfnAddon(this, "InferenceOperatorAddon", {
+    const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
-      clusterName: cluster.eksCluster.clusterName,
-      configurationValues: JSON.stringify({
+      cluster: cluster.eksCluster,
+      configurationValues: {
         executionRoleArn: inferenceOperatorRole.roleArn,
         tlsCertificateS3Bucket: tlsBucket.bucketName,
-      }),
+      },
     });
     addon.node.addDependency(cluster.eksCluster);
     addon.node.addDependency(tlsBucket);

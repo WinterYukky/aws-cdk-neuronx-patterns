@@ -340,6 +340,11 @@ export class HyperPodCluster extends Construct {
 
   /**
    * Creates an IRSA (IAM Role for Service Account) with trust policy for the EKS OIDC provider.
+   *
+   * Note: When using an existing EKS cluster (via `eksCluster` prop), the HYPERPOD_LINUX
+   * AccessEntry is not automatically created. You must ensure the HyperPod execution role
+   * has cluster admin access configured externally.
+   *
    * @param id Construct ID for the role
    * @param serviceAccountName Kubernetes service account name
    * @param serviceAccountNamespace Kubernetes namespace for the service account

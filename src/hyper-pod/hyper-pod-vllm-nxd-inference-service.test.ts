@@ -46,7 +46,7 @@ describe("HyperPodVllmNxdInferenceService", () => {
     });
     const bucket = new Bucket(stack, "Bucket");
     compiledModel = {
-      compileTimeInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
+      recommendedInstanceType: NeuronxInstanceType.TRN2_48XLARGE,
       bucket,
       s3Uri: bucket.s3UrlForObject("compiled-model"),
       s3Prefix: "compiled-model",
