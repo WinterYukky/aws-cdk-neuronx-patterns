@@ -6,6 +6,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/lambda-layer-kubectl-v34",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },

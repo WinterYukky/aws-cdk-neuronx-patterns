@@ -26,7 +26,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "aws-cdk-lambdaless-custom-resource",
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
+  devDeps: [
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    "@aws-cdk/lambda-layer-kubectl-v34",
+  ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js", ".amazonq"],
   githubOptions: {
