@@ -376,7 +376,8 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // which would cause CloudFormation dependency cycles once we make our
     // own manifests depend on the addon to ensure CRDs exist first.
     addon.node.addDependency(
-      (cluster.eksCluster.node.defaultChild ?? cluster.eksCluster) as IDependable,
+      (cluster.eksCluster.node.defaultChild ??
+        cluster.eksCluster) as IDependable,
     );
     addon.node.addDependency(tlsBucket);
 
