@@ -167,7 +167,10 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     this.endpointName = Names.uniqueResourceName(this, {
       maxLength: 63,
       allowedSpecialCharacters: "-",
-    }).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^[^a-z]/, "a");
+    })
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "-")
+      .replace(/^[^a-z]/, "a");
 
     const instanceType = `ml.${props.compiledModel.recommendedInstanceType.instanceType.toString()}`;
 

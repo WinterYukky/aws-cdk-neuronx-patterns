@@ -320,9 +320,7 @@ export class HyperPodCluster extends Construct {
           },
         },
         nodeRecovery: props.nodeRecovery ?? "Automatic",
-        ...(hasSpotGroups
-          ? { nodeProvisioningMode: "Continuous" }
-          : {}),
+        ...(hasSpotGroups ? { nodeProvisioningMode: "Continuous" } : {}),
         vpcConfig: {
           securityGroupIds: [
             this.eksCluster.clusterSecurityGroupId,
