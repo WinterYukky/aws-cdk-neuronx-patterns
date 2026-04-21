@@ -1195,7 +1195,7 @@
       },
       {
        "Type": "VCPU",
-       "Value": "4"
+       "Value": "8"
       }
      ],
      "Secrets": []
@@ -1313,7 +1313,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":states:::aws-sdk:batch:describeJobs\"},\"CheckJobStatus\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $JobStatus = 'SUCCEEDED' %}\",\"Next\":\"JobSucceeded\"},{\"Condition\":\"{% $JobStatus = 'FAILED' %}\",\"Next\":\"JobFailed\"}],\"Default\":\"WaitForJob\"},\"JobSucceeded\":{\"Type\":\"Pass\",\"Output\":{\"Data\":{\"s3Prefix\":\"sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91\"}},\"End\":true},\"JobFailed\":{\"Type\":\"Pass\",\"Output\":{\"{% 'error' %}\":\"{% 'CompileJobFailed' %}\",\"{% 'cause' %}\":\"{% $StatusReason %}\"},\"End\":true},\"Update\":{\"Type\":\"Pass\",\"End\":true},\"Delete\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":43200,\"QueryLanguage\":\"JSONata\"}"
+       ":states:::aws-sdk:batch:describeJobs\"},\"CheckJobStatus\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $JobStatus = 'SUCCEEDED' %}\",\"Next\":\"JobSucceeded\"},{\"Condition\":\"{% $JobStatus = 'FAILED' %}\",\"Next\":\"JobFailed\"}],\"Default\":\"WaitForJob\"},\"JobSucceeded\":{\"Type\":\"Pass\",\"Output\":{\"Data\":{\"s3Prefix\":\"sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91\"}},\"End\":true},\"JobFailed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"{% 'FAILED' %}\",\"Reason\":\"{% 'CompileJobFailed: ' & $StatusReason %}\"},\"End\":true},\"Update\":{\"Type\":\"Pass\",\"End\":true},\"Delete\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":43200,\"QueryLanguage\":\"JSONata\"}"
       ]
      ]
     },

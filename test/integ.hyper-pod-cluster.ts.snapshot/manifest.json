@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9b0045abb456b110d47a9e5c9697f9836df70523cd7a1271cd71c01424ed8d0e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3a3c76c285a9a76c2260b6c7f5568c034e566320a1c09deb986c0fc126f33622.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -335,6 +335,1386 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy",
+              "autoDeleteObjects": true
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Bucket83908E77"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketPolicyE9A3008A"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket/AutoDeleteObjectsCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketAutoDeleteObjectsCustomResourceBAFD23C2"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/CompileImage/CustomResourceHandler": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "code": "*",
+              "handler": "*",
+              "uuid": "*",
+              "lambdaPurpose": "*",
+              "timeout": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/CompileImage/Repository": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/CompileImage/Repository/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileImageRepository8D221D1D"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/CompileImage/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/CompileImage/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileImage3977F38E"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/LaunchTemplate": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "blockDevices": [
+                {
+                  "deviceName": "*",
+                  "volume": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerLaunchTemplate4C63C08A"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "instanceTypes": "*",
+              "useOptimalInstanceClasses": false,
+              "launchTemplate": "*",
+              "spot": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentSecurityGroupC05FE9C7"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentInstanceProfile719C0447"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerComputeEnvironmentFB939B89"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "roleName": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerContainerDefinitionExecutionRoleB7A79408"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/ContainerDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/JobDefinition": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "container": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/JobDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobDefinition637B02EA"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/JobQueue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {}
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/JobQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerJobQueue59AB0D38"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "queryLanguage": "JSONata",
+              "definitionBody": "*",
+              "timeout": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileStateMachineRoleBD8927F3"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileStateMachineRoleDefaultPolicy3A5EC7CA"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/CompileStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerCompileStateMachine8A596131"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Handle": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/WaitCondition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "code": "*",
+              "handler": "*",
+              "timeout": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f306AEFF37"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3LogGroupD6190314"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "environment": {
+                "computeType": "BUILD_GENERAL1_SMALL",
+                "buildImage": {
+                  "type": "*",
+                  "defaultComputeType": "BUILD_GENERAL1_SMALL",
+                  "imageId": "*",
+                  "imagePullPrincipalType": "CODEBUILD",
+                  "secretsManagerCredentials": "*",
+                  "repository": "*"
+                },
+                "privileged": true
+              },
+              "vpc": "*",
+              "buildSpec": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "roleName": "*",
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addManagedPolicy": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleDefaultPolicyBD233B55"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Topic": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "masterKey": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Topic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderTopic58DC2415"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderQueue3E954037"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "queues": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderQueuePolicy16C88515"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue/HyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A0": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "topic": "*",
+              "endpoint": "*",
+              "protocol": "sqs",
+              "rawMessageDelivery": "*",
+              "filterPolicy": "*",
+              "filterPolicyWithMessageBody": "*",
+              "region": "*",
+              "deadLetterQueue": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Queue/HyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Connection": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "authorization": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Connection/Connection": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderConnection803AC994"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "stateMachineType": "EXPRESS",
+              "queryLanguage": "JSONata",
+              "definitionBody": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToRolePolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderStateMachineRole4BDCD64E"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderStateMachineRoleDefaultPolicy613E8B8C"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/StateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderStateMachine7D8C8128"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Pipe/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Pipe/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderPipeRoleD3BC051F"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Pipe/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Pipe/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderPipeRoleDefaultPolicy918C6032"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/LambdalessProvider/Pipe/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdalessProviderPipeE285A459"
           }
         ],
         "/HyperPodClusterIntegTestStack/KubectlLayer": [
@@ -918,6 +2298,40 @@
             "data": "HyperPodEksClusterNodegroupSystemNodesCB7A5C16"
           }
         ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/OidcProviderNative": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "url": "*",
+              "removalPolicy": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "url": "*",
+              "removalPolicy": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/OidcProviderNative/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodEksClusterOidcProviderNative3733B6CC"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/manifest-InferenceEndpoint/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/manifest-InferenceEndpoint/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodEksClustermanifestInferenceEndpoint09B1D871"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/HyperPod/HyperPodSecurityGroup": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -1010,6 +2424,14 @@
                 {}
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/ExecutionRole/Resource": [
@@ -1036,6 +2458,14 @@
             "data": {
               "attachToRole": [
                 "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
               ]
             }
           },
@@ -1193,22 +2623,108 @@
             "data": "HyperPodSageMakerCluster3AAE6C37"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRoleOidcCondition/Resource": [
           {
-            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
-            "data": true
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRoleOidcCondition/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+            "data": "HyperPodInferenceOperatorRoleOidcCondition52F40877"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "roleName": "*",
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addManagedPolicy": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+            "data": "HyperPodInferenceOperatorRoleC9369B05"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodInferenceOperatorRoleDefaultPolicyC3A859A4"
           }
         ],
         "/HyperPodClusterIntegTestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
@@ -1377,6 +2893,68 @@
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CLogGroup817B64E9"
           }
         ],
+        "/HyperPodClusterIntegTestStack/InferenceService/TlsCertificateBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "enforceSSL": true
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/TlsCertificateBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceTlsCertificateBucket485D9F51"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/TlsCertificateBucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/TlsCertificateBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceTlsCertificateBucketPolicy55DB7ABB"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/InferenceOperatorAddon": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "addonName": "*",
+              "cluster": "*",
+              "configurationValues": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/InferenceOperatorAddon/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceInferenceOperatorAddonFEF09769"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/AWSCDKCfnUtilsProviderCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/EksClusterName": [
           {
             "type": "aws:cdk:logicalId",
@@ -1387,6 +2965,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "HyperPodClusterArn"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/CompiledArtifact": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompiledArtifact"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/EndpointName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EndpointName"
           }
         ],
         "/HyperPodClusterIntegTestStack/Exports/Output{\"Fn::GetAtt\":[\"HyperPodSageMakerCluster3AAE6C37\",\"ClusterArn\"]}": [
@@ -1427,7 +3017,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e609b70c43739660a62a0a6f6556b52c4094cd550d97ce85f968c3e4377ec0ae.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e224197749661c638c15c471453e439f48f5607de439f9bfc78bff3b5e4b109a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1528,6 +3118,56 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/IsCompleteProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForIsCompleteProviderInvokeD5CEAC24"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/TimeoutProvider/Invoke": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForTimeoutProviderInvoke5FD3C0F6"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3"
+          }
+        ],
+        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/AssertionResults": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssertionResultsAwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
           }
         ],
         "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [

@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1776768927053"
+    "salt": "1776787387866"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -195,6 +195,24 @@
          "Resource": [
           "*"
          ]
+        },
+        {
+         "Action": [
+          "sagemaker:InvokeEndpoint"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "*"
+         ]
+        },
+        {
+         "Action": [
+          "states:StartExecution"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "*"
+         ]
         }
        ]
       }
@@ -251,6 +269,15 @@
         {
          "Action": [
           "sagemaker:DescribeCluster"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          "*"
+         ]
+        },
+        {
+         "Action": [
+          "sagemaker:InvokeEndpoint"
          ],
          "Effect": "Allow",
          "Resource": [
@@ -324,6 +351,149 @@
      ]
     }
    }
+  },
+  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506": {
+   "Type": "Custom::DeployAssert@SdkCallSageMakerRuntimeinvokeEndpoint",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F",
+      "Arn"
+     ]
+    },
+    "service": "SageMakerRuntime",
+    "api": "invokeEndpoint",
+    "expected": "{\"$ObjectLike\":{\"StatusCode\":200}}",
+    "stateMachineArn": {
+     "Ref": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3"
+    },
+    "parameters": {
+     "EndpointName": "\"hyperpodclusterintegteststackinferenceservice5e8c33f7\"",
+     "ContentType": "\"application/json\"",
+     "Body": "\"{\\\"model\\\":\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\",\\\"messages\\\":[{\\\"role\\\":\\\"system\\\",\\\"content\\\":\\\"You are helpfull assistant.\\\"},{\\\"role\\\":\\\"user\\\",\\\"content\\\":\\\"please answer '1+1=?'. You must answer only answer numeric.\\\"}]}\""
+    },
+    "flattenResponse": "false",
+    "salt": "1776787387868"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForIsCompleteProviderInvokeD5CEAC24": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE",
+      "Arn"
+     ]
+    },
+    "Principal": {
+     "Fn::GetAtt": [
+      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForTimeoutProviderInvoke5FD3C0F6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA",
+      "Arn"
+     ]
+    },
+    "Principal": {
+     "Fn::GetAtt": [
+      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "Policies": [
+     {
+      "PolicyName": "InlineInvokeFunctions",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Action": "lambda:InvokeFunction",
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::GetAtt": [
+            "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE",
+            "Arn"
+           ]
+          },
+          {
+           "Fn::GetAtt": [
+            "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"framework-isComplete-task\",\"States\":{\"framework-isComplete-task\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":5,\"MaxAttempts\":360,\"BackoffRate\":1}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"framework-onTimeout-task\"}],\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE",
+         "Arn"
+        ]
+       },
+       "\"},\"framework-onTimeout-task\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA",
+         "Arn"
+        ]
+       },
+       "\"}}}"
+      ]
+     ]
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E"
+   ]
   }
  },
  "Outputs": {
@@ -331,6 +501,14 @@
    "Value": {
     "Fn::GetAtt": [
      "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c",
+     "assertion"
+    ]
+   }
+  },
+  "AssertionResultsAwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506": {
+   "Value": {
+    "Fn::GetAtt": [
+     "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506",
      "assertion"
     ]
    }

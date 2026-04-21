@@ -15,6 +15,48 @@
         }
       }
     },
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-e31788a2": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74": {
+      "displayName": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3/Code",
+      "source": {
+        "path": "asset.b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-745b40df": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf": {
+      "displayName": "Compiler/CompileImage/Source",
+      "source": {
+        "path": "asset.bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-66af0fe5": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
     "8340e57c9dd5ef860787b6ba79b1fb698b98443065c2e7277e133357da92547f": {
       "displayName": "KubectlLayer/Code",
       "source": {
@@ -85,20 +127,6 @@
         }
       }
     },
-    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
-      "displayName": "HyperPodClusterIntegTestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
-      "source": {
-        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
-        "packaging": "zip"
-      },
-      "destinations": {
-        "current_account-current_region-e31788a2": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
-        }
-      }
-    },
     "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9": {
       "displayName": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
       "source": {
@@ -127,16 +155,30 @@
         }
       }
     },
-    "9b0045abb456b110d47a9e5c9697f9836df70523cd7a1271cd71c01424ed8d0e": {
+    "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80": {
+      "displayName": "HyperPodClusterIntegTestStack/AWSCDKCfnUtilsProviderCustomResourceProvider Code",
+      "source": {
+        "path": "asset.c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-10aab72e": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "3a3c76c285a9a76c2260b6c7f5568c034e566320a1c09deb986c0fc126f33622": {
       "displayName": "HyperPodClusterIntegTestStack Template",
       "source": {
         "path": "HyperPodClusterIntegTestStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-e3f2733b": {
+        "current_account-current_region-7bf34582": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "9b0045abb456b110d47a9e5c9697f9836df70523cd7a1271cd71c01424ed8d0e.json",
+          "objectKey": "3a3c76c285a9a76c2260b6c7f5568c034e566320a1c09deb986c0fc126f33622.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
