@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2956e6c3fd60e3b7b62a39a2e2ca3ad5137d22f8cd584c11f8b2a42a839ec138.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/eb629e8907a4acc82098121db5d1628b7412954980211f8d72d6e2ddc0613650.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2933,6 +2933,21 @@
             "data": "InferenceServiceTlsCertificateBucketPolicy55DB7ABB"
           }
         ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverAddon": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "addonName": "*",
+              "cluster": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverAddon/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiDriverAddon48E523B7"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/InferenceService/InferenceOperatorAddon": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -3029,7 +3044,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ce91cf78401fdeb508c1c6348fd7d66836f4662a438090a77a71e8ff3984d08f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/add2286e5a02db18e3d311d99af861e1294b74749c9de52127ebc607dd64c00c.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
