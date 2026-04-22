@@ -337,11 +337,16 @@ export class HyperPodVllmNxdInferenceService extends Construct {
   }
 
   private installInferencePrerequisites(cluster: HyperPodCluster): eks.Addon {
-    // Inference Operator IRSA role
+    // Inference Operator IRSA role.
+    //
+    // The EKS addon installs the controller-manager ServiceAccount under the
+    // `hyperpod-inference-system` namespace (not `kube-system`), so the IRSA
+    // trust policy must condition on that namespace or sts:AssumeRoleWithWebIdentity
+    // is denied with "Not authorized to perform sts:AssumeRoleWithWebIdentity".
     const inferenceOperatorRole = cluster.createServiceAccountRole(
       "InferenceOperatorRole",
       "hyperpod-inference-controller-manager",
-      "kube-system",
+      "hyperpod-inference-system",
     );
     inferenceOperatorRole.addManagedPolicy(
       iam.ManagedPolicy.fromAwsManagedPolicyName(
@@ -477,6 +482,14 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     addon.node.addDependency(
       (certManager.node.defaultChild ?? certManager) as IDependable,
     );
+
+    // We pass the HyperPod cluster ARN through `hyperpodClusterArn` using a
+    // Ref of the SageMaker cluster, but `toJsonString` on
+    // `configurationValues` does not propagate that Ref into
+    // CloudFormation's automatic DependsOn inference. Explicitly wait for
+    // the CfnCluster so the addon is created after the HyperPod cluster
+    // actually exists.
+    addon.node.addDependency(sagemakerCluster);
 
     return addon;
   }

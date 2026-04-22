@@ -3574,7 +3574,7 @@
          }
         ]
        },
-       ":sub\":\"system:serviceaccount:kube-system:hyperpod-inference-controller-manager\",\"",
+       ":sub\":\"system:serviceaccount:hyperpod-inference-system:hyperpod-inference-controller-manager\",\"",
        {
         "Fn::Select": [
          1,
@@ -3991,6 +3991,7 @@
    "DependsOn": [
     "HyperPodEksClusterchartCertManager6B0C3C19",
     "HyperPodEksCluster2B4D66BB",
+    "HyperPodSageMakerCluster3AAE6C37",
     "InferenceServiceFsxCsiDriverAddon3BD6BA90",
     "InferenceServiceS3CsiDriverAddon48E523B7",
     "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
