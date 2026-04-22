@@ -7,7 +7,7 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3assets from "aws-cdk-lib/aws-s3-assets";
 import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import * as sagemaker from "aws-cdk-lib/aws-sagemaker";
-import { Construct } from "constructs";
+import { Construct, IDependable } from "constructs";
 import { join } from "path";
 
 /**
@@ -330,7 +330,15 @@ export class HyperPodCluster extends Construct {
         },
       },
     );
-    this._sagemakerCluster.node.addDependency(this.eksCluster);
+    // Depend on the underlying CfnCluster (and the dependency bootstraps)
+    // rather than the EKS Cluster construct. Depending on the construct
+    // would expand into every KubernetesManifest / HelmChart / Addon rooted
+    // at the EKS cluster, and any consumer that later makes one of those
+    // resources depend on the SageMaker cluster would form a
+    // CloudFormation dependency cycle.
+    const eksClusterCfn = (this.eksCluster.node.defaultChild ??
+      this.eksCluster) as IDependable;
+    this._sagemakerCluster.node.addDependency(eksClusterCfn);
     this._sagemakerCluster.node.addDependency(hyperPodDepsChart);
     this._sagemakerCluster.node.addDependency(lifecycleDeploy);
     this.clusterArn = this._sagemakerCluster.attrClusterArn;

@@ -419,12 +419,34 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // Inference Operator EKS Addon (bundles ALB Controller and KEDA; requires
     // cert-manager and the S3/FSx CSI drivers to be pre-installed on the
     // cluster).
+    // Derive the HyperPod SageMaker cluster ARN via Stack.formatArn +
+    // getResourceNameAttribute against the underlying CfnCluster's `Ref`
+    // (which resolves to the cluster name). This avoids emitting an
+    // `Fn::GetAtt` to the CfnCluster, which would pull the cluster
+    // construct (and everything that depends on it, including the inference
+    // manifest) into the addon's implicit DependsOn and cause a
+    // CloudFormation dependency cycle.
+    const sagemakerCluster = cluster.node.findChild(
+      "SageMakerCluster",
+    ) as cdk.CfnResource;
+    const clusterArnForAddon = cdk.Stack.of(this).formatArn({
+      service: "sagemaker",
+      resource: "cluster",
+      resourceName: sagemakerCluster.ref,
+    });
+
     const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
       cluster: cluster.eksCluster,
       configurationValues: {
         executionRoleArn: inferenceOperatorRole.roleArn,
         tlsCertificateS3Bucket: tlsBucket.bucketName,
+        // The inference operator tries to auto-detect the HyperPod cluster
+        // ARN from the node it runs on, which fails when it is scheduled on
+        // the EKS system nodegroup ("cluster name label not found"). Pass
+        // the ARN explicitly so the operator does not depend on node labels
+        // present only on SageMaker HyperPod instance groups.
+        hyperpodClusterArn: clusterArnForAddon,
       },
     });
     // We intentionally depend on the underlying CfnCluster rather than the

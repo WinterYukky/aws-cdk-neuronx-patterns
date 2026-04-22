@@ -3541,26 +3541,8 @@
     }
    },
    "DependsOn": [
-    "HyperPodEksClusterchartCertManager6B0C3C19",
     "HyperPodEksClusterchartHyperPodDependencies929AF454",
-    "HyperPodEksClusterClusterAdminRoleAccess145D6E10",
-    "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8",
-    "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0",
-    "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB",
-    "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
-    "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520",
-    "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
-    "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D",
-    "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
-    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828",
-    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475",
-    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC",
-    "HyperPodEksClustermanifestInferenceEndpoint09B1D871",
-    "HyperPodEksClusterNodegroupSystemNodesNodeGroupRole650B2494",
-    "HyperPodEksClusterNodegroupSystemNodesCB7A5C16",
-    "HyperPodEksClusterOidcProviderNative3733B6CC",
     "HyperPodEksCluster2B4D66BB",
-    "HyperPodEksClusterRole395F118B",
     "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7",
     "HyperPodLifecycleScriptsDeployCustomResource170B3FFF"
    ]
@@ -3984,6 +3966,22 @@
        "\",\"tlsCertificateS3Bucket\":\"",
        {
         "Ref": "InferenceServiceTlsCertificateBucket485D9F51"
+       },
+       "\",\"hyperpodClusterArn\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sagemaker:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":cluster/",
+       {
+        "Ref": "HyperPodSageMakerCluster3AAE6C37"
        },
        "\"}"
       ]
