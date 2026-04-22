@@ -3126,18 +3126,22 @@
      "Fn::Join": [
       "",
       [
-       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1alpha1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterintegteststackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"HuggingFaceTB/SmolLM-135M-Instruct\",\"instanceType\":\"ml.trn2.3xlarge\",\"containerSpec\":{\"image\":\"public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04\",\"env\":[{\"name\":\"VLLM_NEURON_FRAMEWORK\",\"value\":\"neuronx-distributed-inference\"},{\"name\":\"NEURON_COMPILED_ARTIFACTS\",\"value\":\"neuron-compiled-artifacts\"},{\"name\":\"NEURON_RT_NUM_CORES\",\"value\":\"1\"},{\"name\":\"XLA_HANDLE_SPECIAL_SCALAR\",\"value\":\"1\"}],\"args\":[\"/opt/ml/model\",\"--served-model-name\",\"HuggingFaceTB/SmolLM-135M-Instruct\",\"--max-model-len\",\"128\",\"--max-num-seqs\",\"1\",\"--tensor-parallel-size\",\"1\",\"--block-size\",\"32\"],\"ports\":[{\"containerPort\":8000,\"protocol\":\"TCP\"}]},\"modelDataSource\":{\"s3DataSource\":{\"s3Uri\":\"s3://",
+       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterintegteststackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"HuggingFaceTB/SmolLM-135M-Instruct\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterintegteststackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
        {
         "Ref": "Bucket83908E77"
        },
-       "/",
+       "\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\"},\"modelLocation\":\"",
        {
         "Fn::GetAtt": [
          "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
          "s3Prefix"
         ]
        },
-       "\"}},\"sageMakerEndpoint\":{\"register\":true}}}]"
+       "\"},\"worker\":{\"image\":\"public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04\",\"args\":[\"/opt/ml/model\",\"--served-model-name\",\"HuggingFaceTB/SmolLM-135M-Instruct\",\"--max-model-len\",\"128\",\"--max-num-seqs\",\"1\",\"--tensor-parallel-size\",\"1\",\"--block-size\",\"32\"],\"environmentVariables\":[{\"name\":\"VLLM_NEURON_FRAMEWORK\",\"value\":\"neuronx-distributed-inference\"},{\"name\":\"NEURON_COMPILED_ARTIFACTS\",\"value\":\"neuron-compiled-artifacts\"},{\"name\":\"NEURON_RT_NUM_CORES\",\"value\":\"1\"},{\"name\":\"XLA_HANDLE_SPECIAL_SCALAR\",\"value\":\"1\"}],\"modelInvocationPort\":{\"containerPort\":8000},\"modelVolumeMount\":{\"name\":\"model-volume\"},\"resources\":{\"requests\":{\"aws.amazon.com/neuron\":\"1\"},\"limits\":{\"aws.amazon.com/neuron\":\"1\"}}}}}]"
       ]
      ]
     },

@@ -113,8 +113,14 @@ describe("HyperPodVllmNxdInferenceService", () => {
       autoscaling: {
         minReplicas: 1,
         maxReplicas: 4,
-        targetMetric: "cpu_utilization",
-        targetValue: 70,
+        cloudWatchTriggers: [
+          {
+            name: "cpu",
+            namespace: "AWS/EKS",
+            metricName: "pod_cpu_utilization",
+            targetValue: 70,
+          },
+        ],
       },
     });
     const template = Template.fromStack(stack);

@@ -60,7 +60,12 @@ export interface IntelligentRoutingConfig {
 }
 
 /**
- * Autoscaling configuration for the inference endpoint via KEDA.
+ * Autoscaling configuration for the inference endpoint.
+ *
+ * The InferenceEndpointConfig CRD (v1) accepts an `autoScalingSpec` with
+ * CloudWatch- or Prometheus-based triggers; this construct currently
+ * exposes the minimum surface needed to set the replica range and leave
+ * triggers configurable via `triggers`.
  */
 export interface AutoscalingConfig {
   /**
@@ -74,13 +79,15 @@ export interface AutoscalingConfig {
    */
   readonly maxReplicas?: number;
   /**
-   * Target metric name for autoscaling.
+   * CloudWatch triggers for autoscaling (see CRD docs for the full schema).
+   * Each trigger must at least set `name`, `namespace`, `metricName` and
+   * `targetValue`.
    */
-  readonly targetMetric?: string;
+  readonly cloudWatchTriggers?: Record<string, unknown>[];
   /**
-   * Target metric value threshold.
+   * Prometheus triggers for autoscaling (see CRD docs for the full schema).
    */
-  readonly targetValue?: number;
+  readonly prometheusTriggers?: Record<string, unknown>[];
 }
 
 /**
@@ -182,8 +189,18 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     );
 
     // --- Build the InferenceEndpointConfig CRD manifest ---
+    //
+    // The stored schema version in the amazon-sagemaker-hyperpod-inference
+    // addon is `v1`, which differs materially from `v1alpha1`:
+    //   - `containerSpec` is renamed to `worker`; `env` -> `environmentVariables`
+    //     and `ports` -> `modelInvocationPort` (a single port).
+    //   - `modelDataSource.s3DataSource.s3Uri` is replaced by
+    //     `modelSourceConfig.{modelSourceType, s3Storage, modelLocation}`.
+    //   - `sageMakerEndpoint.register: true` is replaced by populating
+    //     `endpointName`; an empty string means "do not create an endpoint".
+    //   - `worker.modelVolumeMount` and `worker.resources` are required.
     const manifest = {
-      apiVersion: "inference.sagemaker.aws.amazon.com/v1alpha1",
+      apiVersion: "inference.sagemaker.aws.amazon.com/v1",
       kind: "InferenceEndpointConfig",
       metadata: {
         name: this.endpointName,
@@ -192,9 +209,19 @@ export class HyperPodVllmNxdInferenceService extends Construct {
       spec: {
         modelName: props.compiledModel.modelName,
         instanceType,
-        containerSpec: {
+        ...(registerEndpoint ? { endpointName: this.endpointName } : {}),
+        modelSourceConfig: {
+          modelSourceType: "s3",
+          s3Storage: {
+            bucketName: props.compiledModel.bucket.bucketName,
+            region: cdk.Stack.of(this).region,
+          },
+          modelLocation: props.compiledModel.s3Prefix,
+        },
+        worker: {
           image: imageUri,
-          env: [
+          args: cliArgs,
+          environmentVariables: [
             {
               name: "VLLM_NEURON_FRAMEWORK",
               value: "neuronx-distributed-inference",
@@ -212,17 +239,19 @@ export class HyperPodVllmNxdInferenceService extends Construct {
               value: "1",
             },
           ],
-          args: cliArgs,
-          ports: [
-            {
-              containerPort: port,
-              protocol: "TCP",
+          modelInvocationPort: {
+            containerPort: port,
+          },
+          modelVolumeMount: {
+            name: "model-volume",
+          },
+          resources: {
+            requests: {
+              "aws.amazon.com/neuron": tensorParallelSize.toString(),
             },
-          ],
-        },
-        modelDataSource: {
-          s3DataSource: {
-            s3Uri: props.compiledModel.s3Uri,
+            limits: {
+              "aws.amazon.com/neuron": tensorParallelSize.toString(),
+            },
           },
         },
       } as Record<string, unknown>,
@@ -260,13 +289,6 @@ export class HyperPodVllmNxdInferenceService extends Construct {
       manifest.spec.intelligentRoutingSpec = routingSpec;
     }
 
-    // SageMaker endpoint registration
-    if (registerEndpoint) {
-      manifest.spec.sageMakerEndpoint = {
-        register: true,
-      };
-    }
-
     // Deploy the CRD manifest via kubectl
     const endpointManifest = props.cluster.eksCluster.addManifest(
       "InferenceEndpoint",
@@ -289,50 +311,24 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // Grant S3 access for model loading
     props.compiledModel.bucket.grantRead(props.cluster.executionRole);
 
-    // Autoscaling via KEDA ScaledObject
+    // Autoscaling is driven by the `autoScalingSpec` field on the
+    // InferenceEndpointConfig itself in schema v1 (the operator provisions
+    // a managed ScaledObject internally), so we augment the manifest we
+    // already built above rather than applying a standalone KEDA resource.
     if (props.autoscaling) {
-      const minReplicas = props.autoscaling.minReplicas ?? 1;
-      const maxReplicas = props.autoscaling.maxReplicas ?? 10;
-      const targetMetric = props.autoscaling.targetMetric ?? "cpu_utilization";
-      const targetValue = props.autoscaling.targetValue ?? 80;
-
-      const scaledObjectManifest = {
-        apiVersion: "keda.sh/v1alpha1",
-        kind: "ScaledObject",
-        metadata: {
-          name: `${this.endpointName}-scaledobject`,
-          namespace,
-        },
-        spec: {
-          scaleTargetRef: {
-            apiVersion: "apps/v1",
-            kind: "Deployment",
-            name: this.endpointName,
-          },
-          minReplicaCount: minReplicas,
-          maxReplicaCount: maxReplicas,
-          triggers: [
-            {
-              type: "metrics-api",
-              metadata: {
-                targetValue: targetValue.toString(),
-                url: `http://localhost:${port}/metrics`,
-                valueLocation: targetMetric,
-              },
-            },
-          ],
-        },
+      const autoScalingSpec: Record<string, unknown> = {
+        minReplicaCount: props.autoscaling.minReplicas ?? 1,
+        maxReplicaCount: props.autoscaling.maxReplicas ?? 10,
       };
-
-      const scaledObject = props.cluster.eksCluster.addManifest(
-        "AutoscalingScaledObject",
-        scaledObjectManifest,
-      );
-      // KEDA's ScaledObject CRD is also installed by the inference addon,
-      // so mirror the dependency used for the InferenceEndpointConfig manifest.
-      scaledObject.node.addDependency(
-        inferencePrerequisites.node.defaultChild as cdk.CfnResource,
-      );
+      if (props.autoscaling.cloudWatchTriggers?.length) {
+        autoScalingSpec.cloudWatchTriggerList =
+          props.autoscaling.cloudWatchTriggers;
+      }
+      if (props.autoscaling.prometheusTriggers?.length) {
+        autoScalingSpec.prometheusTriggerList =
+          props.autoscaling.prometheusTriggers;
+      }
+      manifest.spec.autoScalingSpec = autoScalingSpec;
     }
   }
 
