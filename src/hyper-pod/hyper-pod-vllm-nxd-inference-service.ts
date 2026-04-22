@@ -165,10 +165,17 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     const imageUri = `${vllmImage.imageName}:${vllmImage.imageTag}`;
     const registerEndpoint = props.registerEndpoint ?? false;
 
+    // The compile entrypoint (scripts/compile/vllm-nxd-inference/entrypoint.sh)
+    // downloads the model into `$MODEL_NAME/` and then uploads the entire
+    // working directory to S3, so the compiled artifacts in S3 live under
+    // `<s3Prefix>/<modelName>/...` with `config.json` inside that subdirectory.
+    // When the inference operator mounts that prefix at /opt/ml/model, the
+    // HuggingFace config is therefore at /opt/ml/model/<modelName>/config.json,
+    // and vLLM needs to be pointed at that nested directory.
     const vllmArgs: VllmEngineArguments = {
       ...props.compiledModel.vllmArgs,
       ...props.vllmArgs,
-      model: "/opt/ml/model",
+      model: `/opt/ml/model/${props.compiledModel.modelName}`,
     };
     const tensorParallelSize = vllmArgs.tensorParallelSize ?? 1;
     const port = vllmArgs.port ?? 8000;
