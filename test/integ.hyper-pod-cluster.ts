@@ -80,11 +80,16 @@ class HyperPodClusterIntegTestStack extends Stack {
 
     // Add a small managed node group for system workloads
     const eksCluster = this.cluster.eksCluster as Cluster;
+    // The inference operator addon brings in a fair number of system pods
+    // (cert-manager, KEDA, ALB controller, the inference controller-manager
+    // itself, plus its init containers) on top of the baseline kube-system
+    // daemons. A single t3.medium runs into the per-node pod cap (17), so we
+    // provision two t3.large nodes (35 pods each) for the system node group.
     eksCluster.addNodegroupCapacity("SystemNodes", {
-      instanceTypes: [InstanceType.of(InstanceClass.T3, InstanceSize.MEDIUM)],
-      minSize: 1,
-      maxSize: 2,
-      desiredSize: 1,
+      instanceTypes: [InstanceType.of(InstanceClass.T3, InstanceSize.LARGE)],
+      minSize: 2,
+      maxSize: 3,
+      desiredSize: 2,
       amiType: NodegroupAmiType.AL2023_X86_64_STANDARD,
     });
 
