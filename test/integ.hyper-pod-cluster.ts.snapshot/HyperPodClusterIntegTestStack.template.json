@@ -3280,7 +3280,8 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
-        "ec2:ModifyNetworkInterfaceAttribute"
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "eks-auth:AssumeRoleForPodIdentity"
        ],
        "Effect": "Allow",
        "Resource": "*"
@@ -3971,6 +3972,152 @@
    },
    "DependsOn": [
     "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "InferenceServicePodIdentityAgentAddon7B628769": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "eks-pod-identity-agent",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "InferenceServiceS3CsiDriverRole19BC5EF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "sts:AssumeRole",
+        "sts:TagSession"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "pods.eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Role assumed by the Mountpoint S3 CSI driver via EKS Pod Identity to access the inference model bucket."
+   }
+  },
+  "InferenceServiceS3CsiDriverRoleDefaultPolicyCE69BBD8": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "InferenceServiceS3CsiDriverRoleDefaultPolicyCE69BBD8",
+    "Roles": [
+     {
+      "Ref": "InferenceServiceS3CsiDriverRole19BC5EF2"
+     }
+    ]
+   }
+  },
+  "InferenceServiceS3CsiDriverSaAssociation4E0B0FCE": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "kube-system",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "s3-csi-driver-sa"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
+   ]
+  },
+  "InferenceServiceS3CsiDriverControllerSaAssociationFA6364D3": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "kube-system",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "s3-csi-driver-controller-sa"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
+   ]
+  },
+  "InferenceServiceS3CsiMountpointPodAssociation770E6001": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "mount-s3",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "default"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
    ]
   },
   "InferenceServiceInferenceOperatorAddonFEF09769": {

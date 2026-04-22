@@ -1,6 +1,7 @@
 import { Names } from "aws-cdk-lib";
 import * as cdk from "aws-cdk-lib";
 import * as eks from "aws-cdk-lib/aws-eks-v2";
+import * as eksLegacy from "aws-cdk-lib/aws-eks";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct, IDependable } from "constructs";
@@ -186,6 +187,7 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // --- Install inference prerequisites ---
     const inferencePrerequisites = this.installInferencePrerequisites(
       props.cluster,
+      props.compiledModel.bucket,
     );
 
     // --- Build the InferenceEndpointConfig CRD manifest ---
@@ -332,7 +334,10 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     }
   }
 
-  private installInferencePrerequisites(cluster: HyperPodCluster): eks.Addon {
+  private installInferencePrerequisites(
+    cluster: HyperPodCluster,
+    modelBucket: s3.IBucket,
+  ): eks.Addon {
     // Inference Operator IRSA role.
     //
     // The EKS addon installs the controller-manager ServiceAccount under the
@@ -408,12 +413,77 @@ export class HyperPodVllmNxdInferenceService extends Construct {
       addonName: "aws-fsx-csi-driver",
       cluster: cluster.eksCluster,
     });
+    // EKS Pod Identity Agent is required for Mountpoint S3 CSI driver v2
+    // to obtain AWS credentials for signing S3 API calls. Without this
+    // the Mountpoint Pod fails with "NoSigningCredentials" even if
+    // driver-level Pod Identity associations are configured.
+    const podIdentityAgentAddon = new eks.Addon(this, "PodIdentityAgentAddon", {
+      addonName: "eks-pod-identity-agent",
+      cluster: cluster.eksCluster,
+    });
     // Depend on the raw CfnCluster rather than the Cluster construct so we do
     // not pull in other cluster subtree resources and form a dependency cycle.
-    for (const csiAddon of [s3CsiAddon, fsxCsiAddon]) {
-      csiAddon.node.addDependency(
+    for (const helperAddon of [s3CsiAddon, fsxCsiAddon, podIdentityAgentAddon]) {
+      helperAddon.node.addDependency(
         (cluster.eksCluster.node.defaultChild ??
           cluster.eksCluster) as IDependable,
+      );
+    }
+
+    // Grant the S3 CSI driver access to the model bucket. Mountpoint S3 CSI
+    // driver v2 runs as a separate Mountpoint Pod which the driver spawns on
+    // the workload's node; that pod inherits credentials through an EKS Pod
+    // Identity association on both the driver's controller/node SA and the
+    // Mountpoint pod's SA. Here we wire both associations to a role that can
+    // read/write the compiled-model bucket. See
+    // https://github.com/awslabs/mountpoint-s3-csi-driver/blob/main/docs/CONFIGURATION.md
+    const s3CsiRole = new iam.Role(this, "S3CsiDriverRole", {
+      assumedBy: new iam.ServicePrincipal("pods.eks.amazonaws.com", {
+        conditions: {},
+      }).withSessionTags(),
+      description:
+        "Role assumed by the Mountpoint S3 CSI driver via EKS Pod Identity to access the inference model bucket.",
+    });
+    modelBucket.grantReadWrite(s3CsiRole);
+    const s3CsiAssociations = [
+      new eksLegacy.CfnPodIdentityAssociation(
+        this,
+        "S3CsiDriverSaAssociation",
+        {
+          clusterName: cluster.eksCluster.clusterName,
+          namespace: "kube-system",
+          serviceAccount: "s3-csi-driver-sa",
+          roleArn: s3CsiRole.roleArn,
+        },
+      ),
+      new eksLegacy.CfnPodIdentityAssociation(
+        this,
+        "S3CsiDriverControllerSaAssociation",
+        {
+          clusterName: cluster.eksCluster.clusterName,
+          namespace: "kube-system",
+          serviceAccount: "s3-csi-driver-controller-sa",
+          roleArn: s3CsiRole.roleArn,
+        },
+      ),
+      new eksLegacy.CfnPodIdentityAssociation(
+        this,
+        "S3CsiMountpointPodAssociation",
+        {
+          clusterName: cluster.eksCluster.clusterName,
+          namespace: "mount-s3",
+          serviceAccount: "default",
+          roleArn: s3CsiRole.roleArn,
+        },
+      ),
+    ];
+    for (const a of s3CsiAssociations) {
+      a.node.addDependency(
+        (s3CsiAddon.node.defaultChild ?? s3CsiAddon) as IDependable,
+      );
+      a.node.addDependency(
+        (podIdentityAgentAddon.node.defaultChild ??
+          podIdentityAgentAddon) as IDependable,
       );
     }
 

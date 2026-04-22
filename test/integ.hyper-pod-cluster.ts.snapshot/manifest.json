@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/db2e6a56a404ddae02708a53af2241047d81fc92acedada5a7a83f4cb14d7f23.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7e4db156dc7de277a6dea89ca3fbeb5d6774f9214d939741fdcc553d20da3302.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2438,6 +2438,22 @@
           {
             "type": "aws:cdk:analytics:method",
             "data": {
+              "addToPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
               "addToPrincipalPolicy": [
                 {}
               ]
@@ -2476,6 +2492,14 @@
             "data": {
               "attachToRole": [
                 "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
               ]
             }
           },
@@ -2969,6 +2993,117 @@
             "data": "InferenceServiceFsxCsiDriverAddon3BD6BA90"
           }
         ],
+        "/HyperPodClusterIntegTestStack/InferenceService/PodIdentityAgentAddon": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "addonName": "*",
+              "cluster": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/PodIdentityAgentAddon/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServicePodIdentityAgentAddon7B628769"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "description": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiDriverRole19BC5EF2"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiDriverRoleDefaultPolicyCE69BBD8"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverSaAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiDriverSaAssociation4E0B0FCE"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiDriverControllerSaAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiDriverControllerSaAssociationFA6364D3"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/S3CsiMountpointPodAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceS3CsiMountpointPodAssociation770E6001"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/InferenceService/InferenceOperatorAddon": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -3065,7 +3200,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f8dc17165d7b1e033f0319cc389433a77f38f80da7a171de11417129ace8cce0.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6005ac70bc20e877c9f3c10c07133dac23e24928300a2c2a46e56711b2832346.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

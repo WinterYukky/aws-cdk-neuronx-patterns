@@ -243,6 +243,20 @@ export class HyperPodCluster extends Construct {
         resources: ["*"],
       }),
     );
+    // Required for the EKS Pod Identity Agent running on each HyperPod
+    // instance to vend temporary AWS credentials to pods that have an
+    // associated Pod Identity (e.g. the Mountpoint S3 CSI driver uses
+    // this to obtain the driver-level IAM role that lets it sign S3
+    // API calls on behalf of HyperPod inference workloads). Without
+    // this, the Pod Identity Agent returns 403 AccessDeniedException
+    // and S3 mounts fail with NoSigningCredentials.
+    this.executionRole.addToPolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: ["eks-auth:AssumeRoleForPodIdentity"],
+        resources: ["*"],
+      }),
+    );
 
     // Grant the execution role cluster admin access via HYPERPOD_LINUX access entry
     if (!props.eksCluster && this.eksCluster instanceof eks.Cluster) {
