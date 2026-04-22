@@ -508,21 +508,18 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     // Inference Operator EKS Addon (bundles ALB Controller and KEDA; requires
     // cert-manager and the S3/FSx CSI drivers to be pre-installed on the
     // cluster).
-    // Derive the HyperPod SageMaker cluster ARN via Stack.formatArn +
-    // getResourceNameAttribute against the underlying CfnCluster's `Ref`
-    // (which resolves to the cluster name). This avoids emitting an
-    // `Fn::GetAtt` to the CfnCluster, which would pull the cluster
-    // construct (and everything that depends on it, including the inference
-    // manifest) into the addon's implicit DependsOn and cause a
-    // CloudFormation dependency cycle.
+    // We need the HyperPod SageMaker cluster ARN here. `CfnCluster.Ref`
+    // resolves to the full ARN (it is what CloudFormation returns for
+    // Ref on `AWS::SageMaker::Cluster`), so we use `ref` directly rather
+    // than reconstructing the ARN from the name. Wrapping this Ref in
+    // `Stack.formatArn(..., { resourceName: ref })` produced a
+    // double-prefixed ARN at runtime
+    // ("arn:aws:...cluster/arn:aws:...cluster/<id>") and caused the
+    // operator controller to crashloop on EnableClusterInference.
     const sagemakerCluster = cluster.node.findChild(
       "SageMakerCluster",
     ) as cdk.CfnResource;
-    const clusterArnForAddon = cdk.Stack.of(this).formatArn({
-      service: "sagemaker",
-      resource: "cluster",
-      resourceName: sagemakerCluster.ref,
-    });
+    const clusterArnForAddon = sagemakerCluster.ref;
 
     const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",

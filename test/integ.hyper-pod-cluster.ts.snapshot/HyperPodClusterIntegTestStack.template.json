@@ -4142,19 +4142,7 @@
        {
         "Ref": "InferenceServiceTlsCertificateBucket485D9F51"
        },
-       "\",\"hyperpodClusterArn\":\"arn:",
-       {
-        "Ref": "AWS::Partition"
-       },
-       ":sagemaker:",
-       {
-        "Ref": "AWS::Region"
-       },
-       ":",
-       {
-        "Ref": "AWS::AccountId"
-       },
-       ":cluster/",
+       "\",\"hyperpodClusterArn\":\"",
        {
         "Ref": "HyperPodSageMakerCluster3AAE6C37"
        },
