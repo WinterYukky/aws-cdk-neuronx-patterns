@@ -222,6 +222,17 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         },
         worker: {
           image: imageUri,
+          // The Neuron vLLM container's ENTRYPOINT is
+          // `python /usr/local/bin/vllm_entrypoint.py`, which simply
+          // `subprocess.check_call`s its argv. Without an explicit
+          // `command`, Kubernetes would pass the first `args` entry
+          // (the model path) as the program to exec, producing
+          // `PermissionError: [Errno 13] Permission denied: '/opt/ml/model'`
+          // at startup. Prepend `vllm serve` so the rendered process is
+          // `vllm_entrypoint.py vllm serve <model_path> <cliArgs...>`,
+          // matching the invocation the compile-time image uses in
+          // `scripts/compile/vllm-nxd-inference/entrypoint.sh`.
+          command: ["vllm", "serve"],
           args: cliArgs,
           environmentVariables: [
             {

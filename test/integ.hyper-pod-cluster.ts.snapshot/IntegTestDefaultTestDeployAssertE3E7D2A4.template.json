@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1776851192068"
+    "salt": "1776854753814"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -373,7 +373,7 @@
      "Body": "\"{\\\"model\\\":\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\",\\\"messages\\\":[{\\\"role\\\":\\\"system\\\",\\\"content\\\":\\\"You are helpfull assistant.\\\"},{\\\"role\\\":\\\"user\\\",\\\"content\\\":\\\"please answer '1+1=?'. You must answer only answer numeric.\\\"}]}\""
     },
     "flattenResponse": "false",
-    "salt": "1776851192070"
+    "salt": "1776854753816"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
