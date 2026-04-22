@@ -3087,6 +3087,32 @@
     }
    }
   },
+  "HyperPodEksClusterchartCertManager6B0C3C19": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Release": "cert-manager",
+    "Chart": "cert-manager",
+    "Wait": true,
+    "Values": "{\"crds\":{\"enabled\":true}}",
+    "Namespace": "cert-manager",
+    "Repository": "https://charts.jetstack.io",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
   "HyperPodEksClustermanifestInferenceEndpoint09B1D871": {
    "Type": "Custom::AWSCDK-EKS-KubernetesResource",
    "Properties": {
@@ -3515,6 +3541,7 @@
     }
    },
    "DependsOn": [
+    "HyperPodEksClusterchartCertManager6B0C3C19",
     "HyperPodEksClusterchartHyperPodDependencies929AF454",
     "HyperPodEksClusterClusterAdminRoleAccess145D6E10",
     "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8",
@@ -3940,6 +3967,7 @@
     }
    },
    "DependsOn": [
+    "HyperPodEksClusterchartCertManager6B0C3C19",
     "HyperPodEksCluster2B4D66BB",
     "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
     "InferenceServiceTlsCertificateBucket485D9F51"

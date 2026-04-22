@@ -360,7 +360,35 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     });
     tlsBucket.grantReadWrite(inferenceOperatorRole);
 
-    // Inference Operator EKS Addon (bundles ALB Controller, KEDA, and cert-manager)
+    // Install cert-manager via Helm.
+    //
+    // The `amazon-sagemaker-hyperpod-inference` EKS addon depends on
+    // cert-manager at install time (currently a preview-stage requirement):
+    //
+    //     Code: K8sResourceNotFound, Message: cert-manager is not installed
+    //     on this cluster. During preview, you are required to have
+    //     previously installed cert-manager.
+    //
+    // We deploy the upstream Jetstack chart into the `cert-manager` namespace
+    // with CRDs enabled. The addon below depends on this chart so that
+    // CloudFormation does not race the addon ahead of the cert-manager
+    // installation.
+    const certManager = cluster.eksCluster.addHelmChart("CertManager", {
+      chart: "cert-manager",
+      repository: "https://charts.jetstack.io",
+      release: "cert-manager",
+      namespace: "cert-manager",
+      createNamespace: true,
+      values: {
+        crds: {
+          enabled: true,
+        },
+      },
+      wait: true,
+    });
+
+    // Inference Operator EKS Addon (bundles ALB Controller and KEDA; requires
+    // cert-manager to be pre-installed on the cluster).
     const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
       cluster: cluster.eksCluster,
@@ -380,6 +408,14 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         cluster.eksCluster) as IDependable,
     );
     addon.node.addDependency(tlsBucket);
+    // The inference addon refuses to install until cert-manager is present
+    // on the cluster, so wait for the Helm chart above to finish. We depend
+    // on the CfnResource for the custom resource that runs `helm install` to
+    // avoid pulling in any transitive dependencies from the Cluster subtree
+    // and re-introducing a dependency cycle.
+    addon.node.addDependency(
+      (certManager.node.defaultChild ?? certManager) as IDependable,
+    );
 
     return addon;
   }
