@@ -208,6 +208,23 @@ export class HyperPodCluster extends Construct {
         iam.ManagedPolicy.fromAwsManagedPolicyName(
           "AmazonSageMakerClusterInstanceRolePolicy",
         ),
+        // Required so daemonsets baked into the EKS cluster (aws-node,
+        // neuron-device-plugin, fsx-/s3-csi-node, ...) can pull their
+        // container images from the public EKS ECR registries. Without
+        // this, HyperPod instances end up with aws-node in ImagePullBackOff
+        // and no CNI network is ever wired up.
+        iam.ManagedPolicy.fromAwsManagedPolicyName(
+          "AmazonEC2ContainerRegistryReadOnly",
+        ),
+        // Required by the VPC CNI (aws-node) daemon that runs on every
+        // HyperPod instance to manage secondary ENIs and IP addresses.
+        // Without it, aws-node is stuck at "Checking for IPAM
+        // connectivity" and no pod networking ever comes up. The
+        // `AmazonEKS_CNI_Policy` managed policy bundles the required
+        // ec2:CreateTags, AssignPrivateIpAddresses, AttachNetworkInterface
+        // and friends; we still add the finer-grained inline statements
+        // below for any additional controls the operator needs.
+        iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEKS_CNI_Policy"),
       ],
     });
     this.executionRole.addToPolicy(
