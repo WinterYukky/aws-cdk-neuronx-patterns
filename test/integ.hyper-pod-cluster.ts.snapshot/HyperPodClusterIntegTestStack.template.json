@@ -3471,6 +3471,9 @@
    "Properties": {
     "InstanceGroups": [
      {
+      "CapacityRequirements": {
+       "Spot": {}
+      },
       "ExecutionRole": {
        "Fn::GetAtt": [
         "HyperPodExecutionRole32B4ED4D",
@@ -3504,6 +3507,7 @@
       }
      }
     ],
+    "NodeProvisioningMode": "Continuous",
     "NodeRecovery": "Automatic",
     "Orchestrator": {
      "Eks": {

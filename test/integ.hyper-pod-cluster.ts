@@ -72,10 +72,7 @@ class HyperPodClusterIntegTestStack extends Stack {
             InstanceSize.XLARGE3,
           ),
           instanceCount: 1,
-          // On-demand in the integ test: sa-east-1 trn2.3xlarge Spot
-          // capacity has been repeatedly unavailable in practice, leaving
-          // the HyperPod cluster scaling indefinitely.
-          useSpot: false,
+          useSpot: true,
         },
       ],
       nodeRecovery: "Automatic",
