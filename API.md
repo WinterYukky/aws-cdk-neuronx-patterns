@@ -712,7 +712,7 @@ The HyperPod execution role used by instance groups.
 High-level construct that deploys a vLLM inference endpoint on a HyperPod cluster using the InferenceEndpointConfig Kubernetes CRD.
 
 This construct installs the required inference operator addon, cert-manager,
-and configures IRSA roles automatically.
+the S3 Mountpoint CSI driver, and configures IRSA roles automatically.
 
 Note: Model artifacts are loaded by the HyperPod execution role. For production
 workloads requiring pod-level isolation, consider using IRSA for S3 access instead.
