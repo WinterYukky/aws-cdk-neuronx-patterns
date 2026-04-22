@@ -3951,6 +3951,18 @@
     "HyperPodEksCluster2B4D66BB"
    ]
   },
+  "InferenceServiceFsxCsiDriverAddon3BD6BA90": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "aws-fsx-csi-driver",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
   "InferenceServiceInferenceOperatorAddonFEF09769": {
    "Type": "AWS::EKS::Addon",
    "Properties": {
@@ -3981,6 +3993,7 @@
    "DependsOn": [
     "HyperPodEksClusterchartCertManager6B0C3C19",
     "HyperPodEksCluster2B4D66BB",
+    "InferenceServiceFsxCsiDriverAddon3BD6BA90",
     "InferenceServiceS3CsiDriverAddon48E523B7",
     "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
     "InferenceServiceTlsCertificateBucket485D9F51"

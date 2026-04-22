@@ -133,7 +133,8 @@ export interface HyperPodVllmNxdInferenceServiceProps {
  * using the InferenceEndpointConfig Kubernetes CRD.
  *
  * This construct installs the required inference operator addon, cert-manager,
- * the S3 Mountpoint CSI driver, and configures IRSA roles automatically.
+ * the S3 Mountpoint and FSx for Lustre CSI drivers, and configures IRSA roles
+ * automatically.
  *
  * Note: Model artifacts are loaded by the HyperPod execution role. For production
  * workloads requiring pod-level isolation, consider using IRSA for S3 access instead.
@@ -387,29 +388,37 @@ export class HyperPodVllmNxdInferenceService extends Construct {
       wait: true,
     });
 
-    // Install the Mountpoint for Amazon S3 CSI driver as an EKS managed addon.
-    // The HyperPod inference operator's `check-csi-drivers` init container
-    // fails if the `s3.csi.aws.com` CSIDriver object is missing:
+    // Install the Mountpoint for Amazon S3 and the FSx for Lustre CSI drivers
+    // as EKS managed addons. The HyperPod inference operator's
+    // `check-csi-drivers` init container enforces that both CSIDriver objects
+    // exist on the cluster:
     //
     //     S3 CSI driver not installed (missing CSIDriver s3.csi.aws.com).
-    //     Please install the required CSI driver...
+    //     FSx CSI driver not installed (missing CSIDriver fsx.csi.aws.com).
     //
-    // Without this, the inference operator controller-manager pod enters
+    // Without these, the inference operator controller-manager pod enters
     // Init:CrashLoopBackOff and the EKS addon status stays at CREATING for
     // the full CloudFormation stabilization window (2h+).
     const s3CsiAddon = new eks.Addon(this, "S3CsiDriverAddon", {
       addonName: "aws-mountpoint-s3-csi-driver",
       cluster: cluster.eksCluster,
     });
+    const fsxCsiAddon = new eks.Addon(this, "FsxCsiDriverAddon", {
+      addonName: "aws-fsx-csi-driver",
+      cluster: cluster.eksCluster,
+    });
     // Depend on the raw CfnCluster rather than the Cluster construct so we do
     // not pull in other cluster subtree resources and form a dependency cycle.
-    s3CsiAddon.node.addDependency(
-      (cluster.eksCluster.node.defaultChild ??
-        cluster.eksCluster) as IDependable,
-    );
+    for (const csiAddon of [s3CsiAddon, fsxCsiAddon]) {
+      csiAddon.node.addDependency(
+        (cluster.eksCluster.node.defaultChild ??
+          cluster.eksCluster) as IDependable,
+      );
+    }
 
     // Inference Operator EKS Addon (bundles ALB Controller and KEDA; requires
-    // cert-manager and the S3 CSI driver to be pre-installed on the cluster).
+    // cert-manager and the S3/FSx CSI drivers to be pre-installed on the
+    // cluster).
     const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
       cluster: cluster.eksCluster,
@@ -430,11 +439,14 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     );
     addon.node.addDependency(tlsBucket);
     // The inference addon's controller pods only pass their init checks when
-    // the S3 Mountpoint CSI driver is already present, so wait for that
-    // addon's CfnResource before kicking off the inference addon install.
-    addon.node.addDependency(
-      (s3CsiAddon.node.defaultChild ?? s3CsiAddon) as IDependable,
-    );
+    // both the S3 Mountpoint and FSx CSI drivers are already present, so wait
+    // for each addon's CfnResource before kicking off the inference addon
+    // install.
+    for (const csiAddon of [s3CsiAddon, fsxCsiAddon]) {
+      addon.node.addDependency(
+        (csiAddon.node.defaultChild ?? csiAddon) as IDependable,
+      );
+    }
     // The inference addon refuses to install until cert-manager is present
     // on the cluster, so wait for the Helm chart above to finish. We depend
     // on the CfnResource for the custom resource that runs `helm install` to
