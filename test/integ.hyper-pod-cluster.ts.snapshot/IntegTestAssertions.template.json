@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1776882071465"
+    "salt": "1776927653046"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -226,7 +226,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -296,7 +296,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -338,7 +338,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -373,7 +373,7 @@
      "Body": "\"{\\\"model\\\":\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\",\\\"messages\\\":[{\\\"role\\\":\\\"system\\\",\\\"content\\\":\\\"You are helpfull assistant.\\\"},{\\\"role\\\":\\\"user\\\",\\\"content\\\":\\\"please answer '1+1=?'. You must answer only answer numeric.\\\"}]}\""
     },
     "flattenResponse": "false",
-    "salt": "1776882071467"
+    "salt": "1776927653048"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"

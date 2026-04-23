@@ -29,15 +29,17 @@ class HyperPodClusterIntegTestStack extends Stack {
   readonly cluster: HyperPodCluster;
   readonly inferenceService: HyperPodVllmNxdInferenceService;
   constructor(scope: App, id: string) {
-    super(scope, id);
+    // env-agnostic stacks default to 2 availability zones in CDK, but trn2
+    // capacity is unevenly distributed across AZs (for example sa-east-1a
+    // currently has no trn2.3xlarge spot inventory even when 1b/1c do),
+    // so we pin the stack to sa-east-1 and provision 3 AZs explicitly to
+    // give HyperPod the best chance of finding capacity.
+    super(scope, id, {
+      env: { region: "sa-east-1" },
+    });
     const vpc = new Vpc(this, "Vpc", {
       natGateways: 1,
-      // trn2 capacity is unevenly distributed across AZs in most regions
-      // (for example sa-east-1a currently has no trn2.3xlarge spot
-      // inventory even when 1b/1c do), so the HyperPod instance group
-      // needs to target as many AZs as possible to pick up whichever one
-      // still has capacity at scale-out time.
-      maxAzs: 3,
+      availabilityZones: ["sa-east-1a", "sa-east-1b", "sa-east-1c"],
       gatewayEndpoints: {
         S3: {
           service: GatewayVpcEndpointAwsService.S3,
@@ -131,6 +133,9 @@ const stack = new HyperPodClusterIntegTestStack(
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
+  assertionStack: new Stack(app, "IntegTestAssertions", {
+    env: { region: "sa-east-1" },
+  }),
 });
 
 // Assert that the HyperPod cluster is InService

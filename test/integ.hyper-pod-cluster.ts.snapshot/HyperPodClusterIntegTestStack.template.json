@@ -18,15 +18,8 @@
   "VpcPublicSubnet1Subnet5C2D37C4": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
-    "CidrBlock": "10.0.0.0/18",
+    "AvailabilityZone": "sa-east-1a",
+    "CidrBlock": "10.0.0.0/19",
     "MapPublicIpOnLaunch": true,
     "Tags": [
      {
@@ -142,15 +135,8 @@
   "VpcPublicSubnet2Subnet691E08A3": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      1,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
-    "CidrBlock": "10.0.64.0/18",
+    "AvailabilityZone": "sa-east-1b",
+    "CidrBlock": "10.0.32.0/19",
     "MapPublicIpOnLaunch": true,
     "Tags": [
      {
@@ -219,18 +205,84 @@
     "VpcVPCGWBF912B6E"
    ]
   },
+  "VpcPublicSubnet3SubnetBE12F0B6": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1c",
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet3RouteTable93458DBB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet3RouteTableAssociation1F1EDF02": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet3RouteTable93458DBB"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet3SubnetBE12F0B6"
+    }
+   }
+  },
+  "VpcPublicSubnet3DefaultRoute4697774F": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet3RouteTable93458DBB"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
   "VpcPrivateSubnet1Subnet536B997A": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
-    "CidrBlock": "10.0.128.0/18",
+    "AvailabilityZone": "sa-east-1a",
+    "CidrBlock": "10.0.96.0/19",
     "MapPublicIpOnLaunch": false,
     "Tags": [
      {
@@ -299,15 +351,8 @@
   "VpcPrivateSubnet2Subnet3788AAA1": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      1,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
-    "CidrBlock": "10.0.192.0/18",
+    "AvailabilityZone": "sa-east-1b",
+    "CidrBlock": "10.0.128.0/19",
     "MapPublicIpOnLaunch": false,
     "Tags": [
      {
@@ -373,6 +418,76 @@
     }
    }
   },
+  "VpcPrivateSubnet3SubnetF258B56E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1c",
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet3RouteTableD98824C7": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet3RouteTableAssociation16BDDC43": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+    }
+   }
+  },
+  "VpcPrivateSubnet3DefaultRoute94B74F0D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+    }
+   }
+  },
   "VpcIGWD7BA715C": {
    "Type": "AWS::EC2::InternetGateway",
    "Properties": {
@@ -406,10 +521,16 @@
       "Ref": "VpcPrivateSubnet2RouteTableA678073B"
      },
      {
+      "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+     },
+     {
       "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
      },
      {
       "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+     },
+     {
+      "Ref": "VpcPublicSubnet3RouteTable93458DBB"
      }
     ],
     "ServiceName": {
@@ -497,15 +618,7 @@
            "Fn::Join": [
             "",
             [
-             "arn:",
-             {
-              "Ref": "AWS::Partition"
-             },
-             ":ec2:",
-             {
-              "Ref": "AWS::Region"
-             },
-             ":",
+             "arn:aws:ec2:sa-east-1:",
              {
               "Ref": "AWS::AccountId"
              },
@@ -532,7 +645,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
     },
@@ -663,7 +776,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
     },
@@ -768,7 +881,7 @@
      "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
     },
     "sourceS3Url": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
     }
    },
    "DependsOn": [
@@ -990,6 +1103,9 @@
       },
       {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ],
      "Tags": {
@@ -1038,15 +1154,7 @@
         "Fn::Join": [
          "",
          [
-          "arn:",
-          {
-           "Ref": "AWS::Partition"
-          },
-          ":logs:",
-          {
-           "Ref": "AWS::Region"
-          },
-          ":",
+          "arn:aws:logs:sa-east-1:",
           {
            "Ref": "AWS::AccountId"
           },
@@ -1509,15 +1617,7 @@
         "Fn::Join": [
          "",
          [
-          "arn:",
-          {
-           "Ref": "AWS::Partition"
-          },
-          ":states:",
-          {
-           "Ref": "AWS::Region"
-          },
-          ":",
+          "arn:aws:states:sa-east-1:",
           {
            "Ref": "AWS::AccountId"
           },
@@ -1742,7 +1842,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74.zip"
     },
@@ -1828,15 +1928,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
-           {
-            "Ref": "AWS::Partition"
-           },
-           ":logs:",
-           {
-            "Ref": "AWS::Region"
-           },
-           ":",
+           "arn:aws:logs:sa-east-1:",
            {
             "Ref": "AWS::AccountId"
            },
@@ -1852,15 +1944,7 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
-           {
-            "Ref": "AWS::Partition"
-           },
-           ":logs:",
-           {
-            "Ref": "AWS::Region"
-           },
-           ":",
+           "arn:aws:logs:sa-east-1:",
            {
             "Ref": "AWS::AccountId"
            },
@@ -1886,15 +1970,7 @@
         "Fn::Join": [
          "",
          [
-          "arn:",
-          {
-           "Ref": "AWS::Partition"
-          },
-          ":codebuild:",
-          {
-           "Ref": "AWS::Region"
-          },
-          ":",
+          "arn:aws:codebuild:sa-east-1:",
           {
            "Ref": "AWS::AccountId"
           },
@@ -1943,13 +2019,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            },
            "/*"
           ]
@@ -1959,13 +2031,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            }
           ]
          ]
@@ -2019,15 +2087,7 @@
      "Fn::Join": [
       "",
       [
-       "arn:",
-       {
-        "Ref": "AWS::Partition"
-       },
-       ":kms:",
-       {
-        "Ref": "AWS::Region"
-       },
-       ":",
+       "arn:aws:kms:sa-east-1:",
        {
         "Ref": "AWS::AccountId"
        },
@@ -2342,7 +2402,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "8340e57c9dd5ef860787b6ba79b1fb698b98443065c2e7277e133357da92547f.zip"
     },
@@ -2429,6 +2489,9 @@
       },
       {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     },
@@ -2455,6 +2518,10 @@
     "VpcPrivateSubnet2RouteTableA678073B",
     "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
     "VpcPrivateSubnet2Subnet3788AAA1",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableD98824C7",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43",
+    "VpcPrivateSubnet3SubnetF258B56E",
     "VpcPublicSubnet1DefaultRoute3DA9E72A",
     "VpcPublicSubnet1EIPD7E02669",
     "VpcPublicSubnet1NATGateway4D7517AA",
@@ -2465,6 +2532,10 @@
     "VpcPublicSubnet2RouteTable94F7E489",
     "VpcPublicSubnet2RouteTableAssociationDD5762D8",
     "VpcPublicSubnet2Subnet691E08A3",
+    "VpcPublicSubnet3DefaultRoute4697774F",
+    "VpcPublicSubnet3RouteTable93458DBB",
+    "VpcPublicSubnet3RouteTableAssociation1F1EDF02",
+    "VpcPublicSubnet3SubnetBE12F0B6",
     "Vpc8378EB38",
     "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE",
     "VpcS3A5408339",
@@ -2560,7 +2631,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520": {
@@ -2590,13 +2663,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            },
            "/*"
           ]
@@ -2606,13 +2675,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            }
           ]
          ]
@@ -2633,7 +2698,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandler3CF4DC9D": {
@@ -2641,7 +2708,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "379a97e43c3d01fdb08125fcff9c80a976a33da6287e25571deb51e72b5eeda9.zip"
     },
@@ -2684,6 +2751,9 @@
       },
       {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
@@ -2694,7 +2764,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB": {
@@ -2717,7 +2789,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ],
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
@@ -2727,7 +2801,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
@@ -2780,7 +2854,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828": {
@@ -2838,7 +2914,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8": {
@@ -2846,7 +2924,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
@@ -2889,6 +2967,9 @@
       },
       {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
@@ -2899,7 +2980,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D": {
@@ -2922,7 +3005,9 @@
     "VpcPrivateSubnet1DefaultRouteBE02A9ED",
     "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
    ],
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
@@ -2974,7 +3059,7 @@
     },
     "Release": "hyperpod-dependencies",
     "ChartAssetURL": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/64fcfd539c0e39f328c5dd03fea22811ff02d5af6de05435d30f8010ca280796.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/64fcfd539c0e39f328c5dd03fea22811ff02d5af6de05435d30f8010ca280796.zip"
     },
     "Values": "{\"nvidia-device-plugin\":{\"devicePlugin\":{\"enabled\":false}}}",
     "Namespace": "kube-system",
@@ -3069,6 +3154,9 @@
      },
      {
       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+     },
+     {
+      "Ref": "VpcPrivateSubnet3SubnetF258B56E"
      }
     ]
    }
@@ -3130,11 +3218,7 @@
        {
         "Ref": "Bucket83908E77"
        },
-       "\",\"region\":\"",
-       {
-        "Ref": "AWS::Region"
-       },
-       "\"},\"modelLocation\":\"",
+       "\",\"region\":\"sa-east-1\"},\"modelLocation\":\"",
        {
         "Fn::GetAtt": [
          "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
@@ -3456,7 +3540,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
@@ -3474,7 +3558,7 @@
     },
     "SourceBucketNames": [
      {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      }
     ],
     "SourceObjectKeys": [
@@ -3565,6 +3649,9 @@
       },
       {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
@@ -3768,13 +3855,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            },
            "/*"
           ]
@@ -3784,13 +3867,9 @@
          "Fn::Join": [
           "",
           [
-           "arn:",
+           "arn:aws:s3:::",
            {
-            "Ref": "AWS::Partition"
-           },
-           ":s3:::",
-           {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
            }
           ]
          ]
@@ -3850,7 +3929,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip"
     },
@@ -4188,7 +4267,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
      "S3Key": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip"
     },

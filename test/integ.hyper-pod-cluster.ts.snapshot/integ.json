@@ -5,8 +5,8 @@
       "stacks": [
         "HyperPodClusterIntegTestStack"
       ],
-      "assertionStack": "IntegTest/DefaultTest/DeployAssert",
-      "assertionStackName": "IntegTestDefaultTestDeployAssertE3E7D2A4"
+      "assertionStack": "IntegTestAssertions",
+      "assertionStackName": "IntegTestAssertions"
     }
   },
   "minimumCliVersion": "2.1105.0"

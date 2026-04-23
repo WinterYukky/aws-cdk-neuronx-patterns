@@ -11,21 +11,21 @@
     },
     "HyperPodClusterIntegTestStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://unknown-account/unknown-region",
+      "environment": "aws://unknown-account/sa-east-1",
       "properties": {
         "templateFile": "HyperPodClusterIntegTestStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/409a981810c63a4d87641323e7c0d23147e469c7c0465403c9d6f3fb60c67732.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/ff08b03417215bd02301abe390dc9b2f072a2ba09873bfbe4a3deb30928f951d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "HyperPodClusterIntegTestStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-sa-east-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -39,7 +39,7 @@
             "type": "aws:cdk:analytics:construct",
             "data": {
               "natGateways": "*",
-              "maxAzs": "*",
+              "availabilityZones": "*",
               "gatewayEndpoints": "*"
             }
           }
@@ -174,6 +174,58 @@
             "data": "VpcPublicSubnet2DefaultRoute97F91067"
           }
         ],
+        "/HyperPodClusterIntegTestStack/Vpc/PublicSubnet3": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": true,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet3SubnetBE12F0B6"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet3RouteTable93458DBB"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet3RouteTableAssociation1F1EDF02"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPublicSubnet3DefaultRoute4697774F"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -276,6 +328,58 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcPrivateSubnet2DefaultRoute060D2087"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "availabilityZone": "*",
+              "vpcId": "*",
+              "cidrBlock": "*",
+              "mapPublicIpOnLaunch": false,
+              "ipv6CidrBlock": "*",
+              "assignIpv6AddressOnCreation": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {}
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet3SubnetF258B56E"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet3RouteTableD98824C7"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcPrivateSubnet3DefaultRoute94B74F0D"
           }
         ],
         "/HyperPodClusterIntegTestStack/Vpc/IGW": [
@@ -1840,6 +1944,7 @@
               "vpcSubnets": {
                 "subnets": [
                   "*",
+                  "*",
                   "*"
                 ]
               }
@@ -2053,6 +2158,7 @@
               "vpc": "*",
               "vpcSubnets": {
                 "subnets": [
+                  "*",
                   "*",
                   "*"
                 ]
@@ -3183,41 +3289,41 @@
       },
       "displayName": "HyperPodClusterIntegTestStack"
     },
-    "IntegTestDefaultTestDeployAssertE3E7D2A4.assets": {
+    "IntegTestAssertions.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "IntegTestDefaultTestDeployAssertE3E7D2A4.assets.json",
+        "file": "IntegTestAssertions.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "IntegTestDefaultTestDeployAssertE3E7D2A4": {
+    "IntegTestAssertions": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://unknown-account/unknown-region",
+      "environment": "aws://unknown-account/sa-east-1",
       "properties": {
-        "templateFile": "IntegTestDefaultTestDeployAssertE3E7D2A4.template.json",
+        "templateFile": "IntegTestAssertions.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f1b7b1fe0445486896381aa3adbef65bc4ecb5857f374b55b37334ddc449f71d.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/bd0164c0ee71cb68954f658daa6abe5c58f37e20bb5715311fa1558ce6a900e4.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+          "IntegTestAssertions.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-sa-east-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
       "dependencies": [
         "HyperPodClusterIntegTestStack",
-        "IntegTestDefaultTestDeployAssertE3E7D2A4.assets"
+        "IntegTestAssertions.assets"
       ],
       "metadata": {
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/Default": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/Default": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -3231,79 +3337,79 @@
             "data": "*"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/Default/Default": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/IsCompleteProvider/Invoke": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/IsCompleteProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1cWaitForIsCompleteProviderInvokeC57298A7"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/TimeoutProvider/Invoke": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/TimeoutProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1cWaitForTimeoutProviderInvoke53C0EFE7"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/Role": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1cWaitForRole8A4ACCB6"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/Resource": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/WaitFor/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1cWaitForF756CEA1"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/AssertionResults": [
+        "/IntegTestAssertions/AwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c/AssertionResults": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AssertionResultsAwsApiCallSageMakerdescribeClusterd36ea2422fe4af9e4bce198bb176ae1c"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
+        "/IntegTestAssertions/SingletonFunction1488541a7b23466481b69b4408076b81/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
+        "/IntegTestAssertions/SingletonFunction1488541a7b23466481b69b4408076b81/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction1488541a7b23466481b69b4408076b81HandlerCD40AE9F"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Role": [
+        "/IntegTestAssertions/SingletonFunction76b3e830a873425f8453eddd85c86925/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Role918961BB"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction76b3e830a873425f8453eddd85c86925/Handler": [
+        "/IntegTestAssertions/SingletonFunction76b3e830a873425f8453eddd85c86925/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction76b3e830a873425f8453eddd85c86925Handler81461ECE"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Role": [
+        "/IntegTestAssertions/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aRoleB84BD8CE"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Handler": [
+        "/IntegTestAssertions/SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41a/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -3317,56 +3423,56 @@
             "data": "*"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default/Default": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/IsCompleteProvider/Invoke": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/IsCompleteProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForIsCompleteProviderInvokeD5CEAC24"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/TimeoutProvider/Invoke": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/TimeoutProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForTimeoutProviderInvoke5FD3C0F6"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Role": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Resource": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/AssertionResults": [
+        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/AssertionResults": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AssertionResultsAwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/BootstrapVersion": [
+        "/IntegTestAssertions/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/IntegTest/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+        "/IntegTestAssertions/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "IntegTest/DefaultTest/DeployAssert"
+      "displayName": "IntegTestAssertions"
     },
     "Tree": {
       "type": "cdk:tree",
