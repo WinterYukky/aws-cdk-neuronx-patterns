@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/0ceacab90eab3acf6e51c9144bf00b7873df185478662d2b0ca5f0cabbc81356.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/113dc5701bb28068232243773fbb876fed8c761f474c4159227be48f264d8978.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1840,7 +1840,7 @@
               "vpc": "*",
               "vpcSubnets": [
                 {
-                  "availabilityZones": "*"
+                  "subnetType": "Private"
                 }
               ],
               "version": "*",
@@ -1943,6 +1943,8 @@
               ],
               "vpcSubnets": {
                 "subnets": [
+                  "*",
+                  "*",
                   "*"
                 ]
               }
@@ -2156,6 +2158,8 @@
               "vpc": "*",
               "vpcSubnets": {
                 "subnets": [
+                  "*",
+                  "*",
                   "*"
                 ]
               },
@@ -2764,10 +2768,7 @@
         "/HyperPodClusterIntegTestStack/HyperPod/SageMakerCluster": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "HyperPodSageMakerCluster3AAE6C37",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "HyperPodSageMakerCluster3AAE6C37"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/InferenceOperatorRoleOidcCondition/Resource": [
@@ -3305,7 +3306,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/a00ab0c184efc04ba6306e654f6acf622c767f482d4f47710374bc362ffce6b7.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/82891bba9f7a34b3cc885ce6c822925b583d6afbfa50670eb3acf0a9f1d2224f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

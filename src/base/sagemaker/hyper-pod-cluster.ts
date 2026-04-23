@@ -54,10 +54,20 @@ export interface HyperPodClusterProps {
    */
   readonly vpc: ec2.IVpc;
   /**
-   * VPC subnets for worker nodes.
+   * VPC subnets for the underlying EKS cluster and, by default, for
+   * HyperPod worker nodes as well.
    * @default - private subnets with egress
    */
   readonly vpcSubnets?: ec2.SubnetSelection;
+  /**
+   * VPC subnets that SageMaker HyperPod can use to provision worker
+   * instances. Use this when the EKS control plane must span multiple
+   * AZs (EKS requires >=2) but the HyperPod instance groups need to be
+   * constrained to a subset of AZs, e.g. to avoid picking an AZ that
+   * currently has no capacity for the selected instance type.
+   * @default - the same subnets as `vpcSubnets`
+   */
+  readonly workerSubnets?: ec2.SubnetSelection;
   /**
    * Cluster name.
    * @default - auto-generated
@@ -152,6 +162,7 @@ export class HyperPodCluster extends Construct {
     const subnetSelection = props.vpcSubnets ?? {
       subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
     };
+    const workerSubnetSelection = props.workerSubnets ?? subnetSelection;
 
     // --- EKS Cluster ---
     if (props.eksCluster) {
@@ -357,7 +368,7 @@ export class HyperPodCluster extends Construct {
             this.eksCluster.clusterSecurityGroupId,
             hyperPodSg.securityGroupId,
           ],
-          subnets: props.vpc.selectSubnets(subnetSelection).subnetIds,
+          subnets: props.vpc.selectSubnets(workerSubnetSelection).subnetIds,
         },
       },
     );

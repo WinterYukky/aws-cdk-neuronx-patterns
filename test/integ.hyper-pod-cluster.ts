@@ -76,10 +76,9 @@ class HyperPodClusterIntegTestStack extends Stack {
       // sa-east-1c have alternated between "full" and "empty") the
       // instance group is stuck forever. Pin the worker subnets to the
       // single AZ that has had the most reliable trn2.3xlarge spot
-      // inventory during this test's history (sa-east-1b). The Cluster
-      // construct still uses the full AZ set for its EKS control plane
-      // subnets, which do not care about trn2 inventory.
-      vpcSubnets: { availabilityZones: ["sa-east-1b"] },
+      // inventory during this test's history (sa-east-1b). The EKS control
+      // plane still uses every AZ the VPC provides (EKS requires >=2 AZs).
+      workerSubnets: { availabilityZones: ["sa-east-1b"] },
       kubectlLayer: new KubectlV34Layer(this, "KubectlLayer"),
       instanceGroups: [
         {
