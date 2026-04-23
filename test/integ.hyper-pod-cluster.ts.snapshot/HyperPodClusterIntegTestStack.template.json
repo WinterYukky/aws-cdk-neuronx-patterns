@@ -2485,13 +2485,7 @@
      ],
      "SubnetIds": [
       {
-       "Ref": "VpcPrivateSubnet1Subnet536B997A"
-      },
-      {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
-      },
-      {
-       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     },
@@ -2628,12 +2622,8 @@
     ]
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520": {
@@ -2695,12 +2685,8 @@
     ]
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandler3CF4DC9D": {
@@ -2747,13 +2733,7 @@
      ],
      "SubnetIds": [
       {
-       "Ref": "VpcPrivateSubnet1Subnet536B997A"
-      },
-      {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
-      },
-      {
-       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
@@ -2761,12 +2741,8 @@
    "DependsOn": [
     "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520",
     "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB": {
@@ -2786,12 +2762,8 @@
     "RetentionInDays": 731
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ],
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
@@ -2851,12 +2823,8 @@
     ]
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828": {
@@ -2911,12 +2879,8 @@
     ]
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8": {
@@ -2963,13 +2927,7 @@
      ],
      "SubnetIds": [
       {
-       "Ref": "VpcPrivateSubnet1Subnet536B997A"
-      },
-      {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
-      },
-      {
-       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
@@ -2977,12 +2935,8 @@
    "DependsOn": [
     "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828",
     "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475",
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ]
   },
   "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D": {
@@ -3002,12 +2956,8 @@
     "RetentionInDays": 731
    },
    "DependsOn": [
-    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
     "VpcPrivateSubnet2DefaultRoute060D2087",
-    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-    "VpcPrivateSubnet3DefaultRoute94B74F0D",
-    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
    ],
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain"
@@ -3645,13 +3595,7 @@
      ],
      "Subnets": [
       {
-       "Ref": "VpcPrivateSubnet1Subnet536B997A"
-      },
-      {
        "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
-      },
-      {
-       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
       }
      ]
     }
