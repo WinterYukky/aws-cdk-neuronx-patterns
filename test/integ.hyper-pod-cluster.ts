@@ -32,7 +32,12 @@ class HyperPodClusterIntegTestStack extends Stack {
     super(scope, id);
     const vpc = new Vpc(this, "Vpc", {
       natGateways: 1,
-      maxAzs: 2,
+      // trn2 capacity is unevenly distributed across AZs in most regions
+      // (for example sa-east-1a currently has no trn2.3xlarge spot
+      // inventory even when 1b/1c do), so the HyperPod instance group
+      // needs to target as many AZs as possible to pick up whichever one
+      // still has capacity at scale-out time.
+      maxAzs: 3,
       gatewayEndpoints: {
         S3: {
           service: GatewayVpcEndpointAwsService.S3,
