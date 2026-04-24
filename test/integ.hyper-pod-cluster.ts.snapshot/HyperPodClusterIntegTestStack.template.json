@@ -901,7 +901,7 @@
        "DeviceName": "/dev/xvda",
        "Ebs": {
         "Encrypted": true,
-        "VolumeSize": 61,
+        "VolumeSize": 62,
         "VolumeType": "gp3"
        }
       }
@@ -1198,11 +1198,11 @@
    "Properties": {
     "ContainerProperties": {
      "Command": [
-      "HuggingFaceTB/SmolLM-135M-Instruct",
-      "--served-model-name",
-      "HuggingFaceTB/SmolLM-135M-Instruct",
+      "Qwen/Qwen3-0.6B",
       "--max-model-len",
-      "128",
+      "2048",
+      "--served-model-name",
+      "Qwen/Qwen3-0.6B",
       "--max-num-seqs",
       "1",
       "--tensor-parallel-size",
@@ -1248,11 +1248,11 @@
       },
       {
        "Name": "MODEL_ID",
-       "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
+       "Value": "Qwen/Qwen3-0.6B"
       },
       {
        "Name": "MODEL_NAME",
-       "Value": "HuggingFaceTB/SmolLM-135M-Instruct"
+       "Value": "Qwen/Qwen3-0.6B"
       },
       {
        "Name": "COMPILED_ARTIFACTS_S3_URI",
@@ -1264,14 +1264,14 @@
           {
            "Ref": "Bucket83908E77"
           },
-          "/sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91"
+          "/sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1"
          ]
         ]
        }
       },
       {
        "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
-       "Value": "sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91"
+       "Value": "sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1"
       }
      ],
      "ExecutionRoleArn": {
@@ -1461,7 +1461,7 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":states:::aws-sdk:batch:describeJobs\"},\"CheckJobStatus\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $JobStatus = 'SUCCEEDED' %}\",\"Next\":\"JobSucceeded\"},{\"Condition\":\"{% $JobStatus = 'FAILED' %}\",\"Next\":\"JobFailed\"}],\"Default\":\"WaitForJob\"},\"JobSucceeded\":{\"Type\":\"Pass\",\"Output\":{\"Data\":{\"s3Prefix\":\"sdk-2.28.0/f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91\"}},\"End\":true},\"JobFailed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"{% 'FAILED' %}\",\"Reason\":\"{% 'CompileJobFailed: ' & $StatusReason %}\"},\"End\":true},\"Update\":{\"Type\":\"Pass\",\"End\":true},\"Delete\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":43200,\"QueryLanguage\":\"JSONata\"}"
+       ":states:::aws-sdk:batch:describeJobs\"},\"CheckJobStatus\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $JobStatus = 'SUCCEEDED' %}\",\"Next\":\"JobSucceeded\"},{\"Condition\":\"{% $JobStatus = 'FAILED' %}\",\"Next\":\"JobFailed\"}],\"Default\":\"WaitForJob\"},\"JobSucceeded\":{\"Type\":\"Pass\",\"Output\":{\"Data\":{\"s3Prefix\":\"sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1\"}},\"End\":true},\"JobFailed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"{% 'FAILED' %}\",\"Reason\":\"{% 'CompileJobFailed: ' & $StatusReason %}\"},\"End\":true},\"Update\":{\"Type\":\"Pass\",\"End\":true},\"Delete\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":43200,\"QueryLanguage\":\"JSONata\"}"
       ]
      ]
     },
@@ -1479,10 +1479,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43": {
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E": {
    "Type": "AWS::CloudFormation::WaitConditionHandle"
   },
-  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1": {
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a139B2514C": {
    "Type": "Custom::NeuronxCompile",
    "Properties": {
     "ServiceToken": {
@@ -1578,19 +1578,19 @@
      ]
     },
     "waitConditionCallbackURL": {
-     "Ref": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43"
+     "Ref": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E"
     },
     "stateMachineArn": {
      "Ref": "CompilerCompileStateMachine8A596131"
     }
    },
    "DependsOn": [
-    "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F"
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F": {
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -1652,7 +1652,7 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F",
+    "PolicyName": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877",
     "Roles": [
      {
       "Ref": "LambdalessProviderStateMachineRole4BDCD64E"
@@ -1660,21 +1660,21 @@
     ]
    }
   },
-  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8": {
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1WaitConditionA3D19C7E": {
    "Type": "AWS::CloudFormation::WaitCondition",
    "Properties": {
     "Count": 1,
     "Handle": {
-     "Ref": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43"
+     "Ref": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E"
     },
     "Timeout": "43200"
    },
    "DependsOn": [
-    "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F",
-    "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1"
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877",
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a139B2514C"
    ]
   },
-  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE": {
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3": {
    "Type": "AWS::CloudFormation::CustomResource",
    "Properties": {
     "ServiceToken": {
@@ -1772,7 +1772,7 @@
     "__lambdalessMode": "json-parse",
     "__lambdalessJsonParseValue": {
      "Fn::GetAtt": [
-      "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8",
+      "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1WaitConditionA3D19C7E",
       "Data"
      ]
     }
@@ -3235,18 +3235,18 @@
      "Fn::Join": [
       "",
       [
-       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"HuggingFaceTB/SmolLM-135M-Instruct\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
+       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"Qwen/Qwen3-0.6B\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
        {
         "Ref": "Bucket83908E77"
        },
        "\",\"region\":\"sa-east-1\"},\"modelLocation\":\"",
        {
         "Fn::GetAtt": [
-         "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
+         "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3",
          "s3Prefix"
         ]
        },
-       "\"},\"worker\":{\"image\":\"public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04\",\"command\":[\"vllm\",\"serve\"],\"args\":[\"/opt/ml/model/HuggingFaceTB/SmolLM-135M-Instruct\",\"--served-model-name\",\"HuggingFaceTB/SmolLM-135M-Instruct\",\"--max-model-len\",\"128\",\"--max-num-seqs\",\"1\",\"--tensor-parallel-size\",\"1\",\"--block-size\",\"32\"],\"environmentVariables\":[{\"name\":\"VLLM_NEURON_FRAMEWORK\",\"value\":\"neuronx-distributed-inference\"},{\"name\":\"NEURON_COMPILED_ARTIFACTS\",\"value\":\"neuron-compiled-artifacts\"},{\"name\":\"NEURON_RT_NUM_CORES\",\"value\":\"1\"},{\"name\":\"XLA_HANDLE_SPECIAL_SCALAR\",\"value\":\"1\"}],\"modelInvocationPort\":{\"containerPort\":8000},\"modelVolumeMount\":{\"name\":\"model-volume\"},\"resources\":{\"requests\":{\"aws.amazon.com/neuron\":\"1\"},\"limits\":{\"aws.amazon.com/neuron\":\"1\"}}}}}]"
+       "\"},\"worker\":{\"image\":\"public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04\",\"command\":[\"vllm\",\"serve\"],\"args\":[\"/opt/ml/model/Qwen/Qwen3-0.6B\",\"--max-model-len\",\"2048\",\"--served-model-name\",\"Qwen/Qwen3-0.6B\",\"--max-num-seqs\",\"1\",\"--tensor-parallel-size\",\"1\",\"--block-size\",\"32\"],\"environmentVariables\":[{\"name\":\"VLLM_NEURON_FRAMEWORK\",\"value\":\"neuronx-distributed-inference\"},{\"name\":\"NEURON_COMPILED_ARTIFACTS\",\"value\":\"neuron-compiled-artifacts\"},{\"name\":\"NEURON_RT_NUM_CORES\",\"value\":\"1\"},{\"name\":\"XLA_HANDLE_SPECIAL_SCALAR\",\"value\":\"1\"}],\"modelInvocationPort\":{\"containerPort\":8000},\"modelVolumeMount\":{\"name\":\"model-volume\"},\"resources\":{\"requests\":{\"aws.amazon.com/neuron\":\"1\"},\"limits\":{\"aws.amazon.com/neuron\":\"1\"}}}}}]"
       ]
      ]
     },
@@ -4706,7 +4706,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
      },
-     "S3Key": "22a0a69d51062979d728e4adf7ffe4d9af82378182f9def0f98e5f435fdd3c52.zip"
+     "S3Key": "837731db1242b86fddc591de3966bd1c2ece83e10334accd3313a4689ae62b1d.zip"
     },
     "Handler": "index.handler",
     "Role": {
@@ -4813,7 +4813,7 @@
       "/",
       {
        "Fn::GetAtt": [
-        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
+        "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3",
         "s3Prefix"
        ]
       }

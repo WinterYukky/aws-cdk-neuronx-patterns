@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1777012073885"
+    "salt": "1777014623383"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -398,7 +398,7 @@
     }
    }
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971": {
    "Type": "Custom::DeployAssert@SdkCallLambdainvoke",
    "Properties": {
     "ServiceToken": {
@@ -409,9 +409,9 @@
     },
     "service": "Lambda",
     "api": "invoke",
-    "expected": "{\"$ObjectLike\":{\"Payload\":{\"$SerializedJson\":{\"$ObjectLike\":{\"statusCode\":200}}}}}",
+    "expected": "{\"$ObjectLike\":{\"Payload\":{\"$SerializedJson\":{\"$ObjectLike\":{\"statusCode\":200,\"body\":{\"$ObjectLike\":{\"choices\":{\"$ArrayWith\":[{\"$ObjectLike\":{\"message\":{\"$ObjectLike\":{\"content\":{\"$StringLike\":\"2\"}}}}}]}}}}}}}}",
     "stateMachineArn": {
-     "Ref": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715"
+     "Ref": "LambdaInvoke1b026543c52691d0d65601263b204971WaitForC8C6C199"
     },
     "parameters": {
      "FunctionName": {
@@ -434,18 +434,18 @@
         {
          "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6"
         },
-        "/invocations\\\",\\\"options\\\":{\\\"method\\\":\\\"POST\\\",\\\"headers\\\":{\\\"Content-Type\\\":\\\"application/json\\\",\\\"Accept\\\":\\\"application/json\\\"},\\\"body\\\":\\\"{\\\\\\\"model\\\\\\\":\\\\\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\\\\\",\\\\\\\"messages\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\\\\\"system\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"You are helpfull assistant.\\\\\\\"},{\\\\\\\"role\\\\\\\":\\\\\\\"user\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"please answer '1+1=?'. You must answer only answer numeric.\\\\\\\"}]}\\\"}}\""
+        "/invocations\\\",\\\"options\\\":{\\\"method\\\":\\\"POST\\\",\\\"headers\\\":{\\\"Content-Type\\\":\\\"application/json\\\",\\\"Accept\\\":\\\"application/json\\\"},\\\"body\\\":\\\"{\\\\\\\"model\\\\\\\":\\\\\\\"Qwen/Qwen3-0.6B\\\\\\\",\\\\\\\"messages\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\\\\\"user\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"What is 1+1? Answer with just the digit.\\\\\\\"}],\\\\\\\"max_tokens\\\\\\\":300,\\\\\\\"temperature\\\\\\\":0}\\\"}}\""
        ]
       ]
      }
     },
     "flattenResponse": "false",
-    "salt": "1777012073889"
+    "salt": "1777014623386"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bInvoke089AF997": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971Invoke86F15C2F": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -460,7 +460,7 @@
     }
    }
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForIsCompleteProviderInvoke08E96E20": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971WaitForIsCompleteProviderInvoke5F722B79": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -472,13 +472,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
+      "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922",
       "Arn"
      ]
     }
    }
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForTimeoutProviderInvokeC9FD7DB9": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971WaitForTimeoutProviderInvoke5938960D": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -490,13 +490,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
+      "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922",
       "Arn"
      ]
     }
    }
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -541,7 +541,7 @@
     ]
    }
   },
-  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715": {
+  "LambdaInvoke1b026543c52691d0d65601263b204971WaitForC8C6C199": {
    "Type": "AWS::StepFunctions::StateMachine",
    "Properties": {
     "DefinitionString": {
@@ -568,13 +568,13 @@
     },
     "RoleArn": {
      "Fn::GetAtt": [
-      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
+      "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922",
       "Arn"
      ]
     }
    },
    "DependsOn": [
-    "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB"
+    "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922"
    ]
   }
  },
@@ -587,10 +587,10 @@
     ]
    }
   },
-  "AssertionResultsLambdaInvoke3a1b2a978f68156219a6e1eb543e317b": {
+  "AssertionResultsLambdaInvoke1b026543c52691d0d65601263b204971": {
    "Value": {
     "Fn::GetAtt": [
-     "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b",
+     "LambdaInvoke1b026543c52691d0d65601263b204971",
      "assertion"
     ]
    }

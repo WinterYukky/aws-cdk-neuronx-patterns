@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/3977c72ffecfa3e0281d04e334912083ace78b44ab4ccf1cc2248af99b0d0264.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/baa5a46227266b427320ddbe82556877ccdb263e7e5312521e0da12aa6fadc8b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -34,12 +34,6 @@
         "HyperPodClusterIntegTestStack.assets"
       ],
       "metadata": {
-        "/HyperPodClusterIntegTestStack": [
-          {
-            "type": "aws:cdk:warning",
-            "data": "When using NODEJS_LATEST the runtime version may change as new runtimes are released, this may affect the availability of packages shipped with the environment. Ensure that any external dependencies are available through layers or specify a specific runtime version. [ack: @aws-cdk/aws-lambda-nodejs:variableRuntimeExternals]"
-          }
-        ],
         "/HyperPodClusterIntegTestStack/Vpc": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -954,25 +948,25 @@
             "data": "CompilerCompileStateMachine8A596131"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Handle": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/Handle": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43"
+            "data": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Resource": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/Resource/Resource": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Resource/Default": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/Resource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1"
+            "data": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a139B2514C"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Policy": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/Resource/Policy": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -1026,19 +1020,19 @@
             }
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/Resource/Policy/Resource": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/Resource/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F"
+            "data": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/WaitCondition": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/WaitCondition": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8"
+            "data": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1WaitConditionA3D19C7E"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/ParsedAttrData/Resource": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -1052,10 +1046,10 @@
             "data": "*"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91/ParsedAttrData/Resource/Default": [
+        "/HyperPodClusterIntegTestStack/Compiler/Resource/WaitConditionsdk-2.28.0--3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1/ParsedAttrData/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE"
+            "data": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3"
           }
         ],
         "/HyperPodClusterIntegTestStack/DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3": [
@@ -3752,9 +3746,6 @@
               "entry": "*",
               "vpc": "*",
               "timeout": "*",
-              "bundling": {
-                "externalModules": "*"
-              },
               "runtime": "*",
               "code": "*",
               "handler": "*"
@@ -3765,10 +3756,7 @@
             "data": {
               "entry": "*",
               "vpc": "*",
-              "timeout": "*",
-              "bundling": {
-                "externalModules": "*"
-              }
+              "timeout": "*"
             }
           }
         ],
@@ -3899,10 +3887,46 @@
             "data": "CheckBootstrapVersion"
           }
         ],
-        "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B": [
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Handle5AC1EC43",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
             "trace": [
               "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
             ]
@@ -3928,7 +3952,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/be6d66f5168459f3840e220854c11ac570fd1ae8bbf2f80c22b8d8605b0fef3c.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/b765fdbe67fae6443e58ce7795eecf5bcb18810a1d26325e353df29e87879046.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -4031,7 +4055,7 @@
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Default": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/Default": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -4045,46 +4069,46 @@
             "data": "*"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Default/Default": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bInvoke089AF997"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971Invoke86F15C2F"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/IsCompleteProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/WaitFor/IsCompleteProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForIsCompleteProviderInvoke08E96E20"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971WaitForIsCompleteProviderInvoke5F722B79"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/TimeoutProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/WaitFor/TimeoutProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForTimeoutProviderInvokeC9FD7DB9"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971WaitForTimeoutProviderInvoke5938960D"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/Role": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/WaitFor/Role": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971WaitForRole80A31922"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/Resource": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/WaitFor/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715"
+            "data": "LambdaInvoke1b026543c52691d0d65601263b204971WaitForC8C6C199"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/AssertionResults": [
+        "/IntegTestAssertions/LambdaInvoke1b026543c52691d0d65601263b204971/AssertionResults": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AssertionResultsLambdaInvoke3a1b2a978f68156219a6e1eb543e317b"
+            "data": "AssertionResultsLambdaInvoke1b026543c52691d0d65601263b204971"
           }
         ],
         "/IntegTestAssertions/BootstrapVersion": [

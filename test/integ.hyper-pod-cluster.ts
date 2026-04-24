@@ -59,18 +59,24 @@ class HyperPodClusterIntegTestStack extends Stack {
       autoDeleteObjects: true,
     });
 
-    // Compile a small model for testing
+    // Compile a small model for testing. Qwen3-0.6B is chosen because it
+    // is small enough to compile on c7i in a few minutes but has enough
+    // reasoning ability to deterministically answer trivial arithmetic,
+    // which lets us assert the semantic contents of the response.
     const compiler = new VllmNxdInferenceCompiler(this, "Compiler", {
       vpc,
       bucket,
-      model: Model.fromHuggingFace("HuggingFaceTB/SmolLM-135M-Instruct", {
-        parameters: Parameters.million(135),
+      model: Model.fromHuggingFace("Qwen/Qwen3-0.6B", {
+        parameters: Parameters.million(600),
         config: {
-          attentionHeads: 9,
-          embeddingDimension: 576,
-          layers: 30,
+          attentionHeads: 16,
+          embeddingDimension: 1024,
+          layers: 28,
         },
       }),
+      vllmArgs: {
+        maxModelLen: 2048,
+      },
       neuronxInstanceType: NeuronxInstanceType.TRN2_3XLARGE,
     });
     const compiledModel = compiler.compile();
@@ -226,18 +232,15 @@ const invoke = integTest.assertions.invokeFunction({
         Accept: "application/json",
       },
       body: JSON.stringify({
-        model: "HuggingFaceTB/SmolLM-135M-Instruct",
+        model: "Qwen/Qwen3-0.6B",
         messages: [
           {
-            role: "system",
-            content: "You are helpfull assistant.",
-          },
-          {
             role: "user",
-            content:
-              "please answer '1+1=?'. You must answer only answer numeric.",
+            content: "What is 1+1? Answer with just the digit.",
           },
         ],
+        max_tokens: 300,
+        temperature: 0,
       }),
     },
   } satisfies HttpRequestFromVpcFunctionPayload),
@@ -249,6 +252,18 @@ invoke
       Payload: Match.serializedJson(
         Match.objectLike({
           statusCode: 200,
+          body: Match.objectLike({
+            // Assert on the semantic response: Qwen3-0.6B reliably answers
+            // "2" (possibly wrapped in `<think>...</think>` reasoning,
+            // followed by the digit) for trivial arithmetic.
+            choices: Match.arrayWith([
+              Match.objectLike({
+                message: Match.objectLike({
+                  content: Match.stringLikeRegexp("2"),
+                }),
+              }),
+            ]),
+          }),
         }),
       ),
     }),
