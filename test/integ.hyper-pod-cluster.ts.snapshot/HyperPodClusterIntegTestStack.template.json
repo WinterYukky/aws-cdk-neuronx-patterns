@@ -4556,7 +4556,7 @@
        {
         "Ref": "HyperPodSageMakerCluster3AAE6C37"
        },
-       "\",\"alb\":{\"serviceAccount\":{\"create\":false,\"roleArn\":\"",
+       "\",\"alb\":{\"serviceAccount\":{\"roleArn\":\"",
        {
         "Fn::GetAtt": [
          "HyperPodAlbControllerRole452AD5A6",

@@ -576,13 +576,12 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         hyperpodClusterArn: clusterArnForAddon,
         alb: {
           serviceAccount: {
-            // The addon ships its own `aws-load-balancer-controller`
-            // ServiceAccount pre-annotated with a placeholder role ARN
-            // (`arn:aws:iam::123456789012:role/placeholder-alb-role`),
-            // which makes `sts:AssumeRoleWithWebIdentity` fail for every
-            // Ingress the operator creates. Supply our real IRSA role so
-            // the controller can reach ELB v2 on our behalf.
-            create: false,
+            // Let the addon create the ServiceAccount itself, but attach our
+            // real IRSA role ARN to it. Without this override the addon
+            // ships its own SA pre-annotated with a 12-digit placeholder
+            // account ID ("arn:aws:iam::123456789012:role/placeholder-alb-role"),
+            // which makes sts:AssumeRoleWithWebIdentity fail for every
+            // Ingress the operator creates.
             roleArn: albControllerRole.roleArn,
           },
         },
