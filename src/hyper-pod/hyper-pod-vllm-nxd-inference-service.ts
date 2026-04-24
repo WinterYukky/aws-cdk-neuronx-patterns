@@ -191,8 +191,13 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     const port = vllmArgs.port ?? 8000;
     const cliArgs = VllmEngineArgumentsParser.cli(vllmArgs);
 
+    // The inference operator appends `-routing-service` (16 chars) to the
+    // endpoint name when it creates the backing Kubernetes Service and the
+    // ALB Ingress refers to that service name. Kubernetes Service names
+    // must be <= 63 characters, so the endpoint name must fit in
+    // 63 - "-routing-service".length = 47 characters.
     this.endpointName = Names.uniqueResourceName(this, {
-      maxLength: 63,
+      maxLength: 47,
       allowedSpecialCharacters: "-",
     })
       .toLowerCase()

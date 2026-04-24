@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/123cd7291a6c9065c532451bd7784284d430da0b7e108d2927a43b88d0f30bed.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/3977c72ffecfa3e0281d04e334912083ace78b44ab4ccf1cc2248af99b0d0264.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2473,7 +2473,7 @@
             "data": "HyperPodEksClustermanifestInferenceEndpoint09B1D871"
           }
         ],
-        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddress/Resource": [
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress/Resource": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -2483,10 +2483,10 @@
             "data": "*"
           }
         ],
-        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddress/Resource/Default": [
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B"
+            "data": "HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/HyperPodSecurityGroup": [
@@ -3881,10 +3881,10 @@
             "data": "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
           }
         ],
-        "/HyperPodClusterIntegTestStack/Exports/Output{\"Fn::GetAtt\":[\"HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B\",\"Value\"]}": [
+        "/HyperPodClusterIntegTestStack/Exports/Output{\"Fn::GetAtt\":[\"HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483\",\"Value\"]}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
+            "data": "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6"
           }
         ],
         "/HyperPodClusterIntegTestStack/BootstrapVersion": [
@@ -3897,6 +3897,15 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
+          }
+        ],
+        "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ]
       },
@@ -3919,7 +3928,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/bdcc31d1baa9027351f0424cc2619417055bbcce3c0a7f3ec6d42f151614134a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/be6d66f5168459f3840e220854c11ac570fd1ae8bbf2f80c22b8d8605b0fef3c.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -4022,7 +4031,7 @@
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Default": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Default": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -4036,46 +4045,46 @@
             "data": "*"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Default/Default": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558Invoke481CD4C9"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bInvoke089AF997"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/IsCompleteProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/IsCompleteProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForIsCompleteProviderInvokeD2BF88EB"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForIsCompleteProviderInvoke08E96E20"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/TimeoutProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/TimeoutProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForTimeoutProviderInvoke45170463"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForTimeoutProviderInvokeC9FD7DB9"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/Role": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/Role": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/Resource": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/WaitFor/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191"
+            "data": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715"
           }
         ],
-        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/AssertionResults": [
+        "/IntegTestAssertions/LambdaInvoke3a1b2a978f68156219a6e1eb543e317b/AssertionResults": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AssertionResultsLambdaInvoke3f307e88de6a60ad1195004f12054558"
+            "data": "AssertionResultsLambdaInvoke3a1b2a978f68156219a6e1eb543e317b"
           }
         ],
         "/IntegTestAssertions/BootstrapVersion": [

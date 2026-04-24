@@ -3235,7 +3235,7 @@
      "Fn::Join": [
       "",
       [
-       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterintegteststackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"HuggingFaceTB/SmolLM-135M-Instruct\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterintegteststackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
+       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"HuggingFaceTB/SmolLM-135M-Instruct\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
        {
         "Ref": "Bucket83908E77"
        },
@@ -3262,7 +3262,7 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B": {
+  "HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483": {
    "Type": "Custom::AWSCDK-EKS-KubernetesObjectValue",
    "Properties": {
     "ServiceToken": {
@@ -3275,7 +3275,7 @@
      "Ref": "HyperPodEksCluster2B4D66BB"
     },
     "ObjectType": "ingress",
-    "ObjectName": "alb-hyperpodclusterintegteststackinferenceservice5e8c33f7",
+    "ObjectName": "alb-hyperpodclusterinteackinferenceservice5e8c33f7",
     "ObjectNamespace": "default",
     "JsonPath": ".status.loadBalancer.ingress[0].hostname",
     "TimeoutSeconds": 900
@@ -4822,7 +4822,7 @@
    }
   },
   "EndpointName": {
-   "Value": "hyperpodclusterintegteststackinferenceservice5e8c33f7"
+   "Value": "hyperpodclusterinteackinferenceservice5e8c33f7"
   },
   "ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1": {
    "Value": {
@@ -4843,15 +4843,15 @@
     "Name": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
    }
   },
-  "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56": {
+  "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6": {
    "Value": {
     "Fn::GetAtt": [
-     "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B",
+     "HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483",
      "Value"
     ]
    },
    "Export": {
-    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6"
    }
   }
  },

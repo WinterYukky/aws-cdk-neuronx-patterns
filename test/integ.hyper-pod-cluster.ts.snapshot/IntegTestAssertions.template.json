@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1777003320343"
+    "salt": "1777012073885"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -398,7 +398,7 @@
     }
    }
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b": {
    "Type": "Custom::DeployAssert@SdkCallLambdainvoke",
    "Properties": {
     "ServiceToken": {
@@ -411,7 +411,7 @@
     "api": "invoke",
     "expected": "{\"$ObjectLike\":{\"Payload\":{\"$SerializedJson\":{\"$ObjectLike\":{\"statusCode\":200}}}}}",
     "stateMachineArn": {
-     "Ref": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191"
+     "Ref": "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715"
     },
     "parameters": {
      "FunctionName": {
@@ -432,7 +432,7 @@
        [
         "\"{\\\"url\\\":\\\"https://",
         {
-         "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
+         "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6"
         },
         "/invocations\\\",\\\"options\\\":{\\\"method\\\":\\\"POST\\\",\\\"headers\\\":{\\\"Content-Type\\\":\\\"application/json\\\",\\\"Accept\\\":\\\"application/json\\\"},\\\"body\\\":\\\"{\\\\\\\"model\\\\\\\":\\\\\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\\\\\",\\\\\\\"messages\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\\\\\"system\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"You are helpfull assistant.\\\\\\\"},{\\\\\\\"role\\\\\\\":\\\\\\\"user\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"please answer '1+1=?'. You must answer only answer numeric.\\\\\\\"}]}\\\"}}\""
        ]
@@ -440,12 +440,12 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1777003320347"
+    "salt": "1777012073889"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558Invoke481CD4C9": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bInvoke089AF997": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -460,7 +460,7 @@
     }
    }
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForIsCompleteProviderInvokeD2BF88EB": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForIsCompleteProviderInvoke08E96E20": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -472,13 +472,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
+      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
       "Arn"
      ]
     }
    }
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForTimeoutProviderInvoke45170463": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForTimeoutProviderInvokeC9FD7DB9": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -490,13 +490,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
+      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
       "Arn"
      ]
     }
    }
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -541,7 +541,7 @@
     ]
    }
   },
-  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191": {
+  "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitFor2F25E715": {
    "Type": "AWS::StepFunctions::StateMachine",
    "Properties": {
     "DefinitionString": {
@@ -568,13 +568,13 @@
     },
     "RoleArn": {
      "Fn::GetAtt": [
-      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
+      "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB",
       "Arn"
      ]
     }
    },
    "DependsOn": [
-    "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014"
+    "LambdaInvoke3a1b2a978f68156219a6e1eb543e317bWaitForRole38A743FB"
    ]
   }
  },
@@ -587,10 +587,10 @@
     ]
    }
   },
-  "AssertionResultsLambdaInvoke3f307e88de6a60ad1195004f12054558": {
+  "AssertionResultsLambdaInvoke3a1b2a978f68156219a6e1eb543e317b": {
    "Value": {
     "Fn::GetAtt": [
-     "LambdaInvoke3f307e88de6a60ad1195004f12054558",
+     "LambdaInvoke3a1b2a978f68156219a6e1eb543e317b",
      "assertion"
     ]
    }
