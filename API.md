@@ -712,10 +712,21 @@ The HyperPod execution role used by instance groups.
 High-level construct that deploys a vLLM inference endpoint on a HyperPod cluster using the InferenceEndpointConfig Kubernetes CRD.
 
 This construct installs the required inference operator addon, cert-manager,
-the S3 Mountpoint CSI driver, and configures IRSA roles automatically.
+the S3 Mountpoint and FSx for Lustre CSI drivers, and configures IRSA roles
+automatically.
 
 Note: Model artifacts are loaded by the HyperPod execution role. For production
 workloads requiring pod-level isolation, consider using IRSA for S3 access instead.
+
+Known limitation: The Application Load Balancer that the inference operator
+provisions for the endpoint is managed entirely by the operator based on
+the `InferenceEndpointConfig` CRD. That CRD does not currently expose a
+way to specify the security groups attached to the ALB, so this construct
+cannot restrict ingress to the ALB at the security group level. The ALB is
+provisioned `scheme: internal`, so it is not reachable from outside the
+VPC, but any resource inside the VPC can reach it on port 443. If/when the
+operator gains a field for this (e.g. `spec.loadBalancer.securityGroups`),
+this construct should expose it as a typed CDK prop.
 
 #### Initializers <a name="Initializers" id="aws-cdk-neuronx-patterns.HyperPodVllmNxdInferenceService.Initializer"></a>
 
@@ -5342,7 +5353,12 @@ The task definition to use for tasks in the service. TaskDefinition or TaskImage
 
 ### AutoscalingConfig <a name="AutoscalingConfig" id="aws-cdk-neuronx-patterns.AutoscalingConfig"></a>
 
-Autoscaling configuration for the inference endpoint via KEDA.
+Autoscaling configuration for the inference endpoint.
+
+The InferenceEndpointConfig CRD (v1) accepts an `autoScalingSpec` with
+CloudWatch- or Prometheus-based triggers; this construct currently
+exposes the minimum surface needed to set the replica range and leave
+triggers configurable via `triggers`.
 
 #### Initializer <a name="Initializer" id="aws-cdk-neuronx-patterns.AutoscalingConfig.Initializer"></a>
 
@@ -5356,10 +5372,25 @@ const autoscalingConfig: AutoscalingConfig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.cloudWatchTriggers">cloudWatchTriggers</a></code> | <code>{[ key: string ]: any}[]</code> | CloudWatch triggers for autoscaling (see CRD docs for the full schema). |
 | <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.maxReplicas">maxReplicas</a></code> | <code>number</code> | Maximum number of replicas. |
 | <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.minReplicas">minReplicas</a></code> | <code>number</code> | Minimum number of replicas. |
-| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetMetric">targetMetric</a></code> | <code>string</code> | Target metric name for autoscaling. |
-| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetValue">targetValue</a></code> | <code>number</code> | Target metric value threshold. |
+| <code><a href="#aws-cdk-neuronx-patterns.AutoscalingConfig.property.prometheusTriggers">prometheusTriggers</a></code> | <code>{[ key: string ]: any}[]</code> | Prometheus triggers for autoscaling (see CRD docs for the full schema). |
+
+---
+
+##### `cloudWatchTriggers`<sup>Optional</sup> <a name="cloudWatchTriggers" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.cloudWatchTriggers"></a>
+
+```typescript
+public readonly cloudWatchTriggers: {[ key: string ]: any}[];
+```
+
+- *Type:* {[ key: string ]: any}[]
+
+CloudWatch triggers for autoscaling (see CRD docs for the full schema).
+
+Each trigger must at least set `name`, `namespace`, `metricName` and
+`targetValue`.
 
 ---
 
@@ -5389,27 +5420,15 @@ Minimum number of replicas.
 
 ---
 
-##### `targetMetric`<sup>Optional</sup> <a name="targetMetric" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetMetric"></a>
+##### `prometheusTriggers`<sup>Optional</sup> <a name="prometheusTriggers" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.prometheusTriggers"></a>
 
 ```typescript
-public readonly targetMetric: string;
+public readonly prometheusTriggers: {[ key: string ]: any}[];
 ```
 
-- *Type:* string
+- *Type:* {[ key: string ]: any}[]
 
-Target metric name for autoscaling.
-
----
-
-##### `targetValue`<sup>Optional</sup> <a name="targetValue" id="aws-cdk-neuronx-patterns.AutoscalingConfig.property.targetValue"></a>
-
-```typescript
-public readonly targetValue: number;
-```
-
-- *Type:* number
-
-Target metric value threshold.
+Prometheus triggers for autoscaling (see CRD docs for the full schema).
 
 ---
 
@@ -5481,7 +5500,8 @@ const hyperPodClusterProps: HyperPodClusterProps = { ... }
 | <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubectlLayer">kubectlLayer</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion</code> | An AWS Lambda Layer which includes kubectl and Helm. |
 | <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.kubernetesVersion">kubernetesVersion</a></code> | <code>aws-cdk-lib.aws_eks_v2.KubernetesVersion</code> | Kubernetes version for the EKS cluster. |
 | <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.nodeRecovery">nodeRecovery</a></code> | <code>string</code> | Enable automatic node recovery. |
-| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | VPC subnets for worker nodes. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.vpcSubnets">vpcSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | VPC subnets for the underlying EKS cluster and, by default, for HyperPod worker nodes as well. |
+| <code><a href="#aws-cdk-neuronx-patterns.HyperPodClusterProps.property.workerSubnets">workerSubnets</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | VPC subnets that SageMaker HyperPod can use to provision worker instances. |
 
 ---
 
@@ -5595,7 +5615,25 @@ public readonly vpcSubnets: SubnetSelection;
 - *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
 - *Default:* private subnets with egress
 
-VPC subnets for worker nodes.
+VPC subnets for the underlying EKS cluster and, by default, for HyperPod worker nodes as well.
+
+---
+
+##### `workerSubnets`<sup>Optional</sup> <a name="workerSubnets" id="aws-cdk-neuronx-patterns.HyperPodClusterProps.property.workerSubnets"></a>
+
+```typescript
+public readonly workerSubnets: SubnetSelection;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.SubnetSelection
+- *Default:* the same subnets as `vpcSubnets`
+
+VPC subnets that SageMaker HyperPod can use to provision worker instances.
+
+Use this when the EKS control plane must span multiple
+AZs (EKS requires >=2) but the HyperPod instance groups need to be
+constrained to a subset of AZs, e.g. to avoid picking an AZ that
+currently has no capacity for the selected instance type.
 
 ---
 

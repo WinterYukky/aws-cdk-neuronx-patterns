@@ -487,7 +487,11 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     });
     // Depend on the raw CfnCluster rather than the Cluster construct so we do
     // not pull in other cluster subtree resources and form a dependency cycle.
-    for (const helperAddon of [s3CsiAddon, fsxCsiAddon, podIdentityAgentAddon]) {
+    for (const helperAddon of [
+      s3CsiAddon,
+      fsxCsiAddon,
+      podIdentityAgentAddon,
+    ]) {
       helperAddon.node.addDependency(
         (cluster.eksCluster.node.defaultChild ??
           cluster.eksCluster) as IDependable,
