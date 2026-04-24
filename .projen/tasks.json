@@ -90,6 +90,9 @@
       "steps": [
         {
           "exec": "jsii --silence-warnings=reserved-word"
+        },
+        {
+          "exec": "node -e \"require('fs').cpSync('src', 'lib', { recursive: true, filter: (p) => /(?:\\\\/|^)[^.]+$|\\\\.json$/.test(p) })\""
         }
       ]
     },

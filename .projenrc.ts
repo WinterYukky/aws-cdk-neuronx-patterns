@@ -100,4 +100,10 @@ if (approveJob && "steps" in approveJob) {
   });
 }
 
+// Copy non-TS assets (e.g. vendored IAM policy JSONs) into the compiled
+// `lib/` output so runtime `fs.readFileSync` calls can locate them.
+project.compileTask.exec(
+  `node -e "require('fs').cpSync('src', 'lib', { recursive: true, filter: (p) => /(?:\\\\/|^)[^.]+$|\\\\.json$/.test(p) })"`,
+);
+
 project.synth();

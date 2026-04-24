@@ -385,6 +385,37 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     });
     tlsBucket.grantReadWrite(inferenceOperatorRole);
 
+    // IRSA role for the AWS Load Balancer Controller that the inference
+    // operator addon installs. The addon's bundled ServiceAccount comes
+    // pre-annotated with a placeholder role ARN, so we need to provide a
+    // real ALB controller role via the addon's configurationValues for
+    // Ingress resources to reach AWS ELB.
+    const albServiceAccountName = "aws-load-balancer-controller";
+    const albNamespace = "hyperpod-inference-system";
+    const albControllerRole = cluster.createServiceAccountRole(
+      "AlbControllerRole",
+      albServiceAccountName,
+      albNamespace,
+    );
+    // AWS-published ALB controller IAM policy (bundled with CDK's AlbController).
+    // Loading JSON at synth time keeps this policy in lockstep with the
+    // controller version CDK ships without having to mirror it here.
+    // AWS-published ALB controller IAM policy (a vendored copy of the
+    // policy CDK's aws-eks-v2 AlbController bundles at v2.8.2). Keeping the
+    // file in-tree avoids reaching into `aws-cdk-lib`'s private layout at
+    // synth time.
+    const albIamPolicyJson = JSON.parse(
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require("fs").readFileSync(
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("path").join(__dirname, "policies", "alb-iam-policy.json"),
+        "utf-8",
+      ),
+    );
+    for (const statement of albIamPolicyJson.Statement) {
+      albControllerRole.addToPolicy(iam.PolicyStatement.fromJson(statement));
+    }
+
     // Install cert-manager via Helm.
     //
     // The `amazon-sagemaker-hyperpod-inference` EKS addon depends on
@@ -533,6 +564,18 @@ export class HyperPodVllmNxdInferenceService extends Construct {
         // the ARN explicitly so the operator does not depend on node labels
         // present only on SageMaker HyperPod instance groups.
         hyperpodClusterArn: clusterArnForAddon,
+        alb: {
+          serviceAccount: {
+            // The addon ships its own `aws-load-balancer-controller`
+            // ServiceAccount pre-annotated with a placeholder role ARN
+            // (`arn:aws:iam::123456789012:role/placeholder-alb-role`),
+            // which makes `sts:AssumeRoleWithWebIdentity` fail for every
+            // Ingress the operator creates. Supply our real IRSA role so
+            // the controller can reach ELB v2 on our behalf.
+            create: false,
+            roleArn: albControllerRole.roleArn,
+          },
+        },
       },
     });
     // We intentionally depend on the underlying CfnCluster rather than the
