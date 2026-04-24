@@ -36,14 +36,16 @@ class HyperPodClusterIntegTestStack extends Stack {
   readonly httpRequestFromVpcFunction: IFunction;
   readonly ingressHostName: string;
   constructor(scope: App, id: string) {
-    // env-agnostic stacks default to 2 availability zones in CDK, but trn2
-    // capacity is unevenly distributed across AZs (for example sa-east-1a
-    // currently has no trn2.3xlarge spot inventory even when 1b/1c do),
-    // so we pin the stack to sa-east-1 and provision 3 AZs explicitly to
-    // give HyperPod the best chance of finding capacity.
-    super(scope, id, {
-      env: { region: "sa-east-1" },
-    });
+    // NOTE: We intentionally leave the stack environment-agnostic (no
+    // `env` on `super(...)`) so that the synthesized snapshot stays
+    // reproducible across environments (no baked-in account/region). The
+    // actual region is pinned via integ-runner's `--parallel-regions
+    // sa-east-1` flag. trn2 capacity is unevenly distributed across AZs
+    // (for example sa-east-1a currently has no trn2.3xlarge spot
+    // inventory even when 1b/1c do), so we still provision 3 AZs
+    // explicitly below to give HyperPod the best chance of finding
+    // capacity.
+    super(scope, id);
     const vpc = new Vpc(this, "Vpc", {
       natGateways: 1,
       availabilityZones: ["sa-east-1a", "sa-east-1b", "sa-east-1c"],
@@ -182,9 +184,11 @@ const stack = new HyperPodClusterIntegTestStack(
 
 const integTest = new IntegTest(app, "IntegTest", {
   testCases: [stack],
-  assertionStack: new Stack(app, "IntegTestAssertions", {
-    env: { region: "sa-east-1" },
-  }),
+  // Keep the assertion stack environment-agnostic for the same
+  // reproducibility reasons as above; integ-runner injects the real
+  // account/region at deploy time from `--parallel-regions` and the
+  // ambient CDK credentials.
+  assertionStack: new Stack(app, "IntegTestAssertions"),
 });
 
 // Assert that the HyperPod cluster is InService

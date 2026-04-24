@@ -618,7 +618,15 @@
            "Fn::Join": [
             "",
             [
-             "arn:aws:ec2:sa-east-1:",
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
              {
               "Ref": "AWS::AccountId"
              },
@@ -645,7 +653,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
     },
@@ -776,7 +784,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
     },
@@ -881,7 +889,7 @@
      "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
     },
     "sourceS3Url": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
     }
    },
    "DependsOn": [
@@ -1154,7 +1162,15 @@
         "Fn::Join": [
          "",
          [
-          "arn:aws:logs:sa-east-1:",
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":logs:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
           {
            "Ref": "AWS::AccountId"
           },
@@ -1617,7 +1633,15 @@
         "Fn::Join": [
          "",
          [
-          "arn:aws:states:sa-east-1:",
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":states:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
           {
            "Ref": "AWS::AccountId"
           },
@@ -1842,7 +1866,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74.zip"
     },
@@ -1928,7 +1952,15 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:logs:sa-east-1:",
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
            {
             "Ref": "AWS::AccountId"
            },
@@ -1944,7 +1976,15 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:logs:sa-east-1:",
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
            {
             "Ref": "AWS::AccountId"
            },
@@ -1970,7 +2010,15 @@
         "Fn::Join": [
          "",
          [
-          "arn:aws:codebuild:sa-east-1:",
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
           {
            "Ref": "AWS::AccountId"
           },
@@ -2019,9 +2067,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            },
            "/*"
           ]
@@ -2031,9 +2083,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            }
           ]
          ]
@@ -2087,7 +2143,15 @@
      "Fn::Join": [
       "",
       [
-       "arn:aws:kms:sa-east-1:",
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":kms:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
        {
         "Ref": "AWS::AccountId"
        },
@@ -2402,7 +2466,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "8340e57c9dd5ef860787b6ba79b1fb698b98443065c2e7277e133357da92547f.zip"
     },
@@ -2684,9 +2748,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            },
            "/*"
           ]
@@ -2696,9 +2764,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            }
           ]
          ]
@@ -2729,7 +2801,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "379a97e43c3d01fdb08125fcff9c80a976a33da6287e25571deb51e72b5eeda9.zip"
     },
@@ -2822,7 +2894,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
@@ -2945,7 +3017,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
     },
@@ -3080,7 +3152,7 @@
     },
     "Release": "hyperpod-dependencies",
     "ChartAssetURL": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/e49063078d4471ac7a57612dac9ec2c841f544e9001fabab2c7c745db040d6e4.zip"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e49063078d4471ac7a57612dac9ec2c841f544e9001fabab2c7c745db040d6e4.zip"
     },
     "Values": "{\"nvidia-device-plugin\":{\"devicePlugin\":{\"enabled\":false}}}",
     "Namespace": "kube-system",
@@ -3239,7 +3311,11 @@
        {
         "Ref": "Bucket83908E77"
        },
-       "\",\"region\":\"sa-east-1\"},\"modelLocation\":\"",
+       "\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\"},\"modelLocation\":\"",
        {
         "Fn::GetAtt": [
          "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3",
@@ -3585,7 +3661,7 @@
    "Properties": {
     "Content": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
     },
@@ -3603,7 +3679,7 @@
     },
     "SourceBucketNames": [
      {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      }
     ],
     "SourceObjectKeys": [
@@ -4186,9 +4262,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            },
            "/*"
           ]
@@ -4198,9 +4278,13 @@
          "Fn::Join": [
           "",
           [
-           "arn:aws:s3:::",
+           "arn:",
            {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
            }
           ]
          ]
@@ -4260,7 +4344,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip"
     },
@@ -4605,7 +4689,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip"
     },
@@ -4704,7 +4788,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "837731db1242b86fddc591de3966bd1c2ece83e10334accd3313a4689ae62b1d.zip"
     },

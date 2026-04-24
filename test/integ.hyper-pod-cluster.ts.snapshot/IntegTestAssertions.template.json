@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1777014623383"
+    "salt": "1777027678879"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -215,7 +215,15 @@
            "Fn::Join": [
             "",
             [
-             "arn:aws:lambda:sa-east-1:",
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":lambda:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
              {
               "Ref": "AWS::AccountId"
              },
@@ -249,7 +257,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -317,7 +325,15 @@
            "Fn::Join": [
             "",
             [
-             "arn:aws:lambda:sa-east-1:",
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":lambda:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
              {
               "Ref": "AWS::AccountId"
              },
@@ -342,7 +358,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -384,7 +400,7 @@
     "Runtime": "nodejs22.x",
     "Code": {
      "S3Bucket": {
-      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
      "S3Key": "b5c2a7158e57582e84496b24c0499302cec1fd88624535b3dfb629311b3fdc2a.zip"
     },
@@ -440,7 +456,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1777014623386"
+    "salt": "1777027678883"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
