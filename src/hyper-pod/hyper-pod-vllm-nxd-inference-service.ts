@@ -146,6 +146,16 @@ export interface HyperPodVllmNxdInferenceServiceProps {
  *
  * Note: Model artifacts are loaded by the HyperPod execution role. For production
  * workloads requiring pod-level isolation, consider using IRSA for S3 access instead.
+ *
+ * Known limitation: The Application Load Balancer that the inference operator
+ * provisions for the endpoint is managed entirely by the operator based on
+ * the `InferenceEndpointConfig` CRD. That CRD does not currently expose a
+ * way to specify the security groups attached to the ALB, so this construct
+ * cannot restrict ingress to the ALB at the security group level. The ALB is
+ * provisioned `scheme: internal`, so it is not reachable from outside the
+ * VPC, but any resource inside the VPC can reach it on port 443. If/when the
+ * operator gains a field for this (e.g. `spec.loadBalancer.securityGroups`),
+ * this construct should expose it as a typed CDK prop.
  */
 export class HyperPodVllmNxdInferenceService extends Construct {
   /**
