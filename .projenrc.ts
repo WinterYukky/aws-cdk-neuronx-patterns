@@ -29,6 +29,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: [
     `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@aws-cdk/lambda-layer-kubectl-v34",
+    // undici is used by the integ-test VPC Lambda to POST against the
+    // inference ALB, which terminates TLS with a cert-manager self-signed
+    // certificate. We install a global undici dispatcher that disables TLS
+    // verification so the request does not fail with UNABLE_TO_VERIFY_LEAF_SIGNATURE.
+    // Pin to v7.x because 8.x requires Node >= 22.19.
+    "undici@^7",
   ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js", ".amazonq"],

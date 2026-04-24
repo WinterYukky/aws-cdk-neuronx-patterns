@@ -145,11 +145,6 @@ class HyperPodClusterIntegTestStack extends Stack {
         entry: join(__dirname, "private/http-request-from-vpc.ts"),
         vpc,
         timeout: Duration.minutes(5),
-        // `undici` is bundled with the Node.js Lambda runtime, so leaving
-        // it unresolved during esbuild bundling is intentional.
-        bundling: {
-          externalModules: ["undici"],
-        },
       },
     );
     this.cluster.eksCluster.clusterSecurityGroup.connections.allowFrom(

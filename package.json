@@ -63,7 +63,8 @@
     "projen": "^0.99.23",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "undici": "^7"
   },
   "peerDependencies": {
     "@aws-cdk/aws-sagemaker-alpha": "2.240.0-alpha.0",
