@@ -29,13 +29,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: [
     `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
     "@aws-cdk/lambda-layer-kubectl-v34",
-    // Pin the aws-cdk CLI to 2.1118.0. 2.1119.0 has a regression in its
-    // default credential-provider chain that prevents it from obtaining
-    // IAM role credentials from IMDS in some container environments
-    // (e.g. Bedrock AgentCore runtimes), which breaks `cdk deploy` /
-    // `cdk destroy` during integration tests with
-    // `UnresolvedAccount: Unable to resolve AWS account to use`.
-    "aws-cdk@2.1118.0",
     // undici is used by the integ-test VPC Lambda to POST against the
     // inference ALB, which terminates TLS with a cert-manager self-signed
     // certificate. We install a global undici dispatcher that disables TLS
