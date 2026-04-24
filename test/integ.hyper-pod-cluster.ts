@@ -1,16 +1,21 @@
 import { ExpectedResult, IntegTest, Match } from "@aws-cdk/integ-tests-alpha";
-import { App, CfnOutput, RemovalPolicy, Stack } from "aws-cdk-lib";
+import { App, CfnOutput, Duration, RemovalPolicy, Stack } from "aws-cdk-lib";
 import {
   GatewayVpcEndpointAwsService,
   InstanceClass,
   InstanceSize,
   InstanceType,
+  Port,
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
 import { NodegroupAmiType, Cluster } from "aws-cdk-lib/aws-eks-v2";
+import { IFunction } from "aws-cdk-lib/aws-lambda";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { KubectlV34Layer } from "@aws-cdk/lambda-layer-kubectl-v34";
 import * as cxapi from "aws-cdk-lib/cx-api";
+import { join } from "path";
+import { HttpRequestFromVpcFunctionPayload } from "./private/http-request-from-vpc";
 import {
   HyperPodCluster,
   HyperPodVllmNxdInferenceService,
@@ -28,6 +33,8 @@ Object.entries(cxapi.CURRENTLY_RECOMMENDED_FLAGS).map(([key, value]) =>
 class HyperPodClusterIntegTestStack extends Stack {
   readonly cluster: HyperPodCluster;
   readonly inferenceService: HyperPodVllmNxdInferenceService;
+  readonly httpRequestFromVpcFunction: IFunction;
+  readonly ingressHostName: string;
   constructor(scope: App, id: string) {
     // env-agnostic stacks default to 2 availability zones in CDK, but trn2
     // capacity is unevenly distributed across AZs (for example sa-east-1a
@@ -120,6 +127,38 @@ class HyperPodClusterIntegTestStack extends Stack {
       },
     );
 
+    // Look up the ALB hostname the inference operator provisions (named
+    // `alb-<endpointName>` in the `default` namespace). This lets the
+    // integ assertion Lambda POST directly against the model server.
+    this.ingressHostName = eksCluster.getIngressLoadBalancerAddress(
+      `alb-${this.inferenceService.endpointName}`,
+      { timeout: Duration.minutes(15) },
+    );
+
+    // VPC-attached Lambda used to invoke the model's /invocations endpoint
+    // for the integ assertion. The inference ALB is scheme=internal, so
+    // the request must originate from inside the VPC.
+    this.httpRequestFromVpcFunction = new NodejsFunction(
+      this,
+      "HttpRequestFromVpcFunction",
+      {
+        entry: join(__dirname, "private/http-request-from-vpc.ts"),
+        vpc,
+        timeout: Duration.minutes(5),
+        // `undici` is bundled with the Node.js Lambda runtime, so leaving
+        // it unresolved during esbuild bundling is intentional.
+        bundling: {
+          externalModules: ["undici"],
+        },
+      },
+    );
+    this.cluster.eksCluster.clusterSecurityGroup.connections.allowFrom(
+      this.httpRequestFromVpcFunction,
+      // ALB listens on 443 (HTTPS, cert-manager self-signed).
+      Port.tcp(443),
+      "Allow integ test Lambda to call the inference ALB",
+    );
+
     new CfnOutput(this, "EksClusterName", {
       value: this.cluster.eksCluster.clusterName,
     });
@@ -175,34 +214,48 @@ describeCluster
   )
   .waitForAssertions();
 
-// Assert inference via SageMaker Runtime invoke-endpoint
-const invokeEndpoint = integTest.assertions.awsApiCall(
-  "SageMakerRuntime",
-  "invokeEndpoint",
-  {
-    EndpointName: stack.inferenceService.endpointName,
-    ContentType: "application/json",
-    Body: JSON.stringify({
-      model: "HuggingFaceTB/SmolLM-135M-Instruct",
-      messages: [
-        {
-          role: "system",
-          content: "You are helpfull assistant.",
-        },
-        {
-          role: "user",
-          content:
-            "please answer '1+1=?'. You must answer only answer numeric.",
-        },
-      ],
-    }),
-  },
-);
+// Assert inference by having the VPC-attached Lambda POST against the
+// inference ALB's /invocations endpoint (the operator exposes the model
+// server there). We cannot use `SageMakerRuntime.invokeEndpoint` because
+// that API requires a SageMaker Endpoint created via a separate
+// `SageMakerEndpointRegistration` CR + REST API Gateway, which is out of
+// scope for this PR.
+const invoke = integTest.assertions.invokeFunction({
+  functionName: stack.httpRequestFromVpcFunction.functionName,
+  payload: JSON.stringify({
+    url: `https://${stack.ingressHostName}/invocations`,
+    options: {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        model: "HuggingFaceTB/SmolLM-135M-Instruct",
+        messages: [
+          {
+            role: "system",
+            content: "You are helpfull assistant.",
+          },
+          {
+            role: "user",
+            content:
+              "please answer '1+1=?'. You must answer only answer numeric.",
+          },
+        ],
+      }),
+    },
+  } satisfies HttpRequestFromVpcFunctionPayload),
+});
 
-invokeEndpoint
+invoke
   .expect(
     ExpectedResult.objectLike({
-      StatusCode: 200,
+      Payload: Match.serializedJson(
+        Match.objectLike({
+          statusCode: 200,
+        }),
+      ),
     }),
   )
   .waitForAssertions();

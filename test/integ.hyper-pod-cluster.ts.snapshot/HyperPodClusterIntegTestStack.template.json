@@ -2553,6 +2553,27 @@
     "HyperPodEksCluster2B4D66BB"
    ]
   },
+  "HyperPodEksClusterClusterSecurityGroupfromHyperPodClusterIntegTestStackHttpRequestFromVpcFunctionSecurityGroupB6773FEB44359820E4F": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Allow integ test Lambda to call the inference ALB",
+    "FromPort": 443,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "HyperPodEksCluster2B4D66BB",
+      "ClusterSecurityGroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+      "GroupId"
+     ]
+    },
+    "ToPort": 443
+   }
+  },
   "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -3241,6 +3262,30 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
+  "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesObjectValue",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "ObjectType": "ingress",
+    "ObjectName": "alb-hyperpodclusterintegteststackinferenceservice5e8c33f7",
+    "ObjectNamespace": "default",
+    "JsonPath": ".status.loadBalancer.ingress[0].hostname",
+    "TimeoutSeconds": 900
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
   "HyperPodHyperPodSecurityGroup3116C127": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
@@ -3906,19 +3951,24 @@
         "ec2:DescribeCoipPools",
         "ec2:DescribeInstances",
         "ec2:DescribeInternetGateways",
+        "ec2:DescribeIpamPools",
         "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeTags",
         "ec2:DescribeVpcPeeringConnections",
         "ec2:DescribeVpcs",
         "ec2:GetCoipPoolUsage",
+        "ec2:GetSecurityGroupsForVpc",
         "ec2:RevokeSecurityGroupIngress",
         "elasticloadbalancing:AddListenerCertificates",
         "elasticloadbalancing:CreateListener",
         "elasticloadbalancing:CreateRule",
         "elasticloadbalancing:DeleteListener",
         "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DescribeCapacityReservation",
+        "elasticloadbalancing:DescribeListenerAttributes",
         "elasticloadbalancing:DescribeListenerCertificates",
         "elasticloadbalancing:DescribeListeners",
         "elasticloadbalancing:DescribeLoadBalancerAttributes",
@@ -3933,6 +3983,7 @@
         "elasticloadbalancing:ModifyListener",
         "elasticloadbalancing:ModifyRule",
         "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:SetRulePriorities",
         "elasticloadbalancing:SetWebAcl",
         "iam:GetServerCertificate",
         "iam:ListServerCertificates",
@@ -3986,6 +4037,9 @@
         "ec2:RevokeSecurityGroupIngress",
         "elasticloadbalancing:DeleteLoadBalancer",
         "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:ModifyCapacityReservation",
+        "elasticloadbalancing:ModifyIpPools",
+        "elasticloadbalancing:ModifyListenerAttributes",
         "elasticloadbalancing:ModifyLoadBalancerAttributes",
         "elasticloadbalancing:ModifyTargetGroup",
         "elasticloadbalancing:ModifyTargetGroupAttributes",
@@ -4569,6 +4623,158 @@
    "DependsOn": [
     "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
    ]
+  },
+  "HttpRequestFromVpcFunctionServiceRoleA142BB7F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionSecurityGroup5EFA4275": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function HyperPodClusterIntegTestStackHttpRequestFromVpcFunction83B448BA",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionB264F32C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1"
+     },
+     "S3Key": "22a0a69d51062979d728e4adf7ffe4d9af82378182f9def0f98e5f435fdd3c52.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 300,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionLogGroup1EA954C2": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HttpRequestFromVpcFunctionB264F32C"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
   }
  },
  "Conditions": {
@@ -4627,6 +4833,25 @@
    },
    "Export": {
     "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1"
+   }
+  },
+  "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158": {
+   "Value": {
+    "Ref": "HttpRequestFromVpcFunctionB264F32C"
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+   }
+  },
+  "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B",
+     "Value"
+    ]
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
    }
   }
  },

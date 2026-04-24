@@ -30,7 +30,7 @@
      }
     },
     "flattenResponse": "false",
-    "salt": "1776990229182"
+    "salt": "1776991585577"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -198,11 +198,34 @@
         },
         {
          "Action": [
-          "sagemaker:InvokeEndpoint"
+          "lambda:Invoke"
          ],
          "Effect": "Allow",
          "Resource": [
           "*"
+         ]
+        },
+        {
+         "Action": [
+          "lambda:InvokeFunction"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:lambda:sa-east-1:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":function:",
+             {
+              "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+             }
+            ]
+           ]
+          }
          ]
         },
         {
@@ -277,11 +300,34 @@
         },
         {
          "Action": [
-          "sagemaker:InvokeEndpoint"
+          "lambda:Invoke"
          ],
          "Effect": "Allow",
          "Resource": [
           "*"
+         ]
+        },
+        {
+         "Action": [
+          "lambda:InvokeFunction"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:lambda:sa-east-1:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":function:",
+             {
+              "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+             }
+            ]
+           ]
+          }
          ]
         }
        ]
@@ -352,8 +398,8 @@
     }
    }
   },
-  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506": {
-   "Type": "Custom::DeployAssert@SdkCallSageMakerRuntimeinvokeEndpoint",
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558": {
+   "Type": "Custom::DeployAssert@SdkCallLambdainvoke",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
@@ -361,24 +407,60 @@
       "Arn"
      ]
     },
-    "service": "SageMakerRuntime",
-    "api": "invokeEndpoint",
-    "expected": "{\"$ObjectLike\":{\"StatusCode\":200}}",
+    "service": "Lambda",
+    "api": "invoke",
+    "expected": "{\"$ObjectLike\":{\"Payload\":{\"$SerializedJson\":{\"$ObjectLike\":{\"statusCode\":200}}}}}",
     "stateMachineArn": {
-     "Ref": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3"
+     "Ref": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191"
     },
     "parameters": {
-     "EndpointName": "\"hyperpodclusterintegteststackinferenceservice5e8c33f7\"",
-     "ContentType": "\"application/json\"",
-     "Body": "\"{\\\"model\\\":\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\",\\\"messages\\\":[{\\\"role\\\":\\\"system\\\",\\\"content\\\":\\\"You are helpfull assistant.\\\"},{\\\"role\\\":\\\"user\\\",\\\"content\\\":\\\"please answer '1+1=?'. You must answer only answer numeric.\\\"}]}\""
+     "FunctionName": {
+      "Fn::Join": [
+       "",
+       [
+        "\"",
+        {
+         "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+        },
+        "\""
+       ]
+      ]
+     },
+     "Payload": {
+      "Fn::Join": [
+       "",
+       [
+        "\"{\\\"url\\\":\\\"https://",
+        {
+         "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
+        },
+        "/invocations\\\",\\\"options\\\":{\\\"method\\\":\\\"POST\\\",\\\"headers\\\":{\\\"Content-Type\\\":\\\"application/json\\\",\\\"Accept\\\":\\\"application/json\\\"},\\\"body\\\":\\\"{\\\\\\\"model\\\\\\\":\\\\\\\"HuggingFaceTB/SmolLM-135M-Instruct\\\\\\\",\\\\\\\"messages\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\\\\\"system\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"You are helpfull assistant.\\\\\\\"},{\\\\\\\"role\\\\\\\":\\\\\\\"user\\\\\\\",\\\\\\\"content\\\\\\\":\\\\\\\"please answer '1+1=?'. You must answer only answer numeric.\\\\\\\"}]}\\\"}}\""
+       ]
+      ]
+     }
     },
     "flattenResponse": "false",
-    "salt": "1776990229184"
+    "salt": "1776991585581"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
-  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForIsCompleteProviderInvokeD5CEAC24": {
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558Invoke481CD4C9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::ImportValue": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+    },
+    "Principal": {
+     "Fn::GetAtt": [
+      "SingletonFunction1488541a7b23466481b69b4408076b81Role37ABCE73",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForIsCompleteProviderInvokeD2BF88EB": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -390,13 +472,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
       "Arn"
      ]
     }
    }
   },
-  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForTimeoutProviderInvoke5FD3C0F6": {
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForTimeoutProviderInvoke45170463": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -408,13 +490,13 @@
     },
     "Principal": {
      "Fn::GetAtt": [
-      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
       "Arn"
      ]
     }
    }
   },
-  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E": {
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -459,7 +541,7 @@
     ]
    }
   },
-  "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3": {
+  "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191": {
    "Type": "AWS::StepFunctions::StateMachine",
    "Properties": {
     "DefinitionString": {
@@ -486,13 +568,13 @@
     },
     "RoleArn": {
      "Fn::GetAtt": [
-      "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E",
+      "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014",
       "Arn"
      ]
     }
    },
    "DependsOn": [
-    "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E"
+    "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014"
    ]
   }
  },
@@ -505,10 +587,10 @@
     ]
    }
   },
-  "AssertionResultsAwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506": {
+  "AssertionResultsLambdaInvoke3f307e88de6a60ad1195004f12054558": {
    "Value": {
     "Fn::GetAtt": [
-     "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506",
+     "LambdaInvoke3f307e88de6a60ad1195004f12054558",
      "assertion"
     ]
    }

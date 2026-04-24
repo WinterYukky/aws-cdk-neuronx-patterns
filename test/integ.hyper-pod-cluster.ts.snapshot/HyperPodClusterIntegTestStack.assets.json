@@ -181,16 +181,31 @@
         }
       }
     },
-    "561e1b814a08d5482cb7b6709f9b0dda54b9b8e831040e8d5947c35d0d4511a2": {
+    "22a0a69d51062979d728e4adf7ffe4d9af82378182f9def0f98e5f435fdd3c52": {
+      "displayName": "HttpRequestFromVpcFunction/Code",
+      "source": {
+        "path": "asset.22a0a69d51062979d728e4adf7ffe4d9af82378182f9def0f98e5f435fdd3c52",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-sa-east-1-99ecc697": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1",
+          "objectKey": "22a0a69d51062979d728e4adf7ffe4d9af82378182f9def0f98e5f435fdd3c52.zip",
+          "region": "sa-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-sa-east-1"
+        }
+      }
+    },
+    "569c3368c0dc328f9f3640e4beda7bc1b8112ab6c3a203a7a56f1c3763f4d5fc": {
       "displayName": "HyperPodClusterIntegTestStack Template",
       "source": {
         "path": "HyperPodClusterIntegTestStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-sa-east-1-a5cf13bb": {
+        "current_account-sa-east-1-70d2b0b8": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1",
-          "objectKey": "561e1b814a08d5482cb7b6709f9b0dda54b9b8e831040e8d5947c35d0d4511a2.json",
+          "objectKey": "569c3368c0dc328f9f3640e4beda7bc1b8112ab6c3a203a7a56f1c3763f4d5fc.json",
           "region": "sa-east-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-sa-east-1"
         }

@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/561e1b814a08d5482cb7b6709f9b0dda54b9b8e831040e8d5947c35d0d4511a2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/569c3368c0dc328f9f3640e4beda7bc1b8112ab6c3a203a7a56f1c3763f4d5fc.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -34,6 +34,12 @@
         "HyperPodClusterIntegTestStack.assets"
       ],
       "metadata": {
+        "/HyperPodClusterIntegTestStack": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "When using NODEJS_LATEST the runtime version may change as new runtimes are released, this may affect the availability of packages shipped with the environment. Ensure that any external dependencies are available through layers or specify a specific runtime version. [ack: @aws-cdk/aws-lambda-nodejs:variableRuntimeExternals]"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/Vpc": [
           {
             "type": "aws:cdk:analytics:construct",
@@ -1874,6 +1880,17 @@
                 }
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "getIngressLoadBalancerAddress": [
+                "*",
+                {
+                  "timeout": "*"
+                }
+              ]
+            }
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/Role": [
@@ -1923,6 +1940,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/ClusterSecurityGroup/from HyperPodClusterIntegTestStackHttpRequestFromVpcFunctionSecurityGroupB6773FEB:443": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodEksClusterClusterSecurityGroupfromHyperPodClusterIntegTestStackHttpRequestFromVpcFunctionSecurityGroupB6773FEB44359820E4F"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Handler": [
@@ -2448,6 +2471,22 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "HyperPodEksClustermanifestInferenceEndpoint09B1D871"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddress/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/alb-hyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddress/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/HyperPodSecurityGroup": [
@@ -3706,6 +3745,106 @@
             "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
           }
         ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "entry": "*",
+              "vpc": "*",
+              "timeout": "*",
+              "bundling": {
+                "externalModules": "*"
+              },
+              "runtime": "*",
+              "code": "*",
+              "handler": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "entry": "*",
+              "vpc": "*",
+              "timeout": "*",
+              "bundling": {
+                "externalModules": "*"
+              }
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                },
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionServiceRoleA142BB7F"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/SecurityGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "vpc": "*",
+              "description": "*",
+              "allowAllOutbound": "*",
+              "allowAllIpv6Outbound": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEgressRule": [
+                "*",
+                {},
+                "*",
+                true
+              ]
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionSecurityGroup5EFA4275"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionB264F32C"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/LogGroup": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "logGroupName": "*"
+            }
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/HttpRequestFromVpcFunction/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HttpRequestFromVpcFunctionLogGroup1EA954C2"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/EksClusterName": [
           {
             "type": "aws:cdk:logicalId",
@@ -3734,6 +3873,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Exports/Output{\"Ref\":\"HttpRequestFromVpcFunctionB264F32C\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/Exports/Output{\"Fn::GetAtt\":[\"HyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194B\",\"Value\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterintegteststackinferenceservice5e8c33f7LoadBalancerAddressA4C3194BValue99A43D56"
           }
         ],
         "/HyperPodClusterIntegTestStack/BootstrapVersion": [
@@ -3768,7 +3919,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-sa-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-sa-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/a1d3a8b8949f2b3ae8e38cc4a70c9fd7dbf900fe30c8efc878d75f595371879f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-sa-east-1/5995e80bd661d7276ce2167f1e7c3e0a8b0755063d86b5ff72b616a7f30e13f5.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -3871,7 +4022,7 @@
             "data": "SingletonFunction5c1898e096fb4e3e95d5f6c67f3ce41aHandlerADF3E6EA"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Default": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
@@ -3885,40 +4036,46 @@
             "data": "*"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/Default/Default": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/IsCompleteProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForIsCompleteProviderInvokeD5CEAC24"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558Invoke481CD4C9"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/TimeoutProvider/Invoke": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/IsCompleteProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForTimeoutProviderInvoke5FD3C0F6"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForIsCompleteProviderInvokeD2BF88EB"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Role": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/TimeoutProvider/Invoke": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForRoleABEC611E"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForTimeoutProviderInvoke45170463"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/WaitFor/Resource": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/Role": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506WaitForCB0928B3"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitForRole1179F014"
           }
         ],
-        "/IntegTestAssertions/AwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506/AssertionResults": [
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/WaitFor/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AssertionResultsAwsApiCallSageMakerRuntimeinvokeEndpointb52154c8fc20392721364c7b5adbd506"
+            "data": "LambdaInvoke3f307e88de6a60ad1195004f12054558WaitFor182FF191"
+          }
+        ],
+        "/IntegTestAssertions/LambdaInvoke3f307e88de6a60ad1195004f12054558/AssertionResults": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssertionResultsLambdaInvoke3f307e88de6a60ad1195004f12054558"
           }
         ],
         "/IntegTestAssertions/BootstrapVersion": [
