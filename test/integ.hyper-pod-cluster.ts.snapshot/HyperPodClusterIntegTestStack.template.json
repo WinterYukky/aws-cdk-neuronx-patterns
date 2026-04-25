@@ -4647,7 +4647,7 @@
          "Arn"
         ]
        },
-       "\"}}}"
+       "\"},\"tolerations\":[{\"key\":\"node.kubernetes.io/unreachable\",\"operator\":\"Exists\",\"effect\":\"NoSchedule\"},{\"key\":\"node.kubernetes.io/not-ready\",\"operator\":\"Exists\",\"effect\":\"NoSchedule\"}]},\"keda\":{\"tolerations\":[{\"key\":\"node.kubernetes.io/unreachable\",\"operator\":\"Exists\",\"effect\":\"NoSchedule\"},{\"key\":\"node.kubernetes.io/not-ready\",\"operator\":\"Exists\",\"effect\":\"NoSchedule\"}]}}"
       ]
      ]
     }
@@ -4661,6 +4661,31 @@
     "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
     "InferenceServiceTlsCertificateBucket485D9F51"
    ]
+  },
+  "InferenceServiceRemoveInferenceEndpointFinalizerOnDestroy854868F0": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesPatch",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ResourceName": "inferenceendpointconfig/hyperpodclusterinteackinferenceservice5e8c33f7",
+    "ResourceNamespace": "default",
+    "ApplyPatchJson": "{}",
+    "RestorePatchJson": "{\"metadata\":{\"finalizers\":[]}}",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "PatchType": "merge"
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC",
+    "HyperPodEksClustermanifestInferenceEndpoint09B1D871"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
   },
   "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
    "Type": "AWS::IAM::Role",

@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c0a631df012f9e7697e7db21d0d1a8a5cdfd2c839fab189b3d9daca94d1748b9.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/815ed9aecb45eaff7e12b1e8c9f24ef91bd0aff72a4fad755feea73faf737209.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1830,10 +1830,7 @@
         "/HyperPodClusterIntegTestStack/KubectlLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "KubectlLayer600207B5",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "KubectlLayer600207B5"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/EksCluster": [
@@ -2160,10 +2157,7 @@
         "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider/framework-onEvent": [
@@ -2746,10 +2740,7 @@
         "/HyperPodClusterIntegTestStack/HyperPod/LifecycleScriptsDeploy/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_REPLACE"
-            ]
+            "data": "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7"
           }
         ],
         "/HyperPodClusterIntegTestStack/HyperPod/LifecycleScriptsDeploy/CustomResourceHandler": [
@@ -3730,6 +3721,18 @@
             "data": "InferenceServiceInferenceOperatorAddonFEF09769"
           }
         ],
+        "/HyperPodClusterIntegTestStack/InferenceService/RemoveInferenceEndpointFinalizerOnDestroy/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/HyperPodClusterIntegTestStack/InferenceService/RemoveInferenceEndpointFinalizerOnDestroy/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InferenceServiceRemoveInferenceEndpointFinalizerOnDestroy854868F0"
+          }
+        ],
         "/HyperPodClusterIntegTestStack/AWSCDKCfnUtilsProviderCustomResourceProvider": [
           {
             "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
@@ -3916,7 +3919,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c0c191e614abac0babc1680a1bd03875c5655c8c90310cfb5b3bf8b2de72ad42.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/951b7da87cda6acd071a4be5eb908b63a6fd88c6baf1961251db660153bb1337.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
