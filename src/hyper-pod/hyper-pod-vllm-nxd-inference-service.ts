@@ -343,6 +343,43 @@ export class HyperPodVllmNxdInferenceService extends Construct {
       inferencePrerequisites.node.defaultChild as cdk.CfnResource,
     );
 
+    // On stack destroy the EKS system nodegroup is torn down before the
+    // HyperPod worker node is drained, which leaves the
+    // `hyperpod-inference-controller-manager` Deployment with no node to
+    // run on (the only remaining node carries the
+    // `node.kubernetes.io/unreachable:NoSchedule` taint and the
+    // controller-manager Deployment does not yet expose tolerations via
+    // the addon's configurationValues schema). With the controller down
+    // the `inference.sagemaker.aws.InferenceEndpointConfigFinalizer` on
+    // the `InferenceEndpointConfig` CR is never released, so the
+    // KubernetesManifest above hangs in `DELETE_IN_PROGRESS` for 45+
+    // minutes before CloudFormation gives up.
+    //
+    // Use `KubernetesPatch` with a destroy-time `restorePatch` that
+    // removes the finalizer list directly. The patch runs from the
+    // CDK-managed kubectl provider Lambda (not from a pod inside the
+    // cluster), so it is unaffected by whether the controller is
+    // scheduled. The dependency edge below ensures CloudFormation runs
+    // the patch *before* it deletes the manifest: on create/update the
+    // manifest is applied first (then the patch applies its no-op
+    // `applyPatch`), and on delete the order reverses so the finalizer
+    // is stripped before the CR is removed.
+    const removeFinalizer = new eks.KubernetesPatch(
+      this,
+      "RemoveInferenceEndpointFinalizerOnDestroy",
+      {
+        cluster: props.cluster.eksCluster,
+        resourceName: `inferenceendpointconfig/${this.endpointName}`,
+        resourceNamespace: namespace,
+        // No-op on create/update; the actual work is `restorePatch` on
+        // delete.
+        applyPatch: {},
+        restorePatch: { metadata: { finalizers: [] } },
+        patchType: eks.PatchType.MERGE,
+      },
+    );
+    removeFinalizer.node.addDependency(endpointManifest);
+
     // Grant S3 access for model loading
     props.compiledModel.bucket.grantRead(props.cluster.executionRole);
 
