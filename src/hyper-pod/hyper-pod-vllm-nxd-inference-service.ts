@@ -571,6 +571,34 @@ export class HyperPodVllmNxdInferenceService extends Construct {
     ) as cdk.CfnResource;
     const clusterArnForAddon = sagemakerCluster.ref;
 
+    // Tolerations that keep the addon-managed ALB controller and KEDA
+    // components scheduled while the cluster's system nodes are tainted
+    // (e.g. during stack deletion, when nodes are marked
+    // `node.kubernetes.io/unreachable` or `node.kubernetes.io/not-ready`
+    // while they drain). Without these tolerations the ALB controller pod
+    // is evicted before it can process the Ingress deletion event, which
+    // causes the ALB's SecurityGroup and TargetGroup to be orphaned
+    // outside of CloudFormation and leaves the VPC stuck in
+    // `DELETE_IN_PROGRESS` with `DependencyViolation`.
+    //
+    // Note: the HyperPod inference controller-manager Deployment does not
+    // currently expose tolerations through the addon's configurationValues
+    // schema, so the CR finalizer deadlock (handled by the KubernetesPatch
+    // restorePatch below) still needs a separate workaround until the
+    // upstream addon exposes that field.
+    const destroyTimeTolerations = [
+      {
+        key: "node.kubernetes.io/unreachable",
+        operator: "Exists",
+        effect: "NoSchedule",
+      },
+      {
+        key: "node.kubernetes.io/not-ready",
+        operator: "Exists",
+        effect: "NoSchedule",
+      },
+    ];
+
     const addon = new eks.Addon(this, "InferenceOperatorAddon", {
       addonName: "amazon-sagemaker-hyperpod-inference",
       cluster: cluster.eksCluster,
@@ -593,6 +621,10 @@ export class HyperPodVllmNxdInferenceService extends Construct {
             // Ingress the operator creates.
             roleArn: albControllerRole.roleArn,
           },
+          tolerations: destroyTimeTolerations,
+        },
+        keda: {
+          tolerations: destroyTimeTolerations,
         },
       },
     });
