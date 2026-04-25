@@ -1080,7 +1080,7 @@
       },
       {
        "Name": "NEURON_PLATFORM_TARGET_OVERRIDE",
-       "Value": "inf2"
+       "Value": "trn2"
       },
       {
        "Name": "VLLM_NEURON_FRAMEWORK",
@@ -1191,11 +1191,11 @@
      "ResourceRequirements": [
       {
        "Type": "MEMORY",
-       "Value": "15565"
+       "Value": "124519"
       },
       {
        "Type": "VCPU",
-       "Value": "4"
+       "Value": "12"
       }
      ],
      "Secrets": []
@@ -1533,6 +1533,112 @@
     "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91Policy4DCFEE1F",
     "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91681D68F1"
    ]
+  },
+  "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE": {
+   "Type": "AWS::CloudFormation::CustomResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueVllmNxDInferenceIntegTestStackLambdalessProviderTopic9472BB8F228FAE2E",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueVllmNxDInferenceIntegTestStackLambdalessProviderTopic9472BB8F228FAE2E",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         3,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueVllmNxDInferenceIntegTestStackLambdalessProviderTopic9472BB8F228FAE2E",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         4,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueVllmNxDInferenceIntegTestStackLambdalessProviderTopic9472BB8F228FAE2E",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         5,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueVllmNxDInferenceIntegTestStackLambdalessProviderTopic9472BB8F228FAE2E",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     ]
+    },
+    "__lambdalessMode": "json-parse",
+    "__lambdalessJsonParseValue": {
+     "Fn::GetAtt": [
+      "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8",
+      "Data"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
   },
   "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4": {
    "Type": "AWS::IAM::Role",
@@ -1987,19 +2093,6 @@
     "PolicyDocument": {
      "Statement": [
       {
-       "Action": [
-        "states:describeExecution",
-        "states:startExecution"
-       ],
-       "Condition": {
-        "StringEquals": {
-         "aws:RequestedRegion": "DISABLED"
-        }
-       },
-       "Effect": "Allow",
-       "Resource": "*"
-      },
-      {
        "Action": "events:RetrieveConnectionCredentials",
        "Effect": "Allow",
        "Resource": {
@@ -2031,6 +2124,19 @@
        },
        "Effect": "Allow",
        "Resource": "*"
+      },
+      {
+       "Action": [
+        "states:describeExecution",
+        "states:startExecution"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "aws:RequestedRegion": "DISABLED"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
       }
      ],
      "Version": "2012-10-17"
@@ -2050,15 +2156,7 @@
      "Fn::Join": [
       "",
       [
-       "{\"StartAt\":\"Initialize\",\"States\":{\"Initialize\":{\"Type\":\"Pass\",\"Next\":\"Describe Execution\",\"Assign\":{\"ExecutionArn\":\"{% $replace($states.input.ResourceProperties.stateMachineArn, 'stateMachine', 'execution') & ':' & $states.input.RequestId %}\",\"RequestType\":\"{% $states.input.RequestType %}\",\"ResponseURL\":\"{% $states.input.ResponseURL %}\",\"StackId\":\"{% $states.input.StackId %}\",\"RequestId\":\"{% $states.input.RequestId %}\",\"ResourceType\":\"{% $states.input.ResourceType %}\",\"LogicalResourceId\":\"{% $states.input.LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $exists($states.input.PhysicalResourceId) ? $states.input.PhysicalResourceId : null %}\",\"ResourceProperties\":\"{% $states.input.ResourceProperties %}\",\"OldResourceProperties\":\"{% $exists($states.input.OldResourceProperties) ? $states.input.OldResourceProperties : null %}\",\"WaitConditionCallbackURL\":\"{% $exists($states.input.ResourceProperties.waitConditionCallbackURL) ? $states.input.ResourceProperties.waitConditionCallbackURL : null %}\"}},\"Describe Execution\":{\"Next\":\"Is finished?\",\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"Start Execution\"}],\"Type\":\"Task\",\"Arguments\":{\"ExecutionArn\":\"{% $ExecutionArn %}\",\"IncludedData\":\"ALL_DATA\"},\"Resource\":\"arn:",
-       {
-        "Ref": "AWS::Partition"
-       },
-       ":states:::aws-sdk:sfn:describeExecution\"},\"Still Running\":{\"Type\":\"Wait\",\"Seconds\":1,\"Next\":\"Describe Execution\"},\"Start Execution\":{\"Next\":\"Still Running\",\"Type\":\"Task\",\"Arguments\":{\"Name\":\"{% $RequestId %}\",\"Input\":{\"RequestType\":\"{% $RequestType %}\",\"StackId\":\"{% $StackId %}\",\"RequestId\":\"{% $RequestId %}\",\"ResourceType\":\"{% $ResourceType %}\",\"LogicalResourceId\":\"{% $LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $PhysicalResourceId %}\",\"ResourceProperties\":\"{% $ResourceProperties %}\",\"OldResourceProperties\":\"{% $OldResourceProperties %}\"},\"StateMachineArn\":\"{% $ResourceProperties.stateMachineArn %}\"},\"Resource\":\"arn:",
-       {
-        "Ref": "AWS::Partition"
-       },
-       ":states:::aws-sdk:sfn:startExecution\"},\"Is finished?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $states.input.Status = 'RUNNING' %}\",\"Next\":\"Still Running\"},{\"Condition\":\"{% $states.input.Status = 'SUCCEEDED' %}\",\"Output\":\"{% $parse($states.input.Output) %}\",\"Next\":\"Has WaitCondition?\"}],\"Default\":\"Given workflow was failed\"},\"Given workflow was failed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"FAILED\",\"Reason\":\"{% $states.input.Error & ': ' & $states.input.Cause %}\"},\"Next\":\"Response to CloudFormation\"},\"Response to CloudFormation\":{\"End\":true,\"Type\":\"Task\",\"Arguments\":{\"ApiEndpoint\":\"{% $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[0] & '/' & $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[1] ~> $decodeUrlComponent() %}\",\"Authentication\":{\"ConnectionArn\":\"",
+       "{\"StartAt\":\"Initialize\",\"States\":{\"Initialize\":{\"Type\":\"Pass\",\"Next\":\"Dispatch Mode\",\"Assign\":{\"ExecutionArn\":\"{% $exists($states.input.ResourceProperties.stateMachineArn) ? $replace($states.input.ResourceProperties.stateMachineArn, 'stateMachine', 'execution') & ':' & $states.input.RequestId : null %}\",\"RequestType\":\"{% $states.input.RequestType %}\",\"ResponseURL\":\"{% $states.input.ResponseURL %}\",\"StackId\":\"{% $states.input.StackId %}\",\"RequestId\":\"{% $states.input.RequestId %}\",\"ResourceType\":\"{% $states.input.ResourceType %}\",\"LogicalResourceId\":\"{% $states.input.LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $exists($states.input.PhysicalResourceId) ? $states.input.PhysicalResourceId : null %}\",\"ResourceProperties\":\"{% $states.input.ResourceProperties %}\",\"OldResourceProperties\":\"{% $exists($states.input.OldResourceProperties) ? $states.input.OldResourceProperties : null %}\",\"WaitConditionCallbackURL\":\"{% $exists($states.input.ResourceProperties.waitConditionCallbackURL) ? $states.input.ResourceProperties.waitConditionCallbackURL : null %}\",\"Mode\":\"{% $exists($states.input.ResourceProperties.__lambdalessMode) ? $states.input.ResourceProperties.__lambdalessMode : 'custom-resource' %}\"}},\"Dispatch Mode\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $Mode = 'custom-resource' %}\",\"Next\":\"Describe Execution\"},{\"Condition\":\"{% $Mode = 'json-parse' %}\",\"Next\":\"Parse JSON\"}],\"Default\":\"Unknown Mode\"},\"Unknown Mode\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"FAILED\",\"Reason\":\"{% 'Unknown __lambdalessMode: ' & $Mode %}\"},\"Next\":\"Response to CloudFormation\"},\"Response to CloudFormation\":{\"End\":true,\"Type\":\"Task\",\"Arguments\":{\"ApiEndpoint\":\"{% $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[0] & '/' & $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[1] ~> $decodeUrlComponent() %}\",\"Authentication\":{\"ConnectionArn\":\"",
        {
         "Fn::GetAtt": [
          "LambdalessProviderConnection803AC994",
@@ -2080,7 +2178,15 @@
        {
         "Ref": "AWS::Partition"
        },
-       ":states:::http:invoke\"}}}},\"Has WaitCondition?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $WaitConditionCallbackURL != null %}\",\"Next\":\"Signal WaitCondition\"}],\"Default\":\"Response to CloudFormation\"}},\"QueryLanguage\":\"JSONata\"}"
+       ":states:::http:invoke\"}}}},\"Has WaitCondition?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $WaitConditionCallbackURL != null %}\",\"Next\":\"Signal WaitCondition\"}],\"Default\":\"Response to CloudFormation\"},\"Is finished?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $states.input.Status = 'RUNNING' %}\",\"Next\":\"Still Running\"},{\"Condition\":\"{% $states.input.Status = 'SUCCEEDED' %}\",\"Output\":\"{% $parse($states.input.Output) %}\",\"Next\":\"Has WaitCondition?\"}],\"Default\":\"Given workflow was failed\"},\"Describe Execution\":{\"Next\":\"Is finished?\",\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"Start Execution\"}],\"Type\":\"Task\",\"Arguments\":{\"ExecutionArn\":\"{% $ExecutionArn %}\",\"IncludedData\":\"ALL_DATA\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:sfn:describeExecution\"},\"Still Running\":{\"Type\":\"Wait\",\"Seconds\":1,\"Next\":\"Describe Execution\"},\"Start Execution\":{\"Next\":\"Still Running\",\"Type\":\"Task\",\"Arguments\":{\"Name\":\"{% $RequestId %}\",\"Input\":{\"RequestType\":\"{% $RequestType %}\",\"StackId\":\"{% $StackId %}\",\"RequestId\":\"{% $RequestId %}\",\"ResourceType\":\"{% $ResourceType %}\",\"LogicalResourceId\":\"{% $LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $PhysicalResourceId %}\",\"ResourceProperties\":\"{% $ResourceProperties %}\",\"OldResourceProperties\":\"{% $OldResourceProperties %}\"},\"StateMachineArn\":\"{% $ResourceProperties.stateMachineArn %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:sfn:startExecution\"},\"Given workflow was failed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"FAILED\",\"Reason\":\"{% $states.input.Error & ': ' & $states.input.Cause %}\"},\"Next\":\"Response to CloudFormation\"},\"Parse JSON\":{\"Type\":\"Pass\",\"Output\":{\"PhysicalResourceId\":\"{% $RequestId %}\",\"Data\":\"{% $parse($ResourceProperties.__lambdalessJsonParseValue) %}\"},\"Next\":\"Response to CloudFormation\"}},\"QueryLanguage\":\"JSONata\"}"
       ]
      ]
     },
@@ -2335,7 +2441,7 @@
         }
        }
       },
-      "MemoryReservation": 6554,
+      "MemoryReservation": 26215,
       "MountPoints": [
        {
         "ContainerPath": "/opt/ml/model",
@@ -2357,39 +2463,9 @@
         [
          "/opt/ml/model/",
          {
-          "Fn::Join": [
-           "",
-           {
-            "Fn::Split": [
-             "\"}",
-             {
-              "Fn::Select": [
-               0,
-               {
-                "Fn::Split": [
-                 "\",\"",
-                 {
-                  "Fn::Select": [
-                   1,
-                   {
-                    "Fn::Split": [
-                     "\"s3Prefix\":\"",
-                     {
-                      "Fn::GetAtt": [
-                       "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8",
-                       "Data"
-                      ]
-                     }
-                    ]
-                   }
-                  ]
-                 }
-                ]
-               }
-              ]
-             }
-            ]
-           }
+          "Fn::GetAtt": [
+           "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
+           "s3Prefix"
           ]
          }
         ]
@@ -2407,7 +2483,7 @@
     "NetworkMode": "bridge",
     "PlacementConstraints": [
      {
-      "Expression": "runningTasksCount<2",
+      "Expression": "runningTasksCount<4",
       "Type": "memberOf"
      }
     ],
@@ -2840,7 +2916,7 @@
      "ImageId": {
       "Ref": "SsmParameterValueawsserviceecsoptimizedamiamazonlinux2023neuronrecommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter"
      },
-     "InstanceType": "inf2.xlarge",
+     "InstanceType": "trn2.3xlarge",
      "Monitoring": {
       "Enabled": false
      },
@@ -3460,39 +3536,9 @@
       },
       "/",
       {
-       "Fn::Join": [
-        "",
-        {
-         "Fn::Split": [
-          "\"}",
-          {
-           "Fn::Select": [
-            0,
-            {
-             "Fn::Split": [
-              "\",\"",
-              {
-               "Fn::Select": [
-                1,
-                {
-                 "Fn::Split": [
-                  "\"s3Prefix\":\"",
-                  {
-                   "Fn::GetAtt": [
-                    "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91WaitConditionCB7FEDE8",
-                    "Data"
-                   ]
-                  }
-                 ]
-                }
-               ]
-              }
-             ]
-            }
-           ]
-          }
-         ]
-        }
+       "Fn::GetAtt": [
+        "CompilerWaitConditionsdk2280f5197ae435895a4d70e1f6c5b52bbc13f217e0a51d494e2322f202d7a35ace91ParsedAttrData41E522EE",
+        "s3Prefix"
        ]
       }
      ]
