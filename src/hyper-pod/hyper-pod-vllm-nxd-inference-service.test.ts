@@ -164,4 +164,51 @@ describe("HyperPodVllmNxdInferenceService", () => {
       }),
     });
   });
+
+  it("configures destroy-time tolerations on the addon's ALB and KEDA components", () => {
+    new HyperPodVllmNxdInferenceService(stack, "InferenceService", {
+      cluster,
+      compiledModel,
+    });
+    const template = Template.fromStack(stack);
+    // The addon's `configurationValues` is serialized into a tokenized
+    // `Fn::Join` in the CloudFormation template, so we inspect the
+    // concrete resource JSON and assert the substrings we need are
+    // present in one of the join parts.
+    const addons = template.findResources("AWS::EKS::Addon", {
+      Properties: { AddonName: "amazon-sagemaker-hyperpod-inference" },
+    });
+    expect(Object.keys(addons)).toHaveLength(1);
+    const [addon] = Object.values(addons);
+    const join = (addon as any).Properties.ConfigurationValues["Fn::Join"];
+    expect(join).toBeDefined();
+    const joinedLiteral = join[1]
+      .filter((part: unknown): part is string => typeof part === "string")
+      .join("");
+    // Both the ALB and KEDA sections get the same taint tolerations.
+    expect(joinedLiteral).toMatch(
+      /"alb":[\s\S]*"tolerations":\[[\s\S]*"node\.kubernetes\.io\/unreachable"[\s\S]*"node\.kubernetes\.io\/not-ready"/,
+    );
+    expect(joinedLiteral).toMatch(
+      /"keda":\{[\s\S]*"tolerations":\[[\s\S]*"node\.kubernetes\.io\/unreachable"[\s\S]*"node\.kubernetes\.io\/not-ready"/,
+    );
+  });
+
+  it("installs a KubernetesPatch that removes the InferenceEndpointConfig finalizer on destroy", () => {
+    new HyperPodVllmNxdInferenceService(stack, "InferenceService", {
+      cluster,
+      compiledModel,
+    });
+    const template = Template.fromStack(stack);
+    // The patch uses `MERGE` type with an empty `applyPatch` and a
+    // `restorePatch` that clears the finalizer list. We match on
+    // `ResourceName` + `PatchType` + the serialized `RestorePatchJson`.
+    template.hasResourceProperties("Custom::AWSCDK-EKS-KubernetesPatch", {
+      ResourceName: Match.stringLikeRegexp("^inferenceendpointconfig/"),
+      PatchType: "merge",
+      RestorePatchJson: Match.stringLikeRegexp(
+        '"finalizers"\\s*:\\s*\\[\\s*\\]',
+      ),
+    });
+  });
 });
