@@ -13,6 +13,54 @@ import {
 } from "./neuronx-compiler-base";
 
 /**
+ * Minimal hardware specification used to size a Batch job that runs on the
+ * compile (CPU) instance. We only care about vCPU and memory because those are
+ * the two fields we need to propagate to `EcsEc2ContainerDefinition`.
+ *
+ * Keeping this as an internal table (rather than querying EC2 at runtime)
+ * allows the compiler to synthesize deterministically without resolving AWS
+ * context at synth time.
+ */
+interface CompileInstanceSpec {
+  readonly vCpu: number;
+  readonly memory: Size;
+}
+
+/**
+ * Specs for the compile instance types that `selectCompileInstanceType` can
+ * return (and any user-provided overrides).
+ *
+ * Source: https://aws.amazon.com/ec2/instance-types/c7i/
+ */
+const C7I_SPECS: { [size: string]: CompileInstanceSpec } = {
+  large: { vCpu: 2, memory: Size.gibibytes(4) },
+  xlarge: { vCpu: 4, memory: Size.gibibytes(8) },
+  "2xlarge": { vCpu: 8, memory: Size.gibibytes(16) },
+  "4xlarge": { vCpu: 16, memory: Size.gibibytes(32) },
+  "8xlarge": { vCpu: 32, memory: Size.gibibytes(64) },
+  "12xlarge": { vCpu: 48, memory: Size.gibibytes(96) },
+  "16xlarge": { vCpu: 64, memory: Size.gibibytes(128) },
+  "24xlarge": { vCpu: 96, memory: Size.gibibytes(192) },
+  "48xlarge": { vCpu: 192, memory: Size.gibibytes(384) },
+};
+
+function resolveCompileInstanceSpec(
+  instanceType: ec2.InstanceType,
+): CompileInstanceSpec {
+  const asString = instanceType.toString();
+  const [family, size] = asString.split(".");
+  if (family === "c7i" && C7I_SPECS[size]) {
+    return C7I_SPECS[size];
+  }
+  throw new Error(
+    `Unsupported compileInstanceType "${asString}". Supported families: c7i.{${Object.keys(
+      C7I_SPECS,
+    ).join(", ")}}. ` +
+      `If you need another family, please file an issue or contribute to C7I_SPECS.`,
+  );
+}
+
+/**
  * Props of NeuronxCrossCompiler.
  */
 export interface NeuronxCrossCompilerProps extends NeuronxCompilerBaseProps {
@@ -102,6 +150,11 @@ export class NeuronxCrossCompiler extends NeuronxCompilerBase {
       .toString()
       .split(".")[0];
 
+    const compileInstanceType =
+      (props as NeuronxCrossCompilerProps).compileInstanceType ??
+      ec2.InstanceType.of(ec2.InstanceClass.C7I, ec2.InstanceSize.XLARGE4);
+    const compileInstanceInfo = resolveCompileInstanceSpec(compileInstanceType);
+
     const jobDefinition = new batch.EcsJobDefinition(this, "JobDefinition", {
       container: new batch.EcsEc2ContainerDefinition(
         this,
@@ -109,9 +162,9 @@ export class NeuronxCrossCompiler extends NeuronxCompilerBase {
         {
           image: props.image.image,
           memory: Size.mebibytes(
-            Math.ceil(neuronxInstanceType.memory.toMebibytes() * 0.95),
+            Math.ceil(compileInstanceInfo.memory.toMebibytes() * 0.95),
           ),
-          cpu: neuronxInstanceType.vCpu,
+          cpu: compileInstanceInfo.vCpu,
           environment: {
             NEURON_COMPILE_CACHE_URL: `${props.bucket.s3UrlForObject("neuron-compile-cache")}`,
             NEURON_PLATFORM_TARGET_OVERRIDE: targetPlatform,

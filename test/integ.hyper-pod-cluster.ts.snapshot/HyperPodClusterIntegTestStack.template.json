@@ -1,0 +1,4976 @@
+{
+ "Resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcPublicSubnet1Subnet5C2D37C4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1a",
+    "CidrBlock": "10.0.0.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet1RouteTable6C95E38E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet1RouteTableAssociation97140677": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
+    }
+   }
+  },
+  "VpcPublicSubnet1DefaultRoute3DA9E72A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPublicSubnet1EIPD7E02669": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "VpcPublicSubnet1NATGateway4D7517AA": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcPublicSubnet1EIPD7E02669",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet1Subnet5C2D37C4"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPublicSubnet1DefaultRoute3DA9E72A",
+    "VpcPublicSubnet1RouteTableAssociation97140677"
+   ]
+  },
+  "VpcPublicSubnet2Subnet691E08A3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1b",
+    "CidrBlock": "10.0.32.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet2RouteTable94F7E489": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet2RouteTableAssociationDD5762D8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet2Subnet691E08A3"
+    }
+   }
+  },
+  "VpcPublicSubnet2DefaultRoute97F91067": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPublicSubnet3SubnetBE12F0B6": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1c",
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet3RouteTable93458DBB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPublicSubnet3RouteTableAssociation1F1EDF02": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet3RouteTable93458DBB"
+    },
+    "SubnetId": {
+     "Ref": "VpcPublicSubnet3SubnetBE12F0B6"
+    }
+   }
+  },
+  "VpcPublicSubnet3DefaultRoute4697774F": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPublicSubnet3RouteTable93458DBB"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "VpcPrivateSubnet1Subnet536B997A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1a",
+    "CidrBlock": "10.0.96.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet1RouteTableB2C5B500": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet1RouteTableAssociation70C59FA6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet1Subnet536B997A"
+    }
+   }
+  },
+  "VpcPrivateSubnet1DefaultRouteBE02A9ED": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+    }
+   }
+  },
+  "VpcPrivateSubnet2Subnet3788AAA1": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1b",
+    "CidrBlock": "10.0.128.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet2RouteTableA678073B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet2RouteTableAssociationA89CAD56": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+    }
+   }
+  },
+  "VpcPrivateSubnet2DefaultRoute060D2087": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+    }
+   }
+  },
+  "VpcPrivateSubnet3SubnetF258B56E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "sa-east-1c",
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet3RouteTableD98824C7": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcPrivateSubnet3RouteTableAssociation16BDDC43": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+    },
+    "SubnetId": {
+     "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+    }
+   }
+  },
+  "VpcPrivateSubnet3DefaultRoute94B74F0D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    "RouteTableId": {
+     "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+    }
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc"
+     }
+    ]
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcS3A5408339": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "VpcPrivateSubnet1RouteTableB2C5B500"
+     },
+     {
+      "Ref": "VpcPrivateSubnet2RouteTableA678073B"
+     },
+     {
+      "Ref": "VpcPrivateSubnet3RouteTableD98824C7"
+     },
+     {
+      "Ref": "VpcPublicSubnet1RouteTable6C95E38E"
+     },
+     {
+      "Ref": "VpcPublicSubnet2RouteTable94F7E489"
+     },
+     {
+      "Ref": "VpcPublicSubnet3RouteTable93458DBB"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".s3"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "HyperPodClusterIntegTestStack/Vpc"
+     }
+    ],
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "Vpc8378EB38",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "Vpc8378EB38",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ]
+  },
+  "Bucket83908E77": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "BucketPolicyE9A3008A": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "Bucket83908E77"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "BucketAutoDeleteObjectsCustomResourceBAFD23C2": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "Bucket83908E77"
+    }
+   },
+   "DependsOn": [
+    "BucketPolicyE9A3008A"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "Bucket83908E77"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ]
+  },
+  "CompilerCompileImageRepository8D221D1D": {
+   "Type": "AWS::ECR::Repository",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "ImageScanningConfiguration": {
+     "ScanOnPush": true
+    }
+   }
+  },
+  "CompilerCompileImage3977F38E": {
+   "Type": "Custom::CDKContainerImageBuild",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f306AEFF37",
+      "Arn"
+     ]
+    },
+    "type": "ContainerImageBuild",
+    "buildCommand": "docker buildx build --build-arg IMAGE_NAME=public.ecr.aws/neuron/pytorch-inference-vllm-neuronx --build-arg IMAGE_TAG=0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04 --output type=docker,name=artifact:$imageTag --provenance=false .",
+    "repositoryUri": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Fn::Select": [
+         4,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "CompilerCompileImageRepository8D221D1D",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ".dkr.ecr.",
+       {
+        "Fn::Select": [
+         3,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "CompilerCompileImageRepository8D221D1D",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ".",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/",
+       {
+        "Ref": "CompilerCompileImageRepository8D221D1D"
+       }
+      ]
+     ]
+    },
+    "codeBuildProjectName": {
+     "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
+    },
+    "sourceS3Url": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bc3df09043c47984ac377211fa16460cebce24a9c4ece2fa229d4b7ec5301abf.zip"
+    }
+   },
+   "DependsOn": [
+    "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2",
+    "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleDefaultPolicyBD233B55",
+    "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CompilerLaunchTemplate4C63C08A": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "BlockDeviceMappings": [
+      {
+       "DeviceName": "/dev/xvda",
+       "Ebs": {
+        "Encrypted": true,
+        "VolumeSize": 62,
+        "VolumeType": "gp3"
+       }
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "HyperPodClusterIntegTestStack/Compiler/Resource/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "HyperPodClusterIntegTestStack/Compiler/Resource/LaunchTemplate"
+        }
+       ]
+      }
+     ]
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "HyperPodClusterIntegTestStack/Compiler/Resource/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentSecurityGroupC05FE9C7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "HyperPodClusterIntegTestStack/Compiler/Resource/ComputeEnvironment/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-cross-compile-worker"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfileRole028A791A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "neuronx-cross-compile-worker"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerComputeEnvironmentInstanceProfileRoleDefaultPolicy3E511386",
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentInstanceProfile719C0447": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "CompilerComputeEnvironmentInstanceProfileRole028A791A"
+     }
+    ]
+   }
+  },
+  "CompilerComputeEnvironmentFB939B89": {
+   "Type": "AWS::Batch::ComputeEnvironment",
+   "Properties": {
+    "ComputeResources": {
+     "AllocationStrategy": "BEST_FIT_PROGRESSIVE",
+     "InstanceRole": {
+      "Fn::GetAtt": [
+       "CompilerComputeEnvironmentInstanceProfile719C0447",
+       "Arn"
+      ]
+     },
+     "InstanceTypes": [
+      "c7i.2xlarge"
+     ],
+     "LaunchTemplate": {
+      "LaunchTemplateId": {
+       "Ref": "CompilerLaunchTemplate4C63C08A"
+      },
+      "Version": {
+       "Fn::GetAtt": [
+        "CompilerLaunchTemplate4C63C08A",
+        "LatestVersionNumber"
+       ]
+      }
+     },
+     "MaxvCpus": 256,
+     "MinvCpus": 0,
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "CompilerComputeEnvironmentSecurityGroupC05FE9C7",
+        "GroupId"
+       ]
+      }
+     ],
+     "Subnets": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ],
+     "Tags": {
+      "Name": "neuronx-cross-compile-worker"
+     },
+     "Type": "EC2"
+    },
+    "ReplaceComputeEnvironment": false,
+    "State": "ENABLED",
+    "Tags": {
+     "Name": "neuronx-cross-compile-worker"
+    },
+    "Type": "managed",
+    "UpdatePolicy": {}
+   }
+  },
+  "CompilerContainerDefinitionExecutionRoleB7A79408": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":logs:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":log-group:/aws/batch/job:*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "CompilerCompileImageRepository8D221D1D",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerContainerDefinitionExecutionRoleDefaultPolicyFB431370",
+    "Roles": [
+     {
+      "Ref": "CompilerContainerDefinitionExecutionRoleB7A79408"
+     }
+    ]
+   }
+  },
+  "CompilerJobDefinition637B02EA": {
+   "Type": "AWS::Batch::JobDefinition",
+   "Properties": {
+    "ContainerProperties": {
+     "Command": [
+      "Qwen/Qwen3-0.6B",
+      "--max-model-len",
+      "2048",
+      "--served-model-name",
+      "Qwen/Qwen3-0.6B",
+      "--max-num-seqs",
+      "1",
+      "--tensor-parallel-size",
+      "1",
+      "--block-size",
+      "32"
+     ],
+     "Environment": [
+      {
+       "Name": "NEURON_COMPILE_CACHE_URL",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "Bucket83908E77"
+          },
+          "/neuron-compile-cache"
+         ]
+        ]
+       }
+      },
+      {
+       "Name": "NEURON_PLATFORM_TARGET_OVERRIDE",
+       "Value": "trn2"
+      },
+      {
+       "Name": "VLLM_NEURON_FRAMEWORK",
+       "Value": "neuronx-distributed-inference"
+      },
+      {
+       "Name": "NEURON_COMPILED_ARTIFACTS",
+       "Value": "neuron-compiled-artifacts"
+      },
+      {
+       "Name": "NEURON_RT_NUM_CORES",
+       "Value": "1"
+      },
+      {
+       "Name": "XLA_HANDLE_SPECIAL_SCALAR",
+       "Value": "1"
+      },
+      {
+       "Name": "MODEL_ID",
+       "Value": "Qwen/Qwen3-0.6B"
+      },
+      {
+       "Name": "MODEL_NAME",
+       "Value": "Qwen/Qwen3-0.6B"
+      },
+      {
+       "Name": "COMPILED_ARTIFACTS_S3_URI",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "Bucket83908E77"
+          },
+          "/sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1"
+         ]
+        ]
+       }
+      },
+      {
+       "Name": "COMPILED_ARTIFACTS_S3_PREFIX",
+       "Value": "sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1"
+      }
+     ],
+     "ExecutionRoleArn": {
+      "Fn::GetAtt": [
+       "CompilerContainerDefinitionExecutionRoleB7A79408",
+       "Arn"
+      ]
+     },
+     "Image": {
+      "Fn::Join": [
+       "",
+       [
+        {
+         "Fn::Select": [
+          4,
+          {
+           "Fn::Split": [
+            ":",
+            {
+             "Fn::GetAtt": [
+              "CompilerCompileImageRepository8D221D1D",
+              "Arn"
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        ".dkr.ecr.",
+        {
+         "Fn::Select": [
+          3,
+          {
+           "Fn::Split": [
+            ":",
+            {
+             "Fn::GetAtt": [
+              "CompilerCompileImageRepository8D221D1D",
+              "Arn"
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        ".",
+        {
+         "Ref": "AWS::URLSuffix"
+        },
+        "/",
+        {
+         "Ref": "CompilerCompileImageRepository8D221D1D"
+        },
+        ":",
+        {
+         "Fn::GetAtt": [
+          "CompilerCompileImage3977F38E",
+          "ImageTag"
+         ]
+        }
+       ]
+      ]
+     },
+     "ReadonlyRootFilesystem": false,
+     "ResourceRequirements": [
+      {
+       "Type": "MEMORY",
+       "Value": "15565"
+      },
+      {
+       "Type": "VCPU",
+       "Value": "8"
+      }
+     ],
+     "Secrets": []
+    },
+    "PlatformCapabilities": [
+     "EC2"
+    ],
+    "RetryStrategy": {},
+    "Timeout": {},
+    "Type": "container"
+   }
+  },
+  "CompilerJobQueue59AB0D38": {
+   "Type": "AWS::Batch::JobQueue",
+   "Properties": {
+    "ComputeEnvironmentOrder": [
+     {
+      "ComputeEnvironment": {
+       "Fn::GetAtt": [
+        "CompilerComputeEnvironmentFB939B89",
+        "ComputeEnvironmentArn"
+       ]
+      },
+      "Order": 1
+     }
+    ],
+    "JobStateTimeLimitActions": [
+     {
+      "Action": "CANCEL",
+      "MaxTimeSeconds": 600,
+      "Reason": "MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT",
+      "State": "RUNNABLE"
+     }
+    ],
+    "Priority": 1,
+    "State": "ENABLED"
+   }
+  },
+  "CompilerCompileStateMachineRoleBD8927F3": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "CompilerCompileStateMachineRoleDefaultPolicy3A5EC7CA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "batch:SubmitJob",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "CompilerJobQueue59AB0D38",
+          "JobQueueArn"
+         ]
+        },
+        {
+         "Ref": "CompilerJobDefinition637B02EA"
+        }
+       ]
+      },
+      {
+       "Action": "batch:DescribeJobs",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerCompileStateMachineRoleDefaultPolicy3A5EC7CA",
+    "Roles": [
+     {
+      "Ref": "CompilerCompileStateMachineRoleBD8927F3"
+     }
+    ]
+   }
+  },
+  "CompilerCompileStateMachine8A596131": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"Initialize\",\"States\":{\"Initialize\":{\"Type\":\"Pass\",\"Next\":\"Which Request Type?\",\"Assign\":{\"RequestType\":\"{% $states.input.RequestType %}\",\"StackId\":\"{% $states.input.StackId %}\",\"RequestId\":\"{% $states.input.RequestId %}\",\"ResourceType\":\"{% $states.input.ResourceType %}\",\"LogicalResourceId\":\"{% $states.input.LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $exists($states.input.PhysicalResourceId) ? $states.input.PhysicalResourceId : null %}\",\"ResourceProperties\":\"{% $states.input.ResourceProperties %}\",\"OldResourceProperties\":\"{% $exists($states.input.OldResourceProperties) ? $states.input.OldResourceProperties : null %}\"}},\"Which Request Type?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $RequestType = \\\"Create\\\" %}\",\"Next\":\"SubmitJob\"},{\"Condition\":\"{% $RequestType = \\\"Update\\\" %}\",\"Next\":\"Update\"},{\"Condition\":\"{% $RequestType = \\\"Delete\\\" %}\",\"Next\":\"Delete\"}]},\"SubmitJob\":{\"Next\":\"WaitForJob\",\"Type\":\"Task\",\"Arguments\":{\"JobName\":\"{% 'compile-' & $now('[Y0001]-[M01]-[D01]-[H01]-[m01]-[s01]') %}\",\"JobDefinition\":\"",
+       {
+        "Ref": "CompilerJobDefinition637B02EA"
+       },
+       "\",\"JobQueue\":\"",
+       {
+        "Fn::GetAtt": [
+         "CompilerJobQueue59AB0D38",
+         "JobQueueArn"
+        ]
+       },
+       "\"},\"Assign\":{\"JobId\":\"{% $states.result.JobId %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:batch:submitJob\"},\"WaitForJob\":{\"Type\":\"Wait\",\"Seconds\":60,\"Next\":\"DescribeJobs\"},\"DescribeJobs\":{\"Next\":\"CheckJobStatus\",\"Type\":\"Task\",\"Arguments\":{\"Jobs\":\"{% [$JobId] %}\"},\"Assign\":{\"JobStatus\":\"{% $states.result.Jobs[0].Status %}\",\"StatusReason\":\"{% $exists($states.result.Jobs[0].StatusReason) ? $states.result.Jobs[0].StatusReason : '' %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:batch:describeJobs\"},\"CheckJobStatus\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $JobStatus = 'SUCCEEDED' %}\",\"Next\":\"JobSucceeded\"},{\"Condition\":\"{% $JobStatus = 'FAILED' %}\",\"Next\":\"JobFailed\"}],\"Default\":\"WaitForJob\"},\"JobSucceeded\":{\"Type\":\"Pass\",\"Output\":{\"Data\":{\"s3Prefix\":\"sdk-2.28.0/3d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1\"}},\"End\":true},\"JobFailed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"{% 'FAILED' %}\",\"Reason\":\"{% 'CompileJobFailed: ' & $StatusReason %}\"},\"End\":true},\"Update\":{\"Type\":\"Pass\",\"End\":true},\"Delete\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":43200,\"QueryLanguage\":\"JSONata\"}"
+      ]
+     ]
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "CompilerCompileStateMachineRoleBD8927F3",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "CompilerCompileStateMachineRoleDefaultPolicy3A5EC7CA",
+    "CompilerCompileStateMachineRoleBD8927F3"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E": {
+   "Type": "AWS::CloudFormation::WaitConditionHandle"
+  },
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a139B2514C": {
+   "Type": "Custom::NeuronxCompile",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         3,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         4,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         5,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     ]
+    },
+    "waitConditionCallbackURL": {
+     "Ref": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E"
+    },
+    "stateMachineArn": {
+     "Ref": "CompilerCompileStateMachine8A596131"
+    }
+   },
+   "DependsOn": [
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "states:ListExecutions",
+        "states:ListStateMachines",
+        "states:StartExecution"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "CompilerCompileStateMachine8A596131"
+       }
+      },
+      {
+       "Action": [
+        "states:DescribeExecution",
+        "states:DescribeStateMachineForExecution",
+        "states:GetExecutionHistory"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":states:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":execution:",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "CompilerCompileStateMachine8A596131"
+              }
+             ]
+            }
+           ]
+          },
+          ":*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "states:DescribeActivity",
+        "states:DescribeStateMachine",
+        "states:ListActivities"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877",
+    "Roles": [
+     {
+      "Ref": "LambdalessProviderStateMachineRole4BDCD64E"
+     }
+    ]
+   }
+  },
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1WaitConditionA3D19C7E": {
+   "Type": "AWS::CloudFormation::WaitCondition",
+   "Properties": {
+    "Count": 1,
+    "Handle": {
+     "Ref": "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1Handle8A055D6E"
+    },
+    "Timeout": "43200"
+   },
+   "DependsOn": [
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1PolicyA15DC877",
+    "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a139B2514C"
+   ]
+  },
+  "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3": {
+   "Type": "AWS::CloudFormation::CustomResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         3,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         4,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       ":",
+       {
+        "Fn::Select": [
+         5,
+         {
+          "Fn::Split": [
+           ":",
+           {
+            "Fn::GetAtt": [
+             "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B",
+             "Arn"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     ]
+    },
+    "__lambdalessMode": "json-parse",
+    "__lambdalessJsonParseValue": {
+     "Fn::GetAtt": [
+      "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1WaitConditionA3D19C7E",
+      "Data"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codebuild:StartBuild",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC",
+    "Roles": [
+     {
+      "Ref": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4"
+     }
+    ]
+   }
+  },
+  "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f306AEFF37": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "b31e00a71ec5a9e3589df0e6879037cb1dcafee2e079c062e2c8eb891ba98b74.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleDefaultPolicyFECC51DC",
+    "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3ServiceRoleB008BAA4"
+   ]
+  },
+  "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f3LogGroupD6190314": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "DeployTimeBuildCustomResourceHandlerdb740fd554364a848a09e6dfcd01f4f306AEFF37"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleDefaultPolicyBD233B55": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":log-group:/aws/codebuild/",
+           {
+            "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":log-group:/aws/codebuild/",
+           {
+            "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":report-group/",
+          {
+           "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:CompleteLayerUpload",
+        "ecr:DescribeImages",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:InitiateLayerUpload",
+        "ecr:PutImage",
+        "ecr:UploadLayerPart"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "CompilerCompileImageRepository8D221D1D",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           },
+           "/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleDefaultPolicyBD233B55",
+    "Roles": [
+     {
+      "Ref": "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9"
+     }
+    ]
+   }
+  },
+  "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd6491AAA9B2": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "NO_ARTIFACTS"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": "alias/aws/s3",
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": true,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "ContainerImageBuildAmd64e83729feb1564e709bec452b15847a30amd64RoleD95F32B9",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"echo \\\"$input\\\"\",\n        \"mkdir workdir\",\n        \"cd workdir\",\n        \"aws s3 cp \\\"$sourceS3Url\\\" temp.zip\",\n        \"unzip temp.zip\",\n        \"ls -la\",\n        \"aws ecr get-login-password --region $repositoryRegion | docker login --username AWS --password-stdin $repositoryAuthUri\",\n        \"aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws\",\n        \"docker buildx ls\",\n        \"echo \\\"$buildCommand\\\"\",\n        \"eval \\\"$buildCommand\\\"\",\n        \"docker images\",\n        \"docker tag artifact:$imageTag $repositoryUri:$imageTag\",\n        \"docker push $repositoryUri:$imageTag\"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"ContainerImageBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$imageTag\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"ImageTag\\\": \\\"$imageTag\\\"\\n  }\\n}\\nEOF\\ncurl -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}",
+     "Type": "NO_SOURCE"
+    }
+   }
+  },
+  "LambdalessProviderTopic58DC2415": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "KmsMasterKeyId": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":kms:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":alias/aws/sns"
+      ]
+     ]
+    }
+   }
+  },
+  "LambdalessProviderQueue3E954037": {
+   "Type": "AWS::SQS::Queue",
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "LambdalessProviderQueuePolicy16C88515": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": {
+          "Ref": "LambdalessProviderTopic58DC2415"
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::GetAtt": [
+         "LambdalessProviderQueue3E954037",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     {
+      "Ref": "LambdalessProviderQueue3E954037"
+     }
+    ]
+   }
+  },
+  "LambdalessProviderQueueHyperPodClusterIntegTestStackLambdalessProviderTopicADCE16A00F5D029B": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": {
+     "Fn::GetAtt": [
+      "LambdalessProviderQueue3E954037",
+      "Arn"
+     ]
+    },
+    "Protocol": "sqs",
+    "TopicArn": {
+     "Ref": "LambdalessProviderTopic58DC2415"
+    }
+   },
+   "DependsOn": [
+    "LambdalessProviderPipeE285A459",
+    "LambdalessProviderPipeRoleDefaultPolicy918C6032",
+    "LambdalessProviderPipeRoleD3BC051F",
+    "LambdalessProviderQueuePolicy16C88515"
+   ]
+  },
+  "LambdalessProviderConnection803AC994": {
+   "Type": "AWS::Events::Connection",
+   "Properties": {
+    "AuthParameters": {
+     "ApiKeyAuthParameters": {
+      "ApiKeyName": "dummy",
+      "ApiKeyValue": "dummy"
+     }
+    },
+    "AuthorizationType": "API_KEY"
+   }
+  },
+  "LambdalessProviderStateMachineRole4BDCD64E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "states.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "LambdalessProviderStateMachineRoleDefaultPolicy613E8B8C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "events:RetrieveConnectionCredentials",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "LambdalessProviderConnection803AC994",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "LambdalessProviderConnection803AC994",
+         "SecretArn"
+        ]
+       }
+      },
+      {
+       "Action": "states:InvokeHTTPEndpoint",
+       "Condition": {
+        "StringLike": {
+         "states:HTTPEndpoint": "*"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "states:describeExecution",
+        "states:startExecution"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "aws:RequestedRegion": "DISABLED"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LambdalessProviderStateMachineRoleDefaultPolicy613E8B8C",
+    "Roles": [
+     {
+      "Ref": "LambdalessProviderStateMachineRole4BDCD64E"
+     }
+    ]
+   }
+  },
+  "LambdalessProviderStateMachine7D8C8128": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"Initialize\",\"States\":{\"Initialize\":{\"Type\":\"Pass\",\"Next\":\"Dispatch Mode\",\"Assign\":{\"ExecutionArn\":\"{% $exists($states.input.ResourceProperties.stateMachineArn) ? $replace($states.input.ResourceProperties.stateMachineArn, 'stateMachine', 'execution') & ':' & $states.input.RequestId : null %}\",\"RequestType\":\"{% $states.input.RequestType %}\",\"ResponseURL\":\"{% $states.input.ResponseURL %}\",\"StackId\":\"{% $states.input.StackId %}\",\"RequestId\":\"{% $states.input.RequestId %}\",\"ResourceType\":\"{% $states.input.ResourceType %}\",\"LogicalResourceId\":\"{% $states.input.LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $exists($states.input.PhysicalResourceId) ? $states.input.PhysicalResourceId : null %}\",\"ResourceProperties\":\"{% $states.input.ResourceProperties %}\",\"OldResourceProperties\":\"{% $exists($states.input.OldResourceProperties) ? $states.input.OldResourceProperties : null %}\",\"WaitConditionCallbackURL\":\"{% $exists($states.input.ResourceProperties.waitConditionCallbackURL) ? $states.input.ResourceProperties.waitConditionCallbackURL : null %}\",\"Mode\":\"{% $exists($states.input.ResourceProperties.__lambdalessMode) ? $states.input.ResourceProperties.__lambdalessMode : 'custom-resource' %}\"}},\"Dispatch Mode\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $Mode = 'custom-resource' %}\",\"Next\":\"Describe Execution\"},{\"Condition\":\"{% $Mode = 'json-parse' %}\",\"Next\":\"Parse JSON\"}],\"Default\":\"Unknown Mode\"},\"Unknown Mode\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"FAILED\",\"Reason\":\"{% 'Unknown __lambdalessMode: ' & $Mode %}\"},\"Next\":\"Response to CloudFormation\"},\"Response to CloudFormation\":{\"End\":true,\"Type\":\"Task\",\"Arguments\":{\"ApiEndpoint\":\"{% $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[0] & '/' & $match($ResponseURL, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[1] ~> $decodeUrlComponent() %}\",\"Authentication\":{\"ConnectionArn\":\"",
+       {
+        "Fn::GetAtt": [
+         "LambdalessProviderConnection803AC994",
+         "Arn"
+        ]
+       },
+       "\"},\"Method\":\"PUT\",\"RequestBody\":{\"Status\":\"{% $exists($states.input.Status) ? $states.input.Status : 'SUCCESS' %}\",\"StackId\":\"{% $StackId %}\",\"RequestId\":\"{% $RequestId %}\",\"LogicalResourceId\":\"{% $LogicalResourceId %}\",\"Data\":\"{% (\\n            $deepSpread := function($value, $path, $arr) {(\\n                $arr := $arr ? $arr : [];\\n                $t := $type($value);\\n                $result := \\n                $t = \\\"object\\\" ? $each($value, function($v, $k){\\n                    $deepSpread($v, $path ? $path & \\\".\\\" & $k : $k, $arr)\\n                }) : \\n                $t = \\\"array\\\" ? $map($value, function($el, $index){\\n                    $deepSpread($el, $path ? $path & \\\".\\\" & $string($index) : $string($index), $arr)\\n                }) :\\n                {\\n                    $path: $string($value)\\n                };\\n                $append($arr, $result) ~> $merge\\n            )};\\n            $exists($states.input.Data) ? $deepSpread($states.input.Data) : {}\\n            ) %}\",\"NoEcho\":\"{% $exists($states.input.NoEcho) ? $states.input.NoEcho : false %}\",\"PhysicalResourceId\":\"{% $exists($states.input.PhysicalResourceId) ? $states.input.PhysicalResourceId : $RequestId %}\",\"Reason\":\"{% $exists($states.input.Reason) ? $states.input.Reason : '' %}\"},\"QueryParameters\":\"{% $ResponseURL ~> $substringAfter('?') ~> $split('&') ~> $map(function($v) {( $kv := $split($v, '='); {$kv[0]: $decodeUrlComponent($kv[1])} )}) ~> $merge %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::http:invoke\"},\"Signal WaitCondition\":{\"Type\":\"Map\",\"Next\":\"Response to CloudFormation\",\"Items\":\"{% $exists($states.input.Data) ? [$each($states.input.Data, function($v, $k) { {'key': $k, 'value': $v, 'url': $WaitConditionCallbackURL} })] : [{'key': $RequestId, 'value': '', 'url': $WaitConditionCallbackURL}] %}\",\"ItemProcessor\":{\"ProcessorConfig\":{\"Mode\":\"INLINE\"},\"StartAt\":\"Signal One Key\",\"States\":{\"Signal One Key\":{\"QueryLanguage\":\"JSONata\",\"End\":true,\"Type\":\"Task\",\"Arguments\":{\"ApiEndpoint\":\"{% $match($states.input.url, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[0] & '/' & $match($states.input.url, /(https://[^/]+)\\\\/(.*)\\\\?/).groups[1] ~> $decodeUrlComponent() %}\",\"Authentication\":{\"ConnectionArn\":\"",
+       {
+        "Fn::GetAtt": [
+         "LambdalessProviderConnection803AC994",
+         "Arn"
+        ]
+       },
+       "\"},\"Method\":\"PUT\",\"Headers\":{\"Content-Type\":[\"\"]},\"RequestBody\":{\"Status\":\"SUCCESS\",\"UniqueId\":\"{% $states.input.key %}\",\"Reason\":\"Complete\",\"Data\":\"{% $string($states.input.value) %}\"},\"QueryParameters\":\"{% $states.input.url ~> $substringAfter('?') ~> $split('&') ~> $map(function($v) {( $kv := $split($v, '='); {$kv[0]: $decodeUrlComponent($kv[1])} )}) ~> $merge %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::http:invoke\"}}}},\"Has WaitCondition?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $WaitConditionCallbackURL != null %}\",\"Next\":\"Signal WaitCondition\"}],\"Default\":\"Response to CloudFormation\"},\"Is finished?\":{\"Type\":\"Choice\",\"Choices\":[{\"Condition\":\"{% $states.input.Status = 'RUNNING' %}\",\"Next\":\"Still Running\"},{\"Condition\":\"{% $states.input.Status = 'SUCCEEDED' %}\",\"Output\":\"{% $parse($states.input.Output) %}\",\"Next\":\"Has WaitCondition?\"}],\"Default\":\"Given workflow was failed\"},\"Describe Execution\":{\"Next\":\"Is finished?\",\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"Next\":\"Start Execution\"}],\"Type\":\"Task\",\"Arguments\":{\"ExecutionArn\":\"{% $ExecutionArn %}\",\"IncludedData\":\"ALL_DATA\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:sfn:describeExecution\"},\"Still Running\":{\"Type\":\"Wait\",\"Seconds\":1,\"Next\":\"Describe Execution\"},\"Start Execution\":{\"Next\":\"Still Running\",\"Type\":\"Task\",\"Arguments\":{\"Name\":\"{% $RequestId %}\",\"Input\":{\"RequestType\":\"{% $RequestType %}\",\"StackId\":\"{% $StackId %}\",\"RequestId\":\"{% $RequestId %}\",\"ResourceType\":\"{% $ResourceType %}\",\"LogicalResourceId\":\"{% $LogicalResourceId %}\",\"PhysicalResourceId\":\"{% $PhysicalResourceId %}\",\"ResourceProperties\":\"{% $ResourceProperties %}\",\"OldResourceProperties\":\"{% $OldResourceProperties %}\"},\"StateMachineArn\":\"{% $ResourceProperties.stateMachineArn %}\"},\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::aws-sdk:sfn:startExecution\"},\"Given workflow was failed\":{\"Type\":\"Pass\",\"Output\":{\"Status\":\"FAILED\",\"Reason\":\"{% $states.input.Error & ': ' & $states.input.Cause %}\"},\"Next\":\"Response to CloudFormation\"},\"Parse JSON\":{\"Type\":\"Pass\",\"Output\":{\"PhysicalResourceId\":\"{% $RequestId %}\",\"Data\":\"{% $parse($ResourceProperties.__lambdalessJsonParseValue) %}\"},\"Next\":\"Response to CloudFormation\"}},\"QueryLanguage\":\"JSONata\"}"
+      ]
+     ]
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "LambdalessProviderStateMachineRole4BDCD64E",
+      "Arn"
+     ]
+    },
+    "StateMachineType": "EXPRESS"
+   },
+   "DependsOn": [
+    "LambdalessProviderStateMachineRoleDefaultPolicy613E8B8C",
+    "LambdalessProviderStateMachineRole4BDCD64E"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "LambdalessProviderPipeRoleD3BC051F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "pipes.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "LambdalessProviderPipeRoleDefaultPolicy918C6032": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "sqs:ChangeMessageVisibility",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl",
+        "sqs:ReceiveMessage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "LambdalessProviderQueue3E954037",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "states:StartSyncExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "LambdalessProviderStateMachine7D8C8128"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LambdalessProviderPipeRoleDefaultPolicy918C6032",
+    "Roles": [
+     {
+      "Ref": "LambdalessProviderPipeRoleD3BC051F"
+     }
+    ]
+   }
+  },
+  "LambdalessProviderPipeE285A459": {
+   "Type": "AWS::Pipes::Pipe",
+   "Properties": {
+    "Description": "Auto generated by AWS CDK Custom Resource",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "LambdalessProviderPipeRoleD3BC051F",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "Fn::GetAtt": [
+      "LambdalessProviderQueue3E954037",
+      "Arn"
+     ]
+    },
+    "SourceParameters": {
+     "SqsQueueParameters": {
+      "BatchSize": 1
+     }
+    },
+    "Target": {
+     "Ref": "LambdalessProviderStateMachine7D8C8128"
+    },
+    "TargetParameters": {
+     "InputTemplate": "<$.body.Message>",
+     "StepFunctionStateMachineParameters": {
+      "InvocationType": "REQUEST_RESPONSE"
+     }
+    }
+   },
+   "DependsOn": [
+    "LambdalessProviderPipeRoleDefaultPolicy918C6032",
+    "LambdalessProviderPipeRoleD3BC051F"
+   ]
+  },
+  "KubectlLayer600207B5": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "8340e57c9dd5ef860787b6ba79b1fb698b98443065c2e7277e133357da92547f.zip"
+    },
+    "Description": "/opt/kubectl/kubectl 1.34.5; /opt/helm/helm 4.1.3",
+    "LicenseInfo": "Apache-2.0"
+   }
+  },
+  "HyperPodEksClusterRole395F118B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "HyperPodEksCluster2B4D66BB": {
+   "Type": "AWS::EKS::Cluster",
+   "Properties": {
+    "AccessConfig": {
+     "AuthenticationMode": "API"
+    },
+    "ComputeConfig": {
+     "Enabled": false
+    },
+    "KubernetesNetworkConfig": {
+     "ElasticLoadBalancing": {
+      "Enabled": false
+     },
+     "IpFamily": "ipv4"
+    },
+    "ResourcesVpcConfig": {
+     "EndpointPrivateAccess": true,
+     "EndpointPublicAccess": false,
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HyperPodEksClusterControlPlaneSecurityGroup7372A7A8",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ]
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterRole395F118B",
+      "Arn"
+     ]
+    },
+    "StorageConfig": {
+     "BlockStorage": {
+      "Enabled": false
+     }
+    },
+    "Version": "1.34"
+   },
+   "DependsOn": [
+    "VpcIGWD7BA715C",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableB2C5B500",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet1Subnet536B997A",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableA678073B",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet2Subnet3788AAA1",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableD98824C7",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43",
+    "VpcPrivateSubnet3SubnetF258B56E",
+    "VpcPublicSubnet1DefaultRoute3DA9E72A",
+    "VpcPublicSubnet1EIPD7E02669",
+    "VpcPublicSubnet1NATGateway4D7517AA",
+    "VpcPublicSubnet1RouteTable6C95E38E",
+    "VpcPublicSubnet1RouteTableAssociation97140677",
+    "VpcPublicSubnet1Subnet5C2D37C4",
+    "VpcPublicSubnet2DefaultRoute97F91067",
+    "VpcPublicSubnet2RouteTable94F7E489",
+    "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+    "VpcPublicSubnet2Subnet691E08A3",
+    "VpcPublicSubnet3DefaultRoute4697774F",
+    "VpcPublicSubnet3RouteTable93458DBB",
+    "VpcPublicSubnet3RouteTableAssociation1F1EDF02",
+    "VpcPublicSubnet3SubnetBE12F0B6",
+    "Vpc8378EB38",
+    "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE",
+    "VpcS3A5408339",
+    "VpcVPCGWBF912B6E"
+   ]
+  },
+  "HyperPodEksClusterKubectlReadyBarrierFC60BFEC": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "HyperPodEksClusterClusterAdminRoleAccess145D6E10",
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "HyperPodEksClusterClusterSecurityGroupfromHyperPodClusterIntegTestStackHttpRequestFromVpcFunctionSecurityGroupB6773FEB44359820E4F": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Allow integ test Lambda to call the inference ALB",
+    "FromPort": 443,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "HyperPodEksCluster2B4D66BB",
+      "ClusterSecurityGroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+      "GroupId"
+     ]
+    },
+    "ToPort": 443
+   }
+  },
+  "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::If": [
+       "HyperPodEksClusterKubectlProviderHandlerHasEcrPublic634103F4",
+       {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+         ]
+        ]
+       },
+       {
+        "Ref": "AWS::NoValue"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:DescribeCluster",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "HyperPodEksCluster2B4D66BB",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           },
+           "/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           }
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520",
+    "Roles": [
+     {
+      "Ref": "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderHandler3CF4DC9D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "379a97e43c3d01fdb08125fcff9c80a976a33da6287e25571deb51e72b5eeda9.zip"
+    },
+    "Description": "onEvent handler for EKS kubectl resource provider",
+    "Environment": {
+     "Variables": {
+      "AWS_STS_REGIONAL_ENDPOINTS": "regional"
+     }
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     {
+      "Ref": "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0"
+     },
+     {
+      "Ref": "KubectlLayer600207B5"
+     }
+    ],
+    "MemorySize": 1024,
+    "Role": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.13",
+    "Timeout": 900,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HyperPodEksCluster2B4D66BB",
+        "ClusterSecurityGroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlProviderHandlerServiceRoleDefaultPolicyB6881520",
+    "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderHandlerLogGroupC77D82BB": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HyperPodEksClusterKubectlProviderHandler3CF4DC9D"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "HyperPodEksClusterKubectlProviderAwsCliLayer956132D0": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   }
+  },
+  "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "lambda:GetFunction",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828",
+    "Roles": [
+     {
+      "Ref": "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57.zip"
+    },
+    "Description": "AWS CDK resource provider framework - onEvent (HyperPodClusterIntegTestStack/HyperPod/EksCluster/KubectlProvider/Provider)",
+    "Environment": {
+     "Variables": {
+      "USER_ON_EVENT_FUNCTION_ARN": {
+       "Fn::GetAtt": [
+        "HyperPodEksClusterKubectlProviderHandler3CF4DC9D",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "Handler": "framework.onEvent",
+    "LoggingConfig": {
+     "ApplicationLogLevel": "FATAL",
+     "LogFormat": "JSON"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 900,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HyperPodEksCluster2B4D66BB",
+        "ClusterSecurityGroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRoleDefaultPolicy2557C828",
+    "HyperPodEksClusterKubectlProviderframeworkonEventServiceRole31D87475",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HyperPodEksClusterKubectlProviderframeworkonEventLogGroupD53FB19D": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "HyperPodEksClusterClusterAdminRoleAccess145D6E10": {
+   "Type": "AWS::EKS::AccessEntry",
+   "Properties": {
+    "AccessPolicies": [
+     {
+      "AccessScope": {
+       "Type": "cluster"
+      },
+      "PolicyArn": {
+       "Fn::Join": [
+        "",
+        [
+         "arn:",
+         {
+          "Ref": "AWS::Partition"
+         },
+         ":eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+        ]
+       ]
+      }
+     }
+    ],
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "PrincipalArn": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderHandlerServiceRoleE0047F84",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "HyperPodEksClusterchartHyperPodDependencies929AF454": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Release": "hyperpod-dependencies",
+    "ChartAssetURL": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e49063078d4471ac7a57612dac9ec2c841f544e9001fabab2c7c745db040d6e4.zip"
+    },
+    "Values": "{\"nvidia-device-plugin\":{\"devicePlugin\":{\"enabled\":false}}}",
+    "Namespace": "kube-system",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodEksClusterNodegroupSystemNodesNodeGroupRole650B2494": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "HyperPodEksClusterNodegroupSystemNodesCB7A5C16": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "AmiType": "AL2023_x86_64_STANDARD",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "t3.large"
+    ],
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterNodegroupSystemNodesNodeGroupRole650B2494",
+      "Arn"
+     ]
+    },
+    "ScalingConfig": {
+     "DesiredSize": 2,
+     "MaxSize": 3,
+     "MinSize": 2
+    },
+    "Subnets": [
+     {
+      "Ref": "VpcPrivateSubnet1Subnet536B997A"
+     },
+     {
+      "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+     },
+     {
+      "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+     }
+    ]
+   }
+  },
+  "HyperPodEksClusterOidcProviderNative3733B6CC": {
+   "Type": "AWS::IAM::OIDCProvider",
+   "Properties": {
+    "ClientIdList": [
+     "sts.amazonaws.com"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "HyperPodEksCluster2B4D66BB",
+      "OpenIdConnectIssuerUrl"
+     ]
+    }
+   }
+  },
+  "HyperPodEksClusterchartCertManager6B0C3C19": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Release": "cert-manager",
+    "Chart": "cert-manager",
+    "Wait": true,
+    "Values": "{\"crds\":{\"enabled\":true}}",
+    "Namespace": "cert-manager",
+    "Repository": "https://charts.jetstack.io",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodEksClustermanifestInferenceEndpoint09B1D871": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"inference.sagemaker.aws.amazon.com/v1\",\"kind\":\"InferenceEndpointConfig\",\"metadata\":{\"name\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f\":\"\"}},\"spec\":{\"modelName\":\"Qwen/Qwen3-0.6B\",\"instanceType\":\"ml.trn2.3xlarge\",\"endpointName\":\"hyperpodclusterinteackinferenceservice5e8c33f7\",\"modelSourceConfig\":{\"modelSourceType\":\"s3\",\"s3Storage\":{\"bucketName\":\"",
+       {
+        "Ref": "Bucket83908E77"
+       },
+       "\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\"},\"modelLocation\":\"",
+       {
+        "Fn::GetAtt": [
+         "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3",
+         "s3Prefix"
+        ]
+       },
+       "\"},\"worker\":{\"image\":\"public.ecr.aws/neuron/pytorch-inference-vllm-neuronx:0.13.0-neuronx-py312-sdk2.28.0-ubuntu24.04\",\"command\":[\"vllm\",\"serve\"],\"args\":[\"/opt/ml/model/Qwen/Qwen3-0.6B\",\"--max-model-len\",\"2048\",\"--served-model-name\",\"Qwen/Qwen3-0.6B\",\"--max-num-seqs\",\"1\",\"--tensor-parallel-size\",\"1\",\"--block-size\",\"32\"],\"environmentVariables\":[{\"name\":\"VLLM_NEURON_FRAMEWORK\",\"value\":\"neuronx-distributed-inference\"},{\"name\":\"NEURON_COMPILED_ARTIFACTS\",\"value\":\"neuron-compiled-artifacts\"},{\"name\":\"NEURON_RT_NUM_CORES\",\"value\":\"1\"},{\"name\":\"XLA_HANDLE_SPECIAL_SCALAR\",\"value\":\"1\"}],\"modelInvocationPort\":{\"containerPort\":8000},\"modelVolumeMount\":{\"name\":\"model-volume\"},\"resources\":{\"requests\":{\"aws.amazon.com/neuron\":\"1\"},\"limits\":{\"aws.amazon.com/neuron\":\"1\"}}}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8a16750873e1a8da8deb3d349bae53abb1ebb600f"
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC",
+    "InferenceServiceInferenceOperatorAddonFEF09769"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesObjectValue",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "HyperPodEksClusterKubectlProviderframeworkonEventFCB10CB8",
+      "Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "ObjectType": "ingress",
+    "ObjectName": "alb-hyperpodclusterinteackinferenceservice5e8c33f7",
+    "ObjectNamespace": "default",
+    "JsonPath": ".status.loadBalancer.ingress[0].hostname",
+    "TimeoutSeconds": 900
+   },
+   "DependsOn": [
+    "HyperPodEksClusterKubectlReadyBarrierFC60BFEC"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodHyperPodSecurityGroup3116C127": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for SageMaker HyperPod with EFA support",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   }
+  },
+  "HyperPodHyperPodSecurityGroupfromHyperPodClusterIntegTestStackHyperPodHyperPodSecurityGroupDB2E4A50ALLTRAFFICAAA8E53B": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Allow all inbound traffic within SG for EFA",
+    "GroupId": {
+     "Fn::GetAtt": [
+      "HyperPodHyperPodSecurityGroup3116C127",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "-1",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "HyperPodHyperPodSecurityGroup3116C127",
+      "GroupId"
+     ]
+    }
+   }
+  },
+  "HyperPodHyperPodSgSelfEgress443195C7": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "Allow all outbound traffic within SG for EFA",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "HyperPodHyperPodSecurityGroup3116C127",
+      "GroupId"
+     ]
+    },
+    "GroupId": {
+     "Fn::GetAtt": [
+      "HyperPodHyperPodSecurityGroup3116C127",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "-1"
+   }
+  },
+  "HyperPodExecutionRole32B4ED4D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sagemaker.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSageMakerClusterInstanceRolePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "HyperPodExecutionRoleDefaultPolicy39EF654D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "eks-auth:AssumeRoleForPodIdentity"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "HyperPodLifecycleBucket47A602DB",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "HyperPodLifecycleBucket47A602DB",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HyperPodExecutionRoleDefaultPolicy39EF654D",
+    "Roles": [
+     {
+      "Ref": "HyperPodExecutionRole32B4ED4D"
+     }
+    ]
+   }
+  },
+  "HyperPodHyperPodExecutionRoleAccess25475103": {
+   "Type": "AWS::EKS::AccessEntry",
+   "Properties": {
+    "AccessPolicies": [],
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "PrincipalArn": {
+     "Fn::GetAtt": [
+      "HyperPodExecutionRole32B4ED4D",
+      "Arn"
+     ]
+    },
+    "Type": "HYPERPOD_LINUX"
+   }
+  },
+  "HyperPodLifecycleBucket47A602DB": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "aws-cdk:cr-owned:lifecycle-scripts:5f9a86f0",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodLifecycleBucketPolicy8AC282B9": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "HyperPodLifecycleBucket47A602DB"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "HyperPodLifecycleBucket47A602DB",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "HyperPodLifecycleBucket47A602DB",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "HyperPodLifecycleBucketAutoDeleteObjectsCustomResource7234B62E": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "HyperPodLifecycleBucket47A602DB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodLifecycleBucketPolicy8AC282B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   }
+  },
+  "HyperPodLifecycleScriptsDeployCustomResource170B3FFF": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "Arn"
+     ]
+    },
+    "SourceBucketNames": [
+     {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     }
+    ],
+    "SourceObjectKeys": [
+     "3457d3cca7a1db2ea2858083fe6cb9d3c5870f74dd2520fb31088d7d9ef71f03.zip"
+    ],
+    "DestinationBucketName": {
+     "Ref": "HyperPodLifecycleBucket47A602DB"
+    },
+    "DestinationBucketKeyPrefix": "lifecycle-scripts",
+    "WaitForDistributionInvalidation": true,
+    "Prune": true,
+    "OutputObjectKeys": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodSageMakerCluster3AAE6C37": {
+   "Type": "AWS::SageMaker::Cluster",
+   "Properties": {
+    "InstanceGroups": [
+     {
+      "CapacityRequirements": {
+       "Spot": {}
+      },
+      "ExecutionRole": {
+       "Fn::GetAtt": [
+        "HyperPodExecutionRole32B4ED4D",
+        "Arn"
+       ]
+      },
+      "InstanceCount": 1,
+      "InstanceGroupName": "inference-workers",
+      "InstanceStorageConfigs": [
+       {
+        "EbsVolumeConfig": {
+         "VolumeSizeInGB": 500
+        }
+       }
+      ],
+      "InstanceType": "ml.trn2.3xlarge",
+      "LifeCycleConfig": {
+       "OnCreate": "on_create.sh",
+       "SourceS3Uri": {
+        "Fn::Join": [
+         "",
+         [
+          "s3://",
+          {
+           "Ref": "HyperPodLifecycleBucket47A602DB"
+          },
+          "/lifecycle-scripts"
+         ]
+        ]
+       }
+      }
+     }
+    ],
+    "NodeProvisioningMode": "Continuous",
+    "NodeRecovery": "Automatic",
+    "Orchestrator": {
+     "Eks": {
+      "ClusterArn": {
+       "Fn::GetAtt": [
+        "HyperPodEksCluster2B4D66BB",
+        "Arn"
+       ]
+      }
+     }
+    },
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HyperPodEksCluster2B4D66BB",
+        "ClusterSecurityGroupId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "HyperPodHyperPodSecurityGroup3116C127",
+        "GroupId"
+       ]
+      }
+     ],
+     "Subnets": [
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksClusterchartHyperPodDependencies929AF454",
+    "HyperPodEksCluster2B4D66BB",
+    "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7",
+    "HyperPodLifecycleScriptsDeployCustomResource170B3FFF"
+   ]
+  },
+  "HyperPodInferenceOperatorRoleOidcCondition52F40877": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:hyperpod-inference-system:hyperpod-inference-controller-manager\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\"}"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodInferenceOperatorRoleC9369B05": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "HyperPodInferenceOperatorRoleOidcCondition52F40877",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSageMakerHyperPodInferenceAccess"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "SageMakerHyperPodInference-HyperPodClusteferenceService5E8C33F7"
+   }
+  },
+  "HyperPodInferenceOperatorRoleDefaultPolicyC3A859A4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "InferenceServiceTlsCertificateBucket485D9F51",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "InferenceServiceTlsCertificateBucket485D9F51",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HyperPodInferenceOperatorRoleDefaultPolicyC3A859A4",
+    "Roles": [
+     {
+      "Ref": "HyperPodInferenceOperatorRoleC9369B05"
+     }
+    ]
+   }
+  },
+  "HyperPodAlbControllerRoleOidcConditionA52A8118": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:hyperpod-inference-system:aws-load-balancer-controller\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\"}"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "HyperPodAlbControllerRole452AD5A6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "HyperPodAlbControllerRoleOidcConditionA52A8118",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "HyperPodEksClusterOidcProviderNative3733B6CC"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "RoleName": "HyperPodClusterIntegTestStackHyperPod588D7DF9-AlbControllerRole"
+   }
+  },
+  "HyperPodAlbControllerRoleDefaultPolicy40AD2386": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Condition": {
+        "StringEquals": {
+         "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "acm:DescribeCertificate",
+        "acm:ListCertificates",
+        "cognito-idp:DescribeUserPoolClient",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateSecurityGroup",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeCoipPools",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeIpamPools",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeTags",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeVpcs",
+        "ec2:GetCoipPoolUsage",
+        "ec2:GetSecurityGroupsForVpc",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DescribeCapacityReservation",
+        "elasticloadbalancing:DescribeListenerAttributes",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeTags",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DescribeTrustStores",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:SetRulePriorities",
+        "elasticloadbalancing:SetWebAcl",
+        "iam:GetServerCertificate",
+        "iam:ListServerCertificates",
+        "shield:CreateProtection",
+        "shield:DeleteProtection",
+        "shield:DescribeProtection",
+        "shield:GetSubscriptionState",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "waf-regional:GetWebACL",
+        "waf-regional:GetWebACLForResource",
+        "wafv2:AssociateWebACL",
+        "wafv2:DisassociateWebACL",
+        "wafv2:GetWebACL",
+        "wafv2:GetWebACLForResource"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateTags",
+       "Condition": {
+        "StringEquals": {
+         "ec2:CreateAction": "CreateSecurityGroup"
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:aws:ec2:*:*:security-group/*"
+      },
+      {
+       "Action": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:aws:ec2:*:*:security-group/*"
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:ModifyCapacityReservation",
+        "elasticloadbalancing:ModifyIpPools",
+        "elasticloadbalancing:ModifyListenerAttributes",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*",
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+        "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:listener-rule/app/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener-rule/net/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener/app/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener/net/*/*/*"
+       ]
+      },
+      {
+       "Action": "elasticloadbalancing:AddTags",
+       "Condition": {
+        "StringEquals": {
+         "elasticloadbalancing:CreateAction": [
+          "CreateTargetGroup",
+          "CreateLoadBalancer"
+         ]
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*",
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+        "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:DeregisterTargets",
+        "elasticloadbalancing:RegisterTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "HyperPodAlbControllerRoleDefaultPolicy40AD2386",
+    "Roles": [
+     {
+      "Ref": "HyperPodAlbControllerRole452AD5A6"
+     }
+    ]
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           },
+           "/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "HyperPodLifecycleBucket47A602DB",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "HyperPodLifecycleBucket47A602DB",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "Roles": [
+     {
+      "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+     }
+    ]
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "AWS_CA_BUNDLE": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
+     }
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     {
+      "Ref": "HyperPodLifecycleScriptsDeployAwsCliLayerDB7979F7"
+     }
+    ],
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.13",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+   ]
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CLogGroup817B64E9": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "InferenceServiceTlsCertificateBucket485D9F51": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "InferenceServiceTlsCertificateBucketPolicy55DB7ABB": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "InferenceServiceTlsCertificateBucket485D9F51"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "InferenceServiceTlsCertificateBucket485D9F51",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "InferenceServiceTlsCertificateBucket485D9F51",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "InferenceServiceS3CsiDriverAddon48E523B7": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "aws-mountpoint-s3-csi-driver",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "InferenceServiceFsxCsiDriverAddon3BD6BA90": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "aws-fsx-csi-driver",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "InferenceServicePodIdentityAgentAddon7B628769": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "eks-pod-identity-agent",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksCluster2B4D66BB"
+   ]
+  },
+  "InferenceServiceS3CsiDriverRole19BC5EF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "sts:AssumeRole",
+        "sts:TagSession"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "pods.eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Role assumed by the Mountpoint S3 CSI driver via EKS Pod Identity to access the inference model bucket."
+   }
+  },
+  "InferenceServiceS3CsiDriverRoleDefaultPolicyCE69BBD8": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "Bucket83908E77",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "Bucket83908E77",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "InferenceServiceS3CsiDriverRoleDefaultPolicyCE69BBD8",
+    "Roles": [
+     {
+      "Ref": "InferenceServiceS3CsiDriverRole19BC5EF2"
+     }
+    ]
+   }
+  },
+  "InferenceServiceS3CsiDriverSaAssociation4E0B0FCE": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "kube-system",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "s3-csi-driver-sa"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
+   ]
+  },
+  "InferenceServiceS3CsiDriverControllerSaAssociationFA6364D3": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "kube-system",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "s3-csi-driver-controller-sa"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
+   ]
+  },
+  "InferenceServiceS3CsiMountpointPodAssociation770E6001": {
+   "Type": "AWS::EKS::PodIdentityAssociation",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "Namespace": "mount-s3",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "InferenceServiceS3CsiDriverRole19BC5EF2",
+      "Arn"
+     ]
+    },
+    "ServiceAccount": "default"
+   },
+   "DependsOn": [
+    "InferenceServicePodIdentityAgentAddon7B628769",
+    "InferenceServiceS3CsiDriverAddon48E523B7"
+   ]
+  },
+  "InferenceServiceInferenceOperatorAddonFEF09769": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "amazon-sagemaker-hyperpod-inference",
+    "ClusterName": {
+     "Ref": "HyperPodEksCluster2B4D66BB"
+    },
+    "ConfigurationValues": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"executionRoleArn\":\"",
+       {
+        "Fn::GetAtt": [
+         "HyperPodInferenceOperatorRoleC9369B05",
+         "Arn"
+        ]
+       },
+       "\",\"tlsCertificateS3Bucket\":\"",
+       {
+        "Ref": "InferenceServiceTlsCertificateBucket485D9F51"
+       },
+       "\",\"hyperpodClusterArn\":\"",
+       {
+        "Ref": "HyperPodSageMakerCluster3AAE6C37"
+       },
+       "\",\"alb\":{\"serviceAccount\":{\"roleArn\":\"",
+       {
+        "Fn::GetAtt": [
+         "HyperPodAlbControllerRole452AD5A6",
+         "Arn"
+        ]
+       },
+       "\"}}}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "HyperPodEksClusterchartCertManager6B0C3C19",
+    "HyperPodEksCluster2B4D66BB",
+    "HyperPodSageMakerCluster3AAE6C37",
+    "InferenceServiceFsxCsiDriverAddon3BD6BA90",
+    "InferenceServiceS3CsiDriverAddon48E523B7",
+    "InferenceServiceTlsCertificateBucketPolicy55DB7ABB",
+    "InferenceServiceTlsCertificateBucket485D9F51"
+   ]
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ]
+  },
+  "HttpRequestFromVpcFunctionServiceRoleA142BB7F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionSecurityGroup5EFA4275": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function HyperPodClusterIntegTestStackHttpRequestFromVpcFunction83B448BA",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionB264F32C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "837731db1242b86fddc591de3966bd1c2ece83e10334accd3313a4689ae62b1d.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 300,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "HttpRequestFromVpcFunctionSecurityGroup5EFA4275",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Ref": "VpcPrivateSubnet1Subnet536B997A"
+      },
+      {
+       "Ref": "VpcPrivateSubnet2Subnet3788AAA1"
+      },
+      {
+       "Ref": "VpcPrivateSubnet3SubnetF258B56E"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "HttpRequestFromVpcFunctionServiceRoleA142BB7F",
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ]
+  },
+  "HttpRequestFromVpcFunctionLogGroup1EA954C2": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "HttpRequestFromVpcFunctionB264F32C"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 731
+   },
+   "DependsOn": [
+    "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+    "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+    "VpcPrivateSubnet2DefaultRoute060D2087",
+    "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+    "VpcPrivateSubnet3DefaultRoute94B74F0D",
+    "VpcPrivateSubnet3RouteTableAssociation16BDDC43"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  }
+ },
+ "Conditions": {
+  "HyperPodEksClusterKubectlProviderHandlerHasEcrPublic634103F4": {
+   "Fn::Equals": [
+    {
+     "Ref": "AWS::Partition"
+    },
+    "aws"
+   ]
+  }
+ },
+ "Outputs": {
+  "EksClusterName": {
+   "Value": {
+    "Ref": "HyperPodEksCluster2B4D66BB"
+   }
+  },
+  "HyperPodClusterArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HyperPodSageMakerCluster3AAE6C37",
+     "ClusterArn"
+    ]
+   }
+  },
+  "CompiledArtifact": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "s3://",
+      {
+       "Ref": "Bucket83908E77"
+      },
+      "/",
+      {
+       "Fn::GetAtt": [
+        "CompilerWaitConditionsdk22803d87c5c66fc1de13493e5d98e68bee3990da6d376f41dc472fefc2edb32416a1ParsedAttrDataA991B8B3",
+        "s3Prefix"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "EndpointName": {
+   "Value": "hyperpodclusterinteackinferenceservice5e8c33f7"
+  },
+  "ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HyperPodSageMakerCluster3AAE6C37",
+     "ClusterArn"
+    ]
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodSageMakerCluster3AAE6C37ClusterArnFEFC5DA1"
+   }
+  },
+  "ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158": {
+   "Value": {
+    "Ref": "HttpRequestFromVpcFunctionB264F32C"
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputRefHttpRequestFromVpcFunctionB264F32CD66C9158"
+   }
+  },
+  "ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483",
+     "Value"
+    ]
+   },
+   "Export": {
+    "Name": "HyperPodClusterIntegTestStack:ExportsOutputFnGetAttHyperPodEksClusteralbhyperpodclusterinteackinferenceservice5e8c33f7LoadBalancerAddress82384483ValueA9B100B6"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

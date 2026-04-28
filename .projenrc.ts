@@ -26,7 +26,16 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "aws-cdk-lambdaless-custom-resource",
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
+  devDeps: [
+    `@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`,
+    "@aws-cdk/lambda-layer-kubectl-v34",
+    // undici is used by the integ-test VPC Lambda to POST against the
+    // inference ALB, which terminates TLS with a cert-manager self-signed
+    // certificate. We install a global undici dispatcher that disables TLS
+    // verification so the request does not fail with UNABLE_TO_VERIFY_LEAF_SIGNATURE.
+    // Pin to v7.x because 8.x requires Node >= 22.19.
+    "undici@^7",
+  ],
   peerDeps: [`@aws-cdk/aws-sagemaker-alpha@${cdkVersion}-alpha.0`],
   gitignore: ["src/**/index.js", ".amazonq"],
   githubOptions: {
@@ -96,5 +105,11 @@ if (approveJob && "steps" in approveJob) {
     ],
   });
 }
+
+// Copy non-TS assets (e.g. vendored IAM policy JSONs) into the compiled
+// `lib/` output so runtime `fs.readFileSync` calls can locate them.
+project.compileTask.exec(
+  `node -e "require('fs').cpSync('src', 'lib', { recursive: true, filter: (p) => /(?:\\\\/|^)[^.]+$|\\\\.json$/.test(p) })"`,
+);
 
 project.synth();

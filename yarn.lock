@@ -54,6 +54,11 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.251.0-alpha.0.tgz#bd59d1ea73966aa7f55f9ad3f1fc4c54b3144f14"
   integrity sha512-08oHJAU3lauJQoKM6fyhvsTn90UB5zEMlo51ed5VwxptgQjAMRw1R6dzOLNU8ugulVkVLU+Ws4zg7I0BGLyygQ==
 
+"@aws-cdk/lambda-layer-kubectl-v34@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/lambda-layer-kubectl-v34/-/lambda-layer-kubectl-v34-2.2.1.tgz#2fadedf2b766137eacf8c99307ddd2986eb4bdd1"
+  integrity sha512-qbGBH35pRlGYmKTz6kFb+E/EBKMawCStdOodW1WIyErQe+iVt9UIIms7H6i7mPgE1eSiafTexuOX8R78lI8+5A==
+
 "@aws-cdk/service-spec-types@^0.0.237":
   version "0.0.237"
   resolved "https://registry.yarnpkg.com/@aws-cdk/service-spec-types/-/service-spec-types-0.0.237.tgz#1c5089bc139c13134dd502a224a5f1166abfb95f"
@@ -5523,6 +5528,11 @@ undici-types@~7.19.0:
   version "7.19.2"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.19.2.tgz#1b67fc26d0f157a0cba3a58a5b5c1e2276b8ba2a"
   integrity sha512-qYVnV5OEm2AW8cJMCpdV20CDyaN3g0AjDlOGf1OW4iaDEx8MwdtChUp4zu4H0VP3nDRF/8RKWH+IPp9uW0YGZg==
+
+undici@^7:
+  version "7.25.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-7.25.0.tgz#7d72fc429a0421769ca2966fd07cac875c85b781"
+  integrity sha512-xXnp4kTyor2Zq+J1FfPI6Eq3ew5h6Vl0F/8d9XU5zZQf1tX9s2Su1/3PiMmUANFULpmksxkClamIZcaUqryHsQ==
 
 universalify@^0.1.0:
   version "0.1.2"
