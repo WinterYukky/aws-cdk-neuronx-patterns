@@ -17,12 +17,12 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sagemaker-alpha/-/aws-sagemaker-alpha-2.240.0-alpha.0.tgz#4242f66cc82e27cc61a48ec75d7950748e5f98c8"
   integrity sha512-+NVvEaxqmQFXQCEV7v2ItX6vQ8IHFWWMB+ih3L8VgBGJ9gxCg+xwzt1VTWRAbOACVd7Po9oL1MIOYRgTD3QgOg==
 
-"@aws-cdk/aws-service-spec@0.1.171":
-  version "0.1.171"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-service-spec/-/aws-service-spec-0.1.171.tgz#85e53226d29497d6f066b51866a40f8d59bec4a2"
-  integrity sha512-v03JmOpAXM7UCOmCggX1UIt8P1DVwr8RrG+Cl1Z6HjSxAFU/6dlNVrCAjfwkA26kX71YCTPOEvoiQNCEH11/DQ==
+"@aws-cdk/aws-service-spec@0.1.175":
+  version "0.1.175"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-service-spec/-/aws-service-spec-0.1.175.tgz#b7ab9c770bdfe62c380446b4396baee205faaa05"
+  integrity sha512-PFeWLiXpYo4E+mhJly6BT+YkpNTMmEEr1WN0fp2fPZyYVKRToXRRvOb8WvpXRGxcDl5i24xniEA8GKswWnxGQA==
   dependencies:
-    "@aws-cdk/service-spec-types" "^0.0.237"
+    "@aws-cdk/service-spec-types" "^0.0.241"
     "@cdklabs/tskb" "^0.0.4"
 
 "@aws-cdk/cloud-assembly-api@^2.0.1":
@@ -42,22 +42,22 @@
     semver "^7.7.3"
 
 "@aws-cdk/integ-runner@latest":
-  version "2.197.18"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.197.18.tgz#3d36da24de854ad2d5938dc65a69d52c19a5a776"
-  integrity sha512-rhZKuUXeBuq+6DTgtHp8aZHUH3BeJ+OaAn5EPHs+2p4HcEWIxgfytiuVCS5ZY5eYU0wUSiWeAsBhGj8FjiCwQA==
+  version "2.197.19"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.197.19.tgz#24246d7dbae33f88bd23ad03047dc3f0dcb6fc83"
+  integrity sha512-BRQ1pGehJa0I9qJvtmS4smCMj1D1rBccOLw9ZMVu3jifOaA9Cs/MWHXawi/R1vg1BHNYSHzwJ4H/8N9/0Kl8DA==
   dependencies:
-    "@aws-cdk/aws-service-spec" "0.1.171"
-    aws-cdk "2.1119.0"
+    "@aws-cdk/aws-service-spec" "0.1.175"
+    aws-cdk "2.1120.0"
 
 "@aws-cdk/integ-tests-alpha@latest":
   version "2.251.0-alpha.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.251.0-alpha.0.tgz#bd59d1ea73966aa7f55f9ad3f1fc4c54b3144f14"
   integrity sha512-08oHJAU3lauJQoKM6fyhvsTn90UB5zEMlo51ed5VwxptgQjAMRw1R6dzOLNU8ugulVkVLU+Ws4zg7I0BGLyygQ==
 
-"@aws-cdk/service-spec-types@^0.0.237":
-  version "0.0.237"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/service-spec-types/-/service-spec-types-0.0.237.tgz#1c5089bc139c13134dd502a224a5f1166abfb95f"
-  integrity sha512-qC7dfSXGyJddKU/ys+G/LvmOvLmn+rSbKFa28Jk1eNAbE8d2mRu/Ul8srw4KE1QGI8QklR/xikAb4Xffw11z8Q==
+"@aws-cdk/service-spec-types@^0.0.241":
+  version "0.0.241"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/service-spec-types/-/service-spec-types-0.0.241.tgz#407ddb3bc6cde90dc011684e60237ac1543fcfe8"
+  integrity sha512-rBPalvxzKfQIP6927oTpIiXWdF2yw5LND0L6whH1k2swhJswN/75ncubFyUX8u0To6APajV9iD0WqQZsNl07PA==
   dependencies:
     "@cdklabs/tskb" "^0.0.4"
 
@@ -1436,10 +1436,10 @@ aws-cdk-lib@2.240.0:
     table "^6.9.0"
     yaml "1.10.2"
 
-aws-cdk@2.1119.0:
-  version "2.1119.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1119.0.tgz#e63409476403862278cad32338e701f1363fb849"
-  integrity sha512-XBxZEKH3BY4M1EX6x0qBkmOAj8viErjpww14iH6Z3z6nI0YzjZeJ05eEl7eJwzUgv7NTGagWBS9m/eDJW5+dAg==
+aws-cdk@2.1120.0:
+  version "2.1120.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1120.0.tgz#3939e24323a81ca5bfa203aa7c09953f637debc8"
+  integrity sha512-vDVa0IX0FhizARdY/GLSParFglKbdHCIhM8IDmynrAv9w8uLLljzWMeLUOhC1XpMErDZ/npYEihAOjfKxTaMIw==
 
 babel-jest@^29.7.0:
   version "29.7.0"
@@ -2159,9 +2159,9 @@ dunder-proto@^1.0.0, dunder-proto@^1.0.1:
     gopd "^1.2.0"
 
 electron-to-chromium@^1.5.328:
-  version "1.5.344"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.344.tgz#6437cc08a7d9b914a98120e182f37793c9eaffd4"
-  integrity sha512-4MxfbmNDm+KPh066EZy+eUnkcDPcZ35wNmOWzFuh/ijvHsve6kbLTLURy88uCNK5FbpN+yk2nQY6BYh1GEt+wg==
+  version "1.5.345"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.345.tgz#39d8f7cbc19350e5d7d94a471c111eb7326e8ef6"
+  integrity sha512-F9JXQGiMrz6yVNPI2qOVPvB9HzjH5cGzhs8oJ6A28V5L/YnzN/0KsuiibqF+F1Fd9qxFzD1BUnYSd8JfULxTwg==
 
 emittery@^0.13.1:
   version "0.13.1"
