@@ -60,7 +60,7 @@ class VllmNxDInferenceIntegTestStack extends Stack {
           layers: 30,
         },
       }),
-      neuronxInstanceType: NeuronxInstanceType.INF2_XLARGE,
+      neuronxInstanceType: NeuronxInstanceType.TRN2_3XLARGE,
     });
     const compiledModel = compiler.compile();
     const taskDefinition = new VllmNxdInferenceTaskDefinition(
